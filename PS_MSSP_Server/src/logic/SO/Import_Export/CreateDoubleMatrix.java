@@ -19,6 +19,8 @@ public class CreateDoubleMatrix {
                 doubleMatrix[i][j] = datasetValues.get(i)[j];
             }
         }
+        System.out.println("have fun");
         return doubleMatrix;
+        
     }
 }
