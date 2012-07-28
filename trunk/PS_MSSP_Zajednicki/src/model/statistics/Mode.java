@@ -14,15 +14,5 @@ public class Mode extends NumericalStatistic{
     public double calculate(double[] valuesArray) {
         return 34;
     }
-    private static Mode instance;
-
-    private Mode() {
-    }
-
-    public static Mode getInstance() {
-        if (instance == null) {
-            instance = new Mode();
-        }
-        return instance;
-    }
+    
 }

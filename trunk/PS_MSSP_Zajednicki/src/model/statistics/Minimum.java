@@ -14,15 +14,5 @@ public class Minimum extends NumericalStatistic{
     public double calculate(double[] valuesArray) {
         return 34;
     }
-    private static Minimum instance;
-
-    private Minimum() {
-    }
-
-    public static Minimum getInstance() {
-        if (instance == null) {
-            instance = new Minimum();
-        }
-        return instance;
-    }
+   
 }

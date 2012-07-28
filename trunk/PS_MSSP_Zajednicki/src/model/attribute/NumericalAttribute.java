@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.statistics.Maximum;
 import model.statistics.Minimum;
 import model.statistics.NumericalStatistic;
 
@@ -20,8 +21,10 @@ import model.statistics.NumericalStatistic;
 public class NumericalAttribute extends Attribute{
 
     
-    
-    HashMap<NumericalStatistic, Double> statistics;
+    /**
+     * map of class names of statistics and their values of concrete attribute
+     */
+    HashMap<String, Double> statistics;
 
     
     @Override
@@ -44,8 +47,9 @@ public class NumericalAttribute extends Attribute{
  */
     @Override
     public Object getPossibleValues() {
-            double minValue= statistics.get(Minimum.class.getConstructor().newInstance());
-            //return "["+minValue+" - " +maxValue +"]";
+            double minValue= statistics.get(Minimum.class.getName());
+            double maxValue= statistics.get(Maximum.class.getName());
+            return "["+minValue+" - " +maxValue +"]";
         
     }
 

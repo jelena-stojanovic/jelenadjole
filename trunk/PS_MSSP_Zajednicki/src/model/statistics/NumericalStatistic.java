@@ -25,13 +25,5 @@ public abstract class NumericalStatistic {
         return availableImplementationClassNames;
     }
 
-    public static NumericalStatistic getInstance(){
-        return new NumericalStatistic() {
-
-            @Override
-            public double calculate(double[] valuesArray) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-        };
-    }
+   
 }

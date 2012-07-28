@@ -14,17 +14,4 @@ public class Mean extends NumericalStatistic{
         return 34;
     }
     
-    private static Mean instance;
-
-    private Mean() {
-    }
-
-    public static Mean getInstance() {
-        if (instance == null) {
-            instance = new Mean();
-        }
-        return instance;
-    }
-
-    
 }

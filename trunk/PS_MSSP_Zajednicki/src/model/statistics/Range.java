@@ -14,15 +14,4 @@ public class Range extends NumericalStatistic{
     public double calculate(double[] valuesArray) {
         return 4.0;
     }
-    private static Range instance;
-
-    private Range() {
-    }
-
-    public static Range getInstance() {
-        if (instance == null) {
-            instance = new Range();
-        }
-        return instance;
-    }
 }

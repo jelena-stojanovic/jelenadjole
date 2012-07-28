@@ -7,7 +7,6 @@ package test;
 import java.util.HashMap;
 import java.util.Map;
 import model.statistics.CalculatedNumericalStatistics;
-import model.statistics.NumericalStatistic;
 
 /**
  *
@@ -21,9 +20,9 @@ public class Testic {
             System.out.println(d);
             
         }
-        HashMap<NumericalStatistic, Double> statistic= new CalculatedNumericalStatistics().getValues(niz);
-        for (Map.Entry<NumericalStatistic, Double> entry : statistic.entrySet()) {
-            NumericalStatistic numericalStatistic = entry.getKey();
+        HashMap<String, Double> statistic= new CalculatedNumericalStatistics().getValues(niz);
+        for (Map.Entry<String, Double> entry : statistic.entrySet()) {
+            String numericalStatistic = entry.getKey();
             Double double1 = entry.getValue();
             System.out.println(numericalStatistic.getClass().getSimpleName()+"="+double1);
         }

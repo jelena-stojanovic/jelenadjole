@@ -20,16 +20,4 @@ public class Sum extends NumericalStatistic{
         
         return sum;
     }
-
-    private static Sum instance;
-
-    private Sum() {
-    }
-
-    public static Sum getInstance() {
-        if (instance == null) {
-            instance = new Sum();
-        }
-        return instance;
-    }
 }
