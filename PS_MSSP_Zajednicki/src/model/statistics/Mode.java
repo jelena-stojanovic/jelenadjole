@@ -8,11 +8,26 @@ package model.statistics;
  *
  * @author Jelena
  */
-public class Mode extends NumericalStatistic{
+public class Mode extends NumericalStatistic {
 
     @Override
     public double calculate(double[] valuesArray) {
-        return 34;
+
+        double max = 0, maxCount = 0;
+        int length = valuesArray.length;
+        for (int i = 0; i < length; ++i) {
+            int count = 0;
+            for (int j = 0; j < length; ++j) {
+                if (valuesArray[j] == valuesArray[i]) {
+                    ++count;
+                }
+            }
+            if (count > maxCount) {
+                maxCount = count;
+                max = valuesArray[i];
+            }
+        }
+        return max;
+
     }
-    
 }
