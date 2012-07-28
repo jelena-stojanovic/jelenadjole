@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class CreateDoubleMatrix {
 
+    
     public static void create(ArrayList<Double[]> datasetValues, double[][] doubleMatrix) {
         doubleMatrix = new double[datasetValues.size()][datasetValues.get(0).length];
         for (int i = 0; i < datasetValues.size(); i++) {
