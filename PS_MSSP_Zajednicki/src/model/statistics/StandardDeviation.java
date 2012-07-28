@@ -12,6 +12,6 @@ public class StandardDeviation extends NumericalStatistic{
 
     @Override
     public double calculate(double[] valuesArray) {
-        return 2.0;
+        return  Math.sqrt(new Variance().calculate(valuesArray));
     }
 }

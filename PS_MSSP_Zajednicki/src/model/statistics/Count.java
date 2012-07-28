@@ -12,6 +12,6 @@ public class Count extends NumericalStatistic {
 
     @Override
     public double calculate(double[] valuesArray) {
-        return 34;
+        return valuesArray.length;
     }
 }

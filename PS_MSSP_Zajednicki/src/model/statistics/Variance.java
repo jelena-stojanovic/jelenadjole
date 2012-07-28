@@ -8,11 +8,18 @@ package model.statistics;
  *
  * @author Jelena
  */
-public class Variance extends NumericalStatistic{
+public class Variance extends NumericalStatistic {
 
     @Override
     public double calculate(double[] valuesArray) {
-        return 1.0;
+       
+        double average = new Mean().calculate(valuesArray);
+        double Q=0;
+        
+        for (int i = 0; i < valuesArray.length; i++) 
+            Q = Q + (valuesArray[i] - average) * (valuesArray[i] - average);
+        
+        double variance = Q / (valuesArray.length - 1);
+        return variance;
     }
- 
 }

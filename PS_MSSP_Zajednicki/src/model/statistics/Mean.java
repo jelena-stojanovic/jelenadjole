@@ -11,7 +11,7 @@ package model.statistics;
 public class Mean extends NumericalStatistic{
     @Override
     public double calculate(double[] valuesArray) {
-        return 34;
+        return new Sum().calculate(valuesArray)/valuesArray.length;
     }
     
 }
