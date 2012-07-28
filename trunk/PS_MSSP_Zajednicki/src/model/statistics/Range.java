@@ -12,6 +12,9 @@ public class Range extends NumericalStatistic{
 
     @Override
     public double calculate(double[] valuesArray) {
-        return 4.0;
+        double minValue= new Minimum().calculate(valuesArray);
+        double maxValue = new Maximum().calculate(valuesArray);
+        double range= maxValue-minValue;
+        return range;
     }
 }
