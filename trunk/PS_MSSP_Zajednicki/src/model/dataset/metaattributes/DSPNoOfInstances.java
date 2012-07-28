@@ -5,13 +5,14 @@
 package model.dataset.metaattributes;
 
 import model.attribute.Attribute;
+import model.attribute.NumericalAttribute;
 import model.dataset.DataSet;
 
 /**
  *
  * @author Jelena
  */
-public class DSPNoOfInstances extends Attribute implements DSMetaAttribute{
+public class DSPNoOfInstances extends NumericalAttribute implements DSMetaAttribute{
     
     private int numberOfInstances;
 
@@ -27,26 +28,6 @@ public class DSPNoOfInstances extends Attribute implements DSMetaAttribute{
      */
     public void setNumberOfInstances(int numberOfInstances) {
         this.numberOfInstances = numberOfInstances;
-    }
-
-    @Override
-    public boolean isNominal() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isNumerical() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isOrdinal() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Object getPossibleValues() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -68,4 +49,7 @@ public class DSPNoOfInstances extends Attribute implements DSMetaAttribute{
     public double getValue() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+  
+  
 }
