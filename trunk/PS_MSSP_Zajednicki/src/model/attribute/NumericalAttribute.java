@@ -24,7 +24,7 @@ public class NumericalAttribute extends Attribute{
     /**
      * map of class names of statistics and their values of concrete attribute
      */
-    HashMap<String, Double> statistics;
+    private HashMap<String, Double> statistics;
 
     
     @Override
@@ -47,8 +47,8 @@ public class NumericalAttribute extends Attribute{
  */
     @Override
     public Object getPossibleValues() {
-            double minValue= statistics.get(Minimum.class.getName());
-            double maxValue= statistics.get(Maximum.class.getName());
+            double minValue= getStatistics().get(Minimum.class.getName());
+            double maxValue= getStatistics().get(Maximum.class.getName());
             return "["+minValue+" - " +maxValue +"]";
         
     }
@@ -61,6 +61,20 @@ public class NumericalAttribute extends Attribute{
     @Override
     public boolean isDate() {
         return false;
+    }
+
+    /**
+     * @return the statistics
+     */
+    public HashMap<String, Double> getStatistics() {
+        return statistics;
+    }
+
+    /**
+     * @param statistics the statistics to set
+     */
+    public void setStatistics(HashMap<String, Double> statistics) {
+        this.statistics = statistics;
     }
     
 }
