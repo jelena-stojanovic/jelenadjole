@@ -11,7 +11,13 @@ package model.statistics;
 public class Maximum extends NumericalStatistic{
     @Override
     public double calculate(double[] valuesArray) {
-        return 34;
+        double maxValue= Double.MIN_VALUE;
+        
+        for (int i = 0; i < valuesArray.length; i++) {
+            double d = valuesArray[i];
+            maxValue = Math.max(maxValue, d);
+        }
+        return maxValue;
     }
     
 }

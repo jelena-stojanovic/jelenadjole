@@ -12,7 +12,13 @@ public class Minimum extends NumericalStatistic{
 
     @Override
     public double calculate(double[] valuesArray) {
-        return 34;
+        double minValue= Double.MAX_VALUE;
+        
+        for (int i = 0; i < valuesArray.length; i++) {
+            double d = valuesArray[i];
+            minValue = Math.min(minValue, d);
+        }
+        return minValue;
     }
    
 }
