@@ -13,15 +13,5 @@ public class Median extends NumericalStatistic{
     public double calculate(double[] valuesArray) {
         return 34;
     }
-    private static Median instance;
-
-    private Median() {
-    }
-
-    public static Median getInstance() {
-        if (instance == null) {
-            instance = new Median();
-        }
-        return instance;
-    }
+   
 }

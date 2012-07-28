@@ -14,15 +14,4 @@ public class Count extends NumericalStatistic {
     public double calculate(double[] valuesArray) {
         return 34;
     }
-    private static Count instance;
-
-    private Count() {
-    }
-
-    public static Count getInstance() {
-        if (instance == null) {
-            instance = new Count();
-        }
-        return instance;
-    }
 }

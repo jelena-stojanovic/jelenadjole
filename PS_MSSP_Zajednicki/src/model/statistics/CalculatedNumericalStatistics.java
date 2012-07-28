@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  */
 public class CalculatedNumericalStatistics {
 
-    HashMap<NumericalStatistic, Double> statisticsMap=new HashMap<NumericalStatistic, Double>();
+    HashMap<String, Double> statisticsMap=new HashMap<String, Double>();
 
-    public HashMap<NumericalStatistic, Double> getValues(double[] valuesArray) {
+    public HashMap<String, Double> getValues(double[] valuesArray) {
 
         calculateStatistics(valuesArray);
         return statisticsMap;
@@ -30,16 +30,22 @@ public class CalculatedNumericalStatistics {
         
         for (String statclass : NumericalStatistic.getAvailableImplementationClassNames()) {
             try {
-                  Method method= Class.forName(statclass).getMethod("getInstance");
-                  NumericalStatistic numstat = (NumericalStatistic) method.getReturnType().newInstance();
-//                Constructor constructor = Class.forName(statclass).getConstructor();
-//                NumericalStatistic object = (NumericalStatistic) constructor.newInstance();
-//                if(object!=null){
-                    statisticsMap.put(numstat, numstat.calculate(valuesArray));
-//                }
+//                  Method method= Class.forName(statclass).getMethod("getInstance");
+//                  Class<?> returnType = method. getReturnType().;
+//                  NumericalStatistic numstat = (NumericalStatistic)                .newInstance();
+                  
+                Constructor constructor = Class.forName(statclass).getConstructor();
+                NumericalStatistic object = (NumericalStatistic) constructor.newInstance();
+                if(object!=null){
+                    statisticsMap.put(statclass, object.calculate(valuesArray));
+                }
             } catch (InstantiationException ex) {
                 Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
+                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
                 Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchMethodException ex) {
                 Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,20 +54,6 @@ public class CalculatedNumericalStatistics {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
             } 
-//            catch (InstantiationException ex) {
-//                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IllegalAccessException ex) {
-//                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IllegalArgumentException ex) {
-//                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (InvocationTargetException ex) {
-//                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (NoSuchMethodException ex) {
-//                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (SecurityException ex) {
-//                Logger.getLogger(CalculatedNumericalStatistics.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
         }
     }
 }

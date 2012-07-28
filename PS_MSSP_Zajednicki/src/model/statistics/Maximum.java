@@ -13,16 +13,5 @@ public class Maximum extends NumericalStatistic{
     public double calculate(double[] valuesArray) {
         return 34;
     }
-    private static Maximum instance;
-
-    private Maximum() {
-    }
-
-    public static Maximum getInstance() {
-        if (instance == null) {
-            instance = new Maximum();
-        }
-        return instance;
-    }
-
+    
 }

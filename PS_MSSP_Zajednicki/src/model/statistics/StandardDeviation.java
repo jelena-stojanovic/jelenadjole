@@ -14,15 +14,4 @@ public class StandardDeviation extends NumericalStatistic{
     public double calculate(double[] valuesArray) {
         return 2.0;
     }
-    private static StandardDeviation instance;
-
-    private StandardDeviation() {
-    }
-
-    public static StandardDeviation getInstance() {
-        if (instance == null) {
-            instance = new StandardDeviation();
-        }
-        return instance;
-    }
 }
