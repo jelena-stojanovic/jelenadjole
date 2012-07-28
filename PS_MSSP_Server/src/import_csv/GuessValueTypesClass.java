@@ -25,7 +25,7 @@ public class GuessValueTypesClass {
             } else if (value.contains("/") || value.contains("-") || value.contains(".")) {
                 return new DateAttribute();
             } else {
-                return new NominalAttribute();
+                return new NominalAttribute(null);
             }
         }
     }
