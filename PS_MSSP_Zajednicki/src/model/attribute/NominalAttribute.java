@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class NominalAttribute extends Attribute{
 
-    List<String> possibleNominalValue;
-    private final HashMap<String, Double> classToIndexMap = new HashMap<String, Double>();
+    private List<String> possibleNominalValue;
+    private HashMap<String, Double> classToIndexMap = new HashMap<String, Double>();
 
     public NominalAttribute( List<String> possibleNominalValue) {
         this.possibleNominalValue = possibleNominalValue;
@@ -49,7 +49,35 @@ public class NominalAttribute extends Attribute{
     //TODO:vidi da li ces bas ovako
     @Override
     public Object getPossibleValues() {
+        return getPossibleNominalValue();
+    }
+
+    /**
+     * @return the possibleNominalValue
+     */
+    public List<String> getPossibleNominalValue() {
         return possibleNominalValue;
+    }
+
+    /**
+     * @param possibleNominalValue the possibleNominalValue to set
+     */
+    public void setPossibleNominalValue(List<String> possibleNominalValue) {
+        this.possibleNominalValue = possibleNominalValue;
+    }
+
+    /**
+     * @return the classToIndexMap
+     */
+    public HashMap<String, Double> getClassToIndexMap() {
+        return classToIndexMap;
+    }
+
+    /**
+     * @param classToIndexMap the classToIndexMap to set
+     */
+    public void setClassToIndexMap(HashMap<String, Double> classToIndexMap) {
+        this.classToIndexMap = classToIndexMap;
     }
 
     
