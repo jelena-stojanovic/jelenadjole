@@ -41,4 +41,24 @@ public class DataTable {
     public int getNumElements() {
         return matrix.getNumElements();
     }
+    
+    public double[] getColumn(int columnIndex){
+        int noRows= matrix.getNumRows();
+        double[] columnValues=new double[noRows];
+        for (int i = 0; i < noRows; i++) {
+            columnValues[i]= matrix.get(i, columnIndex);   
+        }
+        return columnValues;
+    }
+    
+    public double[] getRow(int rowIndex){
+        int noColums= matrix.getNumElements()/matrix.getNumRows();
+        double[] rowValues= new double[noColums];
+        for (int i = 0; i < noColums; i++) {
+            rowValues[i]=matrix.get(rowIndex, i);
+        }
+        return rowValues;
+    }
+    
+    
 }
