@@ -60,5 +60,24 @@ public class DataTable {
         return rowValues;
     }
     
+    public int getNumRows(){
+        return matrix.getNumRows();
+    }
+    public int getNumColums(){
+        return matrix.getNumElements()/matrix.getNumRows();
+    }
     
+    public double[][] getDoubleMatrix(){
+        double[][] doubleMatrix= new double[getNumRows()][getNumColums()];
+        
+        for (int i = 0; i < doubleMatrix.length; i++) {
+            double[] ds = doubleMatrix[i];
+            for (int j = 0; j < ds.length; j++) {
+                double d = ds[j];
+                doubleMatrix[i][j]=d;
+            }
+        }
+        
+        return doubleMatrix;
+    }
 }
