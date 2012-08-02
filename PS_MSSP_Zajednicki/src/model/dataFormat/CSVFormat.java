@@ -12,28 +12,20 @@ import java.io.File;
  */
 public class CSVFormat extends DataFormat{
 
-    //public static final String PARAMETER_CSV_FILE = "file_name";
     private File csvFile;
-    //public static final String PARAMETER_USE_FIRST_ROW_AS_ATTRIBUTE_NAMES = "use_first_row_as_attribute_names";
     private boolean useFirstRowAsAttributeNames = false;
-    //public static final String PARAMETER_TRIM_LINES = "trim_lines";
     private boolean trimLines = false;
-    //public static final String PARAMETER_SKIP_COMMENTS = "skip_comments";
     private boolean skipComments = true;
-//    public static final String PARAMETER_COMMENT_CHARS = "comment_characters";
     private char commentCharacter = '#';
-//    public static final String PARAMETER_USE_QUOTES = "use_quotes";
     private boolean useQuotesForNominal = true;
-//    public static final String PARAMETER_QUOTES_CHARACTER = "quotes_character";
     private char quotesCharacter = '"';
-//    public static final String PARAMETER_COLUMN_SEPARATORS = "column_separators";
-    private char columnSeparator = ';';
-//    public static final String PARAMETER_ESCAPE_CHARACTER = "escape_character_for_quotes";
+    private char columnSeparator = ',';
     private char escapeCharacterForQuotes = '\\';
 
     public CSVFormat() {
     }
 
+   
     public CSVFormat(File csvFile) {
         this.csvFile = csvFile;
     }
@@ -106,6 +98,62 @@ public class CSVFormat extends DataFormat{
      */
     public void setCommentCharacter(char commentCharacter) {
         this.commentCharacter = commentCharacter;
+    }
+
+    /**
+     * @return the useQuotesForNominal
+     */
+    public boolean isUseQuotesForNominal() {
+        return useQuotesForNominal;
+    }
+
+    /**
+     * @param useQuotesForNominal the useQuotesForNominal to set
+     */
+    public void setUseQuotesForNominal(boolean useQuotesForNominal) {
+        this.useQuotesForNominal = useQuotesForNominal;
+    }
+
+    /**
+     * @return the quotesCharacter
+     */
+    public char getQuotesCharacter() {
+        return quotesCharacter;
+    }
+
+    /**
+     * @param quotesCharacter the quotesCharacter to set
+     */
+    public void setQuotesCharacter(char quotesCharacter) {
+        this.quotesCharacter = quotesCharacter;
+    }
+
+    /**
+     * @return the columnSeparator
+     */
+    public char getColumnSeparator() {
+        return columnSeparator;
+    }
+
+    /**
+     * @param columnSeparator the columnSeparator to set
+     */
+    public void setColumnSeparator(char columnSeparator) {
+        this.columnSeparator = columnSeparator;
+    }
+
+    /**
+     * @return the escapeCharacterForQuotes
+     */
+    public char getEscapeCharacterForQuotes() {
+        return escapeCharacterForQuotes;
+    }
+
+    /**
+     * @param escapeCharacterForQuotes the escapeCharacterForQuotes to set
+     */
+    public void setEscapeCharacterForQuotes(char escapeCharacterForQuotes) {
+        this.escapeCharacterForQuotes = escapeCharacterForQuotes;
     }
 
 
