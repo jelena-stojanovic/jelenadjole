@@ -6,6 +6,7 @@ package logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import logic.SO.Import_Export.CSVImportToDataSet;
 import logic.SO.Import_Export.ConvertListOfHorizontalStringArrayToMatrixOfString;
 
@@ -31,5 +32,14 @@ public class ControllerAL_DSImport {
         ArrayList<String[]> strings=CSVImportToDataSet.readCSV(filePath, columnSeparator);
         matrix= new String[strings.size()][strings.get(0).length];
         return ConvertListOfHorizontalStringArrayToMatrixOfString.convert(strings, matrix) ;
+    }
+    
+    public ArrayList<String[]>  readCSV(String filePath, char columnSeparator) throws IOException{
+        ArrayList<String[]> strings=CSVImportToDataSet.readCSV(filePath, columnSeparator);
+        return strings;
+    }
+    
+    public String[][] convert(List<String[]> dsValues, String[][] stringMatrix){
+        return ConvertListOfHorizontalStringArrayToMatrixOfString.convert(dsValues, stringMatrix);
     }
 }
