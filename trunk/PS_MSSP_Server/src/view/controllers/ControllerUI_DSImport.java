@@ -8,11 +8,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import logic.ControllerAL_DSImport;
+import model.attribute.Attribute;
 import model.dataFormat.CSVFormat;
 import view.panels.importDSpanel.PanelImportDS;
 
@@ -26,9 +28,11 @@ public class ControllerUI_DSImport {
     ControllerAL_DSImport controllerAL_DSImport = ControllerAL_DSImport.getInstance();
     PanelImportDS panelImportDS;
     CSVFormat cSVFormat = new CSVFormat();
+    String[] columnIdentifiers = null;
     /*
      * ---- csv format fields -----
      */
+    File file = null;
     boolean trimLines = false;
     boolean skipComments = false;
     char commentsChar = '#';
@@ -87,13 +91,12 @@ public class ControllerUI_DSImport {
     }
 
     public void chooseFile() {
-        File file = panelImportDS.getFileChooserDS().getSelectedFile();
+        file = panelImportDS.getFileChooserDS().getSelectedFile();
         cSVFormat.setCsvFile(file);
-
         disableAllExcept(1);
+        fillTblDataSetPreprocessing();
     }
 
-    
     public void setValuesToGUI() {
         KonverterTipova.Konvertuj(trimLines, panelImportDS.getCheckbTrimLines());
 
@@ -107,6 +110,9 @@ public class ControllerUI_DSImport {
 
         KonverterTipova.Konvertuj(useQuotesForNominal, panelImportDS.getCheckBUseQuotes());
 
+        if (file != null) {
+            fillTblDataSetPreprocessing();
+        }
     }
 
     public JRadioButton getSelectedRBColumnSeparator() {
@@ -122,8 +128,7 @@ public class ControllerUI_DSImport {
         }
         return panelImportDS.getRbComma();
     }
-    
-    
+
     private char getSelectedColumnSeparator() {
         char character = 0;
         ButtonGroup gbr = panelImportDS.getRbgColumnSeparator();
@@ -145,36 +150,38 @@ public class ControllerUI_DSImport {
         return character;
     }
 
-    public void fillTblDataSetPreprocessing(){
+    public void fillTblDataSetPreprocessing() {
         try {
-            JTable table=panelImportDS.getTblDataSetPreprocessing();
-            DefaultTableModel dtm= (DefaultTableModel) table.getModel();
-            int l=0;
-            String[] columnIdentifiers=null;
-            //ArrayList<String[]> stringArrayList= 
-            String[][] matrix= null;
-            matrix=controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), matrix, columnSeparation);
-            
-            System.out.println(matrix);
-            
-            for (int i = 0; i < matrix.length; i++) {
-            String[] strings = matrix[i];
-            for (int j = 0; j < strings.length; j++) {
-                String string = strings[j];
-                System.out.print(string+", ");
-                l=strings.length;
-                columnIdentifiers= new String[l];
-                columnIdentifiers[j]="Att"+(j+1);
+            JTable table = panelImportDS.getTblDataSetPreprocessing();
+            DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+
+            ArrayList<String[]> stringArrayList = new ArrayList<String[]>();
+            stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation);
+            if (useFirstROwAsAttributeName) {
+                columnIdentifiers = stringArrayList.get(0);
+                stringArrayList.remove(0);
+            } else {
+                columnIdentifiers = new String[stringArrayList.get(0).length];
+                for (int i = 0; i < columnIdentifiers.length; i++) {
+                    columnIdentifiers[i] = "Att" + (i + 1);
+                }
             }
-            
-            
-            System.out.println();
-            
+
+            String[][] matrix = new String[stringArrayList.size()][stringArrayList.get(0).length];
+            matrix = controllerAL_DSImport.convert(stringArrayList, matrix);
             dtm.setDataVector(matrix, columnIdentifiers);
-        }
         } catch (IOException ex) {
             Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void createAttributes(String[] columnIdentifiers) {
+
+        List<Attribute> attributes = new ArrayList<Attribute>();
+        for (int i = 0; i < columnIdentifiers.length; i++) {
+            String string = columnIdentifiers[i];
+            //       attributes.add(new Attribute() {});
+
+        }
+    }
 }
