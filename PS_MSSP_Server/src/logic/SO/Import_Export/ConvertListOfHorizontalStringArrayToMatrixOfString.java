@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ConvertListOfHorizontalStringArrayToMatrixOfString {
     
-    public static void convert(List<String[]> dsValues, String[][] stringMatrix){
+    public static String[][] convert(List<String[]> dsValues, String[][] stringMatrix){
         List<String[]> attributeStringValueVertical= new ArrayList<String[]>();
         
         for (int i = 0; i < dsValues.get(0).length; i++) {
@@ -48,6 +48,8 @@ public class ConvertListOfHorizontalStringArrayToMatrixOfString {
             System.out.println();
             
         }
+        
+        return stringMatrix;
     }
     
    
