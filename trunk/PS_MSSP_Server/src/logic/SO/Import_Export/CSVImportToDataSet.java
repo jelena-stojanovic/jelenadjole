@@ -17,13 +17,16 @@ import java.util.StringTokenizer;
  */
 public class CSVImportToDataSet {
 
-    public static ArrayList<String[]> readCSV(String filePath) throws IOException {
+    public static ArrayList<String[]> readCSV(String filePath, char columnSeparator) throws IOException {
+        if(filePath==null){
+            return new ArrayList<String[]>();
+        }
         File file = new File(filePath);
         BufferedReader bufRdr = new BufferedReader(new FileReader(file));
         String line = null;
         ArrayList<String[]> datasetList = new ArrayList<String[]>();
         while ((line = bufRdr.readLine()) != null) {
-            StringTokenizer st = new StringTokenizer(line, ",");
+            StringTokenizer st = new StringTokenizer(line, String.valueOf(columnSeparator));
             int size = st.countTokens();
             String[] lineInDataset = new String[size];
 
