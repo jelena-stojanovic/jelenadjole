@@ -171,7 +171,7 @@ public class ControllerUI_DSImport {
             JTable table = panelImportDS.getTblDataSetPreprocessing();
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
-            stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation);
+            stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation, cSVFormat.isTrimLines());
             if (useFirstROwAsAttributeName) {
                 columnIdentifiers = stringArrayList.get(0);
                 stringArrayList.remove(0);
@@ -191,103 +191,103 @@ public class ControllerUI_DSImport {
     }
 
     public void fillTblDataTypes() {
-        if(columnIdentifiers!=null){
-            TableDataTypes tblDatatypes=new TableDataTypes(panelImportDS.getPnlAttributeTypes(), panelImportDS.getjScrollPane3(), panelImportDS.getBtnPreviousDataTypes(), panelImportDS.getBtnFinish(), columnIdentifiers, stringArrayList);
-            TableModelDataTypes tmdt= new TableModelDataTypes(stringArrayList, columnIdentifiers);
+        if (columnIdentifiers != null) {
+            TableDataTypes tblDatatypes = new TableDataTypes(panelImportDS.getPnlAttributeTypes(), panelImportDS.getjScrollPane3(), panelImportDS.getBtnPreviousDataTypes(), panelImportDS.getBtnFinish(), columnIdentifiers, stringArrayList);
+            TableModelDataTypes tmdt = new TableModelDataTypes(stringArrayList, columnIdentifiers);
             tblDatatypes.setModel(tmdt);
-            
+
         }
         /*JTable table = panelImportDS.getTblDataTypes();
-        TableModelDataTypes tmdt= new TableModelDataTypes(stringArrayList, columnIdentifiers);
-        table.setModel(tmdt);
-        for (int i = 0; i <3; i++) {
-            for (int j = 0; j < tmdt.getColumnCount(); j++) {
-                TableCellEditor cellEditor=tmdt.getCellEditor(i, j);
-                table.setCellEditor(cellEditor);
-                //table.firepro
+         TableModelDataTypes tmdt= new TableModelDataTypes(stringArrayList, columnIdentifiers);
+         table.setModel(tmdt);
+         for (int i = 0; i <3; i++) {
+         for (int j = 0; j < tmdt.getColumnCount(); j++) {
+         TableCellEditor cellEditor=tmdt.getCellEditor(i, j);
+         table.setCellEditor(cellEditor);
+         //table.firepro
                         
                         
                  
-            }
+         }
             
-        }*/
-                /*List<String> lm = Ontology.getAttributeRoles();
+         }*/
+        /*List<String> lm = Ontology.getAttributeRoles();
 
-        JComboBox jc = new JComboBox();
-        for (String string : lm) {
-            jc.addItem(string);
-        }
+         JComboBox jc = new JComboBox();
+         for (String string : lm) {
+         jc.addItem(string);
+         }
 
-        TableColumnModel tcm = table.getColumnModel();
-        TableColumn tc=  tcm.getColumn(3);
+         TableColumnModel tcm = table.getColumnModel();
+         TableColumn tc=  tcm.getColumn(3);
 
-        tc.setCellEditor(new DefaultCellEditor(jc));
-        table.setCellEditor(new DefaultCellEditor(jc));*/
-        
-        
+         tc.setCellEditor(new DefaultCellEditor(jc));
+         table.setCellEditor(new DefaultCellEditor(jc));*/
+
+
 //        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-       // dtm= new DefaultTableModel();
-        
-        
-   /*     if (columnIdentifiers != null) {
-            dtm.setColumnCount(columnIdentifiers.length);
-            dtm.setRowCount(columnIdentifiers.length);
-            JComboBox[] comboBoxsAttributeRole = new JComboBox[columnIdentifiers.length];
-            JComboBox[] comboBoxsAttributeType = new JComboBox[columnIdentifiers.length];
+        // dtm= new DefaultTableModel();
+
+
+        /*     if (columnIdentifiers != null) {
+         dtm.setColumnCount(columnIdentifiers.length);
+         dtm.setRowCount(columnIdentifiers.length);
+         JComboBox[] comboBoxsAttributeRole = new JComboBox[columnIdentifiers.length];
+         JComboBox[] comboBoxsAttributeType = new JComboBox[columnIdentifiers.length];
             
-            for (int i = 0; i < columnIdentifiers.length; i++) {
-                comboBoxsAttributeRole[i]= new JComboBox();
-                comboBoxsAttributeType[i]= new JComboBox();
-            }
+         for (int i = 0; i < columnIdentifiers.length; i++) {
+         comboBoxsAttributeRole[i]= new JComboBox();
+         comboBoxsAttributeType[i]= new JComboBox();
+         }
 
             
 
-            fillCBs(comboBoxsAttributeRole, comboBoxsAttributeType);
+         fillCBs(comboBoxsAttributeRole, comboBoxsAttributeType);
             
-            for (int i = 0; i < columnIdentifiers.length; i++) {
+         for (int i = 0; i < columnIdentifiers.length; i++) {
                 
-                comboBoxsAttributeRole[i].setSelectedItem("Attribute");
-                comboBoxsAttributeType[i].setSelectedItem(GuessValueTypesClass.guessValueType(stringArrayList.get(1)[i]));
+         comboBoxsAttributeRole[i].setSelectedItem("Attribute");
+         comboBoxsAttributeType[i].setSelectedItem(GuessValueTypesClass.guessValueType(stringArrayList.get(1)[i]));
                 
-            }
+         }
             
-            JComboBox jc = new JComboBox();
-            //jc.setModel(new DefaultComboBoxModel(Ontology.getAttributeRoles().toArray()));
+         JComboBox jc = new JComboBox();
+         //jc.setModel(new DefaultComboBoxModel(Ontology.getAttributeRoles().toArray()));
 
-            for (String string : Ontology.getAttributeRoles()) {
-                jc.addItem(string);
-            }
+         for (String string : Ontology.getAttributeRoles()) {
+         jc.addItem(string);
+         }
             
-            TableColumnModel tcm = table.getColumnModel();
-            TableColumn tc=  tcm.getColumn(0);
+         TableColumnModel tcm = table.getColumnModel();
+         TableColumn tc=  tcm.getColumn(0);
 
-            tc.setCellEditor(new DefaultCellEditor(jc));
-*/
-            //TableCellEditor tce=new DefaultCellEditor(jc);
+         tc.setCellEditor(new DefaultCellEditor(jc));
+         */
+        //TableCellEditor tce=new DefaultCellEditor(jc);
+
+        //table.setCellEditor(tce);
+
+        /*dtm.addRow(columnIdentifiers);
             
-            //table.setCellEditor(tce);
+         dtm.addRow(comboBoxsAttributeType);
             
-            /*dtm.addRow(columnIdentifiers);
+         dtm.addRow(comboBoxsAttributeRole);
             
-            dtm.addRow(comboBoxsAttributeType);
-            
-            dtm.addRow(comboBoxsAttributeRole);
-            
-            for (int i = 0; i < columnIdentifiers.length; i++) {
-                for (int j = 0; j < 3; j++) {
-                    dtm.isCellEditable(j, i);
-                }
+         for (int i = 0; i < columnIdentifiers.length; i++) {
+         for (int j = 0; j < 3; j++) {
+         dtm.isCellEditable(j, i);
+         }
                 
-            }
+         }
             
-            for (int i = 0; i < stringArrayList.size(); i++) {
-            String[] strings = stringArrayList.get(i);
-            dtm.addRow(strings);
+         for (int i = 0; i < stringArrayList.size(); i++) {
+         String[] strings = stringArrayList.get(i);
+         dtm.addRow(strings);
             
-            }
+         }
             
-            table.setModel(dtm);*/
-        
+         table.setModel(dtm);*/
+
 
 //        String[][] matrix = new String[stringArrayList.size()][stringArrayList.get(0).length];
 //        matrix = controllerAL_DSImport.convert(stringArrayList, matrix);
@@ -296,9 +296,10 @@ public class ControllerUI_DSImport {
 //
 //
 //        createTfAndCBs();
-    
-        
+
+
     }
+
     public void createAttributes(String[] columnIdentifiers) {
 
         List<Attribute> attributes = new ArrayList<Attribute>();
@@ -325,32 +326,29 @@ public class ControllerUI_DSImport {
                 jComboBox.addItem(string);
             }
         }
-            /*
-             * panelImportDS.getCbAttributeRole().removeAllItems();
-             * panelImportDS.getCbAttributeType().removeAllItems(); for (String
-             * string : Ontology.getAttributeTypes()) {
-             * panelImportDS.getCbAttributeType().addItem(string); } for (String
-             * string : Ontology.getAttributeRoles()) {
-             * panelImportDS.getCbAttributeRole().addItem(string); }
-             */
-        }
-
-    
-
+        /*
+         * panelImportDS.getCbAttributeRole().removeAllItems();
+         * panelImportDS.getCbAttributeType().removeAllItems(); for (String
+         * string : Ontology.getAttributeTypes()) {
+         * panelImportDS.getCbAttributeType().addItem(string); } for (String
+         * string : Ontology.getAttributeRoles()) {
+         * panelImportDS.getCbAttributeRole().addItem(string); }
+         */
+    }
     /*public void createTfAndCBs() {
-        for (int i = 0; i < columnIdentifiers.length; i++) {
-            JTextField jtf = new JTextField();
-            jtf.setText(columnIdentifiers[i]);
-            jtf.setSize(panelImportDS.getTfAttributeName().getSize());
+     for (int i = 0; i < columnIdentifiers.length; i++) {
+     JTextField jtf = new JTextField();
+     jtf.setText(columnIdentifiers[i]);
+     jtf.setSize(panelImportDS.getTfAttributeName().getSize());
 
-            int x = (int) ((1 + i) * panelImportDS.getTfAttributeName().getSize().getWidth() + panelImportDS.getTfAttributeName().getLocation().getX());
-            int y = (int) panelImportDS.getTfAttributeName().getLocation().getY();
-            jtf.setLocation(x, y);
-            panelImportDS.getPnlTableAndFieldAttributes().add(jtf);
-            textFields.add(jtf);
+     int x = (int) ((1 + i) * panelImportDS.getTfAttributeName().getSize().getWidth() + panelImportDS.getTfAttributeName().getLocation().getX());
+     int y = (int) panelImportDS.getTfAttributeName().getLocation().getY();
+     jtf.setLocation(x, y);
+     panelImportDS.getPnlTableAndFieldAttributes().add(jtf);
+     textFields.add(jtf);
 
 
 
-        }
-    }*/
+     }
+     }*/
 }
