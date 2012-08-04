@@ -21,6 +21,7 @@ public class PanelImportDS extends javax.swing.JPanel {
         ControllerUI_DSImport.getInstance().setPanelImportDS(this);
         ControllerUI_DSImport.getInstance().disableAllExcept(0);
         ControllerUI_DSImport.getInstance().setValuesToGUI();
+
     }
 
     /**
@@ -59,11 +60,11 @@ public class PanelImportDS extends javax.swing.JPanel {
         checkBUseFirstRow = new javax.swing.JCheckBox();
         btnNextFirstRow = new javax.swing.JButton();
         btnPrevioucFirstRow = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDataTypes = new javax.swing.JTable();
+        pnlAttributeTypes = new javax.swing.JPanel();
         btnPreviousDataTypes = new javax.swing.JButton();
         btnFinish = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblDataTypes = new javax.swing.JTable();
 
         fileChooserDS.setCurrentDirectory(new java.io.File("C:\\Users\\Jelena\\Desktop"));
         fileChooserDS.setDialogTitle("Please select the file that should be imported.");
@@ -139,15 +140,35 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         rbgColumnSeparator.add(rbComma);
         rbComma.setText("Comma \",\"");
+        rbComma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbCommaActionPerformed(evt);
+            }
+        });
 
         rbgColumnSeparator.add(rbSemicolon);
         rbSemicolon.setText("Semicolon \";\"");
+        rbSemicolon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSemicolonActionPerformed(evt);
+            }
+        });
 
         rbgColumnSeparator.add(rbSpace);
         rbSpace.setText("Space");
+        rbSpace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSpaceActionPerformed(evt);
+            }
+        });
 
         rbgColumnSeparator.add(rbTab);
         rbTab.setText("Tab");
+        rbTab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTabActionPerformed(evt);
+            }
+        });
 
         checkBUseQuotes.setText("Use quotes");
 
@@ -158,12 +179,9 @@ public class PanelImportDS extends javax.swing.JPanel {
             .addGroup(pnlColumnSeparationLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(pnlColumnSeparationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlColumnSeparationLayout.createSequentialGroup()
-                        .addGroup(pnlColumnSeparationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbComma)
-                            .addComponent(rbSpace)
-                            .addComponent(rbTab))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rbComma)
+                    .addComponent(rbSpace)
+                    .addComponent(rbTab)
                     .addComponent(rbSemicolon))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(checkBUseQuotes)
@@ -305,16 +323,6 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         tpnlImportDS.addTab("Step 3: The first row as name", pnlNameOfAtt);
 
-        tblDataTypes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tblDataTypes);
-
         btnPreviousDataTypes.setText("<-- Previous");
         btnPreviousDataTypes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,34 +332,44 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         btnFinish.setText("Finish :)");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        tblDataTypes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tblDataTypes);
+
+        javax.swing.GroupLayout pnlAttributeTypesLayout = new javax.swing.GroupLayout(pnlAttributeTypes);
+        pnlAttributeTypes.setLayout(pnlAttributeTypesLayout);
+        pnlAttributeTypesLayout.setHorizontalGroup(
+            pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAttributeTypesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(pnlAttributeTypesLayout.createSequentialGroup()
+                        .addGap(0, 551, Short.MAX_VALUE)
                         .addComponent(btnPreviousDataTypes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFinish, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlAttributeTypesLayout.setVerticalGroup(
+            pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAttributeTypesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinish)
                     .addComponent(btnPreviousDataTypes))
                 .addGap(21, 21, 21))
         );
 
-        tpnlImportDS.addTab("Step 4: Data types of attributes", jPanel1);
+        tpnlImportDS.addTab("Step 4: Data types of attributes", pnlAttributeTypes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -400,6 +418,22 @@ public class PanelImportDS extends javax.swing.JPanel {
         ControllerUI_DSImport.getInstance().disableAllExcept(2);
     }//GEN-LAST:event_btnPreviousDataTypesActionPerformed
 
+    private void rbSemicolonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSemicolonActionPerformed
+        ControllerUI_DSImport.getInstance().saveFildValues();
+    }//GEN-LAST:event_rbSemicolonActionPerformed
+
+    private void rbCommaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCommaActionPerformed
+        ControllerUI_DSImport.getInstance().saveFildValues();
+    }//GEN-LAST:event_rbCommaActionPerformed
+
+    private void rbSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSpaceActionPerformed
+        ControllerUI_DSImport.getInstance().saveFildValues();
+    }//GEN-LAST:event_rbSpaceActionPerformed
+
+    private void rbTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTabActionPerformed
+        ControllerUI_DSImport.getInstance().saveFildValues();
+    }//GEN-LAST:event_rbTabActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnNextFirstRow;
@@ -415,10 +449,10 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCommentChar;
+    private javax.swing.JPanel pnlAttributeTypes;
     private javax.swing.JPanel pnlColumnSeparation;
     private javax.swing.JPanel pnlNameOfAtt;
     private javax.swing.JPanel pnlParseFile;
@@ -533,5 +567,37 @@ public class PanelImportDS extends javax.swing.JPanel {
         return tfCommentChar;
     }
 
+    /**
+     * @return the btnFinish
+     */
+    public javax.swing.JButton getBtnFinish() {
+        return btnFinish;
+    }
+
+    /**
+     * @return the btnPreviousDataTypes
+     */
+    public javax.swing.JButton getBtnPreviousDataTypes() {
+        return btnPreviousDataTypes;
+    }
+
+    /**
+     * @return the jScrollPane3
+     */
+    public javax.swing.JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    /**
+     * @return the pnlAttributeTypes
+     */
+    public javax.swing.JPanel getPnlAttributeTypes() {
+        return pnlAttributeTypes;
+    }
+
+    /**
+     * @return the pnlTableAndFieldAttributes
+     */
+    
     
 }
