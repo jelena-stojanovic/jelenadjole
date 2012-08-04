@@ -4,28 +4,23 @@
  */
 package import_csv;
 
-import model.attribute.Attribute;
-import model.attribute.DateAttribute;
-import model.attribute.IntervalAttribute;
-import model.attribute.NominalAttribute;
-import model.attribute.NumericalAttribute;
-import model.attribute.OrdinalAttribute;
+import model.attribute.*;
 
 public class GuessValueTypesClass {
 
-    public static Attribute guessValueType(String value) {
+    public static String guessValueType(String value) {
         try {
             Double.parseDouble(value);
-            return new NumericalAttribute();
+            return Ontology.NUMERICAL_ATTRIBUTE;
         } catch (NumberFormatException ex) {
             if (value.contains("<") || value.contains(">") || value.contains("=")) {
-                return new IntervalAttribute();
+                return Ontology.INTERVAL_ATTRIBUTE;
             } else if (value.endsWith(".") && countOccurances(value, '.') == 1) {
-                return new OrdinalAttribute();
+                return Ontology.ORDINAL_ATTRIBUTE;
             } else if (value.contains("/") || value.contains("-") || value.contains(".")) {
-                return new DateAttribute();
+                return Ontology.DATE_ATTRIBUTE;
             } else {
-                return new NominalAttribute(null);
+                return Ontology.NOMINAL_ATTRIBUTE;
             }
         }
     }
