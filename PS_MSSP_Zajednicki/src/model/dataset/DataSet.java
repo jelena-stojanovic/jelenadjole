@@ -4,8 +4,10 @@
  */
 package model.dataset;
 
+import java.sql.ResultSet;
 import java.util.List;
 import model.Instance;
+import model.OpstiDomenskiObjekat;
 import model.Reference;
 import model.attribute.Attribute;
 import model.dataset.metaattributes.DSMetaAttribute;
@@ -15,7 +17,8 @@ import model.dataset.metaattributes.DSMetaAttribute;
  *
  * @author Jelena
  */
-public class DataSet {
+public class DataSet implements OpstiDomenskiObjekat {
+    
     private int dataSetID;
     private String title;
     private String dsDescription;
@@ -154,6 +157,106 @@ public class DataSet {
      */
     public void setDataTable(DataTable dataTable) {
         this.dataTable = dataTable;
+    }
+
+    @Override
+    public String vratiVrednostiAtributa() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String postaviVrednostiAtributa() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        return "DataSet";
+    }
+
+    @Override
+    public String vratiUslovZaNadjiSlog() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiUslovZaNadjiSlogove() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean Napuni(ResultSet RSslog) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int povecajBroj(ResultSet rs) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public OpstiDomenskiObjekat vratiVezaniObjekat(int brojVezanogObjekta) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void Napuni(ResultSet RSslog, int brojSloga, int brojVezanogObjekta) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void kreirajVezaniObjekat(int brojStavkiVezanogObjekta, int brojVezanogObjekta) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int vratiBrojVezanihObjekata() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void postaviPocetniBroj() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public OpstiDomenskiObjekat vratiSlogVezanogObjekta(int brojVezanogObjekta, int brojSloga) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int vratiBrojSlogovaVezanogObjekta(int brojVezanogObjekta) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean vrednosnaOgranicenja() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void Obradi() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void Storniraj() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
