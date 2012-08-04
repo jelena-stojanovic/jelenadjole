@@ -4,7 +4,13 @@
  */
 package view.panels.importDSpanel;
 
+import java.awt.Color;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import view.controllers.ControllerUI_DSImport;
 
 /**
@@ -77,7 +83,7 @@ public class PanelImportDS extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         tfCreator = new javax.swing.JTextField();
         tfDonor = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        tfDateDS = new javax.swing.JTextField();
         pnlAttributeTypes = new javax.swing.JPanel();
         btnPreviousDataTypes = new javax.swing.JButton();
         btnFinish = new javax.swing.JButton();
@@ -333,6 +339,12 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         jLabel13.setText("Date (please insert date in format MM/dd/yyyy):");
 
+        tfDateDS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDateDSFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -347,7 +359,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfDateDS, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -369,7 +381,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfDateDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -578,6 +590,17 @@ public class PanelImportDS extends javax.swing.JPanel {
         ControllerUI_DSImport.getInstance().finish();
     }//GEN-LAST:event_btnFinishActionPerformed
 
+    private void tfDateDSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDateDSFocusLost
+        try {
+            SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
+            Date date= sdf.parse(tfDateDS.getText().trim());
+        } catch (ParseException ex) {
+            tfDateDS.setBackground(Color.red);
+        }
+        
+        
+    }//GEN-LAST:event_tfDateDSFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnNextFirstRow;
@@ -607,7 +630,6 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCommentChar;
     private javax.swing.JPanel pnlAttributeTypes;
     private javax.swing.JPanel pnlColumnSeparation;
@@ -627,6 +649,7 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JTextField tfCreator;
     private javax.swing.JTextField tfDataSetTitle;
     private javax.swing.JTextField tfDataSetTitle1;
+    private javax.swing.JTextField tfDateDS;
     private javax.swing.JTextField tfDonor;
     private javax.swing.JTabbedPane tpnlImportDS;
     // End of variables declaration//GEN-END:variables
