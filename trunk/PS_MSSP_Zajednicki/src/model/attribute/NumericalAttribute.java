@@ -20,6 +20,9 @@ import model.statistics.NumericalStatistic;
  */
 public class NumericalAttribute extends Attribute{
 
+    public NumericalAttribute() {
+    }
+
     
     /**
      * map of class names of statistics and their values of concrete attribute

@@ -10,6 +10,10 @@ package model.attribute;
  */
 public class DateAttribute extends Attribute{
 
+    public DateAttribute() {
+    }
+    
+
     @Override
     public boolean isNominal() {
        return false;

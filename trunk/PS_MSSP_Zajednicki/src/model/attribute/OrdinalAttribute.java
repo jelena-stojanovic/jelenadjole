@@ -10,6 +10,10 @@ package model.attribute;
  */
 public class OrdinalAttribute extends Attribute{
 
+    public OrdinalAttribute() {
+    }
+
+    
     @Override
     public boolean isNominal() {
         return false;

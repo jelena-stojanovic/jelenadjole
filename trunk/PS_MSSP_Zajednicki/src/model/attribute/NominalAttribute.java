@@ -80,5 +80,8 @@ public class NominalAttribute extends Attribute{
         this.classToIndexMap = classToIndexMap;
     }
 
+    public NominalAttribute() {
+    }
+
     
 }
