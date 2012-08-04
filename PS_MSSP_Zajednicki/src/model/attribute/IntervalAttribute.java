@@ -10,6 +10,10 @@ package model.attribute;
  */
 public class IntervalAttribute extends Attribute{
 
+    public IntervalAttribute() {
+    }
+
+    
     @Override
     public boolean isNominal() {
         return false;

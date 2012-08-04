@@ -13,7 +13,7 @@ public abstract class Attribute {
     private String name;
     private String description;
     private int missingValues;
-    private int attributeRole;
+    private String attributeRole;
     
     public abstract boolean isNominal();
     public abstract boolean isNumerical();
@@ -83,14 +83,14 @@ public abstract class Attribute {
     /**
      * @return the attributeRole
      */
-    public int getAttributeRole() {
+    public String getAttributeRole() {
         return attributeRole;
     }
 
     /**
      * @param attributeRole the attributeRole to set
      */
-    public void setAttributeRole(int attributeRole) {
+    public void setAttributeRole(String attributeRole) {
         this.attributeRole = attributeRole;
     }
     
