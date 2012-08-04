@@ -50,14 +50,16 @@ public class TableModelDataTypes extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
             switch(rowIndex){
                 case 0:{
-                    if(metaAttributes.get(0)[columnIndex] ==null)
-                    metaAttributes.get(0)[columnIndex]= columnIdentifiers[columnIndex];
+                    if(metaAttributes.get(0)[columnIndex] ==null){
+                        metaAttributes.get(0)[columnIndex]= columnIdentifiers[columnIndex];
+                    }
                     return metaAttributes.get(0)[columnIndex];
                 } 
                     
                 case 1: {
-                    if(metaAttributes.get(1)[columnIndex] ==null)
+                    if(metaAttributes.get(1)[columnIndex] ==null){
                         metaAttributes.get(1)[columnIndex]="Attribute";
+                    }   
                     return metaAttributes.get(1)[columnIndex];
                 }
                 case 2: {

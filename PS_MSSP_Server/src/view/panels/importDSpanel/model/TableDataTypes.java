@@ -51,8 +51,6 @@ public class TableDataTypes extends JTable {
                 for (String string : Ontology.getAttributeRoles()) {
                     jcb.addItem(string);
                 }
-                jcb.setSelectedIndex(0);
-      
                 return new DefaultCellEditor(jcb);
             }
             case 2: {
