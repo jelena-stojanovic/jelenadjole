@@ -7,6 +7,8 @@ package view.controllers;
 import import_csv.GuessValueTypesClass;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -19,8 +21,10 @@ import javax.swing.text.TableView.TableCell;
 import javax.swing.text.TableView.TableRow;
 import logic.ControllerAL_DSImport;
 import model.attribute.Attribute;
+import model.attribute.NominalAttribute;
 import model.attribute.Ontology;
 import model.dataFormat.CSVFormat;
+import model.dataset.DataSet;
 import view.panels.importDSpanel.PanelImportDS;
 import view.panels.importDSpanel.model.TableDataTypes;
 import view.panels.importDSpanel.model.TableModelDataTypes;
@@ -40,9 +44,7 @@ public class ControllerUI_DSImport {
      */
     String[] columnIdentifiers = null;
     ArrayList<String[]> stringArrayList = new ArrayList<String[]>();
-    ArrayList<JTextField> textFields = new ArrayList<JTextField>();
-    ArrayList<JComboBox> attributesRole = new ArrayList<JComboBox>();
-    ArrayList<JComboBox> attributesType = new ArrayList<JComboBox>();
+    TableDataTypes tblDatatypes;
     /*
      * ---- csv format fields -----
      */
@@ -83,9 +85,9 @@ public class ControllerUI_DSImport {
         useQuotesForNominal = KonverterTipova.Konvertuj(panelImportDS.getCheckBUseQuotes(), useQuotesForNominal);
         cSVFormat.setUseQuotesForNominal(useQuotesForNominal);
 
-        fillTblDataSetPreprocessing();
         setValuesToGUI();
     }
+
 
     private static class ControllerUI_DSImportHolder {
 
@@ -172,16 +174,17 @@ public class ControllerUI_DSImport {
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
             stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation, cSVFormat.isTrimLines());
-            if (useFirstROwAsAttributeName) {
-                columnIdentifiers = stringArrayList.get(0);
-                stringArrayList.remove(0);
-            } else {
-                columnIdentifiers = new String[stringArrayList.get(0).length];
-                for (int i = 0; i < columnIdentifiers.length; i++) {
-                    columnIdentifiers[i] = "Att" + (i + 1);
+            if (tblDatatypes==null||((TableModelDataTypes) tblDatatypes.getModel()).getAttributeName(0) == null) {
+                if (useFirstROwAsAttributeName) {
+                    columnIdentifiers = stringArrayList.get(0);
+                    stringArrayList.remove(0);
+                } else {
+                    columnIdentifiers = new String[stringArrayList.get(0).length];
+                    for (int i = 0; i < columnIdentifiers.length; i++) {
+                        columnIdentifiers[i] = "Att" + (i + 1);
+                    }
                 }
             }
-
             String[][] matrix = new String[stringArrayList.size()][stringArrayList.get(0).length];
             matrix = controllerAL_DSImport.convert(stringArrayList, matrix);
             dtm.setDataVector(matrix, columnIdentifiers);
@@ -192,163 +195,82 @@ public class ControllerUI_DSImport {
 
     public void fillTblDataTypes() {
         if (columnIdentifiers != null) {
-            TableDataTypes tblDatatypes = new TableDataTypes(panelImportDS.getPnlAttributeTypes(), panelImportDS.getjScrollPane3(), panelImportDS.getBtnPreviousDataTypes(), panelImportDS.getBtnFinish(), columnIdentifiers, stringArrayList);
-            TableModelDataTypes tmdt = new TableModelDataTypes(stringArrayList, columnIdentifiers);
-            tblDatatypes.setModel(tmdt);
-
+            if (tblDatatypes == null) {
+                tblDatatypes = new TableDataTypes(panelImportDS.getPnlAttributeTypes(), panelImportDS.getjScrollPane3(), panelImportDS.getBtnPreviousDataTypes(), panelImportDS.getBtnFinish(), columnIdentifiers, stringArrayList);
+                TableModelDataTypes tmdt = new TableModelDataTypes(stringArrayList, columnIdentifiers);
+                tblDatatypes.setModel(tmdt);
+            } else {
+                TableModelDataTypes tmdt = (TableModelDataTypes) tblDatatypes.getModel();
+                tmdt.setColumnIdentifiers(columnIdentifiers);
+                tmdt.setArrayListString(stringArrayList);
+            }
         }
-        /*JTable table = panelImportDS.getTblDataTypes();
-         TableModelDataTypes tmdt= new TableModelDataTypes(stringArrayList, columnIdentifiers);
-         table.setModel(tmdt);
-         for (int i = 0; i <3; i++) {
-         for (int j = 0; j < tmdt.getColumnCount(); j++) {
-         TableCellEditor cellEditor=tmdt.getCellEditor(i, j);
-         table.setCellEditor(cellEditor);
-         //table.firepro
-                        
-                        
-                 
-         }
-            
-         }*/
-        /*List<String> lm = Ontology.getAttributeRoles();
-
-         JComboBox jc = new JComboBox();
-         for (String string : lm) {
-         jc.addItem(string);
-         }
-
-         TableColumnModel tcm = table.getColumnModel();
-         TableColumn tc=  tcm.getColumn(3);
-
-         tc.setCellEditor(new DefaultCellEditor(jc));
-         table.setCellEditor(new DefaultCellEditor(jc));*/
-
-
-//        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-        // dtm= new DefaultTableModel();
-
-
-        /*     if (columnIdentifiers != null) {
-         dtm.setColumnCount(columnIdentifiers.length);
-         dtm.setRowCount(columnIdentifiers.length);
-         JComboBox[] comboBoxsAttributeRole = new JComboBox[columnIdentifiers.length];
-         JComboBox[] comboBoxsAttributeType = new JComboBox[columnIdentifiers.length];
-            
-         for (int i = 0; i < columnIdentifiers.length; i++) {
-         comboBoxsAttributeRole[i]= new JComboBox();
-         comboBoxsAttributeType[i]= new JComboBox();
-         }
-
-            
-
-         fillCBs(comboBoxsAttributeRole, comboBoxsAttributeType);
-            
-         for (int i = 0; i < columnIdentifiers.length; i++) {
-                
-         comboBoxsAttributeRole[i].setSelectedItem("Attribute");
-         comboBoxsAttributeType[i].setSelectedItem(GuessValueTypesClass.guessValueType(stringArrayList.get(1)[i]));
-                
-         }
-            
-         JComboBox jc = new JComboBox();
-         //jc.setModel(new DefaultComboBoxModel(Ontology.getAttributeRoles().toArray()));
-
-         for (String string : Ontology.getAttributeRoles()) {
-         jc.addItem(string);
-         }
-            
-         TableColumnModel tcm = table.getColumnModel();
-         TableColumn tc=  tcm.getColumn(0);
-
-         tc.setCellEditor(new DefaultCellEditor(jc));
-         */
-        //TableCellEditor tce=new DefaultCellEditor(jc);
-
-        //table.setCellEditor(tce);
-
-        /*dtm.addRow(columnIdentifiers);
-            
-         dtm.addRow(comboBoxsAttributeType);
-            
-         dtm.addRow(comboBoxsAttributeRole);
-            
-         for (int i = 0; i < columnIdentifiers.length; i++) {
-         for (int j = 0; j < 3; j++) {
-         dtm.isCellEditable(j, i);
-         }
-                
-         }
-            
-         for (int i = 0; i < stringArrayList.size(); i++) {
-         String[] strings = stringArrayList.get(i);
-         dtm.addRow(strings);
-            
-         }
-            
-         table.setModel(dtm);*/
-
-
-//        String[][] matrix = new String[stringArrayList.size()][stringArrayList.get(0).length];
-//        matrix = controllerAL_DSImport.convert(stringArrayList, matrix);
-//        dtm.
-//                setDataVector(matrix, columnIdentifiers);
-//
-//
-//        createTfAndCBs();
-
-
     }
 
-    public void createAttributes(String[] columnIdentifiers) {
+    public List<Attribute> createAttributes()  {
 
         List<Attribute> attributes = new ArrayList<Attribute>();
+        TableModelDataTypes tmdt = (TableModelDataTypes) tblDatatypes.getModel();
         for (int i = 0; i < columnIdentifiers.length; i++) {
-            String string = columnIdentifiers[i];
-            //       attributes.add(new Attribute() {});
+            try {
+                String simpleClassName= tmdt.getAttributeType(i)+"Attribute";
+                System.out.println(simpleClassName);
+                
+                String className="model.attribute."+simpleClassName;
+                Constructor c=Class.forName(className).getConstructor();
+                Attribute a=(Attribute)c.newInstance();
+                a.setAttributeRole(tmdt.getAttributeRole(i));
+                a.setName(tmdt.getAttributeName(i));
+                a.setIndexOfAttribute(i);
+                
+                attributes.add(a);
+          } catch (InstantiationException ex) {
+              JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchMethodException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
+        return attributes;
+    }
+    
+    
+    public void finish() {
+        DataSet ds= new DataSet();
+        
+        List<Attribute> attributes= createAttributes();
+        ds.setAttributes(attributes);
+        String title= file.getName().substring(0, file.getName().length()-4);
+        System.out.println(title);
+        ds.setTitle(null);
+        
+        ds.setDataTable(null);
+        
+        ds.setDataSetID(commentsChar);
+        
+        ds.setDsDescription(null);
+        
+        ds.setReferences(null);
+        ds.setInstances(null);
+        ds.setMetaAttributes(null);
+        ds.setSource(null);
 
     }
-
-    public void fillCBs(JComboBox[] comboBoxsAttributeRole, JComboBox[] comboBoxsAttributeType) {
-
-        for (int i = 0; i < comboBoxsAttributeRole.length; i++) {
-            JComboBox jComboBox = comboBoxsAttributeRole[i];
-            for (String string : Ontology.getAttributeRoles()) {
-                jComboBox.addItem(string);
-            }
-        }
-
-        for (int i = 0; i < comboBoxsAttributeType.length; i++) {
-            JComboBox jComboBox = comboBoxsAttributeType[i];
-            for (String string : Ontology.getAttributeTypes()) {
-                jComboBox.addItem(string);
-            }
-        }
-        /*
-         * panelImportDS.getCbAttributeRole().removeAllItems();
-         * panelImportDS.getCbAttributeType().removeAllItems(); for (String
-         * string : Ontology.getAttributeTypes()) {
-         * panelImportDS.getCbAttributeType().addItem(string); } for (String
-         * string : Ontology.getAttributeRoles()) {
-         * panelImportDS.getCbAttributeRole().addItem(string); }
-         */
-    }
-    /*public void createTfAndCBs() {
-     for (int i = 0; i < columnIdentifiers.length; i++) {
-     JTextField jtf = new JTextField();
-     jtf.setText(columnIdentifiers[i]);
-     jtf.setSize(panelImportDS.getTfAttributeName().getSize());
-
-     int x = (int) ((1 + i) * panelImportDS.getTfAttributeName().getSize().getWidth() + panelImportDS.getTfAttributeName().getLocation().getX());
-     int y = (int) panelImportDS.getTfAttributeName().getLocation().getY();
-     jtf.setLocation(x, y);
-     panelImportDS.getPnlTableAndFieldAttributes().add(jtf);
-     textFields.add(jtf);
-
-
-
-     }
-     }*/
 }
