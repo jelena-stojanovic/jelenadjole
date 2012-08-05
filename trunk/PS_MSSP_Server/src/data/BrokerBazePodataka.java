@@ -20,7 +20,7 @@ package data;
 import java.io.*;
 import java.sql.*;
 import model.OpstiDomenskiObjekat;
-import view.KonverterTipova;
+import tools.KonverterTipova;
 
 public class BrokerBazePodataka
 {
