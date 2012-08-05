@@ -12,7 +12,8 @@ import model.statistics.CalculatedNumericalStatistics;
  * @author Jelena
  */
 public class CalculateNumericalAttributeStatistics {
-    public static void calculate(double[] valuesArray,HashMap<String, Double> numericalStatistics){
+    public static HashMap<String, Double> calculate(double[] valuesArray,HashMap<String, Double> numericalStatistics){
         numericalStatistics=new CalculatedNumericalStatistics().getValues(valuesArray);
+        return numericalStatistics;
     }
 }

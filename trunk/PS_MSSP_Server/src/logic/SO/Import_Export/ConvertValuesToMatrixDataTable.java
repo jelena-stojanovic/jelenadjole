@@ -29,27 +29,14 @@ public class ConvertValuesToMatrixDataTable {
                 String string = strings[i];
                 NominalAttribute na = (NominalAttribute) a;
                 Double d = na.getIndexOfNominalValue(string);
-                System.out.println("Value" + d);
-                System.out.println("Row" + i);
-                System.out.println("Column" + index);
-                if (dataTable == null) {
-                    System.out.println("dt je null");
-                } else {
-                    System.out.println("dt nije null");
-                    if (dataTable.getMatrix() == null) {
-                        System.out.println("dt matrix je null");
-                    } else {
-                        System.out.println("dt matrix nije null");
-                    }
-                }
-
+              
                 dataTable.add(i, index, d);
 
             }
         } else if (a.isNumerical()) {
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
-                Double d = Double.valueOf(string);
+                Double d = Double.parseDouble(string);
                 dataTable.add(i, index, d);
 
             }
