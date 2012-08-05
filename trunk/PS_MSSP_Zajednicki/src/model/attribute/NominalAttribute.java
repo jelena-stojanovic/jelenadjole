@@ -83,5 +83,10 @@ public class NominalAttribute extends Attribute{
     public NominalAttribute() {
     }
 
+    @Override
+    public void setPossibleValues() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     
 }

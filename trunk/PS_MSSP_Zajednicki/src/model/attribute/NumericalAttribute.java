@@ -79,5 +79,10 @@ public class NumericalAttribute extends Attribute{
     public void setStatistics(HashMap<String, Double> statistics) {
         this.statistics = statistics;
     }
+
+    @Override
+    public void setPossibleValues() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
