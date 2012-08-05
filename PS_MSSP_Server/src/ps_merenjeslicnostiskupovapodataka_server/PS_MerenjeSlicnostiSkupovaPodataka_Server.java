@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.SO.Import_Export.ConvertHorizontalStringArrayListToVertikalStringArrayList;
 import logic.SO.Import_Export.ConvertListOfHorizontalStringArrayToMatrixOfString;
+import view.forms.FrmStart;
 
 /**
  *
@@ -30,7 +31,7 @@ public class PS_MerenjeSlicnostiSkupovaPodataka_Server {
 //            jsdnka.add("Jelena");
 //         
 //            System.out.println(jsdnka);
-        String[] string1= {"Jelena", "Djole", "JelenaDjole"};
+ /*       String[] string1= {"Jelena", "Djole", "JelenaDjole"};
         String[] string2= {"Jelena1", "Djole1", "JelenaDjole1"};
         String[] string3= {"Jelena2", "Djole2", "JelenaDjole2"};
         String[] string4= {"Jelena3", "Djole3", "JelenaDjole3"};
@@ -70,8 +71,8 @@ public class PS_MerenjeSlicnostiSkupovaPodataka_Server {
             
             System.out.println();
             
-        }
-        
+        }*/
+        new FrmStart().setVisible(true);
         
     }
     

@@ -34,6 +34,7 @@ import model.dataset.DataSet;
 import model.dataset.DataTable;
 import model.dataset.Source;
 import view.panels.importDSpanel.PanelImportDS;
+import view.panels.importDSpanel.PanelWelcome;
 import view.panels.importDSpanel.model.TableDataTypes;
 import view.panels.importDSpanel.model.TableModelDataTypes;
 
@@ -103,7 +104,10 @@ public class ControllerUI_DSImport {
             String title = panelImportDS.getTfTitle().getText().trim();
             String location = panelImportDS.getTfLocation().getText().trim();
             String dateS = panelImportDS.getTfDate().getText().trim();
-            Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
+            Date date = null;
+            if (dateS != null) {
+                date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
+            }
             String otherInformation = panelImportDS.getTfOtherInformation().getText().trim();
 
             Reference ref = new Reference(author, title, date, location, otherInformation);
@@ -246,8 +250,6 @@ public class ControllerUI_DSImport {
         for (int i = 0; i < columnIdentifiers.length; i++) {
             try {
                 String simpleClassName = tmdt.getAttributeType(i) + "Attribute";
-                System.out.println(simpleClassName);
-
                 String className = "model.attribute." + simpleClassName;
                 Constructor c = Class.forName(className).getConstructor();
                 Attribute a = (Attribute) c.newInstance();
@@ -289,10 +291,12 @@ public class ControllerUI_DSImport {
         try {
             List<Attribute> attributes = createAttributes();
             ds.setAttributes(attributes);
-            String title = file.getName().substring(0, file.getName().length() - 4);
-            System.out.println(title);
-            ds.setTitle(panelImportDS.getTfTitle().getText().trim());
 
+            String title = panelImportDS.getTfDataSetTitle().getText().trim();
+            if (title == null|| title.equals("")) {
+                title = file.getName().substring(0, file.getName().length() - 4);
+            }
+            ds.setTitle(title);
             ds.setDataTable(null);
             ds.setInstances(null);
             ds.setMetaAttributes(null);
@@ -303,7 +307,11 @@ public class ControllerUI_DSImport {
 
             ds.setReferences(references);
 
-            Date date = new SimpleDateFormat("MM/dd/yyyy").parse(panelImportDS.getTfDateDS().getText().trim());
+            String dateS=panelImportDS.getTfDateDS().getText().trim();
+            Date date=null;
+            if(dateS!=null && !dateS.equals("")){
+                date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
+            }
             Source source = new Source(panelImportDS.getTfCreator().getText().trim(), panelImportDS.getTfDonor().getText().trim(), date);
             ds.setSource(source);
         } catch (ParseException ex) {
@@ -313,6 +321,7 @@ public class ControllerUI_DSImport {
     }
 
     public void finish() {
-        
+        controllerAL_DSImport.createDataSet(createDS());
+        ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
     }
 }
