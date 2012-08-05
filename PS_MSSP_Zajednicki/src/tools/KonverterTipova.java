@@ -126,8 +126,6 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
             return new java.sql.Date(date.getTime());
     }
     
-    
-    
 }
 
 class Polje {
