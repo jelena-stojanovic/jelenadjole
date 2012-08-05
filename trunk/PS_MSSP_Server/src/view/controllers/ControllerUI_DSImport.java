@@ -173,7 +173,7 @@ public class ControllerUI_DSImport {
             JTable table = panelImportDS.getTblDataSetPreprocessing();
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
-            stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation, cSVFormat.isTrimLines());
+            stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation);
             if (tblDatatypes==null||((TableModelDataTypes) tblDatatypes.getModel()).getAttributeName(0) == null) {
                 if (useFirstROwAsAttributeName) {
                     columnIdentifiers = stringArrayList.get(0);
