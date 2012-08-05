@@ -47,10 +47,8 @@ public class PanelImportDS extends javax.swing.JPanel {
         pnlParseFile = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnlParseLine = new javax.swing.JPanel();
-        checkbTrimLines = new javax.swing.JCheckBox();
-        chexkBSkipComments = new javax.swing.JCheckBox();
-        lblCommentChar = new javax.swing.JLabel();
-        tfCommentChar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        checkBUseFirstRow = new javax.swing.JCheckBox();
         pnlColumnSeparation = new javax.swing.JPanel();
         rbComma = new javax.swing.JRadioButton();
         rbSemicolon = new javax.swing.JRadioButton();
@@ -61,12 +59,9 @@ public class PanelImportDS extends javax.swing.JPanel {
         tblDataSetPreprocessing = new javax.swing.JTable();
         btnNextParse = new javax.swing.JButton();
         btnPreviousParse = new javax.swing.JButton();
-        pnlNameOfAtt = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        checkBUseFirstRow = new javax.swing.JCheckBox();
+        pnlDSInformation = new javax.swing.JPanel();
         btnNextFirstRow = new javax.swing.JButton();
         btnPrevioucFirstRow = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfDataSetTitle = new javax.swing.JTextField();
@@ -74,9 +69,6 @@ public class PanelImportDS extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         taDataSetDescription = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        tfDataSetTitle1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -125,13 +117,16 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         jLabel1.setText("Please specify how the file should be parsed and how columns are separated.");
 
-        pnlParseLine.setBorder(javax.swing.BorderFactory.createTitledBorder("Parse file"));
+        pnlParseLine.setBorder(javax.swing.BorderFactory.createTitledBorder("Attribute name"));
 
-        checkbTrimLines.setText("Trim lines");
+        jLabel2.setText("<html><p>Now the name of attributes are \"att1\", \"att2\"... </br>\nShould we use the first row as attributes' names?</p></html>");
 
-        chexkBSkipComments.setText("Skip Comments");
-
-        lblCommentChar.setText("Comment character:");
+        checkBUseFirstRow.setText("Use first row as attribute name.");
+        checkBUseFirstRow.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkBUseFirstRowItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlParseLineLayout = new javax.swing.GroupLayout(pnlParseLine);
         pnlParseLine.setLayout(pnlParseLineLayout);
@@ -140,24 +135,20 @@ public class PanelImportDS extends javax.swing.JPanel {
             .addGroup(pnlParseLineLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlParseLineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkbTrimLines)
-                    .addComponent(chexkBSkipComments)
-                    .addComponent(lblCommentChar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(tfCommentChar, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addGroup(pnlParseLineLayout.createSequentialGroup()
+                        .addComponent(checkBUseFirstRow)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
         pnlParseLineLayout.setVerticalGroup(
             pnlParseLineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlParseLineLayout.createSequentialGroup()
-                .addComponent(checkbTrimLines)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chexkBSkipComments)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlParseLineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCommentChar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCommentChar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(checkBUseFirstRow)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlColumnSeparation.setBorder(javax.swing.BorderFactory.createTitledBorder("Column separation"));
@@ -262,7 +253,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                         .addComponent(pnlParseLine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(pnlColumnSeparation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlParseFileLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -291,10 +282,6 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         tpnlImportDS.addTab("Step 2: Specify how the file should be parsed ", pnlParseFile);
 
-        jLabel2.setText("Now the name of attributes are \"att1\", \"att2\"... Should we use the first row as attributes' names?");
-
-        checkBUseFirstRow.setText("Use first row as attribute name.");
-
         btnNextFirstRow.setText("Next -->");
         btnNextFirstRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,9 +296,6 @@ public class PanelImportDS extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("o");
-
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("o");
 
@@ -325,11 +309,6 @@ public class PanelImportDS extends javax.swing.JPanel {
         taDataSetDescription.setColumns(20);
         taDataSetDescription.setRows(5);
         jScrollPane2.setViewportView(taDataSetDescription);
-
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("o");
-
-        jLabel10.setText("Data set name:");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("o   Data set source:"));
 
@@ -357,9 +336,9 @@ public class PanelImportDS extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfCreator))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfDateDS, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfDateDS))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -371,102 +350,76 @@ public class PanelImportDS extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCreator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(tfDonor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(tfDateDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addComponent(tfDonor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tfCreator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(tfDateDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout pnlNameOfAttLayout = new javax.swing.GroupLayout(pnlNameOfAtt);
-        pnlNameOfAtt.setLayout(pnlNameOfAttLayout);
-        pnlNameOfAttLayout.setHorizontalGroup(
-            pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNameOfAttLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlDSInformationLayout = new javax.swing.GroupLayout(pnlDSInformation);
+        pnlDSInformation.setLayout(pnlDSInformationLayout);
+        pnlDSInformationLayout.setHorizontalGroup(
+            pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDSInformationLayout.createSequentialGroup()
+                .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlDSInformationLayout.createSequentialGroup()
                         .addGap(0, 575, Short.MAX_VALUE)
                         .addComponent(btnPrevioucFirstRow)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNextFirstRow))
-                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                        .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(checkBUseFirstRow)
-                                            .addComponent(jLabel2)))
-                                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfDataSetTitle))
-                                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane2))
-                                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfDataSetTitle1)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDSInformationLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfDataSetTitle))
+                            .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        pnlNameOfAttLayout.setVerticalGroup(
-            pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlNameOfAttLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkBUseFirstRow)))
-                .addGap(32, 32, 32)
-                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        pnlDSInformationLayout.setVerticalGroup(
+            pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(tfDataSetTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(tfDataSetTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(pnlNameOfAttLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNextFirstRow)
                     .addComponent(btnPrevioucFirstRow))
                 .addGap(19, 19, 19))
         );
 
-        tpnlImportDS.addTab("Step 3: The first row as name", pnlNameOfAtt);
+        tpnlImportDS.addTab("Step 3: Data set information", pnlDSInformation);
 
         btnPreviousDataTypes.setText("<-- Previous");
         btnPreviousDataTypes.addActionListener(new java.awt.event.ActionListener() {
@@ -601,6 +554,10 @@ public class PanelImportDS extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tfDateDSFocusLost
 
+    private void checkBUseFirstRowItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBUseFirstRowItemStateChanged
+        ControllerUI_DSImport.getInstance().saveFildValues();
+    }//GEN-LAST:event_checkBUseFirstRowItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnNextFirstRow;
@@ -610,30 +567,24 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JButton btnPreviousParse;
     private javax.swing.JCheckBox checkBUseFirstRow;
     private javax.swing.JCheckBox checkBUseQuotes;
-    private javax.swing.JCheckBox checkbTrimLines;
-    private javax.swing.JCheckBox chexkBSkipComments;
     private javax.swing.JFileChooser fileChooserDS;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblCommentChar;
     private javax.swing.JPanel pnlAttributeTypes;
     private javax.swing.JPanel pnlColumnSeparation;
-    private javax.swing.JPanel pnlNameOfAtt;
+    private javax.swing.JPanel pnlDSInformation;
     private javax.swing.JPanel pnlParseFile;
     private javax.swing.JPanel pnlParseLine;
     private javax.swing.JPanel pnlSelectFile;
@@ -645,10 +596,8 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JTextArea taDataSetDescription;
     private javax.swing.JTable tblDataSetPreprocessing;
     private javax.swing.JTable tblDataTypes;
-    private javax.swing.JTextField tfCommentChar;
     private javax.swing.JTextField tfCreator;
     private javax.swing.JTextField tfDataSetTitle;
-    private javax.swing.JTextField tfDataSetTitle1;
     private javax.swing.JTextField tfDateDS;
     private javax.swing.JTextField tfDonor;
     private javax.swing.JTabbedPane tpnlImportDS;
@@ -668,20 +617,7 @@ public class PanelImportDS extends javax.swing.JPanel {
         return checkBUseQuotes;
     }
 
-    /**
-     * @return the checkbTrimLines
-     */
-    public javax.swing.JCheckBox getCheckbTrimLines() {
-        return checkbTrimLines;
-    }
-
-    /**
-     * @return the chexkBSkipComments
-     */
-    public javax.swing.JCheckBox getChexkBSkipComments() {
-        return chexkBSkipComments;
-    }
-
+   
     /**
      * @return the fileChooserDS
      */
@@ -745,13 +681,7 @@ public class PanelImportDS extends javax.swing.JPanel {
         return tpnlImportDS;
     }
 
-    /**
-     * @return the tfCommentChar
-     */
-    public javax.swing.JTextField getTfCommentChar() {
-        return tfCommentChar;
-    }
-
+  
     /**
      * @return the btnFinish
      */
