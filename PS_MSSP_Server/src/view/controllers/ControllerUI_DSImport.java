@@ -5,26 +5,34 @@
 package view.controllers;
 
 import import_csv.GuessValueTypesClass;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.table.*;
 import javax.swing.text.TableView;
 import javax.swing.text.TableView.TableCell;
 import javax.swing.text.TableView.TableRow;
 import logic.ControllerAL_DSImport;
+import model.Reference;
 import model.attribute.Attribute;
 import model.attribute.NominalAttribute;
 import model.attribute.Ontology;
 import model.dataFormat.CSVFormat;
 import model.dataset.DataSet;
+import model.dataset.DataTable;
+import model.dataset.Source;
 import view.panels.importDSpanel.PanelImportDS;
 import view.panels.importDSpanel.model.TableDataTypes;
 import view.panels.importDSpanel.model.TableModelDataTypes;
@@ -45,12 +53,13 @@ public class ControllerUI_DSImport {
     String[] columnIdentifiers = null;
     ArrayList<String[]> stringArrayList = new ArrayList<String[]>();
     TableDataTypes tblDatatypes;
+    ArrayList<Reference> references = new ArrayList<Reference>();
     /*
      * ---- csv format fields -----
      */
     File file = null;
     //boolean trimLines = false;
-   // boolean skipComments = false;
+    // boolean skipComments = false;
     //char commentsChar = '#';
     char columnSeparation = ',';
     boolean useFirstROwAsAttributeName = false;
@@ -88,6 +97,29 @@ public class ControllerUI_DSImport {
         setValuesToGUI();
     }
 
+    public void addReference() {
+        try {
+            String author = panelImportDS.getTfAuthors().getText().trim();
+            String title = panelImportDS.getTfTitle().getText().trim();
+            String location = panelImportDS.getTfLocation().getText().trim();
+            String dateS = panelImportDS.getTfDate().getText().trim();
+            Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
+            String otherInformation = panelImportDS.getTfOtherInformation().getText().trim();
+
+            Reference ref = new Reference(author, title, date, location, otherInformation);
+            references.add(ref);
+            DefaultListModel dlm = new DefaultListModel();
+            for (Reference refer : references) {
+                dlm.addElement(refer);
+            }
+            panelImportDS.getListReferences().setModel(dlm);
+
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(panelImportDS, "Unesite datum u \"MM/dd/yyyy\"  formatu.");
+            panelImportDS.getTfDate().setBorder(new EtchedBorder(Color.red, Color.black));
+        }
+
+    }
 
     private static class ControllerUI_DSImportHolder {
 
@@ -174,7 +206,7 @@ public class ControllerUI_DSImport {
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
             stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation);
-            if (tblDatatypes==null||((TableModelDataTypes) tblDatatypes.getModel()).getAttributeName(0) == null) {
+            if (tblDatatypes == null || ((TableModelDataTypes) tblDatatypes.getModel()).getAttributeName(0) == null) {
                 if (useFirstROwAsAttributeName) {
                     columnIdentifiers = stringArrayList.get(0);
                     stringArrayList.remove(0);
@@ -207,70 +239,80 @@ public class ControllerUI_DSImport {
         }
     }
 
-    public List<Attribute> createAttributes()  {
+    public List<Attribute> createAttributes() {
 
         List<Attribute> attributes = new ArrayList<Attribute>();
         TableModelDataTypes tmdt = (TableModelDataTypes) tblDatatypes.getModel();
         for (int i = 0; i < columnIdentifiers.length; i++) {
             try {
-                String simpleClassName= tmdt.getAttributeType(i)+"Attribute";
+                String simpleClassName = tmdt.getAttributeType(i) + "Attribute";
                 System.out.println(simpleClassName);
-                
-                String className="model.attribute."+simpleClassName;
-                Constructor c=Class.forName(className).getConstructor();
-                Attribute a=(Attribute)c.newInstance();
+
+                String className = "model.attribute." + simpleClassName;
+                Constructor c = Class.forName(className).getConstructor();
+                Attribute a = (Attribute) c.newInstance();
                 a.setAttributeRole(tmdt.getAttributeRole(i));
                 a.setName(tmdt.getAttributeName(i));
                 a.setIndexOfAttribute(i);
-                
+
                 attributes.add(a);
-          } catch (InstantiationException ex) {
-              JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+            } catch (InstantiationException ex) {
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvocationTargetException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchMethodException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SecurityException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute "+tmdt.getAttributeName(i)+" couldn't be saved. " +ex);
+                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
                 Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
         return attributes;
     }
-    
-    
-    public void finish() {
-        DataSet ds= new DataSet();
-        
-        List<Attribute> attributes= createAttributes();
-        ds.setAttributes(attributes);
-        String title= file.getName().substring(0, file.getName().length()-4);
-        System.out.println(title);
-        ds.setTitle(null);
-        
-        ds.setDataTable(null);
-        
-        ds.setDataSetID(0);
-        
-        ds.setDsDescription(null);
-        
-        ds.setReferences(null);
-        ds.setInstances(null);
-        ds.setMetaAttributes(null);
-        ds.setSource(null);
 
+    private DataSet createDS() {
+
+        DataSet ds = new DataSet();
+        try {
+            List<Attribute> attributes = createAttributes();
+            ds.setAttributes(attributes);
+            String title = file.getName().substring(0, file.getName().length() - 4);
+            System.out.println(title);
+            ds.setTitle(panelImportDS.getTfTitle().getText().trim());
+
+            ds.setDataTable(null);
+            ds.setInstances(null);
+            ds.setMetaAttributes(null);
+
+            ds.setDataSetID(0);
+
+            ds.setDsDescription(panelImportDS.getTaDataSetDescription().getText().trim());
+
+            ds.setReferences(references);
+
+            Date date = new SimpleDateFormat("MM/dd/yyyy").parse(panelImportDS.getTfDateDS().getText().trim());
+            Source source = new Source(panelImportDS.getTfCreator().getText().trim(), panelImportDS.getTfDonor().getText().trim(), date);
+            ds.setSource(source);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(panelImportDS, "E ovo ne bi trebalo da prodje :)");
+        }
+        return ds;
+    }
+
+    public void finish() {
+        
     }
 }

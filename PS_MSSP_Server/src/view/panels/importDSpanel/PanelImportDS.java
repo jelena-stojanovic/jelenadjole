@@ -76,6 +76,22 @@ public class PanelImportDS extends javax.swing.JPanel {
         tfCreator = new javax.swing.JTextField();
         tfDonor = new javax.swing.JTextField();
         tfDateDS = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        tfAuthors = new javax.swing.JTextField();
+        tfTitle = new javax.swing.JTextField();
+        tfDate = new javax.swing.JTextField();
+        tfLocation = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tfOtherInformation = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listReferences = new javax.swing.JList();
+        jLabel16 = new javax.swing.JLabel();
+        btnAddReference = new javax.swing.JButton();
         pnlAttributeTypes = new javax.swing.JPanel();
         btnPreviousDataTypes = new javax.swing.JButton();
         btnFinish = new javax.swing.JButton();
@@ -99,7 +115,7 @@ public class PanelImportDS extends javax.swing.JPanel {
             .addGroup(pnlSelectFileLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSelectFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fileChooserDS, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addComponent(fileChooserDS, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -109,7 +125,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fileChooserDS, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addComponent(fileChooserDS, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -253,7 +269,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                         .addComponent(pnlParseLine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(pnlColumnSeparation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlParseFileLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -272,8 +288,8 @@ public class PanelImportDS extends javax.swing.JPanel {
                     .addComponent(pnlColumnSeparation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlParseLine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlParseFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNextParse)
                     .addComponent(btnPreviousParse))
@@ -364,23 +380,106 @@ public class PanelImportDS extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("o   Reference"));
+
+        jLabel4.setText("Author(s):");
+
+        jLabel9.setText("Title:");
+
+        jLabel10.setText("Date:");
+
+        jLabel14.setText("Other information:");
+
+        jLabel15.setText("Location:");
+
+        tfOtherInformation.setColumns(20);
+        tfOtherInformation.setRows(5);
+        jScrollPane4.setViewportView(tfOtherInformation);
+
+        jScrollPane5.setViewportView(listReferences);
+
+        jLabel16.setText("References:");
+
+        btnAddReference.setText("Add Reference");
+        btnAddReference.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddReferenceActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfAuthors)
+                                .addComponent(tfTitle)
+                                .addComponent(tfDate)
+                                .addComponent(tfLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
+                    .addComponent(btnAddReference))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(tfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddReference)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout pnlDSInformationLayout = new javax.swing.GroupLayout(pnlDSInformation);
         pnlDSInformation.setLayout(pnlDSInformationLayout);
         pnlDSInformationLayout.setHorizontalGroup(
             pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDSInformationLayout.createSequentialGroup()
-                .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDSInformationLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlDSInformationLayout.createSequentialGroup()
-                        .addGap(0, 575, Short.MAX_VALUE)
-                        .addComponent(btnPrevioucFirstRow)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNextFirstRow))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDSInformationLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlDSInformationLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -392,9 +491,20 @@ public class PanelImportDS extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jScrollPane2))))
+                    .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlDSInformationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDSInformationLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnPrevioucFirstRow)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNextFirstRow)
+                .addGap(11, 11, 11))
         );
         pnlDSInformationLayout.setVerticalGroup(
             pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,14 +519,16 @@ public class PanelImportDS extends javax.swing.JPanel {
                     .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNextFirstRow)
-                    .addComponent(btnPrevioucFirstRow))
-                .addGap(19, 19, 19))
+                    .addComponent(btnPrevioucFirstRow)
+                    .addComponent(btnNextFirstRow))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         tpnlImportDS.addTab("Step 3: Data set information", pnlDSInformation);
@@ -454,7 +566,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                 .addGroup(pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3)
                     .addGroup(pnlAttributeTypesLayout.createSequentialGroup()
-                        .addGap(0, 551, Short.MAX_VALUE)
+                        .addGap(0, 588, Short.MAX_VALUE)
                         .addComponent(btnPreviousDataTypes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFinish, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -464,7 +576,7 @@ public class PanelImportDS extends javax.swing.JPanel {
             pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAttributeTypesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlAttributeTypesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinish)
@@ -486,8 +598,7 @@ public class PanelImportDS extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tpnlImportDS)
-                .addContainerGap())
+                .addComponent(tpnlImportDS))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -546,9 +657,9 @@ public class PanelImportDS extends javax.swing.JPanel {
     private void tfDateDSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDateDSFocusLost
         try {
             SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
-            Date date= sdf.parse(tfDateDS.getText().trim());
+            Date date= sdf.parse(getTfDateDS().getText().trim());
         } catch (ParseException ex) {
-            tfDateDS.setBackground(Color.red);
+            getTfDateDS().setBackground(Color.red);
         }
         
         
@@ -558,7 +669,12 @@ public class PanelImportDS extends javax.swing.JPanel {
         ControllerUI_DSImport.getInstance().saveFildValues();
     }//GEN-LAST:event_checkBUseFirstRowItemStateChanged
 
+    private void btnAddReferenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReferenceActionPerformed
+        ControllerUI_DSImport.getInstance().addReference();
+    }//GEN-LAST:event_btnAddReferenceActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddReference;
     private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnNextFirstRow;
     private javax.swing.JButton btnNextParse;
@@ -569,19 +685,29 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkBUseQuotes;
     private javax.swing.JFileChooser fileChooserDS;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JList listReferences;
     private javax.swing.JPanel pnlAttributeTypes;
     private javax.swing.JPanel pnlColumnSeparation;
     private javax.swing.JPanel pnlDSInformation;
@@ -596,10 +722,15 @@ public class PanelImportDS extends javax.swing.JPanel {
     private javax.swing.JTextArea taDataSetDescription;
     private javax.swing.JTable tblDataSetPreprocessing;
     private javax.swing.JTable tblDataTypes;
+    private javax.swing.JTextField tfAuthors;
     private javax.swing.JTextField tfCreator;
     private javax.swing.JTextField tfDataSetTitle;
+    private javax.swing.JTextField tfDate;
     private javax.swing.JTextField tfDateDS;
     private javax.swing.JTextField tfDonor;
+    private javax.swing.JTextField tfLocation;
+    private javax.swing.JTextArea tfOtherInformation;
+    private javax.swing.JTextField tfTitle;
     private javax.swing.JTabbedPane tpnlImportDS;
     // End of variables declaration//GEN-END:variables
 
@@ -711,8 +842,86 @@ public class PanelImportDS extends javax.swing.JPanel {
     }
 
     /**
+     * @return the listReferences
+     */
+    public javax.swing.JList getListReferences() {
+        return listReferences;
+    }
+
+    /**
+     * @return the taDataSetDescription
+     */
+    public javax.swing.JTextArea getTaDataSetDescription() {
+        return taDataSetDescription;
+    }
+
+    /**
+     * @return the tfAuthors
+     */
+    public javax.swing.JTextField getTfAuthors() {
+        return tfAuthors;
+    }
+
+    /**
+     * @return the tfCreator
+     */
+    public javax.swing.JTextField getTfCreator() {
+        return tfCreator;
+    }
+
+    /**
+     * @return the tfDataSetTitle
+     */
+    public javax.swing.JTextField getTfDataSetTitle() {
+        return tfDataSetTitle;
+    }
+
+    /**
+     * @return the tfDate
+     */
+    public javax.swing.JTextField getTfDate() {
+        return tfDate;
+    }
+
+    /**
+     * @return the tfDateDS
+     */
+    public javax.swing.JTextField getTfDateDS() {
+        return tfDateDS;
+    }
+
+    /**
+     * @return the tfDonor
+     */
+    public javax.swing.JTextField getTfDonor() {
+        return tfDonor;
+    }
+
+    /**
+     * @return the tfLocation
+     */
+    public javax.swing.JTextField getTfLocation() {
+        return tfLocation;
+    }
+
+    /**
+     * @return the tfOtherInformation
+     */
+    public javax.swing.JTextArea getTfOtherInformation() {
+        return tfOtherInformation;
+    }
+
+    /**
+     * @return the tfTitle
+     */
+    public javax.swing.JTextField getTfTitle() {
+        return tfTitle;
+    }
+
+    /**
      * @return the pnlTableAndFieldAttributes
      */
+
     
     
 }
