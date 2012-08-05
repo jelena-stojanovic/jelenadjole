@@ -7,6 +7,7 @@ package model.attribute;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -83,9 +84,28 @@ public class NominalAttribute extends Attribute{
     public NominalAttribute() {
     }
 
+    
+    public  double getIndexOfNominalValue(String nominalValue) {
+        return classToIndexMap.get(nominalValue);
+    }
+
+    public String getNominalValueFromIndex(double index) throws Exception {
+        if(Double.isNaN(index))
+            
+            throw new Exception("Index does not have a valid value.");
+        for (Map.Entry<String, Double> entry : classToIndexMap.entrySet()) {
+            String string = entry.getKey();
+            Double double1 = entry.getValue();
+            if (double1 == index) {
+                return string;
+            }
+        }
+        return null;
+    }
+
     @Override
-    public void setPossibleValues() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setPossibleValues(Object object) {
+       possibleNominalValue=(List<String>)object;
     }
 
     

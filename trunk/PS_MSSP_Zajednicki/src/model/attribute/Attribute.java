@@ -21,7 +21,7 @@ public abstract class Attribute {
     public abstract boolean isInterval();
     public abstract boolean isDate();
     
-    public abstract void setPossibleValues();
+    public abstract void setPossibleValues(Object object);
    
     public abstract Object getPossibleValues();
 

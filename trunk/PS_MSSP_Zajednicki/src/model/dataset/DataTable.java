@@ -18,9 +18,18 @@ public class DataTable {
         matrix = new DenseMatrix64F(data);
     }
 
+    public DataTable() {
+        matrix= new DenseMatrix64F();
+    }
+
     public void setMatrix(DenseMatrix64F matrix) {
         this.matrix = matrix;
     }
+
+    public DenseMatrix64F getMatrix() {
+        return matrix;
+    }
+    
 
     public double getValue(int row, int column) {
         return matrix.get(row, column);
@@ -39,6 +48,7 @@ public class DataTable {
     }
 
     public int getNumElements() {
+     
         return matrix.getNumElements();
     }
     
@@ -60,8 +70,16 @@ public class DataTable {
         return rowValues;
     }
     
+    public void setNumRows(int numRows){
+        matrix.numRows=numRows;
+    }
+    
     public int getNumRows(){
         return matrix.getNumRows();
+    }
+    
+    public void setNumColums(int numColums){
+        matrix.numCols=numColums;
     }
     public int getNumColums(){
         return matrix.getNumElements()/matrix.getNumRows();

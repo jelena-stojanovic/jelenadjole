@@ -81,8 +81,10 @@ public class NumericalAttribute extends Attribute{
     }
 
     @Override
-    public void setPossibleValues() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setPossibleValues(Object object) {
+        
     }
+
+  
     
 }
