@@ -6,14 +6,17 @@ package model.dataset;
 
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.OpstiDomenskiObjekat;
+import tools.KonverterTipova;
 
 /**
  *
  * @author Jelena
  */
-public class Source implements OpstiDomenskiObjekat{
-    
+public class Source implements OpstiDomenskiObjekat {
+
     private int sourceID;
     private String creator;
     private String donor;
@@ -28,12 +31,12 @@ public class Source implements OpstiDomenskiObjekat{
         this.donor = donor;
         this.date = date;
     }
-    public Source( String creator, String donor, Date date) {
+
+    public Source(String creator, String donor, Date date) {
         this.creator = creator;
         this.donor = donor;
         this.date = date;
     }
-    
 
     /**
      * @return the sourceID
@@ -93,12 +96,15 @@ public class Source implements OpstiDomenskiObjekat{
 
     @Override
     public String vratiVrednostiAtributa() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
+        return "" + sourceID + ", '" + creator + "', '" + donor + ", " + sqlDate;
     }
 
     @Override
     public String postaviVrednostiAtributa() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
+        return "sourceID = " + sourceID + ", creator ='" + creator + "', donor ='" + donor + "', date = "
+                + sqlDate;
     }
 
     @Override
@@ -108,12 +114,12 @@ public class Source implements OpstiDomenskiObjekat{
 
     @Override
     public String vratiUslovZaNadjiSlog() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return " sourceID = '" + sourceID + "'";
     }
 
     @Override
     public String vratiUslovZaNadjiSlogove() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
@@ -123,74 +129,87 @@ public class Source implements OpstiDomenskiObjekat{
 
     @Override
     public boolean Napuni(ResultSet RSslog) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            sourceID = KonverterTipova.Konvertuj(RSslog, sourceID, "sourceID");
+            creator = KonverterTipova.Konvertuj(RSslog, creator, "creator");
+            donor = KonverterTipova.Konvertuj(RSslog, donor, "donor");
+            date = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int povecajBroj(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            sourceID = KonverterTipova.Konvertuj(rs, sourceID, "sourceID");
+            return ++sourceID;
+        } catch (Exception e) {
+            System.out.println("Izuzetak kod generisanja novog broja racuna: " + e);
+            return 0;
+        }
     }
 
     @Override
     public OpstiDomenskiObjekat vratiVezaniObjekat(int brojVezanogObjekta) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override
     public void Napuni(ResultSet RSslog, int brojSloga, int brojVezanogObjekta) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void kreirajVezaniObjekat(int brojStavkiVezanogObjekta, int brojVezanogObjekta) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public int vratiBrojVezanihObjekata() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return -1;
     }
 
     @Override
     public void postaviPocetniBroj() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        sourceID = 1;
     }
 
     @Override
     public OpstiDomenskiObjekat vratiSlogVezanogObjekta(int brojVezanogObjekta, int brojSloga) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override
     public int vratiBrojSlogovaVezanogObjekta(int brojVezanogObjekta) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return -1;
     }
 
     @Override
     public boolean vrednosnaOgranicenja() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Date newDate = new Date();
+        if (date.before(newDate)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void Obradi() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void Storniraj() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public String vratiNazivNovogObjekta() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "new source";
     }
 
     @Override
     public String vratiNazivObjekta() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "source";
     }
-    
-    
-    
 }
