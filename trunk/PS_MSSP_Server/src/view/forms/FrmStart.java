@@ -4,6 +4,8 @@
  */
 package view.forms;
 
+import view.controllers.ControllerUI_Main;
+
 /**
  *
  * @author Jelena
@@ -40,6 +42,11 @@ public class FrmStart extends javax.swing.JFrame {
         jLabel1.setText("šta već...");
 
         btnStartServer.setText("Pokreni server");
+        btnStartServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartServerActionPerformed(evt);
+            }
+        });
 
         panelLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -106,6 +113,11 @@ public class FrmStart extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartServerActionPerformed
+        ControllerUI_Main.getInstance().startApplication();
+        this.dispose();
+    }//GEN-LAST:event_btnStartServerActionPerformed
 
     /**
      * @param args the command line arguments

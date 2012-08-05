@@ -656,8 +656,11 @@ public class PanelImportDS extends javax.swing.JPanel {
 
     private void tfDateDSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDateDSFocusLost
         try {
-            SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
-            Date date= sdf.parse(getTfDateDS().getText().trim());
+            String dateS=getTfDateDS().getText().trim();
+            Date date=null;
+            if(dateS!=null && !dateS.equals("")){
+                date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
+            }
         } catch (ParseException ex) {
             getTfDateDS().setBackground(Color.red);
         }

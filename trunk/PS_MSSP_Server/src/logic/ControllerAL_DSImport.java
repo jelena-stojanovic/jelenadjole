@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import logic.SO.Import_Export.CSVImportToDataSet;
 import logic.SO.Import_Export.ConvertListOfHorizontalStringArrayToMatrixOfString;
+import logic.SO.MissingValues;
+import model.attribute.Attribute;
+import model.dataset.DataSet;
 
 /**
  *
@@ -41,5 +44,24 @@ public class ControllerAL_DSImport {
     
     public String[][] convert(List<String[]> dsValues, String[][] stringMatrix){
         return ConvertListOfHorizontalStringArrayToMatrixOfString.convert(dsValues, stringMatrix);
+    }
+    
+    public void createDataSet(DataSet ds ){
+        List<Attribute> attributes= ds.getAttributes();
+        
+        for (int i = 0; i < attributes.size(); i++) {
+            Attribute attribute = attributes.get(i);
+            
+        //    attribute.setPossibleValues();
+            
+        //    attribute.setMissingValues(MissingValues.countMissingValues(column));
+            
+        }
+        
+        //ds.setDataTable(null);
+        
+       // ds.setMetaAttributes(null);
+        
+      //  ds.setDataSetID(ID);
     }
 }

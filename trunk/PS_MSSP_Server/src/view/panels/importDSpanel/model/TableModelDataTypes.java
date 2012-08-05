@@ -32,10 +32,7 @@ public class TableModelDataTypes extends AbstractTableModel {
         metaAttributes.add(new String[columnIdentifiers.length]);//attributes name
         metaAttributes.add(new String[columnIdentifiers.length]);//attributes role
         metaAttributes.add(new String[columnIdentifiers.length]);//attributes type
-        for (int i = 0; i < this.columnIdentifiers.length; i++) {
-            String string = this.columnIdentifiers[i];
-            System.out.println(string);
-        }
+      
     }
 
     @Override
