@@ -321,7 +321,12 @@ public class ControllerUI_DSImport {
     }
 
     public void finish() {
-        controllerAL_DSImport.createDataSet(createDS());
-        ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
+        try {
+            controllerAL_DSImport.createDataSet(createDS(),stringArrayList );
+            ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
     }
 }

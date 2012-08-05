@@ -4,10 +4,9 @@
  */
 package logic.SO.Import_Export;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  *
@@ -15,6 +14,69 @@ import java.util.Map;
  */
 public class MappingValues {
 
+    
+    public static HashMap<String, Double> mapNominalToNumerical(List<String> nominalValues, HashMap<String, Double> indexMap) {
+        for (int i = 0; i < nominalValues.size(); i++) {
+            String string = nominalValues.get(i);
+            indexMap.put(string, Double.valueOf(i));
+        }
+        return indexMap;
+    }
+
+    public static void extractPossibleNominaValuse(List<String> allNominalValues, List<String> possibleNominalValues) {
+        if (possibleNominalValues == null) {
+            possibleNominalValues = new ArrayList<String>();
+        }
+
+        for (String string : allNominalValues) {
+            if (!possibleNominalValues.contains(string)) {
+                possibleNominalValues.add(string);
+            }
+        }
+    }
+    
+    public static List<String> extractPossibleNominaValuse(String[] allNominalValues, List<String> possibleNominalValues) {
+        if (possibleNominalValues == null) {
+            possibleNominalValues = new ArrayList<String>();
+        }
+
+        for (String string : allNominalValues) {
+            if (!possibleNominalValues.contains(string)) {
+                possibleNominalValues.add(string);
+            }
+        }
+        
+        return possibleNominalValues;
+    }
+    
+    
+    public static HashMap<String, Double> mapDateToNumerical(List<String> nominalValues, String patern, HashMap<String, Double> indexMap) throws ParseException {
+        
+        for (int i = 0; i < nominalValues.size(); i++) {
+            String string = nominalValues.get(i);
+            Date date = new SimpleDateFormat(patern).parse(string);
+            
+            indexMap.put(string, Double.valueOf(date.getTime()));
+        }
+        return indexMap;
+    }
+
+        public static List<String> extractPossibleDateValuse(String[] allDateValues, List<String> possibleDateValues) {
+        if (possibleDateValues == null) {
+            possibleDateValues = new ArrayList<String>();
+        }
+
+        for (String string : allDateValues) {
+            if (!possibleDateValues.contains(string)) {
+                possibleDateValues.add(string);
+            }
+        }
+        
+        return possibleDateValues;
+    }
+    
+
+        
     public static double getIndexOfNominalValue(HashMap<String, Double> indexMap, String nominalValue) {
         return indexMap.get(nominalValue);
     }
@@ -32,22 +94,4 @@ public class MappingValues {
         return null;
     }
 
-    public static void mapNominalToNumerical(List<String> nominalValues, HashMap<String, Double> indexMap) {
-        for (int i = 0; i < nominalValues.size(); i++) {
-            String string = nominalValues.get(i);
-            indexMap.put(string, Double.valueOf(i));
-        }
-    }
-
-    public static void extractPossibleNominaValuse(List<String> allNominalValues, List<String> possibleNominalValues) {
-        if (possibleNominalValues == null) {
-            possibleNominalValues = new ArrayList<String>();
-        }
-
-        for (String string : allNominalValues) {
-            if (!possibleNominalValues.contains(string)) {
-                possibleNominalValues.add(string);
-            }
-        }
-    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author Jelena
  */
 public class ConvertHorizontalStringArrayListToVertikalStringArrayList {
-     public static void convert(List<String[]> dsValues, List<String[]> attributeStringValueVertical){
+     public static List<String[]> convert(List<String[]> dsValues, List<String[]> attributeStringValueVertical){
         if(attributeStringValueVertical==null)
          attributeStringValueVertical= new ArrayList<String[]>();
         
@@ -29,7 +29,7 @@ public class ConvertHorizontalStringArrayListToVertikalStringArrayList {
             }
             
         }
-        
+        return attributeStringValueVertical;
     }
     
    
