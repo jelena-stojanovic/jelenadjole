@@ -13,13 +13,21 @@ import org.ejml.data.DenseMatrix64F;
 public class DataTable {
 
     DenseMatrix64F matrix;
-
+    double[][] data;
+    int row;
+    int column;
+    
     public DataTable(double[][] data) {
-        matrix = new DenseMatrix64F(data);
+        //matrix = new DenseMatrix64F(data);
+        this.data=data;
+        row= data.length;
+        column=data[0].length;
     }
 
-    public DataTable() {
-        matrix= new DenseMatrix64F();
+    public DataTable(int numRow, int numCol) {
+        data= new double[numRow][numCol];
+        this.row=numRow;
+        this.column=numCol;
     }
 
     public void setMatrix(DenseMatrix64F matrix) {
@@ -30,63 +38,8 @@ public class DataTable {
         return matrix;
     }
     
-
-    public double getValue(int row, int column) {
-        return matrix.get(row, column);
-    }
-
-    public int getIndex(int row, int col) {
-        return matrix.getIndex(row, col);
-    }
-
-    public void set(int row, int column, double value) {
-        matrix.set(row, column, value);
-    }
-
-    public void add(int row, int col, double value) {
-        matrix.add(row, col, value);
-    }
-
-    public int getNumElements() {
-     
-        return matrix.getNumElements();
-    }
-    
-    public double[] getColumn(int columnIndex){
-        int noRows= matrix.getNumRows();
-        double[] columnValues=new double[noRows];
-        for (int i = 0; i < noRows; i++) {
-            columnValues[i]= matrix.get(i, columnIndex);   
-        }
-        return columnValues;
-    }
-    
-    public double[] getRow(int rowIndex){
-        int noColums= matrix.getNumElements()/matrix.getNumRows();
-        double[] rowValues= new double[noColums];
-        for (int i = 0; i < noColums; i++) {
-            rowValues[i]=matrix.get(rowIndex, i);
-        }
-        return rowValues;
-    }
-    
-    public void setNumRows(int numRows){
-        matrix.numRows=numRows;
-    }
-    
-    public int getNumRows(){
-        return matrix.getNumRows();
-    }
-    
-    public void setNumColums(int numColums){
-        matrix.numCols=numColums;
-    }
-    public int getNumColums(){
-        return matrix.getNumElements()/matrix.getNumRows();
-    }
-    
     public double[][] getDoubleMatrix(){
-        double[][] doubleMatrix= new double[getNumRows()][getNumColums()];
+        /*double[][] doubleMatrix= new double[getNumRows()][getNumColums()];
         
         for (int i = 0; i < doubleMatrix.length; i++) {
             double[] ds = doubleMatrix[i];
@@ -96,6 +49,92 @@ public class DataTable {
             }
         }
         
-        return doubleMatrix;
+        return doubleMatrix;*/
+        return data;
     }
+
+    public void setData(double[][] data) {
+        this.data = data;
+    }
+
+    public double[][] getData() {
+        return data;
+    }
+    
+    
+
+    public double getValue(int row, int column) {
+        //return matrix.get(row, column);
+        return data[row][column];
+    }
+
+    public int getIndex(int row, int col) {
+        return row * this.column + col;
+        
+    }
+
+    public void set(int row, int column, double value) {
+       // matrix.set(row, column, value);
+        data[row][column]=value;
+    }
+
+    public void add(int row, int col, double value) {
+        //matrix.add(row, col, value);
+        data[row][col]=value;
+    }
+
+    public int getNumElements() {
+     
+        //return matrix.getNumElements();
+        return row*column;
+    }
+    
+    public double[] getColumn(int columnIndex){
+        double[] columnValues=new double[row];
+        for (int i = 0; i < row; i++) {
+            //columnValues[i]= matrix.get(i, columnIndex);   
+            columnValues[i]=data[i][columnIndex];
+        }
+        return columnValues;
+    }
+    
+    public double[] getRow(int rowIndex){
+        
+        double[] rowValues= new double[column];
+        /*
+         *  for (int i = 0; i < column; i++) {
+            //rowValues[i]=matrix.get(rowIndex, i);
+            rowValues[i]=data[rowIndex][i];
+        }
+
+         */
+        System.arraycopy(data[rowIndex], 0, rowValues, 0, column);
+        return rowValues;
+    }
+    
+    public void setNumRows(int numRows){
+        //matrix.numRows=numRows;
+        row=numRows;
+        if(column!=0)
+            data=new double[numRows][column];
+    }
+    
+    public int getNumRows(){
+        //return matrix.getNumRows();
+        return row;
+    }
+    
+    public void setNumColums(int numColums){
+        //matrix.numCols=numColums;
+        column=numColums;
+        if(row!=0)
+            data= new double[row][numColums];
+        
+    }
+    public int getNumColums(){
+        //return matrix.getNumElements()/matrix.getNumRows();
+        return column;
+    }
+    
+    
 }
