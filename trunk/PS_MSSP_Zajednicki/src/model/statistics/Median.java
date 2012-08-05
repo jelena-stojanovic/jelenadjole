@@ -16,8 +16,6 @@ public class Median extends NumericalStatistic {
     public double calculate(double[] valuesArray) {
         int length = valuesArray.length;
         double[] sort = new double[length];
-        System.out.println("niz:"+valuesArray);
-        System.out.println("sortiran prazan duzina"+ sort.length+ " niz "+ sort);
         System.arraycopy(valuesArray,0, sort, 0, sort.length);
         Arrays.sort(sort);
 
