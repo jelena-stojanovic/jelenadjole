@@ -49,9 +49,9 @@ public class ControllerUI_DSImport {
      * ---- csv format fields -----
      */
     File file = null;
-    boolean trimLines = false;
-    boolean skipComments = false;
-    char commentsChar = '#';
+    //boolean trimLines = false;
+   // boolean skipComments = false;
+    //char commentsChar = '#';
     char columnSeparation = ',';
     boolean useFirstROwAsAttributeName = false;
     boolean useQuotesForNominal = true;
@@ -67,14 +67,14 @@ public class ControllerUI_DSImport {
     }
 
     public void saveFildValues() {
-        trimLines = KonverterTipova.Konvertuj(panelImportDS.getCheckbTrimLines(), trimLines);
-        cSVFormat.setTrimLines(trimLines);
-
-        skipComments = KonverterTipova.Konvertuj(panelImportDS.getChexkBSkipComments(), skipComments);
-        cSVFormat.setSkipComments(skipComments);
-
-        commentsChar = panelImportDS.getTfCommentChar().getText().trim().charAt(0);
-        cSVFormat.setCommentCharacter(commentsChar);
+//        trimLines = KonverterTipova.Konvertuj(panelImportDS.getCheckbTrimLines(), trimLines);
+//        cSVFormat.setTrimLines(trimLines);
+//
+//        skipComments = KonverterTipova.Konvertuj(panelImportDS.getChexkBSkipComments(), skipComments);
+//        cSVFormat.setSkipComments(skipComments);
+//
+//        commentsChar = panelImportDS.getTfCommentChar().getText().trim().charAt(0);
+//        cSVFormat.setCommentCharacter(commentsChar);
 
         columnSeparation = getSelectedColumnSeparator();
         cSVFormat.setColumnSeparator(columnSeparation);
@@ -115,11 +115,11 @@ public class ControllerUI_DSImport {
     }
 
     public void setValuesToGUI() {
-        KonverterTipova.Konvertuj(trimLines, panelImportDS.getCheckbTrimLines());
-
-        KonverterTipova.Konvertuj(skipComments, panelImportDS.getChexkBSkipComments());
-
-        panelImportDS.getTfCommentChar().setText(String.valueOf(commentsChar));
+//        KonverterTipova.Konvertuj(trimLines, panelImportDS.getCheckbTrimLines());
+//
+//        KonverterTipova.Konvertuj(skipComments, panelImportDS.getChexkBSkipComments());
+//
+//        panelImportDS.getTfCommentChar().setText(String.valueOf(commentsChar));
 
         getSelectedRBColumnSeparator().setSelected(true);
 
@@ -263,7 +263,7 @@ public class ControllerUI_DSImport {
         
         ds.setDataTable(null);
         
-        ds.setDataSetID(commentsChar);
+        ds.setDataSetID(0);
         
         ds.setDsDescription(null);
         
