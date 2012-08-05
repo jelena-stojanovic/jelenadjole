@@ -27,15 +27,15 @@ public class ControllerAL_DSImport {
         private static final ControllerAL_DSImport INSTANCE = new ControllerAL_DSImport();
     }
     
-    public String[][] readCSV(String filePath, String[][] matrix, char columnSeparator, boolean trimLines) throws IOException {
+    public String[][] readCSV(String filePath, String[][] matrix, char columnSeparator) throws IOException {
         
-        ArrayList<String[]> strings=CSVImportToDataSet.readCSV(filePath, columnSeparator, trimLines);
+        ArrayList<String[]> strings=CSVImportToDataSet.readCSV(filePath, columnSeparator);
         matrix= new String[strings.size()][strings.get(0).length];
         return ConvertListOfHorizontalStringArrayToMatrixOfString.convert(strings, matrix) ;
     }
     
-    public ArrayList<String[]>  readCSV(String filePath, char columnSeparator, boolean trimLines) throws IOException{
-        ArrayList<String[]> strings=CSVImportToDataSet.readCSV(filePath, columnSeparator, trimLines);
+    public ArrayList<String[]>  readCSV(String filePath, char columnSeparator) throws IOException{
+        ArrayList<String[]> strings=CSVImportToDataSet.readCSV(filePath, columnSeparator);
         return strings;
     }
     

@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
  */
 public class CSVImportToDataSet {
 
-    public static ArrayList<String[]> readCSV(String filePath, char columnSeparator, boolean trimLines) throws IOException {
+    public static ArrayList<String[]> readCSV(String filePath, char columnSeparator) throws IOException {
         if (filePath == null) {
             return new ArrayList<String[]>();
         }
@@ -31,9 +31,9 @@ public class CSVImportToDataSet {
             String[] lineInDataset = new String[size];
 
             for (int i = 0; i < size; i++) {
-                if (trimLines == true) {
-                    lineInDataset[i] = st.nextToken().trim();
-                }
+//                if (trimLines == true) {
+//                    lineInDataset[i] = st.nextToken().trim();
+//                }
                 lineInDataset[i] = st.nextToken();
             }
             datasetList.add(lineInDataset);
