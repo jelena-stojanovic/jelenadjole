@@ -18,7 +18,21 @@ public class Source implements OpstiDomenskiObjekat{
     private String creator;
     private String donor;
     private Date date;
-    
+
+    public Source() {
+    }
+
+    public Source(int sourceID, String creator, String donor, Date date) {
+        this.sourceID = sourceID;
+        this.creator = creator;
+        this.donor = donor;
+        this.date = date;
+    }
+    public Source( String creator, String donor, Date date) {
+        this.creator = creator;
+        this.donor = donor;
+        this.date = date;
+    }
     
 
     /**

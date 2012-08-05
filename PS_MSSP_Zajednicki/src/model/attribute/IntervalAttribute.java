@@ -43,5 +43,10 @@ public class IntervalAttribute extends Attribute{
     public Object getPossibleValues() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void setPossibleValues() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
