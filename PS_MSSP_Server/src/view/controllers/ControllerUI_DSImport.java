@@ -210,7 +210,6 @@ public class ControllerUI_DSImport {
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
             stringArrayList = controllerAL_DSImport.readCSV(cSVFormat.getCsvFile().getPath(), columnSeparation);
-            if (tblDatatypes == null || ((TableModelDataTypes) tblDatatypes.getModel()).getAttributeName(0) == null) {
                 if (useFirstROwAsAttributeName) {
                     columnIdentifiers = stringArrayList.get(0);
                     stringArrayList.remove(0);
@@ -220,7 +219,9 @@ public class ControllerUI_DSImport {
                         columnIdentifiers[i] = "Att" + (i + 1);
                     }
                 }
-            }
+            //if (tblDatatypes == null || ((TableModelDataTypes) tblDatatypes.getModel()).getAttributeName(0) == null) {
+
+            //}
             String[][] matrix = new String[stringArrayList.size()][stringArrayList.get(0).length];
             matrix = controllerAL_DSImport.convert(stringArrayList, matrix);
             dtm.setDataVector(matrix, columnIdentifiers);
