@@ -145,5 +145,6 @@ public class ControllerAL_DSImport {
         
         /////URADI POVOVOOVOVO
         ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
+        DataSetCollection.getInstance().addDataSet(ds);
     }
 }
