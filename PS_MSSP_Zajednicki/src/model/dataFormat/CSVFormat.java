@@ -21,7 +21,7 @@ public class CSVFormat extends DataFormat{
     private char quotesCharacter = '"';
     private char columnSeparator = ',';
     private char escapeCharacterForQuotes = '\\';
-
+    private String datePattern="MM/dd/yyyy";
     public CSVFormat() {
     }
 
@@ -154,6 +154,20 @@ public class CSVFormat extends DataFormat{
      */
     public void setEscapeCharacterForQuotes(char escapeCharacterForQuotes) {
         this.escapeCharacterForQuotes = escapeCharacterForQuotes;
+    }
+
+    /**
+     * @return the datePattern
+     */
+    public String getDatePattern() {
+        return datePattern;
+    }
+
+    /**
+     * @param datePattern the datePattern to set
+     */
+    public void setDatePattern(String datePattern) {
+        this.datePattern = datePattern;
     }
 
 
