@@ -4,7 +4,10 @@
  */
 package view.forms;
 
+import java.awt.Panel;
 import javax.swing.JPanel;
+import view.controllers.ControllerUI_AllDataSets;
+import view.panels.importDSpanel.PanelAllDataSets;
 import view.panels.importDSpanel.PanelImportDS;
 
 /**
@@ -59,6 +62,11 @@ public class FrmMain extends javax.swing.JFrame {
         mDataSet.setText("DataSet");
 
         miShowDataSets.setText("Show all datasets");
+        miShowDataSets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miShowDataSetsActionPerformed(evt);
+            }
+        });
         mDataSet.add(miShowDataSets);
 
         miImportDataSet.setText(" Import new dataset");
@@ -88,6 +96,12 @@ public class FrmMain extends javax.swing.JFrame {
     private void miImportDataSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportDataSetActionPerformed
         setActivePanel(new PanelImportDS());
     }//GEN-LAST:event_miImportDataSetActionPerformed
+
+    private void miShowDataSetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowDataSetsActionPerformed
+        PanelAllDataSets pads= new PanelAllDataSets();
+        setActivePanel(pads);
+        ControllerUI_AllDataSets.getInstance().setPanelAllDS(pads);        
+    }//GEN-LAST:event_miShowDataSetsActionPerformed
 
     /**
      * @param args the command line arguments
