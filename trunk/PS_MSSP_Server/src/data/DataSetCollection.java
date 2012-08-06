@@ -13,7 +13,7 @@ import model.dataset.DataSet;
  * @author Jelena
  */
 public class DataSetCollection {
-    List<DataSet> datasets;
+    ArrayList<DataSet> datasets;
     private DataSetCollection() {
         datasets= new ArrayList<DataSet>();
     }
@@ -31,11 +31,11 @@ public class DataSetCollection {
         datasets.add(ds);
     }
 
-    public List<DataSet> getDatasets() {
+    public ArrayList<DataSet> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(List<DataSet> datasets) {
+    public void setDatasets(ArrayList<DataSet> datasets) {
         this.datasets = datasets;
     }
     

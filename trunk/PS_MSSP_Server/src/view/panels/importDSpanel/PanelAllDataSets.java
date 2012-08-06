@@ -4,6 +4,9 @@
  */
 package view.panels.importDSpanel;
 
+import data.DataSetCollection;
+import view.panels.importDSpanel.model.TableModelDataSets;
+
 /**
  *
  * @author Jelena
@@ -15,7 +18,8 @@ public class PanelAllDataSets extends javax.swing.JPanel {
      */
     public PanelAllDataSets() {
         initComponents();
-        
+        TableModelDataSets tmds=new TableModelDataSets(DataSetCollection.getInstance().getDatasets());
+        tblDatasets.setModel(tmds);
     }
 
     /**
