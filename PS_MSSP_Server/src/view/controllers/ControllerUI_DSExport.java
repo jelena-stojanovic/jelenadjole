@@ -5,12 +5,20 @@
 package view.controllers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import logic.ControllerAL_DSExport;
 import model.dataFormat.CSVFormat;
+import model.dataFormat.DataFormat;
 import model.dataset.DataSet;
 import view.panels.importDSpanel.PanelExportDS;
+import view.panels.importDSpanel.PanelWelcome;
 
 /**
  *
@@ -18,6 +26,7 @@ import view.panels.importDSpanel.PanelExportDS;
  */
 public class ControllerUI_DSExport {
 
+    ControllerAL_DSExport controllerAL_DSExport = ControllerAL_DSExport.getInstance();
     private PanelExportDS panelExportDS;
     CSVFormat cSVFormat = new CSVFormat();
     boolean saveCSV = false;
@@ -25,6 +34,7 @@ public class ControllerUI_DSExport {
     boolean saveText = false;
     String fileName = null;
     String directoryPath = null;
+    List<DataFormat> dataFormatList = new ArrayList<DataFormat>();
     /*
      * --local--
      */
@@ -50,20 +60,32 @@ public class ControllerUI_DSExport {
         useQuotesForNominal = KonverterTipova.Konvertuj(getPanelExportDS().getCheckBUseQuotes(), useQuotesForNominal);
         datePattern = KonverterTipova.Konvertuj(getPanelExportDS().getTxtFieldDateFormat(), datePattern);
 
-
-
+        
         cSVFormat.setColumnSeparator(columnSeparation);
         cSVFormat.setUseFirstRowAsAttributeNames(writeAttributeNames);
         cSVFormat.setUseQuotesForNominal(useQuotesForNominal);
         cSVFormat.setDatePattern(datePattern);
-        
+
         fileName = panelExportDS.getTxtFieldFileName().getText().trim();
-        directoryPath = panelExportDS.getFileChooserDS().getSelectedFile().getPath().trim();
-        
 //        panelExportDS.getFileChooserDS().get
-        
+
         checkSaveTypes();
         setValuesToGUI();
+    }
+    
+    public void lastStep() {
+        directoryPath = panelExportDS.getFileChooserDS().getCurrentDirectory().getPath().trim();
+        File dsFile = new File(directoryPath+"\\"+fileName);
+        cSVFormat.setCsvFile(dsFile);
+        
+        saveFildValues();
+        try {
+            saveDataSet();
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerUI_DSExport.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
+        }
+        ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
     }
 
     public void setValuesToGUI() {
@@ -145,12 +167,23 @@ public class ControllerUI_DSExport {
     private void checkSaveTypes() {
         if (panelExportDS.getCheckBAML().isSelected()) {
             saveAML = true;
+            //TODO .add(AMLFormat)
         }
         if (panelExportDS.getCheckBCSV().isSelected()) {
             saveCSV = true;
+            dataFormatList.add(cSVFormat);
         }
         if (panelExportDS.getChechBText().isSelected()) {
             saveAML = true;
+            //TODO .add(TextFormat)
+        }
+    }
+
+    public void saveDataSet() throws Exception {
+        if (dataset != null) {
+            for (DataFormat dataFormat : dataFormatList) {
+                controllerAL_DSExport.exportDS(dataFormat, dataset);
+            }
         }
     }
 }
