@@ -27,6 +27,12 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         return (String) kon_u.getValue();
     }
 
+    static String Konvertuj(JTextField kon_u, String kon_i) {
+        return kon_u.getText();
+    }
+
+    
+    
     static Double Konvertuj(JFormattedTextField kon_u, Double kon_i) {
         return (Double) kon_u.getValue();
     }
