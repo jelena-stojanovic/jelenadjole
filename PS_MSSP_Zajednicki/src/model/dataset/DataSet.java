@@ -11,6 +11,7 @@ import model.OpstiDomenskiObjekat;
 import model.Reference;
 import model.attribute.Attribute;
 import model.dataset.metaattributes.DSMetaAttribute;
+import tools.KonverterTipova;
 
 
 /**
@@ -161,12 +162,19 @@ public class DataSet implements OpstiDomenskiObjekat {
 
     @Override
     public String vratiVrednostiAtributa() {
-        throw new UnsupportedOperationException("Not supported yet.");
+       return  dataSetID + ", '" + title + "', '" +  dsDescription + "' ";
     }
-
+/*
+ private int dataSetID;
+    private String title;
+    private String dsDescription;
+    private Source source;
+    private List<Reference> references;
+ */
     @Override
     public String postaviVrednostiAtributa() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "dataSetID = "+ dataSetID + ", title ='" + title +
+           "', dsDescription ='" + dsDescription + "'";
     }
 
     @Override
@@ -176,22 +184,30 @@ public class DataSet implements OpstiDomenskiObjekat {
 
     @Override
     public String vratiUslovZaNadjiSlog() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "dataSetID = "+ dataSetID ;
     }
 
     @Override
     public String vratiUslovZaNadjiSlogove() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
     public String vratiAtributPretrazivanja() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "dataSetID";
     }
 
     @Override
     public boolean Napuni(ResultSet RSslog) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try{
+        dataSetID= KonverterTipova.Konvertuj(RSslog, dataSetID, "dataSetID");
+        dsDescription=KonverterTipova.Konvertuj(RSslog, dsDescription,"dsDescription");
+        title= KonverterTipova.Konvertuj(RSslog, title, "title");
+        }catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
+          return true;     
     }
 
     @Override
@@ -259,4 +275,36 @@ public class DataSet implements OpstiDomenskiObjekat {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public static String[] vratiZaglavlje()
+   {  String [] s = new String [3];
+	  s[0]="Data set ID";
+	  s[1]="Title";
+	  s[2]="Description";
+	  
+  	  return s;
+	}
+
+static Class[] vratiTipove()
+    { return new Class []
+  	  {Integer.class, String.class, String.class };
+    }
+
+
+ static Object[] vratiPocetneVrednosti()
+     { Object [] obj = new Object [3];
+  	   obj[0]=new Integer(0);
+  	   obj[1]="";
+  	   obj[2]="";
+  	  
+  	   return obj;
+     }
+ public Object[] vratiVrednostiPolja(){
+      Object [] o = new Object [3];
+	  o[0]=dataSetID;
+	  o[1]=title;
+	  o[2]=dsDescription;
+	  
+  	  return o;
+ }
+    
 }
