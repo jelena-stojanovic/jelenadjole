@@ -15,6 +15,7 @@ public class PanelAllDataSets extends javax.swing.JPanel {
      */
     public PanelAllDataSets() {
         initComponents();
+        
     }
 
     /**
