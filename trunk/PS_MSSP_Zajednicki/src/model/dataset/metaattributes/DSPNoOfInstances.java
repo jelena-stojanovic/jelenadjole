@@ -32,7 +32,8 @@ public class DSPNoOfInstances extends NumericalAttribute implements DSMetaAttrib
 
     @Override
     public double calculate(DataSet dataSet) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        numberOfInstances= dataSet.getDataTable().getNumRows();
+        return numberOfInstances;
     }
 
     @Override
