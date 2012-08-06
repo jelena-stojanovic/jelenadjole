@@ -4,6 +4,11 @@
  */
 package view.panels.importDSpanel;
 
+import java.awt.Container;
+import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
 import view.controllers.ControllerUI_DSExport;
 
 /**
@@ -19,6 +24,7 @@ public class PanelExportDS extends javax.swing.JPanel {
      */
     public PanelExportDS() {
         initComponents();
+        setActivePanel(new PanelAllDataSets());
     }
 
     /**
@@ -34,6 +40,7 @@ public class PanelExportDS extends javax.swing.JPanel {
         tpnlExportDS = new javax.swing.JTabbedPane();
         pnlSelectDS = new javax.swing.JPanel();
         btnNextSelect = new javax.swing.JButton();
+        pnlAllDataSets = new javax.swing.JPanel();
         pnlSelectFormat = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         checkBCSV = new javax.swing.JCheckBox();
@@ -65,29 +72,18 @@ public class PanelExportDS extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtFieldFileName = new javax.swing.JTextField();
 
+        pnlSelectDS.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         btnNextSelect.setText("Next -->");
         btnNextSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextSelectActionPerformed(evt);
             }
         });
+        pnlSelectDS.add(btnNextSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(686, 546, -1, -1));
 
-        javax.swing.GroupLayout pnlSelectDSLayout = new javax.swing.GroupLayout(pnlSelectDS);
-        pnlSelectDS.setLayout(pnlSelectDSLayout);
-        pnlSelectDSLayout.setHorizontalGroup(
-            pnlSelectDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSelectDSLayout.createSequentialGroup()
-                .addContainerGap(686, Short.MAX_VALUE)
-                .addComponent(btnNextSelect)
-                .addGap(35, 35, 35))
-        );
-        pnlSelectDSLayout.setVerticalGroup(
-            pnlSelectDSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSelectDSLayout.createSequentialGroup()
-                .addContainerGap(546, Short.MAX_VALUE)
-                .addComponent(btnNextSelect)
-                .addGap(20, 20, 20))
-        );
+        pnlAllDataSets.setLayout(new java.awt.BorderLayout());
+        pnlSelectDS.add(pnlAllDataSets, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 780, 500));
 
         tpnlExportDS.addTab("Step 1: Select DataSet to save", pnlSelectDS);
 
@@ -444,8 +440,7 @@ public class PanelExportDS extends javax.swing.JPanel {
     }//GEN-LAST:event_checkBUseFirstRowItemStateChanged
 
     private void fileChooserDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserDSActionPerformed
-//        controllerExport.chooseFile();
-        
+        controllerExport.lastStep();
     }//GEN-LAST:event_fileChooserDSActionPerformed
 
     private void btnNextSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextSelectActionPerformed
@@ -481,6 +476,7 @@ public class PanelExportDS extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnlAllDataSets;
     private javax.swing.JPanel pnlColumnSeparation;
     private javax.swing.JPanel pnlDateFormat;
     private javax.swing.JPanel pnlParseFile;
@@ -652,7 +648,38 @@ public class PanelExportDS extends javax.swing.JPanel {
     public void setControllerExport(ControllerUI_DSExport controllerExport) {
         this.controllerExport = controllerExport;
     }
+
     /**
      * @return the pnlTableAndFieldAttributes
      */
+    public void setActivePanel(PanelAllDataSets newPanel) {
+        if (panelAllDataSets != null) {
+            this.remove(panelAllDataSets);
+        }
+
+        
+        panelAllDataSets = newPanel;
+        panelAllDataSets.setSize(pnlAllDataSets.getSize());
+        panelAllDataSets.setLocation(pnlAllDataSets.getLocation());
+        pnlAllDataSets.add(panelAllDataSets);
+        panelAllDataSets.setVisible(true);
+        validate();
+        repaint();
+        
+    }
+    
+    public void pack(){
+        Container parent = this.getParent();
+        if (parent != null && parent.getPeer() == null) {
+            parent.addNotify();
+        }
+        if (getPeer() == null) {
+            addNotify();
+        }
+        
+       
+    
+    }
+    
+    PanelAllDataSets panelAllDataSets;
 }
