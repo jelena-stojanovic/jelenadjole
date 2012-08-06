@@ -5,6 +5,7 @@
 package model.dataset;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
 import model.Instance;
 import model.OpstiDomenskiObjekat;
@@ -30,7 +31,8 @@ public class DataSet implements OpstiDomenskiObjekat {
     private List<Attribute> attributes;
     private List<Instance> instances;
         
-    private List<DSMetaAttribute> metaAttributes;
+    
+    private HashMap<String, Double> metaAttributes= new HashMap<String, Double>();
     
     private DataTable dataTable;
 
@@ -135,14 +137,14 @@ public class DataSet implements OpstiDomenskiObjekat {
     /**
      * @return the metaAttributes
      */
-    public List<DSMetaAttribute> getMetaAttributes() {
+    public HashMap<String, Double> getMetaAttributes() {
         return metaAttributes;
     }
 
     /**
      * @param metaAttributes the metaAttributes to set
      */
-    public void setMetaAttributes(List<DSMetaAttribute> metaAttributes) {
+    public void setMetaAttributes(HashMap<String, Double> metaAttributes) {
         this.metaAttributes = metaAttributes;
     }
 
@@ -164,13 +166,7 @@ public class DataSet implements OpstiDomenskiObjekat {
     public String vratiVrednostiAtributa() {
        return  dataSetID + ", '" + title + "', '" +  dsDescription + "' ";
     }
-/*
- private int dataSetID;
-    private String title;
-    private String dsDescription;
-    private Source source;
-    private List<Reference> references;
- */
+
     @Override
     public String postaviVrednostiAtributa() {
         return "dataSetID = "+ dataSetID + ", title ='" + title +
