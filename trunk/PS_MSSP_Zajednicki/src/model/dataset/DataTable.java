@@ -136,5 +136,14 @@ public class DataTable {
         return column;
     }
     
-    
+    public void addColumn(double[] columnData){
+        double[][] oldMatrix=data;
+        column++;
+        double[][] newMatrix= new double[row][column];
+        for (int i = 0; i < newMatrix.length; i++) {
+            System.arraycopy(oldMatrix[i], 0, newMatrix[i], 0, column-1);
+            newMatrix[i][column-1]=columnData[i];
+        }
+        
+    }
 }
