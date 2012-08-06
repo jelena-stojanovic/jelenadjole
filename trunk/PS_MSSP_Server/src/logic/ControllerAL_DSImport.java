@@ -4,6 +4,7 @@
  */
 package logic;
 
+import data.DataSetCollection;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -88,48 +89,61 @@ public class ControllerAL_DSImport {
 
         ds.setDataTable(dataTable);
 
-        
-        
-        
 
-            for (int i = 0; i < dataTable.getNumRows(); i++) { //broj redova
 
-                for (int j = 0; j < dataTable.getNumColums(); j++) { //broj kolona
-                    System.out.print(dataTable.getValue(i, j) + ", ");
 
-                }
-                System.out.println("");
+
+        for (int i = 0; i < dataTable.getNumRows(); i++) { //broj redova
+
+            for (int j = 0; j < dataTable.getNumColums(); j++) { //broj kolona
+                System.out.print(dataTable.getValue(i, j) + ", ");
+
             }
+            System.out.println("");
+        }
 
-            for (int i = 0; i < attributes.size(); i++) {
+        for (int i = 0; i < attributes.size(); i++) {
             Attribute attribute = attributes.get(i);
             if (attribute.isNumerical()) {
                 System.out.println(attribute.getName());
                 HashMap<String, Double> statistics = new HashMap<String, Double>();
-                
+
                 double[] columnatt = dataTable.getColumn(attribute.getIndexOfAttribute());
-                if(columnatt==null) System.out.println("Niz je prazan");
-                System.out.println("Prvi element niza je "+ columnatt[0]);
-                
-                statistics=CalculateNumericalAttributeStatistics.calculate(columnatt, statistics);
-                
+                if (columnatt == null) {
+                    System.out.println("Niz je prazan");
+                }
+                System.out.println("Prvi element niza je " + columnatt[0]);
+
+                statistics = CalculateNumericalAttributeStatistics.calculate(columnatt, statistics);
+
                 ((NumericalAttribute) attribute).setStatistics(statistics);
-                if(statistics.isEmpty()) System.out.println("Statistike su prazne");
-                
+                if (statistics.isEmpty()) {
+                    System.out.println("Statistike su prazne");
+                }
+
                 for (Map.Entry<String, Double> entry : statistics.entrySet()) {
                     String string = entry.getKey();
-                    
+
                     Double double1 = entry.getValue();
-                    
+
                     System.out.println(string + "=" + double1);
                 }
             }
         }
-            
-            
 
-            //------------URADI OVO ds.setMetaAttributes(null);
+        HashMap<String, Double> metaAttributes = new HashMap<String, Double>();
+        metaAttributes = (new CalculateMetaAttributeForDataSet()).calculate(ds, metaAttributes);
+        ds.setMetaAttributes(metaAttributes);
 
-            //------------URADI OVO  ds.setDataSetID(ID);
+        for (Map.Entry<String, Double> entry : metaAttributes.entrySet()) {
+            String string = entry.getKey();
+            Double double1 = entry.getValue();
+            System.out.println(string + "=" + double1);
+
         }
+        
+        
+        /////URADI POVOVOOVOVO
+        ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
     }
+}

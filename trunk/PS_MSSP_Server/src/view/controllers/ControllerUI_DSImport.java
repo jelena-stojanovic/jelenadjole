@@ -298,9 +298,6 @@ public class ControllerUI_DSImport {
                 title = file.getName().substring(0, file.getName().length() - 4);
             }
             ds.setTitle(title);
-            ds.setDataTable(null);
-            ds.setInstances(null);
-            ds.setMetaAttributes(null);
 
             ds.setDataSetID(0);
 

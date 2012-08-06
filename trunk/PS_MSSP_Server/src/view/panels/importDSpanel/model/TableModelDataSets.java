@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.dataset.DataSet;
+import model.dataset.MetaAttributesAndStatisticsColection;
 
 /**
  *
@@ -27,12 +28,31 @@ public class TableModelDataSets extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return DataSet.vratiZaglavlje().length+MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames().length;
     }
 
     @Override
+    public String getColumnName(int column) {
+        if(column<DataSet.vratiZaglavlje().length){
+            return DataSet.vratiZaglavlje()[column];
+        }else{
+            return MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames()[column-DataSet.vratiZaglavlje().length];
+        }
+    }
+
+    
+    
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DataSet ds= datasets.get(rowIndex);
+        Object[] objs= ds.vratiVrednostiPolja();
+        if(columnIndex<DataSet.vratiZaglavlje().length){
+            return objs[columnIndex];
+        }else{
+            String string=MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames()[columnIndex-DataSet.vratiZaglavlje().length];
+            Double get = ds.getMetaAttributes().get(string);
+            return get;
+        }
     }
    
             
