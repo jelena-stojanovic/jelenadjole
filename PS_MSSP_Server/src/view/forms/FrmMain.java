@@ -7,7 +7,10 @@ package view.forms;
 import java.awt.Panel;
 import javax.swing.JPanel;
 import view.controllers.ControllerUI_AllDataSets;
+import view.controllers.ControllerUI_DSExport;
+import view.controllers.ControllerUI_Main;
 import view.panels.importDSpanel.PanelAllDataSets;
+import view.panels.importDSpanel.PanelExportDS;
 import view.panels.importDSpanel.PanelImportDS;
 
 /**
@@ -78,6 +81,11 @@ public class FrmMain extends javax.swing.JFrame {
         mDataSet.add(miImportDataSet);
 
         miExportDS.setText(" Export dataset");
+        miExportDS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miExportDSActionPerformed(evt);
+            }
+        });
         mDataSet.add(miExportDS);
 
         jMenuBar1.add(mDataSet);
@@ -94,14 +102,22 @@ public class FrmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miImportDataSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportDataSetActionPerformed
-        setActivePanel(new PanelImportDS());
+        ControllerUI_Main.getInstance().setActivePanel(new PanelImportDS());
     }//GEN-LAST:event_miImportDataSetActionPerformed
 
     private void miShowDataSetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowDataSetsActionPerformed
         PanelAllDataSets pads= new PanelAllDataSets();
-        setActivePanel(pads);
+        ControllerUI_Main.getInstance().setActivePanel(pads);
         ControllerUI_AllDataSets.getInstance().setPanelAllDS(pads);        
     }//GEN-LAST:event_miShowDataSetsActionPerformed
+
+    private void miExportDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExportDSActionPerformed
+        PanelExportDS panelExport = new PanelExportDS();
+        ControllerUI_DSExport dsExport = new ControllerUI_DSExport();
+        panelExport.setControllerExport(dsExport);
+        dsExport.setPanelExportDS(panelExport);
+        ControllerUI_Main.getInstance().setActivePanel(panelExport);
+    }//GEN-LAST:event_miExportDSActionPerformed
 
     /**
      * @param args the command line arguments
