@@ -104,6 +104,12 @@ public class Reference implements OpstiDomenskiObjekat {
     }
 
     @Override
+    public String toString() {
+        return  author + "; " + title + "; " + date + "; " + location + ". " + otherInformation ;
+    }
+    
+
+    @Override
     public String vratiVrednostiAtributa() {
         java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
         return "" + referenceID + ", '" + author + "', '" + title + "', " + sqlDate + ", '" + location + "', '" + otherInformation + "'";

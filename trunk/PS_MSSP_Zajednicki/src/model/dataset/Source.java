@@ -95,6 +95,13 @@ public class Source implements OpstiDomenskiObjekat {
     }
 
     @Override
+    public String toString() {
+        return  creator + ", " + donor + ", " + date ;
+    }
+
+    
+    
+    @Override
     public String vratiVrednostiAtributa() {
         java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
         return "" + sourceID + ", '" + creator + "', '" + donor + ", " + sqlDate;
