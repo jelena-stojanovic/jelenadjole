@@ -144,6 +144,6 @@ public class DataTable {
             System.arraycopy(oldMatrix[i], 0, newMatrix[i], 0, column-1);
             newMatrix[i][column-1]=columnData[i];
         }
-        
+     data= newMatrix;   
     }
 }
