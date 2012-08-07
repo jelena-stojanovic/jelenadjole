@@ -8,6 +8,6 @@ package model.dataFormat;
  *
  * @author Jelena
  */
-class DataFormat {
+public class DataFormat {
     
 }
