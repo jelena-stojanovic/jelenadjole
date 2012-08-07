@@ -5,10 +5,6 @@
 package view.panels.importDSpanel;
 
 import java.awt.Container;
-import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
 import view.controllers.ControllerUI_DSExport;
 
 /**
@@ -444,8 +440,9 @@ public class PanelExportDS extends javax.swing.JPanel {
     }//GEN-LAST:event_fileChooserDSActionPerformed
 
     private void btnNextSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextSelectActionPerformed
-        controllerExport.saveFildValues();
         controllerExport.disableAllExcept(1);
+        controllerExport.saveFildValues();
+
     }//GEN-LAST:event_btnNextSelectActionPerformed
 
     private void btnPreviousFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousFormatActionPerformed
@@ -659,9 +656,9 @@ public class PanelExportDS extends javax.swing.JPanel {
 
         
         panelAllDataSets = newPanel;
-        panelAllDataSets.setSize(pnlAllDataSets.getSize());
-        panelAllDataSets.setLocation(pnlAllDataSets.getLocation());
-        pnlAllDataSets.add(panelAllDataSets);
+        panelAllDataSets.setSize(getPnlAllDataSets().getSize());
+        panelAllDataSets.setLocation(getPnlAllDataSets().getLocation());
+        getPnlAllDataSets().add(panelAllDataSets);
         panelAllDataSets.setVisible(true);
         validate();
         repaint();
@@ -682,4 +679,17 @@ public class PanelExportDS extends javax.swing.JPanel {
     }
     
     PanelAllDataSets panelAllDataSets;
+
+    /**
+     * @return the pnlAllDataSets
+     */
+    public javax.swing.JPanel getPnlAllDataSets() {
+        return pnlAllDataSets;
+    }
+    
+    public PanelAllDataSets getPanelAllDataSets() {
+        return panelAllDataSets;
+    }
+    
+    
 }
