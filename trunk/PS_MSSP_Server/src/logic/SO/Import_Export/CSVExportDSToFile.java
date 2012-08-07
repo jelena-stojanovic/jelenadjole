@@ -60,17 +60,17 @@ public class CSVExportDSToFile {
                 double d1=ds[0];
                 
                 if (attributes.get(0).isNominal()) {
-                        NominalAttribute noma = (NominalAttribute) attributes.get(i);
+                        NominalAttribute noma = (NominalAttribute) attributes.get(0);
                         String value = noma.getNominalValueFromIndex(d1);
-                        out.print(',' +value);
+                        out.print(value);
                     }else if(attributes.get(0).isDate()){
-                        DateAttribute da= (DateAttribute)attributes.get(i);
+                        DateAttribute da= (DateAttribute)attributes.get(0);
                         Date date = da.getDateFromDouble(d1);
                         String format= csvFormat.getDatePattern();
                         String dateInFormat= new SimpleDateFormat(format).format(date);
-                        out.print(',' + dateInFormat);
+                        out.print(dateInFormat);
                     }else {
-                        out.print(',' + String.valueOf(d1));
+                        out.print(String.valueOf(d1));
                     }
                 /***end of first value in row ***/
                 
@@ -79,11 +79,11 @@ public class CSVExportDSToFile {
                     double d = ds[j];
                     
                     if (attributes.get(j).isNominal()) {
-                        NominalAttribute noma = (NominalAttribute) attributes.get(i);
+                        NominalAttribute noma = (NominalAttribute) attributes.get(j);
                         String value = noma.getNominalValueFromIndex(d);
                         out.print(',' +value);
                     }else if(attributes.get(j).isDate()){
-                        DateAttribute da= (DateAttribute)attributes.get(i);
+                        DateAttribute da= (DateAttribute)attributes.get(j);
                         Date date = da.getDateFromDouble(d);
                         String format= da.getDatePatern();
                         String dateInFormat= new SimpleDateFormat(format).format(date);

@@ -55,5 +55,7 @@ public class TableModelDataSets extends AbstractTableModel{
         }
     }
    
-            
+    public DataSet getDataSet(int rowindex){
+        return datasets.get(rowindex);
+    }        
 }
