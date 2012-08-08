@@ -25,7 +25,7 @@ import model.OpstiDomenskiObjekat;
 public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u proste tipove i tipove objekata
 
     
-    static String Konvertuj(JTextField kon_u, String kon_i) {
+    public static String Konvertuj(JTextField kon_u, String kon_i) {
         return kon_u.getText();
     }
     public static String Konvertuj(JFormattedTextField kon_u, String kon_i) {
