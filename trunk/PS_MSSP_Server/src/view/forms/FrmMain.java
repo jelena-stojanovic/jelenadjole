@@ -14,6 +14,7 @@ import logic.SO.serialization.Serialize;
 import view.controllers.ControllerUI_AllDataSets;
 import view.controllers.ControllerUI_DSExport;
 import view.controllers.ControllerUI_Main;
+import view.panels.importDSpanel.PaneAnylNewMetaAttribute;
 import view.panels.importDSpanel.PanelAllDataSets;
 import view.panels.importDSpanel.PanelExportDS;
 import view.panels.importDSpanel.PanelImportDS;
@@ -51,6 +52,7 @@ public class FrmMain extends javax.swing.JFrame {
         miExportDS = new javax.swing.JMenuItem();
         mSimilarity = new javax.swing.JMenu();
         mMetaAttribute = new javax.swing.JMenu();
+        miAnyNewMatt = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -109,6 +111,15 @@ public class FrmMain extends javax.swing.JFrame {
         jMenuBar1.add(mSimilarity);
 
         mMetaAttribute.setText(" MetaAttribute");
+
+        miAnyNewMatt.setText("Are there any new metaattribute?");
+        miAnyNewMatt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAnyNewMattActionPerformed(evt);
+            }
+        });
+        mMetaAttribute.add(miAnyNewMatt);
+
         jMenuBar1.add(mMetaAttribute);
 
         setJMenuBar(jMenuBar1);
@@ -148,6 +159,12 @@ public class FrmMain extends javax.swing.JFrame {
         frmAdmin.setVisible(true);
         frmAdmin.setFocusable(true);
     }//GEN-LAST:event_miNewAdministratorActionPerformed
+
+    private void miAnyNewMattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnyNewMattActionPerformed
+        PaneAnylNewMetaAttribute panma= new PaneAnylNewMetaAttribute();
+        ControllerUI_Main.getInstance().setActivePanel(panma);
+                
+    }//GEN-LAST:event_miAnyNewMattActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +213,7 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenu mDataSet;
     private javax.swing.JMenu mMetaAttribute;
     private javax.swing.JMenu mSimilarity;
+    private javax.swing.JMenuItem miAnyNewMatt;
     private javax.swing.JMenuItem miExportDS;
     private javax.swing.JMenuItem miImportDataSet;
     private javax.swing.JMenuItem miNewAdministrator;
