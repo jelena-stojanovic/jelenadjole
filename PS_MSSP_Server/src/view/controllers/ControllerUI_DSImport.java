@@ -299,8 +299,6 @@ public class ControllerUI_DSImport {
             }
             ds.setTitle(title);
 
-            ds.setDataSetID(0);
-
             ds.setDsDescription(panelImportDS.getTaDataSetDescription().getText().trim());
 
             ds.setReferences(references);

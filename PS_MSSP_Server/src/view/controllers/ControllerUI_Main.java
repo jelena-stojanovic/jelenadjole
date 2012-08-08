@@ -6,6 +6,7 @@ package view.controllers;
 
 import javax.swing.JPanel;
 import view.forms.FrmMain;
+import view.panels.importDSpanel.PanelWelcome;
 
 /**
  *
@@ -16,6 +17,7 @@ public class ControllerUI_Main {
     FrmMain mainForm;
     private ControllerUI_Main() {
         mainForm= new FrmMain();
+        setActivePanel(new PanelWelcome());
         
     }
     

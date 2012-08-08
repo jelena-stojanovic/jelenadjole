@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.SO.Import_Export.*;
 import logic.SO.MissingValues;
+import logic.SO.serialization.Serialize;
 import model.attribute.Attribute;
 import model.attribute.NumericalAttribute;
 import model.dataset.DataSet;
@@ -146,5 +147,9 @@ public class ControllerAL_DSImport {
         /////URADI POVOVOOVOVO
         ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
         DataSetCollection.getInstance().addDataSet(ds);
+        Serialize.serialize(ds);
+        
+        
+        
     }
 }

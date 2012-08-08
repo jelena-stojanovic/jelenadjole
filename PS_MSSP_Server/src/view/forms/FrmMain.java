@@ -4,8 +4,13 @@
  */
 package view.forms;
 
+import data.DataSetCollection;
 import java.awt.Panel;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import logic.SO.serialization.Serialize;
 import view.controllers.ControllerUI_AllDataSets;
 import view.controllers.ControllerUI_DSExport;
 import view.controllers.ControllerUI_Main;
@@ -48,6 +53,11 @@ public class FrmMain extends javax.swing.JFrame {
         mMetaAttribute = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
@@ -118,6 +128,15 @@ public class FrmMain extends javax.swing.JFrame {
         dsExport.setPanelExportDS(panelExport);
         ControllerUI_Main.getInstance().setActivePanel(panelExport);
     }//GEN-LAST:event_miExportDSActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         try {
+            Serialize.serialize(DataSetCollection.getInstance().getMetaDataSet());
+            System.out.println("Serialize meta dataset");
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
