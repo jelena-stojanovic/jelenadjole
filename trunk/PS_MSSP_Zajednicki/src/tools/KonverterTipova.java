@@ -24,9 +24,15 @@ import model.OpstiDomenskiObjekat;
 
 public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u proste tipove i tipove objekata
 
+    
+    static String Konvertuj(JTextField kon_u, String kon_i) {
+        return kon_u.getText();
+    }
     public static String Konvertuj(JFormattedTextField kon_u, String kon_i) {
         return (String) kon_u.getValue();
     }
+
+    
 
     public static Double Konvertuj(JFormattedTextField kon_u, Double kon_i) {
         return (Double) kon_u.getValue();
@@ -41,6 +47,11 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         kon_i.setValue(kon_u);
     }
 
+     static void Konvertuj(String kon_u, JTextField kon_i) {
+        kon_i.setText(kon_u);
+    }
+    
+    
     public static void Konvertuj(Double kon_u, JFormattedTextField kon_i) {
         kon_i.setValue(kon_u);
     }
