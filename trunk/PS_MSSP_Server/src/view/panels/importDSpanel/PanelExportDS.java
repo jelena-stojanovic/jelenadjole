@@ -78,7 +78,7 @@ public class PanelExportDS extends javax.swing.JPanel {
         });
         pnlSelectDS.add(btnNextSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(686, 546, -1, -1));
 
-        pnlAllDataSets.setLayout(new java.awt.BorderLayout());
+        pnlAllDataSets.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnlSelectDS.add(pnlAllDataSets, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 780, 500));
 
         tpnlExportDS.addTab("Step 1: Select DataSet to save", pnlSelectDS);
@@ -658,7 +658,8 @@ public class PanelExportDS extends javax.swing.JPanel {
         panelAllDataSets = newPanel;
         panelAllDataSets.setSize(getPnlAllDataSets().getSize());
         panelAllDataSets.setLocation(getPnlAllDataSets().getLocation());
-        getPnlAllDataSets().add(panelAllDataSets);
+        getPnlAllDataSets().add(panelAllDataSets, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 780, 500));
+        //getPnlAllDataSets().add(panelAllDataSets);
         panelAllDataSets.setVisible(true);
         validate();
         repaint();
