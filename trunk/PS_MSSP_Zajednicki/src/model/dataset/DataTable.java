@@ -147,4 +147,15 @@ public class DataTable implements Serializable{
         }
      data= newMatrix;   
     }
+    
+    public void addRow(double[] rowd){
+        double[][] oldMatrix=data;
+        double[][] newMatrix= new double[row+1][column];
+        for (int i = 0; i < newMatrix.length-1; i++) {
+            System.arraycopy(oldMatrix, 0, newMatrix, 0, (row)*column);
+                    }
+        newMatrix[row]=rowd;
+        row++;
+        data= newMatrix;   
+    }
 }
