@@ -68,6 +68,11 @@ public class FrmMain extends javax.swing.JFrame {
         mAdministrator.add(miShowAdministators);
 
         miNewAdministrator.setText("Add new Administrators");
+        miNewAdministrator.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNewAdministratorActionPerformed(evt);
+            }
+        });
         mAdministrator.add(miNewAdministrator);
 
         jMenuBar1.add(mAdministrator);
@@ -137,6 +142,12 @@ public class FrmMain extends javax.swing.JFrame {
             Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void miNewAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNewAdministratorActionPerformed
+        FrmAdministrator frmAdmin = new FrmAdministrator();
+        frmAdmin.setVisible(true);
+        frmAdmin.setFocusable(true);
+    }//GEN-LAST:event_miNewAdministratorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -47,6 +47,10 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         kon_i.setValue(kon_u);
     }
 
+    static void Konvertuj(String kon_u, JTextField kon_i) {
+        kon_i.setText(kon_u);
+    }
+    
     static void Konvertuj(Double kon_u, JFormattedTextField kon_i) {
         kon_i.setValue(kon_u);
     }
