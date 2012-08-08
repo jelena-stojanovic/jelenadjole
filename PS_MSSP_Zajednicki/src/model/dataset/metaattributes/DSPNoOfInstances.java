@@ -4,6 +4,7 @@
  */
 package model.dataset.metaattributes;
 
+import java.io.Serializable;
 import model.attribute.Attribute;
 import model.attribute.NumericalAttribute;
 import model.dataset.DataSet;
@@ -12,7 +13,7 @@ import model.dataset.DataSet;
  *
  * @author Jelena
  */
-public class DSPNoOfInstances extends NumericalAttribute implements DSMetaAttribute{
+public class DSPNoOfInstances extends NumericalAttribute implements DSMetaAttribute, Serializable{
     
     private int numberOfInstances;
 

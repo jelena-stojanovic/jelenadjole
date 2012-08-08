@@ -4,6 +4,7 @@
  */
 package model.dataset;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +20,19 @@ import tools.KonverterTipova;
  *
  * @author Jelena
  */
-public class DataSet implements OpstiDomenskiObjekat {
+/*@Entity
+@Table(name = "dataset")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "DataSet.findAll", query = "SELECT d FROM DataSet d"),
+    @NamedQuery(name = "DataSet.findByDataSetID", query = "SELECT d FROM DataSet d WHERE d.dataSetID = :dataSetID")})*/
+public class DataSet implements OpstiDomenskiObjekat, Serializable {
     
     private int dataSetID;
     private String title;
     private String dsDescription;
     private Source source;
+    private String filePath;
     private List<Reference> references;
 
     
@@ -162,6 +170,22 @@ public class DataSet implements OpstiDomenskiObjekat {
         this.dataTable = dataTable;
     }
 
+    
+    /**
+     * @return the filePath
+     */
+    public String getFilePath() {
+        return filePath;
+    }
+
+    /**
+     * @param filePath the filePath to set
+     */
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    
     @Override
     public String vratiVrednostiAtributa() {
        return  dataSetID + ", '" + title + "', '" +  dsDescription + "' ";
@@ -193,6 +217,8 @@ public class DataSet implements OpstiDomenskiObjekat {
         return "dataSetID";
     }
 
+    
+    
     @Override
     public boolean Napuni(ResultSet RSslog) {
         try{

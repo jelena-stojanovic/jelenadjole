@@ -30,9 +30,6 @@ public class CalculatedNumericalStatistics {
         
         for (String statclass : NumericalStatistic.getAvailableImplementationClassNames()) {
             try {
-//                  Method method= Class.forName(statclass).getMethod("getInstance");
-//                  Class<?> returnType = method. getReturnType().;
-//                  NumericalStatistic numstat = (NumericalStatistic)                .newInstance();
                   
                 Constructor constructor = Class.forName(statclass).getConstructor();
                 NumericalStatistic object = (NumericalStatistic) constructor.newInstance();

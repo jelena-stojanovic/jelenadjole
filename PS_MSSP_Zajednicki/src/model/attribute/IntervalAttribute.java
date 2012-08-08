@@ -4,11 +4,13 @@
  */
 package model.attribute;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class IntervalAttribute extends Attribute{
+public class IntervalAttribute extends Attribute implements Serializable {
 
     public IntervalAttribute() {
     }

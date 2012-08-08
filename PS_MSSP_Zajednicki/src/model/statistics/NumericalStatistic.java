@@ -4,6 +4,7 @@
  */
 package model.statistics;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import tools.ReflectionTools;
@@ -12,7 +13,7 @@ import tools.ReflectionTools;
  *
  * @author Jelena
  */
-public abstract class NumericalStatistic {
+public abstract class NumericalStatistic implements Serializable{
 
     private static String[] availableImplementationClassNames = ReflectionTools.getComponentClassNamesForSubproblem(model.statistics.NumericalStatistic.class);
 

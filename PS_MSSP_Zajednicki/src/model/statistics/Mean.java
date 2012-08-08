@@ -4,11 +4,13 @@
  */
 package model.statistics;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class Mean extends NumericalStatistic{
+public class Mean extends NumericalStatistic implements Serializable{
     @Override
     public double calculate(double[] valuesArray) {
         return new Sum().calculate(valuesArray)/valuesArray.length;

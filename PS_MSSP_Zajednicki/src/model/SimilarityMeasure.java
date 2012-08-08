@@ -4,10 +4,12 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class SimilarityMeasure {
+public class SimilarityMeasure  implements Serializable {
     
 }

@@ -4,6 +4,7 @@
  */
 package model.attribute;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import model.statistics.Maximum;
@@ -13,7 +14,7 @@ import model.statistics.Minimum;
  *
  * @author Jelena
  */
-public class DateAttribute extends Attribute{
+public class DateAttribute extends Attribute  implements Serializable {
 
     private HashMap<String, Double> statistics;
     private String datePatern="MM/dd/yyyy";

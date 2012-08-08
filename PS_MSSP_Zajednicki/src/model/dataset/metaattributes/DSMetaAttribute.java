@@ -10,7 +10,7 @@ import model.dataset.DataSet;
  *
  * @author Jelena
  */
-public interface DSMetaAttribute {
+public interface DSMetaAttribute  {
     public double calculate(DataSet dataSet);
     public void register();
     public String getName();

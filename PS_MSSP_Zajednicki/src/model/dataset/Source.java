@@ -4,6 +4,7 @@
  */
 package model.dataset;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import tools.KonverterTipova;
  *
  * @author Jelena
  */
-public class Source implements OpstiDomenskiObjekat {
+public class Source implements OpstiDomenskiObjekat, Serializable {
 
     private int sourceID;
     private String creator;
