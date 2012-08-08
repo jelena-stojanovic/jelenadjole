@@ -132,7 +132,7 @@ public class ControllerAL_DSImport {
             }
         }
 
-        HashMap<String, Double> metaAttributes = new HashMap<String, Double>();
+      /*  HashMap<String, Double> metaAttributes = new HashMap<String, Double>();
         metaAttributes = (new CalculateMetaAttributeForDataSet()).calculate(ds, metaAttributes);
         ds.setMetaAttributes(metaAttributes);
 
@@ -141,15 +141,17 @@ public class ControllerAL_DSImport {
             Double double1 = entry.getValue();
             System.out.println(string + "=" + double1);
 
-        }
+        }*/
+        ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
+        ControllerAL_MetaAttribute.getInstance().calculateMetaattributes(ds);
         
         
         /////URADI POVOVOOVOVO
-        ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
+        
         DataSetCollection.getInstance().addDataSet(ds);
         Serialize.serialize(ds);
-        
-        
-        
-    }
+     }
+    
+    
+    
 }
