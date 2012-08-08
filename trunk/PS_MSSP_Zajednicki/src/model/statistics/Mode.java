@@ -4,11 +4,13 @@
  */
 package model.statistics;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class Mode extends NumericalStatistic {
+public class Mode extends NumericalStatistic implements Serializable{
 
     @Override
     public double calculate(double[] valuesArray) {

@@ -4,13 +4,14 @@
  */
 package model.dataset;
 
+import java.io.Serializable;
 import org.ejml.data.DenseMatrix64F;
 
 /**
  *
  * @author Jelena
  */
-public class DataTable {
+public class DataTable implements Serializable{
 
     DenseMatrix64F matrix;
     double[][] data;

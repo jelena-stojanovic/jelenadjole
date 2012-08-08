@@ -4,13 +4,14 @@
  */
 package model.statistics;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  *
  * @author Jelena
  */
-public class Median extends NumericalStatistic {
+public class Median extends NumericalStatistic implements Serializable{
 
     @Override
     public double calculate(double[] valuesArray) {

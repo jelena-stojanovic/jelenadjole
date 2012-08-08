@@ -4,11 +4,13 @@
  */
 package model.attribute;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public abstract class Attribute {
+public abstract class Attribute implements Serializable {
     private int indexOfAttribute;
     private String name;
     private String description;

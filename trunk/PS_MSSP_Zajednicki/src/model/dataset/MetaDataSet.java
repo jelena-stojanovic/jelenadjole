@@ -5,13 +5,27 @@
 package model.dataset;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Jelena
  */
-public class MetaDataSet extends DataSet{
-    List<File> datasets;
+public class MetaDataSet extends DataSet implements Serializable{
+    List<File> datasets= new ArrayList<File>();
+
+    public MetaDataSet() {
+    }
+
+    public List<File> getDatasets() {
+        return datasets;
+    }
+
+    public void setDatasets(List<File> datasets) {
+        this.datasets = datasets;
+    }
+    
     
 }

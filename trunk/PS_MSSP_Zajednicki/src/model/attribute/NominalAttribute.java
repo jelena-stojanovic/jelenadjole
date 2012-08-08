@@ -4,6 +4,7 @@
  */
 package model.attribute;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
  *
  * @author Jelena
  */
-public class NominalAttribute extends Attribute{
+public class NominalAttribute extends Attribute implements Serializable {
 
     private List<String> possibleNominalValue;
     private HashMap<String, Double> classToIndexMap = new HashMap<String, Double>();

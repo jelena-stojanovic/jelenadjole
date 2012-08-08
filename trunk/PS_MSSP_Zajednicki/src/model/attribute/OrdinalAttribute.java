@@ -4,11 +4,13 @@
  */
 package model.attribute;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class OrdinalAttribute extends Attribute{
+public class OrdinalAttribute extends Attribute implements Serializable {
 
     public OrdinalAttribute() {
     }

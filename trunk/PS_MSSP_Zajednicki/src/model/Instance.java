@@ -4,10 +4,12 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class Instance {
+public class Instance  implements Serializable {
     
 }

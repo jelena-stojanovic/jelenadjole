@@ -4,11 +4,13 @@
  */
 package model.statistics;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class Maximum extends NumericalStatistic{
+public class Maximum extends NumericalStatistic implements Serializable{
     @Override
     public double calculate(double[] valuesArray) {
         double maxValue= Double.MIN_VALUE;

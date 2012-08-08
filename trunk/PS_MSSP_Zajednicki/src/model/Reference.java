@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +14,7 @@ import tools.KonverterTipova;
  *
  * @author Jelena
  */
-public class Reference implements OpstiDomenskiObjekat {
+public class Reference implements OpstiDomenskiObjekat  , Serializable {
 
     private int referenceID;
     private String author;

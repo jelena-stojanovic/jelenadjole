@@ -4,11 +4,13 @@
  */
 package model.statistics;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class Range extends NumericalStatistic{
+public class Range extends NumericalStatistic implements Serializable{
 
     @Override
     public double calculate(double[] valuesArray) {

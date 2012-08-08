@@ -4,6 +4,7 @@
  */
 package model.attribute;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ import model.statistics.NumericalStatistic;
  *
  * @author Jelena
  */
-public class NumericalAttribute extends Attribute{
+public class NumericalAttribute extends Attribute implements Serializable {
 
     public NumericalAttribute() {
     }
