@@ -206,7 +206,7 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     @Override
     public boolean vrednosnaOgranicenja() {
         Date newDate = new Date();
-        if (date.before(newDate)) {
+        if (date.before(newDate) && referenceID>=0) {
             return true;
         } else {
             return false;
