@@ -50,7 +50,7 @@ public class ControllerUI_DSExport {
     private char columnSeparation = ',';
     private boolean writeAttributeNames = false;
     private boolean useQuotesForNominal = true;
-    private String datePattern = null;
+    private String datePattern = "MM/dd/yyyy";
     /*
      * ----end of csv format fields -----
      */
@@ -62,7 +62,7 @@ public class ControllerUI_DSExport {
         columnSeparation = getSelectedColumnSeparator();
         writeAttributeNames = KonverterTipova.Konvertuj(getPanelExportDS().getCheckBUseFirstRow(), writeAttributeNames);
         useQuotesForNominal = KonverterTipova.Konvertuj(getPanelExportDS().getCheckBUseQuotes(), useQuotesForNominal);
-        datePattern = KonverterTipova.Konvertuj(getPanelExportDS().getTxtFieldDateFormat(), datePattern);
+        datePattern = KonverterTipova.Konvertuj( getPanelExportDS().getTxtFieldDateFormat(), datePattern);
 
 
         cSVFormat.setColumnSeparator(columnSeparation);
