@@ -4,6 +4,8 @@
  */
 package ps_merenjeslicnostiskupovapodataka_klijent;
 
+import view.guicontrollers.ControllerUI_Main;
+
 /**
  *
  * @author Jelena
@@ -15,5 +17,6 @@ public class PS_MerenjeSlicnostiSkupovaPodataka_Klijent {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ControllerUI_Main.getInstance().startApplication();
     }
 }
