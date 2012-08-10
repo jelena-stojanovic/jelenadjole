@@ -149,10 +149,6 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
         return "";
     }
 
-    @Override
-    public String vratiAtributPretrazivanja() {
-        return "sourceID";
-    }
 
     @Override
     public boolean Napuni(ResultSet RSslog) {
@@ -239,4 +235,35 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
     public String vratiNazivObjekta() {
         return "source";
     }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "source";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        
+        Source source = (Source) odo;
+        source.setCreator(creator);
+        source.setDonor(donor);
+        source.setDate(sourceDate);
+        
+    }
+@Override
+    public int vratiID() {
+        return sourceID;
+    }
+
+   private String atributPretrazivanja;
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        atributPretrazivanja=atribut;
+    }
+    @Override
+    public String vratiAtributPretrazivanja() {
+        //return "dataSetID";
+        return atributPretrazivanja;
+    }    
+    
 }
