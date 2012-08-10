@@ -61,6 +61,15 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
         this.otherInformation = otherInformation;
     }
 
+    public Reference(int referenceID, String author, String title, Date referenceDate, String location, String otherInformation) {
+        this.referenceID = referenceID;
+        this.author = author;
+        this.title = title;
+        this.referenceDate = referenceDate;
+        this.location = location;
+        this.otherInformation = otherInformation;
+    }
+
     /**
      * @return the author
      */
@@ -167,7 +176,8 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
 
     @Override
     public String vratiAtributPretrazivanja() {
-        return "referenceID";
+        //return "referenceID";
+        return atributPretrazivanja;
     }
 
     @Override
@@ -256,5 +266,30 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     @Override
     public String vratiNazivObjekta() {
         return "reference";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "reference";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        Reference ref = (Reference)odo;
+        ref.setTitle(title) ;
+        ref.setDate(referenceDate);
+        ref.setLocation(location);
+        ref.setOtherInformation(otherInformation);
+
+    }
+
+    @Override
+    public int vratiID() {
+        return referenceID;
+    }
+private String atributPretrazivanja;
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        atributPretrazivanja=atribut;
     }
 }

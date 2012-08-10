@@ -34,6 +34,22 @@ String postaviVrednostiAtributa();
 
 // ***koristi se***//
 String vratiImeKlase();
+/*************JELENA************/
+// ***koristi se***//
+String vratiNazivTabele();
+
+void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo);
+
+int vratiID();
+
+void postaviAtributPretrazivanja(String atribut);
+
+/************* end JELENA************/
+
+// ***koristi se***//
+String vratiAtributPretrazivanja();
+
+
 
 // ***koristi se***//
 String vratiUslovZaNadjiSlog();
@@ -41,8 +57,6 @@ String vratiUslovZaNadjiSlog();
 // ***koristi se***//
 String vratiUslovZaNadjiSlogove();
 
-// ***koristi se***//
-String vratiAtributPretrazivanja();
 
 // ***koristi se***//
 boolean Napuni(ResultSet RSslog);

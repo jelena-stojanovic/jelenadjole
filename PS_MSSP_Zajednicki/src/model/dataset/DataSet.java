@@ -63,6 +63,9 @@ public class DataSet implements OpstiDomenskiObjekat, Serializable {
     
     private DataTable dataTable;
 
+    public DataSet() {
+    }
+
     /**
      * @return the dataSetID
      */
@@ -231,10 +234,7 @@ public class DataSet implements OpstiDomenskiObjekat, Serializable {
         return "";
     }
 
-    @Override
-    public String vratiAtributPretrazivanja() {
-        return "dataSetID";
-    }
+    
 
     
     
@@ -347,5 +347,44 @@ static Class[] vratiTipove()
 	  
   	  return o;
  }
-    
+
+    @Override
+    public String vratiNazivTabele() {
+        return "dataset";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        DataSet ds= (DataSet) odo;
+        ds.setTitle(title);
+        ds.setDsDescription(dsDescription);
+        ds.setFilePath(filePath);
+        ds.setSource(source);
+        ds.setDataTable(dataTable);
+    }
+
+    public DataSet(int dataSetID, String title, String dsDescription, Source source, String filePath, DataTable dataTable) {
+        this.dataSetID = dataSetID;
+        this.title = title;
+        this.dsDescription = dsDescription;
+        this.source = source;
+        this.filePath = filePath;
+        this.dataTable = dataTable;
+    }
+
+    @Override
+    public int vratiID() {
+        return dataSetID;
+    }
+
+   private String atributPretrazivanja;
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        atributPretrazivanja=atribut;
+    }
+    @Override
+    public String vratiAtributPretrazivanja() {
+        //return "dataSetID";
+        return atributPretrazivanja;
+    }
 }
