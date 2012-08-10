@@ -18,8 +18,7 @@ public class PanelAllDataSets extends javax.swing.JPanel {
      */
     public PanelAllDataSets() {
         initComponents();
-        TableModelDataSets tmds=new TableModelDataSets(ControllerUI_AllDataSets.getInstance().getAllDataSets());
-        tblDatasets.setModel(tmds);
+        
     }
 
     /**

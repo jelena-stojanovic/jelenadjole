@@ -9,6 +9,7 @@ import java.awt.Panel;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.guicontrollers.ControllerUI_AllDataSets;
@@ -86,9 +87,14 @@ public class FrmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miShowDataSetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowDataSetsActionPerformed
-        PanelAllDataSets pads= new PanelAllDataSets();
-        ControllerUI_Main.getInstance().setActivePanel(pads);
-        ControllerUI_AllDataSets.getInstance().setPanelAllDS(pads);        
+        try {
+            PanelAllDataSets pads= new PanelAllDataSets();
+            ControllerUI_AllDataSets allDataSets=new ControllerUI_AllDataSets(pads);
+            //allDataSets.setPanelAllDS(pads);
+            ControllerUI_Main.getInstance().setActivePanel(pads);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_miShowDataSetsActionPerformed
 
     private void miExportDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExportDSActionPerformed
