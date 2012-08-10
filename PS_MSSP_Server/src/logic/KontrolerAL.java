@@ -67,6 +67,9 @@ class Klijent extends Thread {
                     signal = Pretrazi.Pretrazi(rac);
                 }
 
+                if(NazivSO.equals("Vrati sve") == true) {
+                    signal = Pretrazi.Pretrazi(rac);
+                }
                 if (NazivSO.equals("Zapamti") == true) {
                     signal = Zapamti.Zapamti(rac);
                 }
