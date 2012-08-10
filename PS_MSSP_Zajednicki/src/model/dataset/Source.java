@@ -7,8 +7,8 @@ package model.dataset;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import model.OpstiDomenskiObjekat;
 import tools.KonverterTipova;
 
@@ -16,12 +16,31 @@ import tools.KonverterTipova;
  *
  * @author Jelena
  */
+@Entity
+//@Table(name = "source")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Source.findAll", query = "SELECT s FROM Source s"),
+    @NamedQuery(name = "Source.findBySourceID", query = "SELECT s FROM Source s WHERE s.sourceID = :sourceID")})
 public class Source implements OpstiDomenskiObjekat, Serializable {
 
+    @Id
+    @Basic(optional = false)
+    @Column(name = "sourceID")
     private int sourceID;
+    
+    @Lob
+    @Column(name = "creator")
     private String creator;
+    
+    @Lob
+    @Column(name = "donor")
     private String donor;
-    private Date date;
+    
+    @Lob
+    @Column(name = "sourceDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date sourceDate;
 
     public Source() {
     }
@@ -30,13 +49,13 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
         this.sourceID = sourceID;
         this.creator = creator;
         this.donor = donor;
-        this.date = date;
+        this.sourceDate = date;
     }
 
     public Source(String creator, String donor, Date date) {
         this.creator = creator;
         this.donor = donor;
-        this.date = date;
+        this.sourceDate = date;
     }
 
     /**
@@ -85,32 +104,32 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
      * @return the date
      */
     public Date getDate() {
-        return date;
+        return sourceDate;
     }
 
     /**
      * @param date the date to set
      */
     public void setDate(Date date) {
-        this.date = date;
+        this.sourceDate = date;
     }
 
     @Override
     public String toString() {
-        return  creator + ", " + donor + ", " + date ;
+        return  creator + ", " + donor + ", " + sourceDate ;
     }
 
     
     
     @Override
     public String vratiVrednostiAtributa() {
-        java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
+        java.sql.Date sqlDate = KonverterTipova.Konvertuj(sourceDate);
         return "" + sourceID + ", '" + creator + "', '" + donor + ", " + sqlDate;
     }
 
     @Override
     public String postaviVrednostiAtributa() {
-        java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
+        java.sql.Date sqlDate = KonverterTipova.Konvertuj(sourceDate);
         return "sourceID = " + sourceID + ", creator ='" + creator + "', donor ='" + donor + "', date = "
                 + sqlDate;
     }
@@ -141,7 +160,7 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
             sourceID = KonverterTipova.Konvertuj(RSslog, sourceID, "sourceID");
             creator = KonverterTipova.Konvertuj(RSslog, creator, "creator");
             donor = KonverterTipova.Konvertuj(RSslog, donor, "donor");
-            date = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
+            sourceDate = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
         } catch (Exception e) {
             System.out.println(e);
             return false;
@@ -196,7 +215,7 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
     @Override
     public boolean vrednosnaOgranicenja() {
         Date newDate = new Date();
-        if (date.before(newDate)) {
+        if (sourceDate.before(newDate)) {
             return true;
         } else {
             return false;
