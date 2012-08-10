@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import model.dataset.metaattributes.DSMetaAttribute;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class MetaDataSet extends DataSet implements Serializable{
     List<File> datasets= new ArrayList<File>();
+    List<DSMetaAttribute> metaAttributes= new ArrayList<DSMetaAttribute>();
 
     public MetaDataSet() {
     }
@@ -25,6 +27,11 @@ public class MetaDataSet extends DataSet implements Serializable{
 
     public void setDatasets(List<File> datasets) {
         this.datasets = datasets;
+    }
+
+
+    public void setMetaAttributes(List<DSMetaAttribute> metaAttributes) {
+        this.metaAttributes = metaAttributes;
     }
     
     

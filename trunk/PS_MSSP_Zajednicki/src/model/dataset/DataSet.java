@@ -6,8 +6,11 @@ package model.dataset;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import model.Instance;
 import model.OpstiDomenskiObjekat;
 import model.Reference;
@@ -20,24 +23,40 @@ import tools.KonverterTipova;
  *
  * @author Jelena
  */
-/*@Entity
-@Table(name = "dataset")
+@Entity
+//@Table(name = "dataset")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DataSet.findAll", query = "SELECT d FROM DataSet d"),
-    @NamedQuery(name = "DataSet.findByDataSetID", query = "SELECT d FROM DataSet d WHERE d.dataSetID = :dataSetID")})*/
+    @NamedQuery(name = "DataSet.findByDataSetID", query = "SELECT d FROM DataSet d WHERE d.dataSetID = :dataSetID")})
 public class DataSet implements OpstiDomenskiObjekat, Serializable {
-    
+    @Id
+    @Basic(optional = false)
+    @Column(name = "dataSetID")
     private int dataSetID;
+    
+    @Lob
+    @Column(name = "title")
     private String title;
+    
+    @Lob
+    @Column(name = "dsDescription")
     private String dsDescription;
+    
+    @Lob
+    @Column(name = "source")
     private Source source;
+    
+    @Lob
+    @Column(name = "filePath")
     private String filePath;
-    private List<Reference> references;
+    
+    
+    private List<Reference> references= new ArrayList<Reference>();
 
     
-    private List<Attribute> attributes;
-    private List<Instance> instances;
+    private List<Attribute> attributes= new ArrayList<Attribute>();
+    private List<Instance> instances= new ArrayList<Instance>();
         
     
     private HashMap<String, Double> metaAttributes= new HashMap<String, Double>();

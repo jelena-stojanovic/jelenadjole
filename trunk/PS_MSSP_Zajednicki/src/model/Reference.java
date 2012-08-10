@@ -8,19 +8,46 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import tools.KonverterTipova;
 
 /**
  *
  * @author Jelena
  */
+@Entity
+//@Table(name = "reference")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Reference.findAll", query = "SELECT r FROM Reference r"),
+    @NamedQuery(name = "Reference.findByReferenceID", query = "SELECT r FROM Reference r WHERE r.referenceID = :referenceID"),
+    @NamedQuery(name = "Reference.findByDataSetID", query = "SELECT r FROM Reference r WHERE r.dataSetID = :dataSetID")})
 public class Reference implements OpstiDomenskiObjekat  , Serializable {
-
+    @Id
+    @Basic(optional = false)
+    @Column(name = "referenceID")
     private int referenceID;
+    
+    @Lob
+    @Column(name = "author")   
     private String author;
+    
+    @Lob
+    @Column(name = "title")   
     private String title;
-    private Date date;
+    
+    @Lob
+    @Column(name = "referenceDate")   
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date referenceDate;
+    
+    @Lob
+    @Column(name = "location")   
     private String location;
+    
+    @Lob
+    @Column(name = "otherInformation")   
     private String otherInformation;
 
     public Reference() {
@@ -29,7 +56,7 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     public Reference(String author, String title, Date date, String location, String otherInformation) {
         this.author = author;
         this.title = title;
-        this.date = date;
+        this.referenceDate = date;
         this.location = location;
         this.otherInformation = otherInformation;
     }
@@ -66,14 +93,14 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
      * @return the date
      */
     public Date getDate() {
-        return date;
+        return referenceDate;
     }
 
     /**
      * @param date the date to set
      */
     public void setDate(Date date) {
-        this.date = date;
+        this.referenceDate = date;
     }
 
     /**
@@ -106,19 +133,19 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
 
     @Override
     public String toString() {
-        return  author + "; " + title + "; " + date + "; " + location + ". " + otherInformation ;
+        return  author + "; " + title + "; " + referenceDate + "; " + location + ". " + otherInformation ;
     }
     
 
     @Override
     public String vratiVrednostiAtributa() {
-        java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
+        java.sql.Date sqlDate = KonverterTipova.Konvertuj(referenceDate);
         return "" + referenceID + ", '" + author + "', '" + title + "', " + sqlDate + ", '" + location + "', '" + otherInformation + "'";
     }
 
     @Override
     public String postaviVrednostiAtributa() {
-        java.sql.Date sqlDate = KonverterTipova.Konvertuj(date);
+        java.sql.Date sqlDate = KonverterTipova.Konvertuj(referenceDate);
         return "reference ID = " + referenceID + ",author = '" + author + "', title ='" + title + "', date = "
                 + sqlDate + ", location = '" + location + "', otherInformation = '" + otherInformation + "'";
     }
@@ -149,7 +176,7 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
             referenceID = KonverterTipova.Konvertuj(RSslog, referenceID, "referenceID");
             author = KonverterTipova.Konvertuj(RSslog, author, "author");
             title = KonverterTipova.Konvertuj(RSslog, title, "title");
-            date = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
+            referenceDate = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
             location = KonverterTipova.Konvertuj(RSslog, location, "location");
             otherInformation = KonverterTipova.Konvertuj(RSslog, otherInformation, "otherInformation");
         } catch (Exception e) {
@@ -206,7 +233,7 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     @Override
     public boolean vrednosnaOgranicenja() {
         Date newDate = new Date();
-        if (date.before(newDate) && referenceID>=0) {
+        if (referenceDate.before(newDate) && referenceID>=0) {
             return true;
         } else {
             return false;
