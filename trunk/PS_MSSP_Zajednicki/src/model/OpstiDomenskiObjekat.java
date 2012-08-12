@@ -44,6 +44,8 @@ int vratiID();
 
 void postaviAtributPretrazivanja(String atribut);
 
+//Object vratiVrednostAtributeaPretrazivanja();
+
 /************* end JELENA************/
 
 // ***koristi se***//
