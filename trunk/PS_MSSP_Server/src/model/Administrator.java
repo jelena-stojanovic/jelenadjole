@@ -66,10 +66,6 @@ public class Administrator implements OpstiDomenskiObjekat {
         return "";
     }
 
-    @Override
-    public String vratiAtributPretrazivanja() {
-        return "adminID";
-    }
 
     @Override
     public boolean Napuni(ResultSet RSslog) {
@@ -241,4 +237,36 @@ public class Administrator implements OpstiDomenskiObjekat {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "administrator";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        Administrator admin= (Administrator) odo;
+        admin.setFirstName(firstName);
+        admin.setLastName(lastName);
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setEmail(email);
+    }
+
+    @Override
+    public int vratiID() {
+        return adminID;
+    }
+String atributPretrazivanja="adminID";
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        atributPretrazivanja=atribut;
+    }
+    
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return atributPretrazivanja;
+    }
+
+    
 }
