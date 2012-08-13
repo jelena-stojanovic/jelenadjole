@@ -8,6 +8,7 @@ import data.DataSetCollection;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.dataset.DataSet;
 import model.dataset.MetaDataSet;
 
@@ -40,6 +41,12 @@ public class Serialize {
         String currentUserName = System.getProperty("user.name");
         String filePath = "C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\" + dataset.getDataSetID() + "_" + dataset.getTitle();
         dataset.setFilePath(filePath);
+        
+        File file = new File("C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\");
+        
+        if(!file.exists()){
+            file.mkdirs();
+        }
         
         addDSToMDS(dataset, filePath);
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));

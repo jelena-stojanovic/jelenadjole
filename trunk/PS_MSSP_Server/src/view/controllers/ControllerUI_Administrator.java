@@ -39,6 +39,5 @@ public class ControllerUI_Administrator extends OpstiKontrolerKI {
         KonverterTipova.Konvertuj(admin.getFirstName(), frmadmin.getFirstName());
         KonverterTipova.Konvertuj(admin.getLastName(), frmadmin.getLastName());
         KonverterTipova.Konvertuj(admin.getEmail(), frmadmin.getEmail());
-
     }
 }

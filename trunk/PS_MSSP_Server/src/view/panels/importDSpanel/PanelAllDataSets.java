@@ -5,6 +5,9 @@
 package view.panels.importDSpanel;
 
 import data.DataSetCollection;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import view.panels.datasets.FrmDataSet;
 import view.panels.importDSpanel.model.TableModelDataSets;
 
 /**
@@ -18,7 +21,7 @@ public class PanelAllDataSets extends javax.swing.JPanel {
      */
     public PanelAllDataSets() {
         initComponents();
-        TableModelDataSets tmds=new TableModelDataSets(DataSetCollection.getInstance().getDatasets());
+        TableModelDataSets tmds = new TableModelDataSets(DataSetCollection.getInstance().getDatasets());
         tblDatasets.setModel(tmds);
     }
 
@@ -42,6 +45,11 @@ public class PanelAllDataSets extends javax.swing.JPanel {
 
             }
         ));
+        tblDatasets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatasetsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDatasets);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -61,6 +69,27 @@ public class PanelAllDataSets extends javax.swing.JPanel {
                 .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblDatasetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatasetsMouseClicked
+        JPopupMenu popupMeny = new JPopupMenu();
+        JMenuItem miViewDataset = new JMenuItem("View dataset");
+        tblDatasets.getSelectedRow();
+
+        miViewDataset.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FrmDataSet dsForm = new FrmDataSet();
+                dsForm.setVisible(true);
+                dsForm.setFocusable(true);
+            }
+        });
+        
+        popupMeny.add(miViewDataset);
+        popupMeny.show(evt.getComponent(), evt.getX(), evt.getY());
+        popupMeny.setVisible(true);
+        popupMeny.setFocusable(true);
+        
+    }//GEN-LAST:event_tblDatasetsMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatasets;
@@ -72,6 +101,4 @@ public class PanelAllDataSets extends javax.swing.JPanel {
     public javax.swing.JTable getTblDatasets() {
         return tblDatasets;
     }
-
-    
 }

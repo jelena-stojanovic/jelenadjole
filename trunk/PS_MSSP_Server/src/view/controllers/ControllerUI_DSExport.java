@@ -81,6 +81,7 @@ public class ControllerUI_DSExport {
 
     public void lastStep() {
         directoryPath = panelExportDS.getFileChooserDS().getCurrentDirectory().getPath().trim();
+        System.out.println(directoryPath);
         fileName = panelExportDS.getTxtFieldFileName().getText().trim();
         if (fileName == null || fileName.equals("")) {
             fileName = dataset.getTitle() + ".csv";
@@ -94,6 +95,7 @@ public class ControllerUI_DSExport {
         saveFildValues();
         try {
             saveDataSet();
+            JOptionPane.showMessageDialog(panelExportDS, "Data set has been successfully exported", "success", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(ControllerUI_DSExport.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println(ex);
