@@ -69,12 +69,12 @@ public class ControllerUI_DSImport {
      * ----end of csv format fields -----
      */
 
-    private ControllerUI_DSImport() {
+    public ControllerUI_DSImport() {
     }
 
-    public static ControllerUI_DSImport getInstance() {
-        return ControllerUI_DSImportHolder.INSTANCE;
-    }
+//    public static ControllerUI_DSImport getInstance() {
+//        return ControllerUI_DSImportHolder.INSTANCE;
+//    }
 
     public void saveFildValues() {
 //        trimLines = KonverterTipova.Konvertuj(panelImportDS.getCheckbTrimLines(), trimLines);
@@ -319,6 +319,7 @@ public class ControllerUI_DSImport {
     public void finish() {
         try {
             controllerAL_DSImport.createDataSet(createDS(),stringArrayList );
+            JOptionPane.showMessageDialog(panelImportDS, "Data set has been successfully created!", "success", JOptionPane.INFORMATION_MESSAGE);
             ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
         } catch (Exception ex) {
             Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);

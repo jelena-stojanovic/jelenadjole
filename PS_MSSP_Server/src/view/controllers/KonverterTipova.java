@@ -18,8 +18,14 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.lang.reflect.*;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.OpstiDomenskiObjekat;
+import model.Reference;
 
 public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u proste tipove i tipove objekata
 
@@ -31,16 +37,29 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         return kon_u.getText();
     }
 
-    
-    
+    static String Konvertuj(JTextArea kon_u, String kon_i) {
+        return kon_u.getText();
+    }
+
+    static java.util.Date Konvertuj(JTextField kon_u, java.util.Date kon_i) throws ParseException {
+        java.util.Date date = null;
+        if (kon_u != null) {
+            date = new SimpleDateFormat("MM/dd/yyyy").parse(kon_u.getText().trim());
+        }
+        return date;
+    }
+
     static Double Konvertuj(JFormattedTextField kon_u, Double kon_i) {
         return (Double) kon_u.getValue();
+    }
+
+    static int Konvertuj(JTextField kon_u, int kon_i) {
+        return Integer.parseInt(kon_u.getText());
     }
 
     static boolean Konvertuj(JCheckBox kon_u, boolean kon_i) {
         return kon_u.isSelected();
     }
-    
 
 // Konvertovanje prostih tipova i tipova objekata u tipove grafickih elemenata
     static void Konvertuj(String kon_u, JFormattedTextField kon_i) {
@@ -50,7 +69,23 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
     static void Konvertuj(String kon_u, JTextField kon_i) {
         kon_i.setText(kon_u);
     }
-    
+
+    static void Konvertuj(java.util.Date kon_u, JTextField kon_i) {
+        kon_i.setText(kon_u.toString());
+    }
+
+    static void Konvertuj(List<Reference> references, javax.swing.JList list) {
+        DefaultListModel dlm = new DefaultListModel();
+        for (Reference refer : references) {
+            dlm.addElement(refer);
+        }
+        list.setModel(dlm);
+    }
+
+    static void Konvertuj(String kon_u, JTextArea kon_i) {
+        kon_i.setText(kon_u);
+    }
+
     static void Konvertuj(Double kon_u, JFormattedTextField kon_i) {
         kon_i.setValue(kon_u);
     }
@@ -87,7 +122,7 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
     }
 
 // Konvertovanje atributa result seta u atribut objekta
-   public static String Konvertuj(ResultSet kon_u, String kon_i, String nazivAtributa) {
+    public static String Konvertuj(ResultSet kon_u, String kon_i, String nazivAtributa) {
         try {
             return kon_u.getString(nazivAtributa);
         } catch (SQLException sqle) {
@@ -105,7 +140,7 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         }
     }
 
-   public  static boolean Konvertuj(ResultSet kon_u, boolean kon_i, String nazivAtributa) {
+    public static boolean Konvertuj(ResultSet kon_u, boolean kon_i, String nazivAtributa) {
         try {
             return kon_u.getBoolean(nazivAtributa);
         } catch (SQLException sqle) {
@@ -114,7 +149,7 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         }
     }
 
-   public static Integer Konvertuj(ResultSet kon_u, Integer kon_i, String nazivAtributa) {
+    public static Integer Konvertuj(ResultSet kon_u, Integer kon_i, String nazivAtributa) {
         try {
             return new Integer(kon_u.getInt(nazivAtributa));
         } catch (SQLException sqle) {

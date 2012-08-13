@@ -5,7 +5,6 @@
 package view.forms;
 
 import data.DataSetCollection;
-import java.awt.Panel;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +12,7 @@ import javax.swing.JPanel;
 import logic.SO.serialization.Serialize;
 import view.controllers.ControllerUI_AllDataSets;
 import view.controllers.ControllerUI_DSExport;
+import view.controllers.ControllerUI_DSImport;
 import view.controllers.ControllerUI_Main;
 import view.panels.importDSpanel.PaneAnylNewMetaAttribute;
 import view.panels.importDSpanel.PanelAllDataSets;
@@ -128,7 +128,12 @@ public class FrmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miImportDataSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportDataSetActionPerformed
-        ControllerUI_Main.getInstance().setActivePanel(new PanelImportDS());
+//        ControllerUI_Main.getInstance().setActivePanel(new PanelImportDS());
+        PanelImportDS panelImport = new PanelImportDS();
+        ControllerUI_DSImport dsImport = new ControllerUI_DSImport();
+        panelImport.setControllerImport(dsImport);
+        dsImport.setPanelImportDS(panelImport);
+        ControllerUI_Main.getInstance().setActivePanel(panelImport);
     }//GEN-LAST:event_miImportDataSetActionPerformed
 
     private void miShowDataSetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowDataSetsActionPerformed

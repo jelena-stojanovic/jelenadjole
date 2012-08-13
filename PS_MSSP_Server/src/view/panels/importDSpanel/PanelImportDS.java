@@ -19,14 +19,16 @@ import view.controllers.ControllerUI_DSImport;
  */
 public class PanelImportDS extends javax.swing.JPanel {
 
+    private ControllerUI_DSImport controllerImport;
+    
     /**
      * Creates new form PanelImportDS
      */
     public PanelImportDS() {
         initComponents();
-        ControllerUI_DSImport.getInstance().setPanelImportDS(this);
-        ControllerUI_DSImport.getInstance().disableAllExcept(0);
-        ControllerUI_DSImport.getInstance().setValuesToGUI();
+//        controllerImport.setPanelImportDS(this);
+//        controllerImport.disableAllExcept(0);
+//        controllerImport.setValuesToGUI();
 
     }
 
@@ -603,55 +605,54 @@ public class PanelImportDS extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fileChooserDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserDSActionPerformed
-        ControllerUI_DSImport.getInstance().chooseFile();
+        getControllerImport().chooseFile();
         
     }//GEN-LAST:event_fileChooserDSActionPerformed
 
     private void btnPreviousParseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousParseActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
-        ControllerUI_DSImport.getInstance().disableAllExcept(0);
+        getControllerImport().saveFildValues();
+        getControllerImport().disableAllExcept(0);
     }//GEN-LAST:event_btnPreviousParseActionPerformed
 
     private void btnNextParseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextParseActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
-        ControllerUI_DSImport.getInstance().disableAllExcept(2);
+        getControllerImport().saveFildValues();
+        getControllerImport().disableAllExcept(2);
     }//GEN-LAST:event_btnNextParseActionPerformed
 
     private void btnPrevioucFirstRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevioucFirstRowActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
-        ControllerUI_DSImport.getInstance().disableAllExcept(1);
+        getControllerImport().saveFildValues();
+        getControllerImport().disableAllExcept(1);
     }//GEN-LAST:event_btnPrevioucFirstRowActionPerformed
 
     private void btnNextFirstRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextFirstRowActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
-        ControllerUI_DSImport.getInstance().disableAllExcept(3);
+        getControllerImport().saveFildValues();
+        getControllerImport().disableAllExcept(3);
     }//GEN-LAST:event_btnNextFirstRowActionPerformed
 
     private void btnPreviousDataTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousDataTypesActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
-        ControllerUI_DSImport.getInstance().disableAllExcept(2);
+        getControllerImport().saveFildValues();
+        getControllerImport().disableAllExcept(2);
     }//GEN-LAST:event_btnPreviousDataTypesActionPerformed
 
     private void rbSemicolonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSemicolonActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
+        getControllerImport().saveFildValues();
     }//GEN-LAST:event_rbSemicolonActionPerformed
 
     private void rbCommaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCommaActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
+        getControllerImport().saveFildValues();
     }//GEN-LAST:event_rbCommaActionPerformed
 
     private void rbSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSpaceActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
+        getControllerImport().saveFildValues();
     }//GEN-LAST:event_rbSpaceActionPerformed
 
     private void rbTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTabActionPerformed
-        ControllerUI_DSImport.getInstance().saveFildValues();
+        getControllerImport().saveFildValues();
     }//GEN-LAST:event_rbTabActionPerformed
 
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
-
-        ControllerUI_DSImport.getInstance().saveFildValues();
-        ControllerUI_DSImport.getInstance().finish();
+        getControllerImport().saveFildValues();
+        getControllerImport().finish();
     }//GEN-LAST:event_btnFinishActionPerformed
 
     private void tfDateDSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDateDSFocusLost
@@ -669,11 +670,11 @@ public class PanelImportDS extends javax.swing.JPanel {
     }//GEN-LAST:event_tfDateDSFocusLost
 
     private void checkBUseFirstRowItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBUseFirstRowItemStateChanged
-        ControllerUI_DSImport.getInstance().saveFildValues();
+        getControllerImport().saveFildValues();
     }//GEN-LAST:event_checkBUseFirstRowItemStateChanged
 
     private void btnAddReferenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReferenceActionPerformed
-        ControllerUI_DSImport.getInstance().addReference();
+        getControllerImport().addReference();
     }//GEN-LAST:event_btnAddReferenceActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -922,9 +923,20 @@ public class PanelImportDS extends javax.swing.JPanel {
     }
 
     /**
-     * @return the pnlTableAndFieldAttributes
+     * @return the controllerImport
      */
+    public ControllerUI_DSImport getControllerImport() {
+        return controllerImport;
+    }
 
+    /**
+     * @param controllerImport the controllerImport to set
+     */
+    public void setControllerImport(ControllerUI_DSImport controllerImport) {
+        this.controllerImport = controllerImport;
+    }
+
+    
     
     
 }
