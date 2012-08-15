@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import logic.ControllerAL_DSExport;
 import model.dataFormat.CSVFormat;
 import model.dataFormat.DataFormat;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import view.panels.importDSpanel.PanelAllDataSets;
 import view.panels.importDSpanel.PanelExportDS;
 import view.panels.importDSpanel.PanelWelcome;
@@ -46,7 +46,7 @@ public class ControllerUI_DSExport {
      * ---- csv format fields -----
      */
     private File file = null;
-    private DataSet dataset = null;
+    private Dataset dataset = null;
     private char columnSeparation = ',';
     private boolean writeAttributeNames = false;
     private boolean useQuotesForNominal = true;
@@ -220,9 +220,9 @@ public class ControllerUI_DSExport {
         JTable table = panelExportDS.getTblDataSetPreprocessing();
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         if (dataset != null) {
-            String[] columIdentifiers = new String[dataset.getAttributes().size()];
-            for (int i = 0; i < dataset.getAttributes().size(); i++) {
-                columIdentifiers[i] = dataset.getAttributes().get(i).getName();
+            String[] columIdentifiers = new String[dataset.getAttributeList().size()];
+            for (int i = 0; i < dataset.getAttributeList().size(); i++) {
+                columIdentifiers[i] = dataset.getAttributeList().get(i).getName();
             }
             String[][] datasetMatrix = new String[dataset.getDataTable().getDoubleMatrix().length][dataset.getDataTable().getDoubleMatrix()[0].length];
             for (int i = 0; i < dataset.getDataTable().getDoubleMatrix().length; i++) {

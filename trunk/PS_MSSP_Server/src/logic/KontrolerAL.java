@@ -16,6 +16,8 @@ package logic;
  */
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import logic.SO.*;
 import model.OpstiDomenskiObjekat;
 
@@ -47,6 +49,7 @@ class Klijent extends Thread {
         start();
     }
 
+    @Override
     public void run() {
         try {
             String signal = "";
@@ -59,32 +62,38 @@ class Klijent extends Thread {
                 OpstiDomenskiObjekat rac = (OpstiDomenskiObjekat) in.readObject();
 
 
-                if (NazivSO.equals("kreirajNovi") == true) {
-                    signal = KreirajNovi.kreirajNovi(rac);
-                }
+                if (NazivSO.equals("Vrati sve") == true) {
+                    List<OpstiDomenskiObjekat> odoList = new ArrayList<OpstiDomenskiObjekat>();
+                    odoList.add(rac);
+                    signal = VratiSve.VratiSve(odoList);
+                    out.writeObject(odoList);
+                    out.writeObject(signal);
+                } else {
 
-                if (NazivSO.equals("Pretrazi") == true) {
-                    signal = Pretrazi.Pretrazi(rac);
-                }
+                    if (NazivSO.equals("kreirajNovi") == true) {
+                        signal = KreirajNovi.kreirajNovi(rac);
+                    }
 
-                if(NazivSO.equals("Vrati sve") == true) {
-                    signal = Pretrazi.Pretrazi(rac);
-                }
-                if (NazivSO.equals("Zapamti") == true) {
-                    signal = Zapamti.Zapamti(rac);
-                }
+                    if (NazivSO.equals("Pretrazi") == true) {
+                        signal = Pretrazi.Pretrazi(rac);
+                    }
 
-                if (NazivSO.equals("Obradi") == true) {
-                    signal = Obradi.Obradi(rac);
-                }
+                    if (NazivSO.equals("Zapamti") == true) {
+                        signal = Zapamti.Zapamti(rac);
+                    }
 
-                if (NazivSO.equals("Storniraj") == true) {
-                    signal = Storniraj.Storniraj(rac);
-                }
+                    if (NazivSO.equals("Obradi") == true) {
+                        signal = Obradi.Obradi(rac);
+                    }
 
-                // Slanje promenjenog racuna i signala o uspesnosti operacije
-                out.writeObject(rac);
-                out.writeObject(new String(signal));
+                    if (NazivSO.equals("Storniraj") == true) {
+                        signal = Storniraj.Storniraj(rac);
+                    }
+
+                    // Slanje promenjenog racuna i signala o uspesnosti operacije
+                    out.writeObject(rac);
+                    out.writeObject(signal);
+                }
             }
 
         } catch (Exception e) {

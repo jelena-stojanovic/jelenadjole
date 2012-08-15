@@ -14,22 +14,44 @@ import model.OpstiDomenskiObjekat;
  */
 public class VratiSve extends OpstaSO {
 
-    public static String VratiSve(OpstiDomenskiObjekat odo) {
+    public static String VratiSve(List<OpstiDomenskiObjekat> odoList) {
         VratiSve vs = new VratiSve();
         OpstaSO.transakcija = false;
-        return OpstaSO.opsteIzvrsenjeSO(odo, vs);
+        return opsteIzvrsenjeSO(odoList, vs);
+    }
+
+    synchronized static String opsteIzvrsenjeSO(List<OpstiDomenskiObjekat> odoList, VratiSve vs) {
+        if (!vs.otvoriBazu()) {
+            return vs.vratiPorukuMetode();
+        }
+
+        if (vs.izvrsenjeSO(odoList) && transakcija) {
+            signal = vs.rollbackTransakcije();
+            return vs.vratiPorukuMetode();
+        }
+
+        if (transakcija) {
+            vs.commitTransakcije();
+        }
+        return vs.vratiPorukuMetode();
+    }
+
+    
+   
+    boolean  izvrsenjeSO(List<OpstiDomenskiObjekat> odoList) {
+        signal = dbbe.vratiSveODO(odoList);
+        
+        if (!signal) {
+            dbbe.dodajPorukuMetode("*Sistem ne moze da nadje " + odoList.get(0).vratiNazivObjekta() + " po zadatoj vrednosti.");
+            return false;
+        }
+        dbbe.dodajPorukuMetode("Sistem je nasao " + odoList.get(0).vratiNazivObjekta() + " po zadatoj vrednosti.");
+        return true;
     }
 
     @Override
-    boolean izvrsenjeSO(OpstiDomenskiObjekat odo) {
-        signal = BBP.nadjiSlogiVratiGa(odo);
-        List<OpstiDomenskiObjekat> vratiSveODO = DBBrokerEntity.getInstance().vratiSveODO(odo);
-        if (!signal) {
-            BBP.dodajPorukuMetode("*Sistem ne moze da nadje " + odo.vratiNazivObjekta() + " po zadatoj vrednosti.");
-            return false;
-        }
-        BBP.dodajPorukuMetode("Sistem je nasao " + odo.vratiNazivObjekta() + " po zadatoj vrednosti.");
-        return true;
+    boolean izvrsenjeSO(OpstiDomenskiObjekat rac) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
 

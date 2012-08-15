@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import logic.SO.Import_Export.CalculateMetaAttributeForDataSet;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
+import model.dataset.Datasetmetaattribute;
 
 /**
  *
@@ -16,19 +17,21 @@ import model.dataset.DataSet;
  */
 public class CalculateEuclidianSimilarity {
 
-    public static double calculate(DataSet dataset1, DataSet dataset2) {
+    public static double calculate(Dataset dataset1, Dataset dataset2) {
 
-        if(dataset1.getMetaAttributes().size()!= dataset2.getMetaAttributes().size()){
-            new CalculateMetaAttributeForDataSet().calculate(dataset1, dataset1.getMetaAttributes());
-            new CalculateMetaAttributeForDataSet().calculate(dataset2, dataset2.getMetaAttributes());
+        if(dataset1.getDatasetmetaattributeList().size()!= dataset2.getDatasetmetaattributeList().size()){
+       //     new CalculateMetaAttributeForDataSet().calculate(dataset1, dataset1.getMetaAttributes());
+       //     new CalculateMetaAttributeForDataSet().calculate(dataset2, dataset2.getMetaAttributes());
         }
         
-        HashMap<String, Double> metaAttributes1= dataset1.getMetaAttributes();
-        double[] value1= new double[metaAttributes1.size()];
-        HashMap<String, Double> metaAttributes2= dataset2.getMetaAttributes();
-        double[] value2= new double[metaAttributes2.size()];
+        //HashMap<String, Double> metaAttributes1= dataset1.getMetaAttributes();
+         List<Datasetmetaattribute> l1=dataset1.getDatasetmetaattributeList();
+        List<Datasetmetaattribute> l2=dataset2.getDatasetmetaattributeList();
+        double[] value1= new double[l1.size()];
+        //HashMap<String, Double> metaAttributes2= dataset2.getMetaAttributes();
+        double[] value2= new double[l2.size()];
         
-        int i=0;
+       /* int i=0;
         for (Map.Entry<String, Double> entry : metaAttributes1.entrySet()) {
             String string = entry.getKey();
             
@@ -36,6 +39,10 @@ public class CalculateEuclidianSimilarity {
             value2[i]=metaAttributes2.get(string);
             
             i++;   
+        }*/
+         for (int i = 0; i < l2.size(); i++) {
+            value2[i]=l2.get(i).getValue();
+            value1[i]=l1.get(i).getValue();
         }
         return calculateSimilarity(value1, value2);
     }

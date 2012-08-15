@@ -27,35 +27,36 @@ public class Zapamti extends OpstaSO
      }
 
    // Prekrivanje metode klase OpstaSO
+    @Override
    boolean izvrsenjeSO(OpstiDomenskiObjekat odo)
      { if (!Preduslov(odo))
-	     { BBP.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + "." + odo.vratiImeKlase() + " je vec obradjen ili storniran.");
+	     { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + "." + odo.vratiImeKlase() + " je vec obradjen ili storniran.");
 	  	   return false;
 	     }
 
-	  if (!odo.vrednosnaOgranicenja())
-	    { BBP.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ". Naruseno je vrednosno ogranicenje.");
+	/*  if (!odo.vrednosnaOgranicenja())
+	    { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ". Naruseno je vrednosno ogranicenje.");
 	      return false;
 	    }
-
-	  if (!BBP.brisiSlog(odo))
-	    { BBP.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");
+*/
+	  if (!dbbe.obrisiODO(odo))
+	    { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");
 	   	  return false;
 	    }
 
-      if (!BBP.pamtiSlozeniSlog(odo))
-       { BBP.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");
+      if (!dbbe.sacuvajODO(odo))
+       { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");
 	   	 return false;
 	   }
 
-      BBP.dodajPorukuMetode("Sistem je zapamtio " + odo.vratiNazivObjekta() + ".");
+      dbbe.dodajPorukuMetode("Sistem je zapamtio " + odo.vratiNazivObjekta() + ".");
       return true;
   }
 
-   private boolean Preduslov(OpstiDomenskiObjekat odo) // 94,77
-      {  if ((BBP.vratiLogickuVrednostAtributa(odo,"Obradjen") == true) || (BBP.vratiLogickuVrednostAtributa(odo,"Storniran") == true))
-		   { return false;
-	       }
+   private boolean Preduslov(OpstiDomenskiObjekat odo){ // 94,77
+//      {  if ((dbbe.vratiLogickuVrednostAtributa(odo,"Obradjen") == true) || (dbbe.vratiLogickuVrednostAtributa(odo,"Storniran") == true))
+//		   { return false;
+//	       }
 	     return true;
 	  }
 }

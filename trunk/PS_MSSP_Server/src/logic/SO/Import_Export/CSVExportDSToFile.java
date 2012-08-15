@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +17,7 @@ import model.attribute.Attribute;
 import model.attribute.DateAttribute;
 import model.attribute.NominalAttribute;
 import model.dataFormat.CSVFormat;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 
 /**
  *
@@ -28,14 +27,14 @@ public class CSVExportDSToFile {
 
     List<Attribute> attributes = null;
 
-    public void export( DataSet dataset,CSVFormat csvFormat ) throws Exception {
+    public void export( Dataset dataset,CSVFormat csvFormat ) throws Exception {
         boolean writeAttributeName= csvFormat.isUseFirstRowAsAttributeNames();
         char columnSeparator= csvFormat.getColumnSeparator();
         String filePath=csvFormat.getCsvFile().getPath();
         PrintWriter out = null;
         try {
             out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(filePath)));
-            attributes = dataset.getAttributes();
+            attributes = dataset.getAttributeList();
             
             //*****write name of attribute*******/
             if (writeAttributeName == true) {

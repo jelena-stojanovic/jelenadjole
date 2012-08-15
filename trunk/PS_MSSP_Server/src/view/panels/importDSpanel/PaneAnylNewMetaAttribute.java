@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import model.dataset.Dsmetaattribute;
 import view.controllers.ControllerUI_Main;
 import view.controllers.ControllerUI_MetaAttributes;
 
@@ -124,10 +125,10 @@ public class PaneAnylNewMetaAttribute extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillList(){
-        ArrayList<String> calculatedMetaAttribute = ControllerUI_MetaAttributes.getInstance().getCalculatedMetaAttribute();
+        ArrayList<Dsmetaattribute> calculatedMetaAttribute = ControllerUI_MetaAttributes.getInstance().getUnCalculatedMetaAttribute();
         DefaultListModel dlm = new DefaultListModel();
-            for (String string : calculatedMetaAttribute) {
-                dlm.addElement(string);
+            for (Dsmetaattribute dsma : calculatedMetaAttribute) {
+                dlm.addElement(dsma);
             }
             jList1.setModel(dlm);
             System.out.println("Seted list");

@@ -4,11 +4,8 @@
  */
 package ps_merenjeslicnostiskupovapodataka_server;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import model.attribute.Attribute;
-import model.dataFormat.CSVFormat;
+import logic.SO.KreirajNovi;
+import model.dataset.Dataset;
 
 /**
  *
@@ -16,7 +13,7 @@ import model.dataFormat.CSVFormat;
  */
 public class TetsNewDS {
     public static void main(String[] args) {
-        char columnSeparator= ',';
+      /*  char columnSeparator= ',';
         boolean useFirstRow= true;
         String filePath="C:\\Users\\Jelena\\Desktop\\Iris.csv";
         File file = new File(filePath);
@@ -24,9 +21,13 @@ public class TetsNewDS {
         csvFormat.setColumnSeparator(columnSeparator);
         csvFormat.setUseFirstRowAsAttributeNames(useFirstRow);
         //csv.set... 
+        */
+        //List<Attribute> attributes= new ArrayList<Attribute>();
+        Dataset dataSet = new Dataset();
         
-        List<Attribute> attributes= new ArrayList<Attribute>();
-        
+        System.out.println(KreirajNovi.kreirajNovi(dataSet));
+        System.out.println(dataSet.getDataSetID());
+       
         
         
     }

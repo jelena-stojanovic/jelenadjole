@@ -14,7 +14,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EtchedBorder;
 import model.Reference;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import model.dataset.Source;
 import view.panels.datasets.FrmDataSet;
 
@@ -34,7 +34,7 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
 
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
-        DataSet dataSet = (DataSet) odo;
+        Dataset dataSet = (Dataset) odo;
         Reference reference = new Reference();
         Source source = new Source();
         dataSet.setTitle(KonverterTipova.Konvertuj(frmDataSet.getTxtFieldDataSetTitle(), dataSet.getTitle()));
@@ -42,7 +42,7 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
         source.setCreator(KonverterTipova.Konvertuj(frmDataSet.getTfCreator(), source.getCreator()));
         source.setDonor(KonverterTipova.Konvertuj(frmDataSet.getTfDonor(), source.getDonor()));
         try {
-            source.setDate(KonverterTipova.Konvertuj(frmDataSet.getTfDateDS(), source.getDate()));
+            source.setSourceDate(KonverterTipova.Konvertuj(frmDataSet.getTfDateDS(), source.getSourceDate()));
         } catch (ParseException ex) {
             frmDataSet.getTfDateDS().setBackground(Color.red);
         }
@@ -57,18 +57,18 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
 //        }
 //        reference.setOtherInformation(KonverterTipova.Konvertuj(frmDataSet.getTfOtherInformation(), reference.getOtherInformation()));
         dataSet.setSource(source);
-        dataSet.setReferences(references);
+        dataSet.setReferenceList(references);
     }
 
     @Override
     public void KonvertujDomenskiObjekatUGrafickiObjekat() {
-       DataSet dataSet = (DataSet) odo;
+       Dataset dataSet = (Dataset) odo;
        KonverterTipova.Konvertuj(dataSet.getTitle(), frmDataSet.getTxtFieldDataSetTitle());
        KonverterTipova.Konvertuj(dataSet.getDsDescription(), frmDataSet.getTxtAreaDescription());
        KonverterTipova.Konvertuj(dataSet.getSource().getCreator(), frmDataSet.getTfCreator());
        KonverterTipova.Konvertuj(dataSet.getSource().getDonor(), frmDataSet.getTfDonor());
-       KonverterTipova.Konvertuj(dataSet.getSource().getDate(), frmDataSet.getTfDateDS());
-       KonverterTipova.Konvertuj(dataSet.getReferences(), frmDataSet.getListReferences());
+       KonverterTipova.Konvertuj(dataSet.getSource().getSourceDate(), frmDataSet.getTfDateDS());
+       KonverterTipova.Konvertuj(dataSet.getReferenceList(), frmDataSet.getListReferences());
     }
 
     public void addReference() {

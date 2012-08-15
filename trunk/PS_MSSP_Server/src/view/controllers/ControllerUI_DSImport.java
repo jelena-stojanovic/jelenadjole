@@ -26,11 +26,13 @@ import javax.swing.text.TableView.TableCell;
 import javax.swing.text.TableView.TableRow;
 import logic.ControllerAL_DSImport;
 import model.Reference;
+import model.ReferencePK;
 import model.attribute.Attribute;
+import model.attribute.AttributePK;
 import model.attribute.NominalAttribute;
 import model.attribute.Ontology;
 import model.dataFormat.CSVFormat;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import model.dataset.DataTable;
 import model.dataset.Source;
 import view.panels.importDSpanel.PanelImportDS;
@@ -100,16 +102,16 @@ public class ControllerUI_DSImport {
 
     public void addReference() {
         try {
-            String author = panelImportDS.getTfAuthors().getText().trim();
-            String title = panelImportDS.getTfTitle().getText().trim();
-            String location = panelImportDS.getTfLocation().getText().trim();
-            String dateS = panelImportDS.getTfDate().getText().trim();
+            String author = null;
+            author=KonverterTipova.Konvertuj(panelImportDS.getTfAuthors(), author);
+            String title = null;
+            title=KonverterTipova.Konvertuj(panelImportDS.getTfTitle(), title);
+            String location = null;
+            location=KonverterTipova.Konvertuj(panelImportDS.getTfLocation(), location);
             Date date = null;
-            if (dateS != null) {
-                date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
-            }
-            String otherInformation = panelImportDS.getTfOtherInformation().getText().trim();
-
+            date= KonverterTipova.Konvertuj(panelImportDS.getTfDate(), date);
+            String otherInformation = null;
+            otherInformation=KonverterTipova.Konvertuj(panelImportDS.getTfOtherInformation(), otherInformation);
             Reference ref = new Reference(author, title, date, location, otherInformation);
             references.add(ref);
             DefaultListModel dlm = new DefaultListModel();
@@ -125,10 +127,10 @@ public class ControllerUI_DSImport {
 
     }
 
-    private static class ControllerUI_DSImportHolder {
-
-        private static final ControllerUI_DSImport INSTANCE = new ControllerUI_DSImport();
-    }
+//    private static class ControllerUI_DSImportHolder {
+//
+//        private static final ControllerUI_DSImport INSTANCE = new ControllerUI_DSImport();
+//    }
 
     public void setPanelImportDS(PanelImportDS panelImportDS) {
         this.panelImportDS = panelImportDS;
@@ -244,7 +246,7 @@ public class ControllerUI_DSImport {
         }
     }
 
-    public List<Attribute> createAttributes() {
+    public List<Attribute> createAttributes(Dataset ds) {
 
         List<Attribute> attributes = new ArrayList<Attribute>();
         TableModelDataTypes tmdt = (TableModelDataTypes) tblDatatypes.getModel();
@@ -256,8 +258,9 @@ public class ControllerUI_DSImport {
                 Attribute a = (Attribute) c.newInstance();
                 a.setAttributeRole(tmdt.getAttributeRole(i));
                 a.setName(tmdt.getAttributeName(i));
-                a.setIndexOfAttribute(i);
-
+                AttributePK apk= new AttributePK(i, ds.getDataSetID());
+                a.setAttributePK(apk);
+                
                 attributes.add(a);
             } catch (InstantiationException ex) {
                 JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
@@ -286,12 +289,13 @@ public class ControllerUI_DSImport {
         return attributes;
     }
 
-    private DataSet createDS() {
+    private Dataset createDS() {
 
-        DataSet ds = new DataSet();
+        Dataset ds = new Dataset();
+        controllerAL_DSImport.creatNewODO(ds);
         try {
-            List<Attribute> attributes = createAttributes();
-            ds.setAttributes(attributes);
+            List<Attribute> attributes = createAttributes(ds);
+            ds.setAttributeList(attributes);
 
             String title = panelImportDS.getTfDataSetTitle().getText().trim();
             if (title == null|| title.equals("")) {
@@ -301,15 +305,41 @@ public class ControllerUI_DSImport {
 
             ds.setDsDescription(panelImportDS.getTaDataSetDescription().getText().trim());
 
-            ds.setReferences(references);
+            
 
             String dateS=panelImportDS.getTfDateDS().getText().trim();
             Date date=null;
             if(dateS!=null && !dateS.equals("")){
                 date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
             }
-            Source source = new Source(panelImportDS.getTfCreator().getText().trim(), panelImportDS.getTfDonor().getText().trim(), date);
+            /***CREATE REFERENCEs***/
+            for (Reference ref : references) {
+                ReferencePK refpk= new ReferencePK();
+                refpk.setDataSetID(ds.getDataSetID());
+                ref.setReferencePK(refpk);
+                controllerAL_DSImport.creatNewODO(ref);
+                controllerAL_DSImport.saveODO(ref);
+            }
+            ds.setReferenceList(references);
+            /***end CREATE REFERENCEs***/
+            
+            /***CREATE SOURCE***/
+            Source source = new Source();
+            
+            String creator=null;
+            creator= KonverterTipova.Konvertuj(panelImportDS.getTfCreator(),creator );
+            source.setCreator(creator);
+            
+            String donor=null;
+            donor= KonverterTipova.Konvertuj(panelImportDS.getTfDonor(),donor );
+            source.setCreator(donor);
+            source.setSourceDate(date);
+            
+            controllerAL_DSImport.saveODO(source);
+            
             ds.setSource(source);
+            /***end CREATE SOURCE***/
+            
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(panelImportDS, "E ovo ne bi trebalo da prodje :)");
         }
