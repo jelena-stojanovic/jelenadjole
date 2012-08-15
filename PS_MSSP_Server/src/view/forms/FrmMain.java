@@ -51,6 +51,7 @@ public class FrmMain extends javax.swing.JFrame {
         miImportDataSet = new javax.swing.JMenuItem();
         miExportDS = new javax.swing.JMenuItem();
         mSimilarity = new javax.swing.JMenu();
+        miCheckSimilarity = new javax.swing.JMenuItem();
         mMetaAttribute = new javax.swing.JMenu();
         miAnyNewMatt = new javax.swing.JMenuItem();
 
@@ -108,6 +109,10 @@ public class FrmMain extends javax.swing.JFrame {
         jMenuBar1.add(mDataSet);
 
         mSimilarity.setText("Similarity");
+
+        miCheckSimilarity.setText(" Check similarity");
+        mSimilarity.add(miCheckSimilarity);
+
         jMenuBar1.add(mSimilarity);
 
         mMetaAttribute.setText(" MetaAttribute");
@@ -219,6 +224,7 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenu mMetaAttribute;
     private javax.swing.JMenu mSimilarity;
     private javax.swing.JMenuItem miAnyNewMatt;
+    private javax.swing.JMenuItem miCheckSimilarity;
     private javax.swing.JMenuItem miExportDS;
     private javax.swing.JMenuItem miImportDataSet;
     private javax.swing.JMenuItem miNewAdministrator;

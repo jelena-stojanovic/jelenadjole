@@ -59,6 +59,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Similarity"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miCheckSimilarity">
+              <Properties>
+                <Property name="text" type="java.lang.String" value=" Check similarity"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mMetaAttribute">
           <Properties>
