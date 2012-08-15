@@ -5,8 +5,12 @@
 package model.attribute;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import model.Attributestatistic;
+import model.OpstiDomenskiObjekat;
 import model.dataset.Dataset;
 
 /**
@@ -24,7 +28,12 @@ import model.dataset.Dataset;
     @NamedQuery(name = "Attribute.findByDescription", query = "SELECT a FROM Attribute a WHERE a.description = :description"),
     @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
     @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
-public abstract class Attribute implements Serializable {
+public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
+    private List<Attributestatistic> attributestatisticList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
+    private List<Attributestatistic> attributestatisticList1;
    
 
     private static final long serialVersionUID = 1L;
@@ -137,6 +146,24 @@ public abstract class Attribute implements Serializable {
     @Override
     public String toString() {
         return "entity.Attribute[ attributePK=" + attributePK + " ]";
+    }
+
+    @XmlTransient
+    public List<Attributestatistic> getAttributestatisticList() {
+        return attributestatisticList;
+    }
+
+    public void setAttributestatisticList(List<Attributestatistic> attributestatisticList) {
+        this.attributestatisticList = attributestatisticList;
+    }
+
+    @XmlTransient
+    public List<Attributestatistic> getAttributestatisticList1() {
+        return attributestatisticList1;
+    }
+
+    public void setAttributestatisticList1(List<Attributestatistic> attributestatisticList1) {
+        this.attributestatisticList1 = attributestatisticList1;
     }
     
    

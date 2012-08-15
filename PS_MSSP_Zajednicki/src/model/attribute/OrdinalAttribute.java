@@ -5,6 +5,7 @@
 package model.attribute;
 
 import java.io.Serializable;
+import model.OpstiDomenskiObjekat;
 
 /**
  *
@@ -53,5 +54,51 @@ public class OrdinalAttribute extends Attribute implements Serializable {
     public void setPossibleValues(Object object) {
        throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    
+    @Override
+    public String vratiImeKlase() {
+        return "OrdinalAttribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "attribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        OrdinalAttribute oa= (OrdinalAttribute) odo;
+        oa.setAttributePK(attributePK);
+        oa.setAttributeRole(this.getAttributeRole());
+        
+    }
+
+    @Override
+    public int vratiID() {
+        return attributePK.getIndexOfAttribute();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "IndexOfAttribute";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new ordinal attribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "ordinal attribute";
+    }
+
+
     
 }

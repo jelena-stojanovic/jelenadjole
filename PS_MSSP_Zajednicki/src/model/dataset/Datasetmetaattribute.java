@@ -7,6 +7,7 @@ package model.dataset;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import model.OpstiDomenskiObjekat;
 
 /**
  *
@@ -20,19 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Datasetmetaattribute.findByDataSetID", query = "SELECT d FROM Datasetmetaattribute d WHERE d.datasetmetaattributePK.dataSetID = :dataSetID"),
     @NamedQuery(name = "Datasetmetaattribute.findByDsmetaattributeID", query = "SELECT d FROM Datasetmetaattribute d WHERE d.datasetmetaattributePK.dsmetaattributeID = :dsmetaattributeID"),
     @NamedQuery(name = "Datasetmetaattribute.findByMetaAttributeValue", query = "SELECT d FROM Datasetmetaattribute d WHERE d.metaAttributeValue = :metaAttributeValue")})
-public class Datasetmetaattribute implements Serializable {
+public class Datasetmetaattribute implements Serializable, OpstiDomenskiObjekat {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected DatasetmetaattributePK datasetmetaattributePK;
-    
     @Column(name = "metaAttributeValue")
-    private Integer metaAttributeValue;
-    
-    
+    private Double metaAttributeValue;
     @JoinColumn(name = "dsmetaattributeID", referencedColumnName = "dsmetaattributeID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Dsmetaattribute dsmetaattribute;
-    
     @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Dataset dataset;
@@ -56,11 +54,11 @@ public class Datasetmetaattribute implements Serializable {
         this.datasetmetaattributePK = datasetmetaattributePK;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return metaAttributeValue;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.metaAttributeValue = value;
     }
 
@@ -104,5 +102,47 @@ public class Datasetmetaattribute implements Serializable {
     public String toString() {
         return "entity.Datasetmetaattribute[ datasetmetaattributePK=" + datasetmetaattributePK + " ]";
     }
-    
+
+    @Override
+    public String vratiImeKlase() {
+        return "Datasetmetaattribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "datasetmetaattribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        Datasetmetaattribute d = (Datasetmetaattribute) odo;
+        d.setDatasetmetaattributePK(datasetmetaattributePK);
+        d.setDataset(dataset);
+        d.setDsmetaattribute(dsmetaattribute);
+        d.setValue(metaAttributeValue);
+    }
+
+    @Override
+    public int vratiID() {
+        return datasetmetaattributePK.getDsmetaattributeID();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "DsmetaattributeID";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new dataset metaattribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "dataset metaattribute";
+    }
 }
