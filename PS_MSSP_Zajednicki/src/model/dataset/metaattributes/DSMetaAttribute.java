@@ -4,14 +4,14 @@
  */
 package model.dataset.metaattributes;
 
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 
 /**
  *
  * @author Jelena
  */
 public interface DSMetaAttribute  {
-    public double calculate(DataSet dataSet);
+    public double calculate(Dataset dataSet);
     public void register();
     public String getName();
     public double getValue();

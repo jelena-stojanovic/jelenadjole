@@ -5,7 +5,6 @@
 package model.dataset;
 
 import java.io.Serializable;
-import org.ejml.data.DenseMatrix64F;
 
 /**
  *
@@ -13,13 +12,13 @@ import org.ejml.data.DenseMatrix64F;
  */
 public class DataTable implements Serializable{
 
-    DenseMatrix64F matrix;
+    private Dataset dataSet;
     double[][] data;
     int row;
     int column;
     
     public DataTable(double[][] data) {
-        //matrix = new DenseMatrix64F(data);
+        
         this.data=data;
         row= data.length;
         column=data[0].length;
@@ -31,26 +30,7 @@ public class DataTable implements Serializable{
         this.column=numCol;
     }
 
-    public void setMatrix(DenseMatrix64F matrix) {
-        this.matrix = matrix;
-    }
-
-    public DenseMatrix64F getMatrix() {
-        return matrix;
-    }
-    
     public double[][] getDoubleMatrix(){
-        /*double[][] doubleMatrix= new double[getNumRows()][getNumColums()];
-        
-        for (int i = 0; i < doubleMatrix.length; i++) {
-            double[] ds = doubleMatrix[i];
-            for (int j = 0; j < ds.length; j++) {
-                double d = ds[j];
-                doubleMatrix[i][j]=d;
-            }
-        }
-        
-        return doubleMatrix;*/
         return data;
     }
 
@@ -65,7 +45,6 @@ public class DataTable implements Serializable{
     
 
     public double getValue(int row, int column) {
-        //return matrix.get(row, column);
         return data[row][column];
     }
 
@@ -75,25 +54,20 @@ public class DataTable implements Serializable{
     }
 
     public void set(int row, int column, double value) {
-       // matrix.set(row, column, value);
         data[row][column]=value;
     }
 
     public void add(int row, int col, double value) {
-        //matrix.add(row, col, value);
         data[row][col]=value;
     }
 
     public int getNumElements() {
-     
-        //return matrix.getNumElements();
         return row*column;
     }
     
     public double[] getColumn(int columnIndex){
         double[] columnValues=new double[row];
         for (int i = 0; i < row; i++) {
-            //columnValues[i]= matrix.get(i, columnIndex);   
             columnValues[i]=data[i][columnIndex];
         }
         return columnValues;
@@ -102,38 +76,27 @@ public class DataTable implements Serializable{
     public double[] getRow(int rowIndex){
         
         double[] rowValues= new double[column];
-        /*
-         *  for (int i = 0; i < column; i++) {
-            //rowValues[i]=matrix.get(rowIndex, i);
-            rowValues[i]=data[rowIndex][i];
-        }
-
-         */
         System.arraycopy(data[rowIndex], 0, rowValues, 0, column);
         return rowValues;
     }
     
     public void setNumRows(int numRows){
-        //matrix.numRows=numRows;
         row=numRows;
         if(column!=0)
             data=new double[numRows][column];
     }
     
     public int getNumRows(){
-        //return matrix.getNumRows();
         return row;
     }
     
     public void setNumColums(int numColums){
-        //matrix.numCols=numColums;
         column=numColums;
         if(row!=0)
             data= new double[row][numColums];
         
     }
     public int getNumColums(){
-        //return matrix.getNumElements()/matrix.getNumRows();
         return column;
     }
     
@@ -157,5 +120,19 @@ public class DataTable implements Serializable{
         newMatrix[row]=rowd;
         row++;
         data= newMatrix;   
+    }
+
+    /**
+     * @return the dataSet
+     */
+    public Dataset getDataSet() {
+        return dataSet;
+    }
+
+    /**
+     * @param dataSet the dataSet to set
+     */
+    public void setDataSet(Dataset dataSet) {
+        this.dataSet = dataSet;
     }
 }

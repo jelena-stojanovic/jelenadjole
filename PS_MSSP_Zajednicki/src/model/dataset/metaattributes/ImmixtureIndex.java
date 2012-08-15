@@ -6,7 +6,7 @@ package model.dataset.metaattributes;
 
 import java.io.Serializable;
 import model.attribute.NumericalAttribute;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 
 /**
  *
@@ -15,7 +15,7 @@ import model.dataset.DataSet;
 public class ImmixtureIndex extends NumericalAttribute implements DSMetaAttribute, Serializable{
 
     @Override
-    public double calculate(DataSet dataSet) {
+    public double calculate(Dataset dataSet) {
         return 0.5;
     }
 

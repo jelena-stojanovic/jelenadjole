@@ -14,7 +14,7 @@ import model.dataset.metaattributes.DSMetaAttribute;
  *
  * @author Jelena
  */
-public class MetaDataSet extends DataSet implements Serializable{
+public class MetaDataSet extends Dataset implements Serializable{
     List<File> datasets= new ArrayList<File>();
     List<DSMetaAttribute> metaAttributes= new ArrayList<DSMetaAttribute>();
 

@@ -7,7 +7,7 @@ package model.dataset.metaattributes;
 import java.io.Serializable;
 import model.attribute.Attribute;
 import model.attribute.NumericalAttribute;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 
 /**
  *
@@ -32,7 +32,7 @@ public class DSPNoOfInstances extends NumericalAttribute implements DSMetaAttrib
     }
 
     @Override
-    public double calculate(DataSet dataSet) {
+    public double calculate(Dataset dataSet) {
         numberOfInstances= dataSet.getDataTable().getNumRows();
         return numberOfInstances;
     }
