@@ -6,7 +6,7 @@ package model.dataset.metaattributes;
 
 import java.io.Serializable;
 import model.attribute.NumericalAttribute;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 
 /**
  *
@@ -16,7 +16,7 @@ public class DSNoOfAttributes extends NumericalAttribute implements DSMetaAttrib
 
     int numberOfAttributes=0;
     @Override
-    public double calculate(DataSet dataSet) {
+    public double calculate(Dataset dataSet) {
         numberOfAttributes=dataSet.getDataTable().getNumColums();
         return numberOfAttributes;
     }

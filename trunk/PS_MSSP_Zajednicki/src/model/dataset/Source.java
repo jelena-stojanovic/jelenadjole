@@ -7,8 +7,10 @@ package model.dataset;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import model.OpstiDomenskiObjekat;
 import tools.KonverterTipova;
 
@@ -17,215 +19,206 @@ import tools.KonverterTipova;
  * @author Jelena
  */
 @Entity
-//@Table(name = "source")
+@Table(name = "source")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Source.findAll", query = "SELECT s FROM Source s"),
-    @NamedQuery(name = "Source.findBySourceID", query = "SELECT s FROM Source s WHERE s.sourceID = :sourceID")})
-public class Source implements OpstiDomenskiObjekat, Serializable {
+    @NamedQuery(name = "Source.findBySourceID", query = "SELECT s FROM Source s WHERE s.sourceID = :sourceID"),
+    @NamedQuery(name = "Source.findByCreator", query = "SELECT s FROM Source s WHERE s.creator = :creator"),
+    @NamedQuery(name = "Source.findByDonor", query = "SELECT s FROM Source s WHERE s.donor = :donor"),
+    @NamedQuery(name = "Source.findBySourceDate", query = "SELECT s FROM Source s WHERE s.sourceDate = :sourceDate")})
 
-    @Id
-    @Basic(optional = false)
-    @Column(name = "sourceID")
-    private int sourceID;
-    
-    @Lob
-    @Column(name = "creator")
-    private String creator;
-    
-    @Lob
-    @Column(name = "donor")
-    private String donor;
-    
-    @Lob
-    @Column(name = "sourceDate")
-    @Temporal(javax.persistence.TemporalType.DATE)
+public class Source implements OpstiDomenskiObjekat, Serializable {
+    @Column(name =     "sourceDate")
+    @Temporal(TemporalType.DATE)
     private Date sourceDate;
 
+        private static final long serialVersionUID = 1L;
+    @Id
+    @SequenceGenerator(name="seq", sequenceName="seq") 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+    @Basic(optional = false)
+    @Column(name = "sourceID")
+    private Integer sourceID;
+    @Column(name = "creator")
+    private String creator;
+    @Column(name = "donor")
+    private String donor;
+    @OneToMany(mappedBy = "source")
+    private List<Dataset> datasetList;
+    
     public Source() {
     }
 
-    public Source(int sourceID, String creator, String donor, Date date) {
+    public Source(Integer sourceID) {
         this.sourceID = sourceID;
-        this.creator = creator;
-        this.donor = donor;
-        this.sourceDate = date;
     }
 
-    public Source(String creator, String donor, Date date) {
-        this.creator = creator;
-        this.donor = donor;
-        this.sourceDate = date;
-    }
-
-    /**
-     * @return the sourceID
-     */
-    public int getSourceID() {
+    public Integer getSourceID() {
         return sourceID;
     }
 
-    /**
-     * @param sourceID the sourceID to set
-     */
-    public void setSourceID(int sourceID) {
+    public void setSourceID(Integer sourceID) {
         this.sourceID = sourceID;
     }
 
-    /**
-     * @return the creator
-     */
     public String getCreator() {
         return creator;
     }
 
-    /**
-     * @param creator the creator to set
-     */
     public void setCreator(String creator) {
         this.creator = creator;
     }
 
-    /**
-     * @return the donor
-     */
     public String getDonor() {
         return donor;
     }
 
-    /**
-     * @param donor the donor to set
-     */
     public void setDonor(String donor) {
         this.donor = donor;
     }
 
-    /**
-     * @return the date
-     */
-    public Date getDate() {
-        return sourceDate;
+    @XmlTransient
+    public List<Dataset> getDatasetList() {
+        return datasetList;
     }
 
-    /**
-     * @param date the date to set
-     */
-    public void setDate(Date date) {
-        this.sourceDate = date;
+    public void setDatasetList(List<Dataset> datasetList) {
+        this.datasetList = datasetList;
     }
 
     @Override
-    public String toString() {
-        return  creator + ", " + donor + ", " + sourceDate ;
-    }
-
-    
-    
-    @Override
-    public String vratiVrednostiAtributa() {
-        java.sql.Date sqlDate = KonverterTipova.Konvertuj(sourceDate);
-        return "" + sourceID + ", '" + creator + "', '" + donor + ", " + sqlDate;
+    public int hashCode() {
+        int hash = 0;
+        hash += (sourceID != null ? sourceID.hashCode() : 0);
+        return hash;
     }
 
     @Override
-    public String postaviVrednostiAtributa() {
-        java.sql.Date sqlDate = KonverterTipova.Konvertuj(sourceDate);
-        return "sourceID = " + sourceID + ", creator ='" + creator + "', donor ='" + donor + "', date = "
-                + sqlDate;
-    }
-
-    @Override
-    public String vratiImeKlase() {
-        return "Source";
-    }
-
-    @Override
-    public String vratiUslovZaNadjiSlog() {
-        return " sourceID = '" + sourceID + "'";
-    }
-
-    @Override
-    public String vratiUslovZaNadjiSlogove() {
-        return "";
-    }
-
-
-    @Override
-    public boolean Napuni(ResultSet RSslog) {
-        try {
-            sourceID = KonverterTipova.Konvertuj(RSslog, sourceID, "sourceID");
-            creator = KonverterTipova.Konvertuj(RSslog, creator, "creator");
-            donor = KonverterTipova.Konvertuj(RSslog, donor, "donor");
-            sourceDate = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
-        } catch (Exception e) {
-            System.out.println(e);
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Source)) {
+            return false;
+        }
+        Source other = (Source) object;
+        if ((this.sourceID == null && other.sourceID != null) || (this.sourceID != null && !this.sourceID.equals(other.sourceID))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public int povecajBroj(ResultSet rs) {
-        try {
-            sourceID = KonverterTipova.Konvertuj(rs, sourceID, "sourceID");
-            return ++sourceID;
-        } catch (Exception e) {
-            System.out.println("Izuzetak kod generisanja novog broja racuna: " + e);
-            return 0;
-        }
+    public String toString() {
+        return "entity.Source[ sourceID=" + sourceID + " ]";
     }
+
+    
+    
+//    @Override
+//    public String vratiVrednostiAtributa() {
+//        java.sql.Date sqlDate = KonverterTipova.Konvertuj(sourceDate);
+//        return "" + sourceID + ", '" + creator + "', '" + donor + ", " + sqlDate;
+//    }
+//
+//    @Override
+//    public String postaviVrednostiAtributa() {
+//        java.sql.Date sqlDate = KonverterTipova.Konvertuj(sourceDate);
+//        return "sourceID = " + sourceID + ", creator ='" + creator + "', donor ='" + donor + "', date = "
+//                + sqlDate;
+//    }
 
     @Override
-    public OpstiDomenskiObjekat vratiVezaniObjekat(int brojVezanogObjekta) {
-        return null;
+    public String vratiImeKlase() {
+        return "Source";
     }
 
-    @Override
-    public void Napuni(ResultSet RSslog, int brojSloga, int brojVezanogObjekta) {
-    }
-
-    @Override
-    public void kreirajVezaniObjekat(int brojStavkiVezanogObjekta, int brojVezanogObjekta) {
-    }
-
-    @Override
-    public int vratiBrojVezanihObjekata() {
-        return -1;
-    }
-
-    @Override
-    public void postaviPocetniBroj() {
-        sourceID = 1;
-    }
-
-    @Override
-    public OpstiDomenskiObjekat vratiSlogVezanogObjekta(int brojVezanogObjekta, int brojSloga) {
-        return null;
-    }
-
-    @Override
-    public int vratiBrojSlogovaVezanogObjekta(int brojVezanogObjekta) {
-        return -1;
-    }
-
-    @Override
-    public boolean vrednosnaOgranicenja() {
-        Date newDate = new Date();
-        if (sourceDate.before(newDate)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public void Obradi() {
-    }
-
-    @Override
-    public void Storniraj() {
-    }
-
+//    @Override
+//    public String vratiUslovZaNadjiSlog() {
+//        return " sourceID = '" + sourceID + "'";
+//    }
+//
+//    @Override
+//    public String vratiUslovZaNadjiSlogove() {
+//        return "";
+//    }
+//
+//
+//    @Override
+//    public boolean Napuni(ResultSet RSslog) {
+//        try {
+//            sourceID = KonverterTipova.Konvertuj(RSslog, sourceID, "sourceID");
+//            creator = KonverterTipova.Konvertuj(RSslog, creator, "creator");
+//            donor = KonverterTipova.Konvertuj(RSslog, donor, "donor");
+//            sourceDate = KonverterTipova.Konvertuj(KonverterTipova.Konvertuj(RSslog, "date"));
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    @Override
+//    public int povecajBroj(ResultSet rs) {
+//        try {
+//            sourceID = KonverterTipova.Konvertuj(rs, sourceID, "sourceID");
+//            return ++sourceID;
+//        } catch (Exception e) {
+//            System.out.println("Izuzetak kod generisanja novog broja racuna: " + e);
+//            return 0;
+//        }
+//    }
+//
+//    @Override
+//    public OpstiDomenskiObjekat vratiVezaniObjekat(int brojVezanogObjekta) {
+//        return null;
+//    }
+//
+//    @Override
+//    public void Napuni(ResultSet RSslog, int brojSloga, int brojVezanogObjekta) {
+//    }
+//
+//    @Override
+//    public void kreirajVezaniObjekat(int brojStavkiVezanogObjekta, int brojVezanogObjekta) {
+//    }
+//
+//    @Override
+//    public int vratiBrojVezanihObjekata() {
+//        return -1;
+//    }
+//
+//    @Override
+//    public void postaviPocetniBroj() {
+//        sourceID = 1;
+//    }
+//
+//    @Override
+//    public OpstiDomenskiObjekat vratiSlogVezanogObjekta(int brojVezanogObjekta, int brojSloga) {
+//        return null;
+//    }
+//
+//    @Override
+//    public int vratiBrojSlogovaVezanogObjekta(int brojVezanogObjekta) {
+//        return -1;
+//    }
+//
+//    @Override
+//    public boolean vrednosnaOgranicenja() {
+//        Date newDate = new Date();
+//        if (sourceDate.before(newDate)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    @Override
+//    public void Obradi() {
+//    }
+//
+//    @Override
+//    public void Storniraj() {
+//    }
+//
     @Override
     public String vratiNazivNovogObjekta() {
         return "new source";
@@ -247,7 +240,7 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
         Source source = (Source) odo;
         source.setCreator(creator);
         source.setDonor(donor);
-        source.setDate(sourceDate);
+        source.setSourceDate(sourceDate);
         
     }
 @Override
@@ -264,6 +257,14 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
     public String vratiAtributPretrazivanja() {
         //return "dataSetID";
         return atributPretrazivanja;
-    }    
+    }
+
+    public Date getSourceDate() {
+        return sourceDate;
+    }
+
+    public void setSourceDate(Date sourceDate) {
+        this.sourceDate = sourceDate;
+    }
     
 }

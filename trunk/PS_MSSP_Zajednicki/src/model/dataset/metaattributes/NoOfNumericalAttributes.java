@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import model.attribute.Attribute;
 import model.attribute.NumericalAttribute;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 
 /**
  *
@@ -18,8 +18,8 @@ public class NoOfNumericalAttributes extends NumericalAttribute implements DSMet
 
     int noOfNumericalAttribute;
     @Override
-    public double calculate(DataSet dataSet) {
-       List<Attribute> attributes= dataSet.getAttributes();
+    public double calculate(Dataset dataSet) {
+       List<Attribute> attributes= dataSet.getAttributeList();
         for (Attribute attribute : attributes) {
             if(attribute.isNumerical()){
                 noOfNumericalAttribute++;
