@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.SO.serialization.Deserialize;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import model.dataset.MetaDataSet;
 
 /**
@@ -19,12 +19,12 @@ import model.dataset.MetaDataSet;
  * @author Jelena
  */
 public class DataSetCollection {
-    ArrayList<DataSet> datasets;
+    ArrayList<Dataset> datasets;
     MetaDataSet mds=null;
     private DataSetCollection() {
         try {
             try {
-                datasets= new ArrayList<DataSet>();
+                datasets= new ArrayList<Dataset>();
                 String currentUserName=System.getProperty("user.name");
                 mds=(MetaDataSet) Deserialize.deserialize("C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\" + 0 + "_" + "MetaDataSet");
                 datasets.add(0, mds);
@@ -47,8 +47,8 @@ public class DataSetCollection {
                     datasets.add(mds);
                 }
             }
-            ArrayList<DataSet> dss = (ArrayList<DataSet>) Deserialize.deserialize(mds.getDatasets());
-            for (DataSet dataSet : dss) {
+            ArrayList<Dataset> dss = (ArrayList<Dataset>) Deserialize.deserialize(mds.getDatasets());
+            for (Dataset dataSet : dss) {
                 datasets.add(dataSet);
             }
         } catch (IOException ex) {
@@ -67,15 +67,15 @@ public class DataSetCollection {
         private static final DataSetCollection INSTANCE = new DataSetCollection();
     }
     
-    public void addDataSet(DataSet ds){
+    public void addDataSet(Dataset ds){
         datasets.add(ds);
     }
 
-    public ArrayList<DataSet> getDatasets() {
+    public ArrayList<Dataset> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(ArrayList<DataSet> datasets) {
+    public void setDatasets(ArrayList<Dataset> datasets) {
         this.datasets = datasets;
     }
 

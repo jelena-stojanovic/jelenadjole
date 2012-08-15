@@ -15,11 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logic.SO.Import_Export.*;
+import logic.SO.KreirajNovi;
 import logic.SO.MissingValues;
+import logic.SO.Zapamti;
 import logic.SO.serialization.Serialize;
+import model.OpstiDomenskiObjekat;
 import model.attribute.Attribute;
 import model.attribute.NumericalAttribute;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import model.dataset.DataTable;
 
 /**
@@ -35,6 +38,16 @@ public class ControllerAL_DSImport {
         return ControllerAL_DSImportHolder.INSTANCE;
     }
 
+    public void creatNewODO(OpstiDomenskiObjekat odo) {
+        String kreirajNovi = KreirajNovi.kreirajNovi(odo);
+        System.out.println(kreirajNovi);
+    }
+
+    public void saveODO(OpstiDomenskiObjekat odo) {
+        String sacuvaj = Zapamti.Zapamti(odo);
+        System.out.println(sacuvaj);
+    }
+    
     private static class ControllerAL_DSImportHolder {
 
         private static final ControllerAL_DSImport INSTANCE = new ControllerAL_DSImport();
@@ -56,11 +69,11 @@ public class ControllerAL_DSImport {
         return ConvertListOfHorizontalStringArrayToMatrixOfString.convert(dsValues, stringMatrix);
     }
 
-    public void createDataSet(DataSet ds, ArrayList<String[]> stringArrayList) throws Exception {
+    public void createDataSet(Dataset ds, ArrayList<String[]> stringArrayList) throws Exception {
         List<String[]> verticalArrayListString = new ArrayList<String[]>();
 
         verticalArrayListString = ConvertHorizontalStringArrayListToVertikalStringArrayList.convert(stringArrayList, verticalArrayListString);
-        List<Attribute> attributes = ds.getAttributes();
+        List<Attribute> attributes = ds.getAttributeList();
         int row = stringArrayList.size();
         int column = stringArrayList.get(1).length;
         DataTable dataTable = new DataTable(row, column);
@@ -68,7 +81,7 @@ public class ControllerAL_DSImport {
             try {
                 Attribute attribute = attributes.get(i);
 
-                String[] allValues = verticalArrayListString.get(attribute.getIndexOfAttribute());
+                String[] allValues = verticalArrayListString.get(attribute.getAttributePK().getIndexOfAttribute());
 
                 Object possibleValues = AttributePossibleValues.getAttributePossibleValues(attribute, allValues);
                 attribute.setPossibleValues(possibleValues);
@@ -88,12 +101,7 @@ public class ControllerAL_DSImport {
         }
 
 
-
         ds.setDataTable(dataTable);
-
-
-
-
 
         for (int i = 0; i < dataTable.getNumRows(); i++) { //broj redova
 
@@ -110,7 +118,7 @@ public class ControllerAL_DSImport {
                 System.out.println(attribute.getName());
                 HashMap<String, Double> statistics = new HashMap<String, Double>();
 
-                double[] columnatt = dataTable.getColumn(attribute.getIndexOfAttribute());
+                double[] columnatt = dataTable.getColumn(attribute.getAttributePK().getIndexOfAttribute());
                 if (columnatt == null) {
                     System.out.println("Niz je prazan");
                 }
@@ -143,7 +151,8 @@ public class ControllerAL_DSImport {
             System.out.println(string + "=" + double1);
 
         }*/
-        ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
+//        ds.setDataSetID(DataSetCollection.getInstance().getDatasets().size());
+        
         ControllerAL_MetaAttribute.getInstance().calculateMetaattributes(ds);
         
         

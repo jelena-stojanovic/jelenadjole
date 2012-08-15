@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import model.dataset.MetaDataSet;
 
 /**
@@ -18,7 +18,7 @@ import model.dataset.MetaDataSet;
  */
 public class Serialize {
 
-    public static void serialize(DataSet dataset, String filePath) throws IOException {
+    public static void serialize(Dataset dataset, String filePath) throws IOException {
         ObjectOutputStream oos = null;
         File file = new File(filePath);
         if (file != null) {
@@ -36,7 +36,7 @@ public class Serialize {
         }
     }
 
-    public static void serialize(DataSet dataset) throws IOException {
+    public static void serialize(Dataset dataset) throws IOException {
 
         String currentUserName = System.getProperty("user.name");
         String filePath = "C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\" + dataset.getDataSetID() + "_" + dataset.getTitle();
@@ -55,7 +55,7 @@ public class Serialize {
         
     }
     
-    private static void addDSToMDS(DataSet ds,String filepath){
+    private static void addDSToMDS(Dataset ds,String filepath){
         if(!(ds instanceof MetaDataSet))
         DataSetCollection.getInstance().getMetaDataSet().getDatasets().add(new File (filepath));
     }

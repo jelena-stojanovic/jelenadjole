@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import logic.ControllerAL_Main;
 import logic.ControllerAL_MetaAttribute;
+import model.dataset.Dsmetaattribute;
 
 /**
  *
@@ -28,12 +29,12 @@ public class ControllerUI_MetaAttributes {
         private static final ControllerUI_MetaAttributes INSTANCE = new ControllerUI_MetaAttributes();
     }
     
-    public ArrayList<String> getCalculatedMetaAttribute(){
-        ArrayList<String> uncalculated= ControllerAL_Main.getInstance().getUnalculatedMetaAttribute();
+    public ArrayList<Dsmetaattribute> getUnCalculatedMetaAttribute(){
+        ArrayList<Dsmetaattribute> uncalculated= ControllerAL_MetaAttribute.getInstance().getUnalculatedMetaAttribute(ControllerAL_Main.getInstance().getAllDataSets().get(0));
         
         for (int i = 0; i < uncalculated.size(); i++) {
-            String string = uncalculated.get(i);
-            System.out.println(string);
+            Dsmetaattribute Dsmetaattribute = uncalculated.get(i);
+            System.out.println(Dsmetaattribute.getDsmetaattributeName());
         }
         return uncalculated;
     }

@@ -37,13 +37,14 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         return kon_u.getText();
     }
 
+    
     static String Konvertuj(JTextArea kon_u, String kon_i) {
         return kon_u.getText();
     }
 
     static java.util.Date Konvertuj(JTextField kon_u, java.util.Date kon_i) throws ParseException {
         java.util.Date date = null;
-        if (kon_u != null) {
+        if (kon_u != null&&!kon_u.getText().equals("")) {
             date = new SimpleDateFormat("MM/dd/yyyy").parse(kon_u.getText().trim());
         }
         return date;

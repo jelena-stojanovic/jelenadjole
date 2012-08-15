@@ -21,7 +21,7 @@ public class ConvertValuesToMatrixDataTable {
 
     public static void convert(DataTable dataTable, Attribute a, String[] strings) throws ParseException {
 
-        int index = a.getIndexOfAttribute();
+        int index = a.getAttributePK().getIndexOfAttribute();
 
         if (a.isNominal()) {
 

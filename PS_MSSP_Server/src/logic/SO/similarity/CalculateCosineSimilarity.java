@@ -4,10 +4,17 @@
  */
 package logic.SO.similarity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import logic.SO.Import_Export.CalculateMetaAttributeForDataSet;
-import model.dataset.DataSet;
+import logic.SO.VratiSve;
+import model.OpstiDomenskiObjekat;
+import model.dataset.Dataset;
+import model.dataset.Datasetmetaattribute;
+import model.dataset.Dsmetaattribute;
+import model.dataset.metaattributes.DSMetaAttribute;
 
 /**
  *
@@ -15,19 +22,39 @@ import model.dataset.DataSet;
  */
 public class CalculateCosineSimilarity {
     
-    public static double calculate(DataSet dataset1, DataSet dataset2) {
+    public static double calculate(Dataset dataset1, Dataset dataset2) {
 
-        if(dataset1.getMetaAttributes().size()!= dataset2.getMetaAttributes().size()){
-            new CalculateMetaAttributeForDataSet().calculate(dataset1, dataset1.getMetaAttributes());
-            new CalculateMetaAttributeForDataSet().calculate(dataset2, dataset2.getMetaAttributes());
+        if(dataset1.getDatasetmetaattributeList().size()!= dataset2.getDatasetmetaattributeList().size()){
+            List<OpstiDomenskiObjekat> list= new ArrayList<OpstiDomenskiObjekat>();
+            list.add(new Dsmetaattribute());
+            String poruka= VratiSve.VratiSve(list);
+            System.out.println(poruka);
+            List<Dsmetaattribute> lista= new ArrayList<Dsmetaattribute>();
+            for (int i = 0; i < list.size(); i++) {
+                OpstiDomenskiObjekat opstiDomenskiObjekat = list.get(i);
+                Dsmetaattribute d= (Dsmetaattribute) opstiDomenskiObjekat;
+                lista.add(d);
+            }
+            
+            new CalculateMetaAttributeForDataSet().calculate(dataset1,lista);
+            new CalculateMetaAttributeForDataSet().calculate(dataset2, lista);
         }
         
-        HashMap<String, Double> metaAttributes1= dataset1.getMetaAttributes();
-        double[] value1= new double[metaAttributes1.size()];
-        HashMap<String, Double> metaAttributes2= dataset2.getMetaAttributes();
-        double[] value2= new double[metaAttributes2.size()];
+        List<Datasetmetaattribute> l1=dataset1.getDatasetmetaattributeList();
+        List<Datasetmetaattribute> l2=dataset2.getDatasetmetaattributeList();
+        //HashMap<String, Double> metaAttributes1= dataset1.getMetaAttributes();
+        double[] value1= new double[l1.size()];
+        //HashMap<String, Double> metaAttributes2= dataset2.getMetaAttributes();
+        double[] value2= new double[l2.size()];
         
-        int i=0;
+        for (int i = 0; i < l2.size(); i++) {
+            value2[i]=l2.get(i).getValue();
+            value1[i]=l1.get(i).getValue();
+        }
+        
+        /*
+         * int i=0;
+        
         for (Map.Entry<String, Double> entry : metaAttributes1.entrySet()) {
             String string = entry.getKey();
             
@@ -35,7 +62,7 @@ public class CalculateCosineSimilarity {
             value2[i]=metaAttributes2.get(string);
             
             i++;   
-        }
+        }*/
         return calculateSimilarity(value1, value2);
     }
 
