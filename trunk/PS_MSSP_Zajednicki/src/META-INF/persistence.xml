@@ -5,13 +5,13 @@
     <class>model.Administrator</class>
     <class>model.Reference</class>
     <class>model.attribute.Attribute</class>
-    <class>model.dataset.Dataset</class>
     <class>model.dataset.Datasetmetaattribute</class>
     <class>model.dataset.Dsmetaattribute</class>
     <class>model.dataset.Source</class>
     <class>model.dataset.Metads</class>
     <class>model.Statistic</class>
     <class>model.Attributestatistic</class>
+    <class>model.dataset.Dataset</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dss"/>
       <property name="javax.persistence.jdbc.password" value=""/>
