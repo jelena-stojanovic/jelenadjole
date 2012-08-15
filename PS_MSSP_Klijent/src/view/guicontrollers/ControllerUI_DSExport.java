@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.dataFormat.CSVFormat;
 import model.dataFormat.DataFormat;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import tools.KonverterTipova;
 
 import view.panels.PanelExportDS;
@@ -46,7 +46,7 @@ public class ControllerUI_DSExport {
      * ---- csv format fields -----
      */
     private File file = null;
-    private DataSet dataset = null;
+    private Dataset dataset = null;
     private char columnSeparation = ',';
     private boolean writeAttributeNames = false;
     private boolean useQuotesForNominal = true;
