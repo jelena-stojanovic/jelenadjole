@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Statistic.findByStatisticName", query = "SELECT s FROM Statistic s WHERE s.statisticName = :statisticName"),
     @NamedQuery(name = "Statistic.findByStatisticDescription", query = "SELECT s FROM Statistic s WHERE s.statisticDescription = :statisticDescription"),
     @NamedQuery(name = "Statistic.findByStatisticClass", query = "SELECT s FROM Statistic s WHERE s.statisticClass = :statisticClass")})
-public class Statistic implements Serializable {
+public class Statistic implements Serializable, OpstiDomenskiObjekat {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -116,6 +116,46 @@ public class Statistic implements Serializable {
     @Override
     public String toString() {
         return "model.Statistic[ statisticID=" + statisticID + " ]";
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        return "Statistic";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "statistic";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int vratiID() {
+        return statisticID;
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new statistic";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return  "statistic";
     }
     
 }
