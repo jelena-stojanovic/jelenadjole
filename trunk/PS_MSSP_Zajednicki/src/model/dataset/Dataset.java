@@ -146,6 +146,15 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         this.datasetmetaattributeList = datasetmetaattributeList;
     }
 
+    public double getDataSetMetaAttributeValue(Dsmetaattribute dsma){
+        for (Datasetmetaattribute datasetmetaattribute : datasetmetaattributeList) {
+            if(datasetmetaattribute.getDsmetaattribute().getDsmetaattributeID()==dsma.getDsmetaattributeID())
+                return datasetmetaattribute.getValue();
+        }
+        return Double.NaN;
+                
+    }
+    
     public void addDatasetmetaattribute(Datasetmetaattribute datasetmetaattribute) {
         datasetmetaattributeList.add(datasetmetaattribute);
     }
