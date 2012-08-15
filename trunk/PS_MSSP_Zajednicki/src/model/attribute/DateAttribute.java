@@ -7,6 +7,7 @@ package model.attribute;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import model.OpstiDomenskiObjekat;
 import model.statistics.Maximum;
 import model.statistics.Minimum;
 
@@ -100,4 +101,49 @@ public class DateAttribute extends Attribute  implements Serializable {
         this.statistics = statistics;
     }
     
+    
+    @Override
+    public String vratiImeKlase() {
+        return "DateAttribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "attribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        DateAttribute da= (DateAttribute) odo;
+        da.setAttributePK(attributePK);
+        da.setAttributeRole(this.getAttributeRole());
+        
+    }
+
+    @Override
+    public int vratiID() {
+        return attributePK.getIndexOfAttribute();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "IndexOfAttribute";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new date attribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "date attribute";
+    }
+
+
 }

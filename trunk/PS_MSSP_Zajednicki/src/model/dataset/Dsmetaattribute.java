@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import model.OpstiDomenskiObjekat;
 
 /**
  *
@@ -22,7 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dsmetaattribute.findByDsmetaattributeID", query = "SELECT d FROM Dsmetaattribute d WHERE d.dsmetaattributeID = :dsmetaattributeID"),
     @NamedQuery(name = "Dsmetaattribute.findByDsmetaattributeName", query = "SELECT d FROM Dsmetaattribute d WHERE d.dsmetaattributeName = :dsmetaattributeName"),
     @NamedQuery(name = "Dsmetaattribute.findByDsmetaattributeDescription", query = "SELECT d FROM Dsmetaattribute d WHERE d.dsmetaattributeDescription = :dsmetaattributeDescription")})
-public class Dsmetaattribute implements Serializable {
+public class Dsmetaattribute implements Serializable , OpstiDomenskiObjekat{
+    @Basic(optional = false)
+    @Column(name = "dsmetaattributeClass")
+    private String dsmetaattributeClass;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -117,6 +121,60 @@ public class Dsmetaattribute implements Serializable {
     @Override
     public String toString() {
         return "entity.Dsmetaattribute[ dsmetaattributeID=" + dsmetaattributeID + " ]";
+    }
+
+    public String getDsmetaattributeClass() {
+        return dsmetaattributeClass;
+    }
+
+    public void setDsmetaattributeClass(String dsmetaattributeClass) {
+        this.dsmetaattributeClass = dsmetaattributeClass;
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        return "Dsmetaattribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "dsmetaattribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        Dsmetaattribute d= (Dsmetaattribute)odo;
+        d.setDsmetaattributeClass(dsmetaattributeClass);
+        d.setDsmetaattributeDescription(dsmetaattributeDescription);
+        d.setDsmetaattributeName(dsmetaattributeName);
+        d.setDsmetaattributeName(dsmetaattributeName);
+        d.setMetadsID(metadsID);
+    }
+    
+
+    @Override
+    public int vratiID() {
+        return dsmetaattributeID;
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "DsmetaattributeID";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new dataset metaattribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "dataset metaattribute";
     }
     
 }

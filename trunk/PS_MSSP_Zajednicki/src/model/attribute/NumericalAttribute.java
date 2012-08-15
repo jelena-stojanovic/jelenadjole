@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.OpstiDomenskiObjekat;
 import model.statistics.Maximum;
 import model.statistics.Minimum;
 import model.statistics.NumericalStatistic;
@@ -84,6 +85,48 @@ public class NumericalAttribute extends Attribute implements Serializable {
     @Override
     public void setPossibleValues(Object object) {
         
+    }
+@Override
+    public String vratiImeKlase() {
+        return "NumericalAttribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "attribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        NumericalAttribute na= (NumericalAttribute) odo;
+        na.setAttributePK(attributePK);
+        na.setAttributeRole(this.getAttributeRole());
+        
+    }
+
+    @Override
+    public int vratiID() {
+        return attributePK.getIndexOfAttribute();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "IndexOfAttribute";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new numerical attribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "numerical attribute";
     }
 
   

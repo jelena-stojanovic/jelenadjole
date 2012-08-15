@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.OpstiDomenskiObjekat;
 
 /**
  *
@@ -107,6 +108,49 @@ public class NominalAttribute extends Attribute implements Serializable {
     @Override
     public void setPossibleValues(Object object) {
        possibleNominalValue=(List<String>)object;
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        return "NominalAttribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "attribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        NominalAttribute noma= (NominalAttribute) odo;
+        noma.setAttributePK(attributePK);
+        noma.setAttributeRole(this.getAttributeRole());
+        
+    }
+
+    @Override
+    public int vratiID() {
+        return attributePK.getIndexOfAttribute();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "IndexOfAttribute";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new nominal attribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "nominal attribute";
     }
 
     

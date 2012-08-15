@@ -10,6 +10,8 @@
     <class>model.dataset.Dsmetaattribute</class>
     <class>model.dataset.Source</class>
     <class>model.dataset.Metads</class>
+    <class>model.Statistic</class>
+    <class>model.Attributestatistic</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dss"/>
       <property name="javax.persistence.jdbc.password" value=""/>

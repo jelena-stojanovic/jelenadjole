@@ -5,6 +5,7 @@
 package model.attribute;
 
 import java.io.Serializable;
+import model.OpstiDomenskiObjekat;
 
 /**
  *
@@ -49,6 +50,50 @@ public class IntervalAttribute extends Attribute implements Serializable {
     @Override
     public void setPossibleValues(Object object) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+     @Override
+    public String vratiImeKlase() {
+        return "IntervalAttribute";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "attribute";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        IntervalAttribute ia= (IntervalAttribute) odo;
+        ia.setAttributePK(attributePK);
+        ia.setAttributeRole(this.getAttributeRole());
+        
+    }
+
+    @Override
+    public int vratiID() {
+        return attributePK.getIndexOfAttribute();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        return "IndexOfAttribute";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new interval attribute";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "interval attribute";
     }
 
     
