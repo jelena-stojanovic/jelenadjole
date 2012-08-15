@@ -7,7 +7,7 @@ package view.guicontrollers;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import view.forms.FrmMain;
 import view.panels.PanelWelcome;
 

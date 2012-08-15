@@ -6,7 +6,7 @@ package view.guicontrollers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import model.dataset.DataSet;
+import model.dataset.Dataset;
 import view.panels.PanelAllDataSets;
 import view.panels.TableModelDataSets;
 
@@ -29,8 +29,8 @@ public class ControllerUI_AllDataSets extends OpstiKontrolerKI{
     public PanelAllDataSets getPanelAllDS() {
         return panelAllDS;
     }
-    public ArrayList<DataSet> getAllDataSets(){
-        return new ArrayList<DataSet>();
+    public ArrayList<Dataset> getAllDataSets(){
+        return new ArrayList<Dataset>();
     }
     
   /*  public static ControllerUI_AllDataSets getInstance() {
