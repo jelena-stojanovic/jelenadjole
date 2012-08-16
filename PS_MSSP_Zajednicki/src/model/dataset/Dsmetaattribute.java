@@ -153,7 +153,7 @@ public class Dsmetaattribute implements Serializable , OpstiDomenskiObjekat{
     
 
     @Override
-    public int vratiID() {
+    public Object vratiID() {
         return dsmetaattributeID;
     }
 

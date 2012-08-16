@@ -26,7 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Statistic implements Serializable, OpstiDomenskiObjekat {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="seq", sequenceName="seq") 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
     @Basic(optional = false)
     @Column(name = "statisticID")
     private Integer statisticID;
@@ -134,7 +135,7 @@ public class Statistic implements Serializable, OpstiDomenskiObjekat {
     }
 
     @Override
-    public int vratiID() {
+    public Object vratiID() {
         return statisticID;
     }
 

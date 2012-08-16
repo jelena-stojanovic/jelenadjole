@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Attributestatistic;
 import model.OpstiDomenskiObjekat;
 import model.statistics.Maximum;
 import model.statistics.Minimum;
@@ -29,7 +30,7 @@ public class NumericalAttribute extends Attribute implements Serializable {
     /**
      * map of class names of statistics and their values of concrete attribute
      */
-    private HashMap<String, Double> statistics;
+  //  private HashMap<String, Double> statistics;
 
     
     @Override
@@ -52,8 +53,17 @@ public class NumericalAttribute extends Attribute implements Serializable {
  */
     @Override
     public Object getPossibleValues() {
-            double minValue= getStatistics().get(Minimum.class.getName());
-            double maxValue= getStatistics().get(Maximum.class.getName());
+        double minValue=0;
+        double maxValue=0;
+            
+        for (int i = 0; i < getAttributestatisticList().size(); i++) {
+            Attributestatistic as = getAttributestatisticList().get(i);
+            if(as.getStatistic().getStatisticName().equals("Minimum"))
+                minValue=as.getStatisticValue();
+            if(as.getStatistic().getStatisticName().equals("Maximum"))
+                maxValue=as.getStatisticValue();
+        }
+            
             return "["+minValue+" - " +maxValue +"]";
         
     }
@@ -71,16 +81,16 @@ public class NumericalAttribute extends Attribute implements Serializable {
     /**
      * @return the statistics
      */
-    public HashMap<String, Double> getStatistics() {
-        return statistics;
-    }
-
-    /**
-     * @param statistics the statistics to set
-     */
-    public void setStatistics(HashMap<String, Double> statistics) {
-        this.statistics = statistics;
-    }
+//    public HashMap<String, Double> getStatistics() {
+//        return statistics;
+//    }
+//
+//    /**
+//     * @param statistics the statistics to set
+//     */
+//    public void setStatistics(HashMap<String, Double> statistics) {
+//        this.statistics = statistics;
+//    }
 
     @Override
     public void setPossibleValues(Object object) {
@@ -105,8 +115,8 @@ public class NumericalAttribute extends Attribute implements Serializable {
     }
 
     @Override
-    public int vratiID() {
-        return attributePK.getIndexOfAttribute();
+    public Object vratiID() {
+        return attributePK;
     }
 
     @Override

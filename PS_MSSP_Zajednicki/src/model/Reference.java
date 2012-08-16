@@ -288,8 +288,8 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     }
 
     @Override
-    public int vratiID() {
-        return referencePK.getReferenceID();
+    public Object vratiID() {
+        return referencePK;
     }
 private String atributPretrazivanja;
     @Override

@@ -22,19 +22,26 @@ import model.attribute.Attribute;
     @NamedQuery(name = "Attributestatistic.findByDataSetID", query = "SELECT a FROM Attributestatistic a WHERE a.attributestatisticPK.dataSetID = :dataSetID"),
     @NamedQuery(name = "Attributestatistic.findByStatisticID", query = "SELECT a FROM Attributestatistic a WHERE a.attributestatisticPK.statisticID = :statisticID"),
     @NamedQuery(name = "Attributestatistic.findByStatisticValue", query = "SELECT a FROM Attributestatistic a WHERE a.statisticValue = :statisticValue")})
-public class Attributestatistic implements Serializable {
+public class Attributestatistic implements Serializable, OpstiDomenskiObjekat {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AttributestatisticPK attributestatisticPK;
     @Basic(optional = false)
     @Column(name = "statisticValue")
     private double statisticValue;
-    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false)
+    
+    @JoinColumns({
+    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false),    
+    @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)    
+    })
     @ManyToOne(optional = false)
     private Attribute attribute;
-    @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)
+//    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false)
+//    @ManyToOne(optional = false)
+    
+/*    @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Attribute attribute1;
+    private Attribute attribute1;*/
     @JoinColumn(name = "statisticID", referencedColumnName = "statisticID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Statistic statistic;
@@ -79,13 +86,13 @@ public class Attributestatistic implements Serializable {
         this.attribute = attribute;
     }
 
-    public Attribute getAttribute1() {
-        return attribute1;
-    }
-
-    public void setAttribute1(Attribute attribute1) {
-        this.attribute1 = attribute1;
-    }
+//    public Attribute getAttribute1() {
+//        return attribute1;
+//    }
+//
+//    public void setAttribute1(Attribute attribute1) {
+//        this.attribute1 = attribute1;
+//    }
 
     public Statistic getStatistic() {
         return statistic;
@@ -118,6 +125,49 @@ public class Attributestatistic implements Serializable {
     @Override
     public String toString() {
         return "model.Attributestatistic[ attributestatisticPK=" + attributestatisticPK + " ]";
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        return "Attributestatistic";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "attributestatistic";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        Attributestatistic a= (Attributestatistic)odo;
+        a.setAttribute(attribute);
+        a.setStatistic(statistic);
+        a.setStatisticValue(statisticValue);
+    }
+
+    @Override
+    public Object vratiID() {
+        return getAttributestatisticPK();
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+       return "attributestatisticPK";
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new attributestatistic";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "attributestatistic";
     }
     
 }

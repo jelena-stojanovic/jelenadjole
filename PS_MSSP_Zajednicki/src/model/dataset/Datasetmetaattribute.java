@@ -123,8 +123,8 @@ public class Datasetmetaattribute implements Serializable, OpstiDomenskiObjekat 
     }
 
     @Override
-    public int vratiID() {
-        return datasetmetaattributePK.getDsmetaattributeID();
+    public Object vratiID() {
+        return datasetmetaattributePK;
     }
 
     @Override

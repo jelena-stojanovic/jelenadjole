@@ -45,7 +45,7 @@ String vratiNazivTabele();
 
 void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo);
 
-int vratiID();
+Object vratiID();
 
 void postaviAtributPretrazivanja(String atribut);
 String vratiAtributPretrazivanja();

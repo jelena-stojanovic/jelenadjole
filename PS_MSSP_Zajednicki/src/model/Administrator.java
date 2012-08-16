@@ -26,7 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Administrator implements Serializable, OpstiDomenskiObjekat{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="seq", sequenceName="seq") 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
     @Basic(optional = false)
     @Column(name = "adminID")
     private Integer adminID;
@@ -152,7 +153,7 @@ public class Administrator implements Serializable, OpstiDomenskiObjekat{
     }
 
     @Override
-    public int vratiID() {
+    public Object vratiID() {
         return adminID;
     }
 String atributPretrazivanja="adminID";

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import model.OpstiDomenskiObjekat;
 
 /**
  *
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Metads.findAll", query = "SELECT m FROM Metads m"),
     @NamedQuery(name = "Metads.findByMetadsID", query = "SELECT m FROM Metads m WHERE m.metadsID = :metadsID")})
-public class Metads implements Serializable {
+public class Metads implements Serializable, OpstiDomenskiObjekat {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -106,6 +107,50 @@ public class Metads implements Serializable {
      */
     public void setDsmetaattributeList(List<Dsmetaattribute> dsmetaattributeList) {
         this.dsmetaattributeList = dsmetaattributeList;
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        return "Metads";
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        return "metads";
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        Metads mds= (Metads) odo;
+        mds.setDataset(dataset);
+        mds.setDatasetList(datasetList);
+        mds.setMetadsID(metadsID);
+        mds.setDsmetaattributeList(dsmetaattributeList);
+    }
+
+    @Override
+    public Object vratiID() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        return "new metads";
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        return "metads";
     }
     
 }

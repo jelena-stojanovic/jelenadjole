@@ -4,8 +4,10 @@
  */
 package model.dataset;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -366,7 +368,7 @@ static Class[] vratiTipove()
    
 
     @Override
-    public int vratiID() {
+    public Object vratiID() {
         return dataSetID;
     }
 
@@ -382,32 +384,58 @@ static Class[] vratiTipove()
     }        
     
         
-    /***RAZLIKA***/
-    private DataTable dataTable;
-
+//    /***RAZLIKA***/
+//    private DataTable dataTable;
 
     /**
      * @return the dataTable
      */
     public DataTable getDataTable() {
+        DataTable dataTable=null;
+        try {
+            dataTable= deserializeDT();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Dataset.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dataset.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return dataTable;
     }
 
-    /**
-     * @param dataTable the dataTable to set
-     */
-    public void setDataTable(DataTable dataTable) {
-        this.dataTable = dataTable;
+    public void setDataTable(DataTable dt){
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(filePath+".dt"));
+            oos.writeObject(dt);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Dataset.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Dataset.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                oos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Dataset.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-
-    public Metads getMetadsID() {
-        return metadsID;
-    }
-
-    public void setMetadsID(Metads metadsID) {
-        this.metadsID = metadsID;
-    }
-
-/***--RAZLIKA***/    
     
+     public DataTable deserializeDT() throws IOException, ClassNotFoundException{
+            ObjectInputStream ois= new ObjectInputStream(new FileInputStream(filePath+".dt"));
+            DataTable dt=(DataTable) ois.readObject();
+            return dt;
+    }
+//
+//    public Metads getMetadsID() {
+//        return metadsID;
+//    }
+//
+//    public void setMetadsID(Metads metadsID) {
+//        this.metadsID = metadsID;
+//    }
+//
+///***--RAZLIKA***/    
+//    
 }
