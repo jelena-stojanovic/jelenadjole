@@ -4,13 +4,8 @@
  */
 package logic.SO.serialization;
 
-import data.DataSetCollection;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import model.dataset.Dataset;
-import model.dataset.MetaDataSet;
 
 /**
  *

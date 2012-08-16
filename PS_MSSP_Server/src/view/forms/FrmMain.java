@@ -4,20 +4,22 @@
  */
 package view.forms;
 
-import data.DataSetCollection;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import logic.ControllerAL_Main;
 import logic.SO.serialization.Serialize;
 import view.controllers.ControllerUI_AllDataSets;
 import view.controllers.ControllerUI_DSExport;
 import view.controllers.ControllerUI_DSImport;
 import view.controllers.ControllerUI_Main;
+import view.controllers.ControllerUI_Similarity;
 import view.panels.importDSpanel.PaneAnylNewMetaAttribute;
 import view.panels.importDSpanel.PanelAllDataSets;
 import view.panels.importDSpanel.PanelExportDS;
 import view.panels.importDSpanel.PanelImportDS;
+import view.panels.similarity.PanelSimilarity;
 
 /**
  *
@@ -111,6 +113,11 @@ public class FrmMain extends javax.swing.JFrame {
         mSimilarity.setText("Similarity");
 
         miCheckSimilarity.setText(" Check similarity");
+        miCheckSimilarity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCheckSimilarityActionPerformed(evt);
+            }
+        });
         mSimilarity.add(miCheckSimilarity);
 
         jMenuBar1.add(mSimilarity);
@@ -140,13 +147,13 @@ public class FrmMain extends javax.swing.JFrame {
         dsImport.setPanelImportDS(panelImport);
         ControllerUI_Main.getInstance().setActivePanel(panelImport);
     }//GEN-LAST:event_miImportDataSetActionPerformed
-
+    
     private void miShowDataSetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowDataSetsActionPerformed
-        PanelAllDataSets pads= new PanelAllDataSets();
+        PanelAllDataSets pads = new PanelAllDataSets();
         ControllerUI_Main.getInstance().setActivePanel(pads);
         ControllerUI_AllDataSets.getInstance().setPanelAllDS(pads);        
     }//GEN-LAST:event_miShowDataSetsActionPerformed
-
+    
     private void miExportDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExportDSActionPerformed
         PanelExportDS panelExport = new PanelExportDS();
         ControllerUI_DSExport dsExport = new ControllerUI_DSExport();
@@ -154,27 +161,35 @@ public class FrmMain extends javax.swing.JFrame {
         dsExport.setPanelExportDS(panelExport);
         ControllerUI_Main.getInstance().setActivePanel(panelExport);
     }//GEN-LAST:event_miExportDSActionPerformed
-
+    
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         try {
-            Serialize.serialize(DataSetCollection.getInstance().getMetaDataSet());
+        try {
+            Serialize.serialize(ControllerAL_Main.getInstance().getMetads());
             System.out.println("Serialize meta dataset");
         } catch (IOException ex) {
             Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
-
+    
     private void miNewAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNewAdministratorActionPerformed
         FrmAdministrator frmAdmin = new FrmAdministrator();
         frmAdmin.setVisible(true);
         frmAdmin.setFocusable(true);
     }//GEN-LAST:event_miNewAdministratorActionPerformed
-
+    
     private void miAnyNewMattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnyNewMattActionPerformed
-        PaneAnylNewMetaAttribute panma= new PaneAnylNewMetaAttribute();
+        PaneAnylNewMetaAttribute panma = new PaneAnylNewMetaAttribute();
         ControllerUI_Main.getInstance().setActivePanel(panma);
-                
+        
     }//GEN-LAST:event_miAnyNewMattActionPerformed
+    
+    private void miCheckSimilarityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCheckSimilarityActionPerformed
+        PanelSimilarity pansim = new PanelSimilarity();
+        ControllerUI_Similarity contr = new ControllerUI_Similarity();
+        pansim.setController(contr);
+        contr.setPanelSimilarity(pansim);
+        ControllerUI_Main.getInstance().setActivePanel(pansim);
+    }//GEN-LAST:event_miCheckSimilarityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,7 +226,6 @@ public class FrmMain extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new FrmMain().setVisible(true);
             }
@@ -232,19 +246,18 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem miShowDataSets;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
-
-private JPanel activePanel;
+    private JPanel activePanel;
     
-    public void setActivePanel(JPanel newPanel){
-        if (activePanel!=null) this.remove(activePanel);
-
+    public void setActivePanel(JPanel newPanel) {
+        if (activePanel != null) {
+            this.remove(activePanel);
+        }
+        
         activePanel = newPanel;
-        getContentPane().add(activePanel,java.awt.BorderLayout.SOUTH); 
+        getContentPane().add(activePanel, java.awt.BorderLayout.SOUTH);        
         activePanel.setVisible(true);
         validate();
         repaint();
         pack();
     }
-
-
 }

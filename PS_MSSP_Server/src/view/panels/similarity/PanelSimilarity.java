@@ -4,7 +4,10 @@
  */
 package view.panels.similarity;
 
-import data.DataSetCollection;
+import logic.ControllerAL_Main;
+import logic.SO.similarity.CalculateCosineSimilarity;
+import logic.SO.similarity.CalculateEuclidianSimilarity;
+import view.controllers.ControllerUI_Similarity;
 import view.panels.importDSpanel.model.TableModelDataSets;
 
 /**
@@ -13,12 +16,14 @@ import view.panels.importDSpanel.model.TableModelDataSets;
  */
 public class PanelSimilarity extends javax.swing.JPanel {
 
+    
+    private ControllerUI_Similarity controller;
     /**
      * Creates new form PanelSimilarity
      */
     public PanelSimilarity() {
         initComponents();
-        TableModelDataSets tmds = new TableModelDataSets(DataSetCollection.getInstance().getDatasets());
+        TableModelDataSets tmds = new TableModelDataSets(ControllerAL_Main.getInstance().getAllDataSets());
         tblAllDatasets.setModel(tmds);
     }
 
@@ -57,17 +62,21 @@ public class PanelSimilarity extends javax.swing.JPanel {
 
         jLabel1.setText("Select similarity measurement  : ");
 
+        cbSimilarity.setModel(new javax.swing.DefaultComboBoxModel(new Object[] { new CalculateCosineSimilarity(), new CalculateEuclidianSimilarity()}));
+
         btnCalculateSimilarity.setText("Calculate similarity");
+        btnCalculateSimilarity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculateSimilarityActionPerformed(evt);
+            }
+        });
 
         tblAllDatasets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tblAllDatasets.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -108,6 +117,11 @@ public class PanelSimilarity extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCalculateSimilarityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateSimilarityActionPerformed
+        lblSimilarityResult.setText(String.valueOf(controller.calculateSimilarity()));
+    }//GEN-LAST:event_btnCalculateSimilarityActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculateSimilarity;
     private javax.swing.JComboBox cbSimilarity;
@@ -132,8 +146,31 @@ public class PanelSimilarity extends javax.swing.JPanel {
     }
     
     private void addCBItems() {
-        
         cbSimilarity.add(this);
     }
+    
+
+    /**
+     * @return the controller
+     */
+    public ControllerUI_Similarity getController() {
+        return controller;
+    }
+
+    /**
+     * @param controller the controller to set
+     */
+    public void setController(ControllerUI_Similarity controller) {
+        this.controller = controller;
+    }
+
+    /**
+     * @return the tblAllDatasets
+     */
+    public javax.swing.JTable getTblAllDatasets() {
+        return tblAllDatasets;
+    }
+    
+    
 
 }
