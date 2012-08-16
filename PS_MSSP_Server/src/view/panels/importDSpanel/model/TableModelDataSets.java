@@ -20,7 +20,7 @@ public class TableModelDataSets extends AbstractTableModel{
     List<Dataset> datasets= new ArrayList<Dataset>();
     ArrayList<Dsmetaattribute> dataMetaAttributes= ControllerAL_MetaAttribute.getInstance().getAllDsmetaattributes();
 
-    public TableModelDataSets(ArrayList<Dataset> datasets) {
+    public TableModelDataSets(List<Dataset> datasets) {
         this.datasets= datasets;
     }
 

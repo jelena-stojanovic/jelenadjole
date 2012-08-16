@@ -27,7 +27,7 @@ public class Serialize {
             } catch (FileNotFoundException ex) {
 
                 String currentUserName = System.getProperty("user.name");
-                filePath = "C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\" + dataset.getDataSetID() + "_" + dataset.getTitle();
+                filePath = "C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\" + dataset.getDataSetID() + "_" + dataset.getTitle()+".ds";
                 oos = new ObjectOutputStream(new FileOutputStream(filePath));
                 oos.writeObject(dataset);
             } finally {
@@ -38,25 +38,15 @@ public class Serialize {
 
     public static void serialize(Dataset dataset) throws IOException {
 
-        String currentUserName = System.getProperty("user.name");
-        String filePath = "C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\" + dataset.getDataSetID() + "_" + dataset.getTitle();
-        dataset.setFilePath(filePath);
-        
-        File file = new File("C:\\Users\\" + currentUserName + "\\Documents\\DataSetSimilarity\\");
-        
-        if(!file.exists()){
-            file.mkdirs();
-        }
-        
-        addDSToMDS(dataset, filePath);
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
+        //addDSToMDS(dataset, filePath);
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataset.getFilePath()));
         oos.writeObject(dataset);
         oos.close();
         
     }
-    
+    /*
     private static void addDSToMDS(Dataset ds,String filepath){
         if(!(ds instanceof MetaDataSet))
         DataSetCollection.getInstance().getMetaDataSet().getDatasets().add(new File (filepath));
-    }
+    }*/
 }

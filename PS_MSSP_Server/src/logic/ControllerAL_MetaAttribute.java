@@ -14,6 +14,7 @@ import logic.SO.Import_Export.CalculateMetaAttributeForDataSet;
 import logic.SO.VratiSve;
 import logic.SO.serialization.Serialize;
 import model.OpstiDomenskiObjekat;
+import model.Statistic;
 import model.dataset.Dataset;
 import model.dataset.Datasetmetaattribute;
 import model.dataset.Dsmetaattribute;
@@ -98,6 +99,20 @@ public class ControllerAL_MetaAttribute {
         for (int i = 0; i < allODO.size(); i++) {
             OpstiDomenskiObjekat opstiDomenskiObjekat = allODO.get(i);
             Dsmetaattribute dsma= (Dsmetaattribute)opstiDomenskiObjekat;
+            alldsma.add(dsma);
+        }
+        return alldsma;
+    }
+    
+    public ArrayList<Statistic> getAllStatistics(){
+        ArrayList<Statistic> alldsma=new ArrayList<Statistic>();
+        ArrayList<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
+        Statistic st= new Statistic();
+        allODO.add(st);
+        VratiSve.VratiSve(allODO);
+        for (int i = 0; i < allODO.size(); i++) {
+            OpstiDomenskiObjekat opstiDomenskiObjekat = allODO.get(i);
+            Statistic dsma= (Statistic)opstiDomenskiObjekat;
             alldsma.add(dsma);
         }
         return alldsma;
