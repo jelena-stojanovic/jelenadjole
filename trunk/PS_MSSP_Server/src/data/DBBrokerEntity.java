@@ -30,7 +30,7 @@ public class DBBrokerEntity {
     }
 
     private DBBrokerEntity() {
-        emf = Persistence.createEntityManagerFactory("PS_MSSP_ServerPU");
+        emf = Persistence.createEntityManagerFactory("PS_MSSP_ZajednickiPU");
     }
 
     public boolean vratiSveODO(List<OpstiDomenskiObjekat> odoList) {
