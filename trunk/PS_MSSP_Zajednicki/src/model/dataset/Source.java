@@ -5,14 +5,12 @@
 package model.dataset;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import model.OpstiDomenskiObjekat;
-import tools.KonverterTipova;
 
 /**
  *
@@ -33,7 +31,7 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
     @Temporal(TemporalType.DATE)
     private Date sourceDate;
 
-        private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @SequenceGenerator(name="seq", sequenceName="seq") 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
@@ -244,7 +242,7 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
         
     }
 @Override
-    public int vratiID() {
+    public Object vratiID() {
         return sourceID;
     }
 

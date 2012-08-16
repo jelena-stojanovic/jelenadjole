@@ -75,8 +75,8 @@ public class OrdinalAttribute extends Attribute implements Serializable {
     }
 
     @Override
-    public int vratiID() {
-        return attributePK.getIndexOfAttribute();
+    public Object vratiID() {
+        return attributePK;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class DSNoOfAttributes extends NumericalAttribute implements DSMetaAttrib
     int numberOfAttributes=0;
     @Override
     public double calculate(Dataset dataSet) {
-        numberOfAttributes=dataSet.getDataTable().getNumColums();
+        numberOfAttributes=dataSet.getAttributeList().size();
         return numberOfAttributes;
     }
 

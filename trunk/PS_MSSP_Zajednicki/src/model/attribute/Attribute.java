@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import model.Attributestatistic;
 import model.OpstiDomenskiObjekat;
+import model.Statistic;
 import model.dataset.Dataset;
 
 /**
@@ -32,9 +33,9 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
     private List<Attributestatistic> attributestatisticList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
+   /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
     private List<Attributestatistic> attributestatisticList1;
-   
+   */
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -156,16 +157,30 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
     public void setAttributestatisticList(List<Attributestatistic> attributestatisticList) {
         this.attributestatisticList = attributestatisticList;
     }
-
-    @XmlTransient
-    public List<Attributestatistic> getAttributestatisticList1() {
-        return attributestatisticList1;
-    }
-
-    public void setAttributestatisticList1(List<Attributestatistic> attributestatisticList1) {
-        this.attributestatisticList1 = attributestatisticList1;
+    
+    
+     public double getDataSetMetaAttributeValue(Statistic statistic){
+        for (Attributestatistic attstat : attributestatisticList) {
+            if(attstat.getStatistic().getStatisticID()==statistic.getStatisticID())
+                return attstat.getStatisticValue();
+        }
+        return Double.NaN;
+                
     }
     
+    public void addAttributestatistic(Attributestatistic attStat) {
+        attributestatisticList.add(attStat);
+    }
+
+//    @XmlTransient
+//    public List<Attributestatistic> getAttributestatisticList1() {
+//        return attributestatisticList1;
+//    }
+//
+//    public void setAttributestatisticList1(List<Attributestatistic> attributestatisticList1) {
+//        this.attributestatisticList1 = attributestatisticList1;
+//    }
+//    
    
     
 }
