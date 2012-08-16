@@ -4,7 +4,6 @@
  */
 package view.panels.importDSpanel;
 
-import data.DataSetCollection;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import logic.ControllerAL_Main;
