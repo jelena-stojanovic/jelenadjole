@@ -4,14 +4,12 @@
  */
 package view.controllers;
 
-import import_csv.GuessValueTypesClass;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -21,19 +19,12 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.*;
-import javax.swing.text.TableView;
-import javax.swing.text.TableView.TableCell;
-import javax.swing.text.TableView.TableRow;
 import logic.ControllerAL_DSImport;
 import model.Reference;
-import model.ReferencePK;
 import model.attribute.Attribute;
 import model.attribute.AttributePK;
-import model.attribute.NominalAttribute;
-import model.attribute.Ontology;
 import model.dataFormat.CSVFormat;
 import model.dataset.Dataset;
-import model.dataset.DataTable;
 import model.dataset.Source;
 import view.panels.importDSpanel.PanelImportDS;
 import view.panels.importDSpanel.PanelWelcome;
@@ -256,6 +247,7 @@ public class ControllerUI_DSImport {
                 String className = "model.attribute." + simpleClassName;
                 Constructor c = Class.forName(className).getConstructor();
                 Attribute a = (Attribute) c.newInstance();
+                
                 a.setAttributeRole(tmdt.getAttributeRole(i));
                 a.setName(tmdt.getAttributeName(i));
                 AttributePK apk= new AttributePK(i, ds.getDataSetID());
@@ -303,27 +295,17 @@ public class ControllerUI_DSImport {
             }
             ds.setTitle(title);
 
-            ds.setDsDescription(panelImportDS.getTaDataSetDescription().getText().trim());
+            String dsDescr=null;
+            dsDescr=KonverterTipova.Konvertuj(panelImportDS.getTaDataSetDescription(), dsDescr);
+            ds.setDsDescription(dsDescr);
 
             
-
-            String dateS=panelImportDS.getTfDateDS().getText().trim();
-            Date date=null;
-            if(dateS!=null && !dateS.equals("")){
-                date = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
-            }
-            /***CREATE REFERENCEs***/
-            for (Reference ref : references) {
-                ReferencePK refpk= new ReferencePK();
-                refpk.setDataSetID(ds.getDataSetID());
-                ref.setReferencePK(refpk);
-                controllerAL_DSImport.creatNewODO(ref);
-                controllerAL_DSImport.saveODO(ref);
-            }
+            /*** REFERENCEs***/
+            
             ds.setReferenceList(references);
             /***end CREATE REFERENCEs***/
             
-            /***CREATE SOURCE***/
+            /*** SOURCE***/
             Source source = new Source();
             
             String creator=null;
@@ -333,12 +315,13 @@ public class ControllerUI_DSImport {
             String donor=null;
             donor= KonverterTipova.Konvertuj(panelImportDS.getTfDonor(),donor );
             source.setCreator(donor);
+            
+            Date date = null;
+            date= KonverterTipova.Konvertuj(panelImportDS.getTfDateDS(), date);
             source.setSourceDate(date);
             
-            controllerAL_DSImport.saveODO(source);
-            
             ds.setSource(source);
-            /***end CREATE SOURCE***/
+            /***end SOURCE***/
             
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(panelImportDS, "E ovo ne bi trebalo da prodje :)");

@@ -4,16 +4,12 @@
  */
 package logic;
 
-import data.DataSetCollection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import logic.SO.VratiSve;
 import model.OpstiDomenskiObjekat;
 import model.dataset.Dataset;
-import model.dataset.Dsmetaattribute;
-import model.dataset.MetaAttributesAndStatisticsColection;
+import model.dataset.Metads;
 
 /**
  *
@@ -33,26 +29,6 @@ public class ControllerAL_Main {
         private static final ControllerAL_Main INSTANCE = new ControllerAL_Main();
     }
     
-    /*public ArrayList<String> getUnalculatedMetaAttribute(){
-        ArrayList<String> uncalculated= new ArrayList<String>();
-        String[] statclasss = MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames();
-        
-        
-        Dataset dataset1=DataSetCollection.getInstance().getDatasets().get(1);
-        if(dataset1!=null){
-            HashMap<String, Double> metaAttributes = dataset1.getMetaAttributes();
-            System.out.println("All Meta attributes");
-            for (int i = 0; i < statclasss.length; i++) {
-                String string = statclasss[i];
-                System.out.println(i+string);
-                if(!metaAttributes.containsKey(string)){
-                    uncalculated.add(string);
-                }
-            } 
-        }
-        return uncalculated;
-    }
-    */
     public List<Dataset> getAllDataSets(){
         ArrayList<Dataset> alldsma=new ArrayList<Dataset>();
         ArrayList<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
@@ -65,6 +41,16 @@ public class ControllerAL_Main {
             alldsma.add(dsma);
         }
         return alldsma;
+    }
+    
+    public Metads getMetads(){
+        ArrayList<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
+        Metads dma= new Metads();
+        allODO.add(dma);
+        String vratiSve = VratiSve.VratiSve(allODO);
+        System.out.println(vratiSve);
+        dma=(Metads)allODO.get(0);
+        return dma;
     }
     
 }

@@ -7,6 +7,7 @@ package logic.SO.serialization;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.dataset.DataTable;
 import model.dataset.Dataset;
 
 /**
@@ -34,11 +35,13 @@ public class Deserialize {
         return datasets;
     }
     
-        public static Dataset deserialize(String filepath) throws IOException, ClassNotFoundException{
+    public static Dataset deserialize(String filepath) throws IOException, ClassNotFoundException{
             ObjectInputStream ois= new ObjectInputStream(new FileInputStream(filepath));
             Dataset ds=(Dataset) ois.readObject();
             return ds;
     }
 
+       
+        
     
 }

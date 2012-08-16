@@ -7,6 +7,7 @@ package view.panels.importDSpanel;
 import data.DataSetCollection;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import logic.ControllerAL_Main;
 import view.panels.datasets.FrmDataSet;
 import view.panels.importDSpanel.model.TableModelDataSets;
 
@@ -21,7 +22,7 @@ public class PanelAllDataSets extends javax.swing.JPanel {
      */
     public PanelAllDataSets() {
         initComponents();
-        TableModelDataSets tmds = new TableModelDataSets(DataSetCollection.getInstance().getDatasets());
+        TableModelDataSets tmds = new TableModelDataSets(ControllerAL_Main.getInstance().getAllDataSets());
         tblDatasets.setModel(tmds);
     }
 
