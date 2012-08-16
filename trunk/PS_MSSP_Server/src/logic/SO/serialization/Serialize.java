@@ -6,6 +6,7 @@ package logic.SO.serialization;
 
 import java.io.*;
 import model.dataset.Dataset;
+import model.dataset.Metads;
 
 /**
  *
@@ -35,6 +36,14 @@ public class Serialize {
 
         //addDSToMDS(dataset, filePath);
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataset.getFilePath()));
+        oos.writeObject(dataset);
+        oos.close();
+        
+    }
+    public static void serialize(Metads dataset) throws IOException {
+
+        //addDSToMDS(dataset, filePath);
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataset.getDataset().getFilePath()));
         oos.writeObject(dataset);
         oos.close();
         
