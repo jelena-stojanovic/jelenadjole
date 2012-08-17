@@ -46,7 +46,8 @@ public class ConvertValuesToMatrixDataTable {
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
                 DateAttribute da = (DateAttribute) a;
-                Date date = new SimpleDateFormat(da.getDatePatern()).parse(string);
+                //Date date = new SimpleDateFormat(da.getDatePatern()).parse(string);
+                Date date = new Date();
                 Double d = Double.valueOf(date.getTime());
                 dataTable.add(i, index, d);
 
