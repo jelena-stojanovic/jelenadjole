@@ -30,6 +30,9 @@ import model.dataset.Dataset;
     @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
     @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
 public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
+    private List<Possibleattributevalue> possibleattributevalueList;
+    
    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
     private List<Attributestatistic> attributestatisticList;
@@ -60,10 +63,6 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
     public abstract boolean isInterval();
     public abstract boolean isDate();
     
-    public abstract void setPossibleValues(Object object);
-   
-    public abstract Object getPossibleValues();
-
 
     public Attribute() {
     }
@@ -181,6 +180,16 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
 //        this.attributestatisticList1 = attributestatisticList1;
 //    }
 //    
+
+    @XmlTransient
+    public List<Possibleattributevalue> getPossibleattributevalueList() {
+        return possibleattributevalueList;
+    }
+
+    public void setPossibleattributevalueList(List<Possibleattributevalue> possibleattributevalueList) {
+        this.possibleattributevalueList = possibleattributevalueList;
+    }
+
    
     
 }

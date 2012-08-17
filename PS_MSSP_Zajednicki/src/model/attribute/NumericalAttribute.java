@@ -10,6 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import model.Attributestatistic;
 import model.OpstiDomenskiObjekat;
 import model.statistics.Maximum;
@@ -21,9 +26,22 @@ import model.statistics.NumericalStatistic;
  *
  * @author Jelena
  */
+@Entity
+@Table(name = "attribute")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Attribute.findAll", query = "SELECT a FROM Attribute a"),
+    @NamedQuery(name = "Attribute.findByIndexOfAttribute", query = "SELECT a FROM Attribute a WHERE a.attributePK.indexOfAttribute = :indexOfAttribute"),
+    @NamedQuery(name = "Attribute.findByDataSetID", query = "SELECT a FROM Attribute a WHERE a.attributePK.dataSetID = :dataSetID"),
+    @NamedQuery(name = "Attribute.findByName", query = "SELECT a FROM Attribute a WHERE a.name = :name"),
+    @NamedQuery(name = "Attribute.findByDescription", query = "SELECT a FROM Attribute a WHERE a.description = :description"),
+    @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
+    @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
 public class NumericalAttribute extends Attribute implements Serializable {
 
     public NumericalAttribute() {
+        
+        
     }
 
     
@@ -51,7 +69,7 @@ public class NumericalAttribute extends Attribute implements Serializable {
  * 
  * @return range of values
  */
-    @Override
+    
     public Object getPossibleValues() {
         double minValue=0;
         double maxValue=0;
@@ -92,10 +110,10 @@ public class NumericalAttribute extends Attribute implements Serializable {
 //        this.statistics = statistics;
 //    }
 
-    @Override
-    public void setPossibleValues(Object object) {
-        
-    }
+//    @Override
+//    public void setPossibleValues(Object object) {
+//        
+//    }
 @Override
     public String vratiImeKlase() {
         return "NumericalAttribute";
