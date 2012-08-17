@@ -7,6 +7,9 @@ package logic.SO.Import_Export;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import model.attribute.Attribute;
+import model.attribute.Possibleattributevalue;
+import model.attribute.PossibleattributevaluePK;
 
 /**
  *
@@ -15,12 +18,28 @@ import java.util.*;
 public class MappingValues {
 
     
-    public static HashMap<String, Double> mapNominalToNumerical(List<String> nominalValues, HashMap<String, Double> indexMap) {
+//    public static HashMap<String, Double> mapNominalToNumerical(List<String> nominalValues, HashMap<String, Double> indexMap) {
+//        for (int i = 0; i < nominalValues.size(); i++) {
+//            String string = nominalValues.get(i);
+//            indexMap.put(string, Double.valueOf(i));
+//        }
+//        return indexMap;
+//    }
+//    
+    public static List<Possibleattributevalue> mapNominalToNumerical(Attribute a, List<String> nominalValues, List<Possibleattributevalue> pvalues) {
         for (int i = 0; i < nominalValues.size(); i++) {
+            Possibleattributevalue pv= new Possibleattributevalue();
+            
+            PossibleattributevaluePK pk=new PossibleattributevaluePK(a.getAttributePK().getIndexOfAttribute(), a.getAttributePK().getDataSetID(), Double.valueOf(i));
             String string = nominalValues.get(i);
-            indexMap.put(string, Double.valueOf(i));
+            
+            pv.setPossibleattributevaluePK(pk);
+            pv.setAttribute(a);
+            pv.setPossibleValue(string);
+            
+            pvalues.add(pv);
         }
-        return indexMap;
+        return pvalues;
     }
 
     public static void extractPossibleNominaValuse(List<String> allNominalValues, List<String> possibleNominalValues) {

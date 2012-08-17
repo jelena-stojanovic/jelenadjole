@@ -84,7 +84,8 @@ public class CSVExportDSToFile {
                     }else if(attributes.get(j).isDate()){
                         DateAttribute da= (DateAttribute)attributes.get(j);
                         Date date = da.getDateFromDouble(d);
-                        String format= da.getDatePatern();
+                        //String format= da.getDatePatern();
+                        String format= "MM/dd/yyyy";
                         String dateInFormat= new SimpleDateFormat(format).format(date);
                         out.print(',' + dateInFormat);
                     }else {

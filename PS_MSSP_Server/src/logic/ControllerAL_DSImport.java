@@ -7,12 +7,9 @@ package logic;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import logic.SO.Import_Export.*;
 import logic.SO.KreirajNovi;
 import logic.SO.MissingValues;
@@ -23,7 +20,7 @@ import model.OpstiDomenskiObjekat;
 import model.Reference;
 import model.ReferencePK;
 import model.attribute.Attribute;
-import model.attribute.NumericalAttribute;
+import model.attribute.Possibleattributevalue;
 import model.dataset.Dataset;
 import model.dataset.DataTable;
 import model.dataset.Datasetmetaattribute;
@@ -82,16 +79,22 @@ public class ControllerAL_DSImport {
         int column = stringArrayList.get(1).length;
         DataTable dataTable = new DataTable(row, column);
         
-        
+        /**mapping values**/
         for (int i = 0; i < attributes.size(); i++) {
             try {
                 Attribute attribute = attributes.get(i);
 
                 String[] allValues = verticalArrayListString.get(attribute.getAttributePK().getIndexOfAttribute());
-
-                Object possibleValues = AttributePossibleValues.getAttributePossibleValues(attribute, allValues);
-                attribute.setPossibleValues(possibleValues);
-
+                //Object possibleValues = AttributePossibleValues.getAttributePossibleValues(attribute, allValues);
+                //attribute.setPossibleValues(possibleValues);
+                List<Possibleattributevalue> attributePossibleValues = AttributePossibleValues.getAttributePossibleValues(attribute, allValues);
+                //attribute.setPossibleattributevalueList(attributePossibleValues);
+                for (int j = 0; j < attributePossibleValues.size(); j++) {
+                    Possibleattributevalue possibleattributevalue = attributePossibleValues.get(j);
+                    saveODO(possibleattributevalue);
+                    
+                }
+                
                 attribute.setMissingValues(MissingValues.countMissingValues(allValues));
 
                 ConvertValuesToMatrixDataTable.convert(dataTable, attribute, allValues);
@@ -102,6 +105,8 @@ public class ControllerAL_DSImport {
 
             }
         }
+        /**end mapping values**/
+        
         /**end create dataTable**/
         
 
