@@ -5,10 +5,7 @@
 package model.attribute;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,6 +29,14 @@ import model.OpstiDomenskiObjekat;
     @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
     @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
 public class NominalAttribute extends Attribute implements Serializable {
+
+    public NominalAttribute(int indexOfAttribute, int dataSetID) {
+        super(indexOfAttribute, dataSetID);
+    }
+
+    public NominalAttribute(AttributePK attributePK) {
+        super(attributePK);
+    }
 
 //    private List<String> possibleNominalValue;
 //    private HashMap<String, Double> classToIndexMap = new HashMap<String, Double>();
@@ -78,9 +83,6 @@ public class NominalAttribute extends Attribute implements Serializable {
 //        return possibleNominalValue;
 //    }
 
-    /**
-     * @param possibleNominalValue the possibleNominalValue to set
-     */
 //    public void setPossibleNominalValue(List<String> possibleNominalValue) {
 //        this.possibleNominalValue = possibleNominalValue;
 //    }
@@ -92,9 +94,7 @@ public class NominalAttribute extends Attribute implements Serializable {
 //        return classToIndexMap;
 //    }
 
-    /**
-     * @param classToIndexMap the classToIndexMap to set
-     */
+    
 //    public void setClassToIndexMap(HashMap<String, Double> classToIndexMap) {
 //        this.classToIndexMap = classToIndexMap;
 //    }
@@ -153,7 +153,7 @@ public class NominalAttribute extends Attribute implements Serializable {
 
     @Override
     public Object vratiID() {
-        return attributePK.getIndexOfAttribute();
+        return attributePK;
     }
 
     @Override

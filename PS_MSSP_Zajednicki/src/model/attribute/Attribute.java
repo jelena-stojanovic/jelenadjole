@@ -30,38 +30,41 @@ import model.dataset.Dataset;
     @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
     @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
 public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
+    
+    
+   
+    /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
+    private List<Attributestatistic> attributestatisticList1;
+   */
+
+    private static final long serialVersionUID = 1L;
+    
+    @EmbeddedId
+    protected AttributePK attributePK;
+    
+    @Column(name = "name")
+    private String name;
+    
+    @Column(name = "description")
+    private String description;
+    
+    @Column(name = "missingValues")
+    private Integer missingValues;
+    
+    @Column(name = "attributeRole")
+    private String attributeRole;
+    
+    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Dataset dataset;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
     private List<Possibleattributevalue> possibleattributevalueList;
     
    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
     private List<Attributestatistic> attributestatisticList;
-   /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
-    private List<Attributestatistic> attributestatisticList1;
-   */
-
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AttributePK attributePK;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "missingValues")
-    private Integer missingValues;
-    @Column(name = "attributeRole")
-    private String attributeRole;
-    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Dataset dataset;
-
     
-    
-    public abstract boolean isNominal();
-    public abstract boolean isNumerical();
-    public abstract boolean isOrdinal();
-    public abstract boolean isInterval();
-    public abstract boolean isDate();
     
 
     public Attribute() {
@@ -190,6 +193,11 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
         this.possibleattributevalueList = possibleattributevalueList;
     }
 
-   
+    public abstract boolean isNominal();
+    public abstract boolean isNumerical();
+    public abstract boolean isOrdinal();
+    public abstract boolean isInterval();
+    public abstract boolean isDate();
+    
     
 }

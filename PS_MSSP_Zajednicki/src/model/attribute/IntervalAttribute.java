@@ -112,5 +112,13 @@ public class IntervalAttribute extends Attribute implements Serializable {
         return "interval attribute";
     }
 
+    public IntervalAttribute(int indexOfAttribute, int dataSetID) {
+        super(indexOfAttribute, dataSetID);
+    }
+
+    public IntervalAttribute(AttributePK attributePK) {
+        super(attributePK);
+    }
+
     
 }

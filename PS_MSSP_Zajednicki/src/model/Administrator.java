@@ -139,6 +139,7 @@ public class Administrator implements Serializable, OpstiDomenskiObjekat{
     
     @Override
     public String vratiNazivTabele() {
+        
         return "administrator";
     }
 
@@ -156,15 +157,15 @@ public class Administrator implements Serializable, OpstiDomenskiObjekat{
     public Object vratiID() {
         return adminID;
     }
-String atributPretrazivanja="adminID";
+
     @Override
     public void postaviAtributPretrazivanja(String atribut) {
-        atributPretrazivanja=atribut;
+
     }
     
     @Override
     public String vratiAtributPretrazivanja() {
-        return atributPretrazivanja;
+        return "adminID";
     }
 
      @Override

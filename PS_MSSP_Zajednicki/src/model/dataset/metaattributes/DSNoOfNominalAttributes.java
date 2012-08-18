@@ -7,14 +7,13 @@ package model.dataset.metaattributes;
 import java.io.Serializable;
 import java.util.List;
 import model.attribute.Attribute;
-import model.attribute.NumericalAttribute;
 import model.dataset.Dataset;
 
 /**
  *
  * @author Jelena
  */
-public class DSNoOfNominalAttributes extends NumericalAttribute implements DSMetaAttribute, Serializable{
+public class DSNoOfNominalAttributes  implements DSMetaAttribute, Serializable{
 
     int noOfNominalAttributes=0;
     @Override
@@ -36,6 +35,11 @@ public class DSNoOfNominalAttributes extends NumericalAttribute implements DSMet
     @Override
     public double getValue() {
         return noOfNominalAttributes;
+    }
+
+    @Override
+    public String getName() {
+        return "DSNoOfNominalAttributes";
     }
     
 }

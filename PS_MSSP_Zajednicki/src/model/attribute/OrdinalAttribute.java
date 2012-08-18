@@ -32,6 +32,15 @@ public class OrdinalAttribute extends Attribute implements Serializable {
     public OrdinalAttribute() {
     }
 
+    public OrdinalAttribute(AttributePK attributePK) {
+        super(attributePK);
+    }
+
+    public OrdinalAttribute(int indexOfAttribute, int dataSetID) {
+        super(indexOfAttribute, dataSetID);
+    }
+    
+
     
     @Override
     public boolean isNominal() {

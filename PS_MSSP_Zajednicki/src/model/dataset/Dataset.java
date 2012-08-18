@@ -5,6 +5,7 @@
 package model.dataset;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +60,7 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
     
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dataset")
-    private List<Attribute> attributeList;
+    private List<Attribute> attributeList= new ArrayList<Attribute>();
     
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "dataset")
@@ -67,11 +68,11 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
     
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dataset")
-    private List<Datasetmetaattribute> datasetmetaattributeList;
+    private List<Datasetmetaattribute> datasetmetaattributeList= new ArrayList<Datasetmetaattribute>();
     
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dataset")
-    private List<Reference> referenceList;
+    private List<Reference> referenceList= new ArrayList<Reference>();
 
     //private DataTable dataTable;
 
