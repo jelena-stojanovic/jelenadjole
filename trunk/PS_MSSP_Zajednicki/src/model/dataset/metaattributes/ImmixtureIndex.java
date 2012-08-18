@@ -5,14 +5,13 @@
 package model.dataset.metaattributes;
 
 import java.io.Serializable;
-import model.attribute.NumericalAttribute;
 import model.dataset.Dataset;
 
 /**
  *
  * @author Jelena
  */
-public class ImmixtureIndex extends NumericalAttribute implements DSMetaAttribute, Serializable{
+public class ImmixtureIndex implements DSMetaAttribute, Serializable{
 
     @Override
     public double calculate(Dataset dataSet) {
@@ -26,6 +25,11 @@ public class ImmixtureIndex extends NumericalAttribute implements DSMetaAttribut
 
     @Override
     public double getValue() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getName() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

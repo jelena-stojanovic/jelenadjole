@@ -7,14 +7,13 @@ package model.dataset.metaattributes;
 import java.io.Serializable;
 import java.util.List;
 import model.attribute.Attribute;
-import model.attribute.NumericalAttribute;
 import model.dataset.Dataset;
 
 /**
  *
  * @author Jelena
  */
-public class PercentOfNominalAttribute extends NumericalAttribute implements DSMetaAttribute, Serializable{
+public class PercentOfNominalAttribute implements DSMetaAttribute, Serializable{
 
     int percentOfNominalAttributes=0;
     @Override
@@ -36,6 +35,11 @@ public class PercentOfNominalAttribute extends NumericalAttribute implements DSM
     @Override
     public double getValue() {
         return percentOfNominalAttributes;
+    }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

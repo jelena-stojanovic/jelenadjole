@@ -7,14 +7,13 @@ package model.dataset.metaattributes;
 import java.io.Serializable;
 import java.util.List;
 import model.attribute.Attribute;
-import model.attribute.NumericalAttribute;
 import model.dataset.Dataset;
 
 /**
  *
  * @author Jelena
  */
-public class NoOfNumericalAttributes extends NumericalAttribute implements DSMetaAttribute, Serializable{
+public class NoOfNumericalAttributes implements DSMetaAttribute, Serializable{
 
     int noOfNumericalAttribute;
     @Override
@@ -36,6 +35,11 @@ public class NoOfNumericalAttributes extends NumericalAttribute implements DSMet
     @Override
     public double getValue() {
         return noOfNumericalAttribute;
+    }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

@@ -6,15 +6,12 @@ package model.attribute;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import model.OpstiDomenskiObjekat;
-import model.statistics.Maximum;
-import model.statistics.Minimum;
 
 /**
  *
@@ -87,11 +84,7 @@ public class DateAttribute extends Attribute  implements Serializable {
 //        this.datePatern = datePatern;
 //    }
 //    
-    /**
-     * 
-     * @param d double value from matrix
-     * @return Date
-     */
+    
     public Date getDateFromDouble(double d){
         Long time= Math.round(d);
         Date date= new Date(time);

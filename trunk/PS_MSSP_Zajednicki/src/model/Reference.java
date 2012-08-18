@@ -5,13 +5,10 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import model.dataset.Dataset;
-import tools.KonverterTipova;
 
 /**
  *
@@ -181,7 +178,7 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     @Override
     public String vratiAtributPretrazivanja() {
         //return "referenceID";
-        return atributPretrazivanja;
+        return "ReferenceID";
     }
 
 //    @Override
@@ -291,10 +288,10 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
     public Object vratiID() {
         return referencePK;
     }
-private String atributPretrazivanja;
+
     @Override
     public void postaviAtributPretrazivanja(String atribut) {
-        atributPretrazivanja=atribut;
+
     }
 
 }

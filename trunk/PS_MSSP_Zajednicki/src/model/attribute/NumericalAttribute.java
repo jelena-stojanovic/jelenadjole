@@ -44,11 +44,15 @@ public class NumericalAttribute extends Attribute implements Serializable {
         
     }
 
-    
-    /**
-     * map of class names of statistics and their values of concrete attribute
-     */
+    public NumericalAttribute(int indexOfAttribute, int dataSetID) {
+        super(indexOfAttribute, dataSetID);
+    }
+
   //  private HashMap<String, Double> statistics;
+
+    public NumericalAttribute(AttributePK attributePK) {
+        super(attributePK);
+    }
 
     
     @Override
@@ -65,11 +69,7 @@ public class NumericalAttribute extends Attribute implements Serializable {
     public boolean isOrdinal() {
          return false;
     }
-/**
- * 
- * @return range of values
- */
-    
+
     public Object getPossibleValues() {
         double minValue=0;
         double maxValue=0;
@@ -96,9 +96,7 @@ public class NumericalAttribute extends Attribute implements Serializable {
         return false;
     }
 
-    /**
-     * @return the statistics
-     */
+  
 //    public HashMap<String, Double> getStatistics() {
 //        return statistics;
 //    }

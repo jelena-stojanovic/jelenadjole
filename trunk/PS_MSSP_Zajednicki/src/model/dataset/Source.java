@@ -246,15 +246,15 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
         return sourceID;
     }
 
-   private String atributPretrazivanja;
+   
     @Override
     public void postaviAtributPretrazivanja(String atribut) {
-        atributPretrazivanja=atribut;
+        
     }
     @Override
     public String vratiAtributPretrazivanja() {
         //return "dataSetID";
-        return atributPretrazivanja;
+        return "SourceID";
     }
 
     public Date getSourceDate() {
