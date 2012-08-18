@@ -5,12 +5,9 @@
 package view.panels.importDSpanel;
 
 import java.awt.Color;
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import view.controllers.ControllerUI_DSImport;
 
 /**

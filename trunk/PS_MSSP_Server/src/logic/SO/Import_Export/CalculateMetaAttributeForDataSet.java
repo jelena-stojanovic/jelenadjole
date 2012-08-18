@@ -32,6 +32,7 @@ public class CalculateMetaAttributeForDataSet {
     public List<Datasetmetaattribute> calculate(Dataset ds,List<Dsmetaattribute> availableMetaAttribute){
         String[] availableMetaAttributeImplementationClassNames= new String[availableMetaAttribute.size()];
         List<Datasetmetaattribute> list= new ArrayList<Datasetmetaattribute>();
+        if(ds!=null){
         for (int i = 0; i < availableMetaAttribute.size(); i++) {
             Dsmetaattribute dsmetaattribute = availableMetaAttribute.get(i);
             availableMetaAttributeImplementationClassNames[i]=dsmetaattribute.getDsmetaattributeClass();
@@ -44,7 +45,7 @@ public class CalculateMetaAttributeForDataSet {
             d.setValue(doub);
             list.add(d);
         }
-        
+        }
         return list;
     }
     
