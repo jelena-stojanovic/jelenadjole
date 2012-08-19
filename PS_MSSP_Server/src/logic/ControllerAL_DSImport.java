@@ -24,6 +24,8 @@ import model.attribute.Possibleattributevalue;
 import model.dataset.Dataset;
 import model.dataset.DataTable;
 import model.dataset.Datasetmetaattribute;
+import model.statistics.Maximum;
+import model.statistics.Minimum;
 
 /**
  *
@@ -98,6 +100,25 @@ public class ControllerAL_DSImport {
                 attribute.setMissingValues(MissingValues.countMissingValues(allValues));
 
                 ConvertValuesToMatrixDataTable.convert(dataTable, attribute, allValues);
+//--------------------------------------------  
+                /***calculate statistics***/
+                double[] columnatt = dataTable.getColumn(attribute.getAttributePK().getIndexOfAttribute());//uzima iz datatable kolonu
+                List<Attributestatistic> statistics = new CalculatedNumericalStatistics().calculate(attribute, columnatt, ControllerAL_MetaAttribute.getInstance().getAllStatistics());
+                attribute.setAttributestatisticList(statistics);
+                /***end calculate statistics***/
+                
+                /***save statistics***/
+                for (Attributestatistic attributestatistic : statistics) {
+                    saveODO(attributestatistic);
+                }
+                /***end save statistics***/
+                
+                
+                if(attribute.getNumericalattribute()!=null){
+                    attribute.getNumericalattribute().setMinValue(attribute.getStatisticValue(Minimum.class.getSimpleName()));
+                    attribute.getNumericalattribute().setMaxValue(attribute.getStatisticValue(Maximum.class.getSimpleName()));
+                }
+///------------------------------------------
 
             } catch (ParseException ex) {
                 Logger.getLogger(ControllerAL_DSImport.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,39 +159,42 @@ public class ControllerAL_DSImport {
         /***sracunavanje statistika**/
         for (int i = 0; i < attributes.size(); i++) {
             Attribute attribute = attributes.get(i);
-            if (attribute.isNumerical()) {
+    //        if (attribute.getNumericalattribute()!=null) {
                 System.out.println(attribute.getName());
                 
-
-                double[] columnatt = dataTable.getColumn(attribute.getAttributePK().getIndexOfAttribute());//uzima iz datatable kolonu
-                if (columnatt == null) {
-                    System.out.println("Niz je prazan");
-                }
+//--------------------------------copy
+//                double[] columnatt = dataTable.getColumn(attribute.getAttributePK().getIndexOfAttribute());//uzima iz datatable kolonu
+//                if (columnatt == null) {
+//                    System.out.println("Niz je prazan");
+//                }
+//                
+//
+//                List<Attributestatistic> statistics = new CalculatedNumericalStatistics().calculate(attribute, columnatt, ControllerAL_MetaAttribute.getInstance().getAllStatistics());
+//                attribute.setAttributestatisticList(statistics);
+//
+//                /***save statistics***/
+//                for (Attributestatistic attributestatistic : statistics) {
+//                    saveODO(attributestatistic);
+//                }
+//                /***end save statistics***/
+//---------------------------------paste gore                                
                 
-
-                List<Attributestatistic> statistics = new CalculatedNumericalStatistics().calculate(attribute, columnatt, ControllerAL_MetaAttribute.getInstance().getAllStatistics());
-                attribute.setAttributestatisticList(statistics);
-
-                /****stampa statistika***/
-                if (statistics.isEmpty()) {
-                    System.out.println("Statistike su prazne");
-                }
-                for (int j = 0; j < statistics.size(); j++) {
-                    Attributestatistic attributestatistic = statistics.get(j);
-                    System.out.println(attributestatistic.getStatistic().getStatisticName()+"="+attributestatistic.getStatisticValue());
-                }
-                /****end stampa statistika***/
-                /***save statistics***/
-                for (Attributestatistic attributestatistic : statistics) {
-                    saveODO(attributestatistic);
-                }
-                /***end save statistics***/
+//                /****stampa statistika***/
+//                if (statistics.isEmpty()) {
+//                    System.out.println("Statistike su prazne");
+//                }
+//                for (int j = 0; j < statistics.size(); j++) {
+//                    Attributestatistic attributestatistic = statistics.get(j);
+//                    System.out.println(attributestatistic.getStatistic().getStatisticName()+"="+attributestatistic.getStatisticValue());
+//                }
+//                /****end stampa statistika***/
+                
                 
                 /**save attribute**/
                 
                 saveODO(attribute);
                 /**end save attribute**/
-            }
+        //KRAJ IF ZAGRADA    }
             
             /***end sracunavanje statistika**/
         }

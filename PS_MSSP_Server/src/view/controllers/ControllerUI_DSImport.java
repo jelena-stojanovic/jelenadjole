@@ -237,56 +237,14 @@ public class ControllerUI_DSImport {
         }
     }
 
-    public List<Attribute> createAttributes(Dataset ds) {
-
-        List<Attribute> attributes = new ArrayList<Attribute>();
-        TableModelDataTypes tmdt = (TableModelDataTypes) tblDatatypes.getModel();
-        for (int i = 0; i < columnIdentifiers.length; i++) {
-            try {
-                String simpleClassName = tmdt.getAttributeType(i) + "Attribute";
-                String className = "model.attribute." + simpleClassName;
-                Constructor c = Class.forName(className).getConstructor();
-                Attribute a = (Attribute) c.newInstance();
-                
-                a.setAttributeRole(tmdt.getAttributeRole(i));
-                a.setName(tmdt.getAttributeName(i));
-                AttributePK apk= new AttributePK(i, ds.getDataSetID());
-                a.setAttributePK(apk);
-                
-                attributes.add(a);
-            } catch (InstantiationException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchMethodException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(i) + " couldn't be saved. " + ex);
-                Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-        return attributes;
-    }
-
+    
     private Dataset createDS() {
 
         Dataset ds = new Dataset();
         controllerAL_DSImport.creatNewODO(ds);
+        TableModelDataTypes tmdt = (TableModelDataTypes) tblDatatypes.getModel();
         try {
-            List<Attribute> attributes = createAttributes(ds);
+            List<Attribute> attributes = AttributeFactory.createAttributes(ds,tmdt);
             ds.setAttributeList(attributes);
 
             String title = panelImportDS.getTfDataSetTitle().getText().trim();
@@ -323,6 +281,19 @@ public class ControllerUI_DSImport {
             ds.setSource(source);
             /***end SOURCE***/
             
+        } catch (InstantiationException ex) {
+           JOptionPane.showMessageDialog(panelImportDS, "Attribute " + tmdt.getAttributeName(0) + "(mozda i ne prvi) couldn't be saved. " + ex);
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(ControllerUI_DSImport.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(panelImportDS, "E ovo ne bi trebalo da prodje :)");
         }

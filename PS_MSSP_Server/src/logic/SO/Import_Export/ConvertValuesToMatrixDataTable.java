@@ -7,10 +7,7 @@ package logic.SO.Import_Export;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import model.attribute.Attribute;
-import model.attribute.DateAttribute;
-import model.attribute.NominalAttribute;
+import model.attribute.*;
 import model.dataset.DataTable;
 
 /**
@@ -23,17 +20,17 @@ public class ConvertValuesToMatrixDataTable {
 
         int index = a.getAttributePK().getIndexOfAttribute();
 
-        if (a.isNominal()) {
+        if (a.getNominalattribute()!=null) {
 
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
-                NominalAttribute na = (NominalAttribute) a;
+                Nominalattribute na = a.getNominalattribute();
                 Double d = na.getIndexOfNominalValue(string);
               
                 dataTable.add(i, index, d);
 
             }
-        } else if (a.isNumerical()) {
+        } else if (a.getNumericalattribute()!=null) {
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
                 Double d = Double.parseDouble(string);
@@ -41,18 +38,18 @@ public class ConvertValuesToMatrixDataTable {
 
             }
 
-        } else if (a.isOrdinal()) {
-        } else if (a.isDate()) {
+        //} else if (a.isOrdinal()) {
+        } else if (a.getDateattribute()!=null) {
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
-                DateAttribute da = (DateAttribute) a;
-                //Date date = new SimpleDateFormat(da.getDatePatern()).parse(string);
-                Date date = new Date();
+                Dateattribute da = a.getDateattribute();
+                Date date = new SimpleDateFormat(da.getDatePattern()).parse(string);
+                
                 Double d = Double.valueOf(date.getTime());
                 dataTable.add(i, index, d);
 
             }
-        } else if (a.isInterval()) {
+       // } else if (a.isInterval()) {
         }
 
 
