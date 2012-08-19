@@ -6,6 +6,7 @@ package view.panels.importDSpanel;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import logic.ControllerAL_Main;
 import view.panels.datasets.FrmDataSet;
 import view.panels.importDSpanel.model.TableModelDataSets;
@@ -71,24 +72,25 @@ public class PanelAllDataSets extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDatasetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatasetsMouseClicked
-        JPopupMenu popupMeny = new JPopupMenu();
-        JMenuItem miViewDataset = new JMenuItem("View dataset");
-        tblDatasets.getSelectedRow();
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            JPopupMenu popupMeny = new JPopupMenu();
+            JMenuItem miViewDataset = new JMenuItem("View dataset");
+            tblDatasets.getSelectedRow();
 
-        miViewDataset.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FrmDataSet dsForm = new FrmDataSet();
-                dsForm.setVisible(true);
-                dsForm.setFocusable(true);
-            }
-        });
-        
-        popupMeny.add(miViewDataset);
-        popupMeny.show(evt.getComponent(), evt.getX(), evt.getY());
-        popupMeny.setVisible(true);
-        popupMeny.setFocusable(true);
-        
+            miViewDataset.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    FrmDataSet dsForm = new FrmDataSet();
+                    dsForm.setVisible(true);
+                    dsForm.setFocusable(true);
+                }
+            });
+
+            popupMeny.add(miViewDataset);
+            popupMeny.show(evt.getComponent(), evt.getX(), evt.getY());
+            popupMeny.setVisible(true);
+            popupMeny.setFocusable(true);
+        }
     }//GEN-LAST:event_tblDatasetsMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

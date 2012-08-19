@@ -20,22 +20,27 @@ import java.awt.event.*;
 import javax.swing.table.*;
 import java.net.*;
 import java.io.*;
+import logic.SO.KreirajNovi;
+import logic.SO.Obradi;
+import logic.SO.Pretrazi;
+import logic.SO.Storniraj;
+import logic.SO.Zapamti;
 import model.OpstiDomenskiObjekat;
 import view.forms.OpstaEkranskaForma;
 
 public abstract class OpstiKontrolerKI {
 
-    Socket soketK;
-    ObjectOutputStream out;
-    ObjectInputStream in;
+//    Socket soketK;
+//    ObjectOutputStream out;
+//    ObjectInputStream in;
     String signal;
     OpstiDomenskiObjekat odo;
     OpstaEkranskaForma oef;
 
-    OpstiKontrolerKI() throws IOException {
-        soketK = new Socket("127.0.0.1", 8189);
-        out = new ObjectOutputStream(soketK.getOutputStream());
-        in = new ObjectInputStream(soketK.getInputStream());
+    OpstiKontrolerKI()  {
+//        soketK = new Socket("127.0.0.1", 8189);
+//        out = new ObjectOutputStream(soketK.getOutputStream());
+//        in = new ObjectInputStream(soketK.getInputStream());
     }
 
     public String pritisakTipke(KeyEvent evt) {
@@ -72,7 +77,7 @@ public abstract class OpstiKontrolerKI {
         /**
          * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
          */
-        signal = pozivSO("Pretrazi");
+        signal = Pretrazi.Pretrazi(odo);
         /**
          * *******************************************************************************
          */
@@ -86,7 +91,7 @@ public abstract class OpstiKontrolerKI {
         /**
          * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
          */
-        signal = pozivSO("kreirajNovi");
+        signal = KreirajNovi.kreirajNovi(odo);
         /**
          * *******************************************************************************
          */
@@ -100,7 +105,7 @@ public abstract class OpstiKontrolerKI {
         /**
          * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
          */
-        signal = pozivSO("Zapamti");
+        signal = Zapamti.Zapamti(odo);
         /**
          * *******************************************************************************
          */
@@ -114,7 +119,7 @@ public abstract class OpstiKontrolerKI {
         /**
          * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
          */
-        signal = pozivSO("Storniraj");
+        signal = Storniraj.Storniraj(odo);
         /**
          * *******************************************************************************
          */
@@ -128,7 +133,7 @@ public abstract class OpstiKontrolerKI {
         /**
          * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
          */
-        signal = pozivSO("Obradi");
+        signal = Obradi.Obradi(odo);
         /**
          * *******************************************************************************
          */
@@ -136,22 +141,22 @@ public abstract class OpstiKontrolerKI {
         return signal;
     }
 
-    String pozivSO(String nazivSO) {
-        try {
-            out.writeObject(nazivSO);
-            out.writeObject(odo);
-        } catch (IOException io) {
-            return "Neuspesno slanje objekata ka serveru.";
-        }
-
-        try {
-            odo = (OpstiDomenskiObjekat) in.readObject();
-            signal = (String) in.readObject();
-        } catch (Exception e) {
-            return "Neuspesno citanje objekata sa servera";
-        }
-        return signal;
-    }
+//    String pozivSO(String nazivSO) {
+//        try {
+//            out.writeObject(nazivSO);
+//            out.writeObject(odo);
+//        } catch (IOException io) {
+//            return "Neuspesno slanje objekata ka serveru.";
+//        }
+//
+//        try {
+//            odo = (OpstiDomenskiObjekat) in.readObject();
+//            signal = (String) in.readObject();
+//        } catch (Exception e) {
+//            return "Neuspesno citanje objekata sa servera";
+//        }
+//        return signal;
+//    }
 
     abstract public void KonvertujGrafickiObjekatUDomenskiObjekat();
 
