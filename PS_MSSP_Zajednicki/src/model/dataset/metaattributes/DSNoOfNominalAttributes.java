@@ -20,7 +20,7 @@ public class DSNoOfNominalAttributes  implements DSMetaAttribute, Serializable{
     public double calculate(Dataset dataSet) {
         List<Attribute> attributes= dataSet.getAttributeList();
         for (Attribute attribute : attributes) {
-            if(attribute.isNominal()){
+            if(attribute.getNominalattribute()!=null){
                 noOfNominalAttributes++;
             }
         }
