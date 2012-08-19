@@ -6,9 +6,11 @@ package view.guicontrollers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import model.dataset.Dataset;
+import model.dataset.metaattributes.DSMetaAttribute;
 import view.panels.PanelAllDataSets;
-import view.panels.TableModelDataSets;
+import view.panels.tablemodels.TableModelDataSets;
 
 /**
  *
@@ -39,7 +41,9 @@ public class ControllerUI_AllDataSets extends OpstiKontrolerKI{
 */
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
+        
         throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     @Override

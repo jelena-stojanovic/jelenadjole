@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.panels;
+package view.panels.tablemodels;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.dataset.Dataset;
-import model.dataset.MetaAttributesAndStatisticsColection;
+import model.dataset.Dsmetaattribute;
 
 /**
  *
@@ -16,9 +16,11 @@ import model.dataset.MetaAttributesAndStatisticsColection;
  */
 public class TableModelDataSets extends AbstractTableModel{
     List<Dataset> datasets= new ArrayList<Dataset>();
+    List<Dsmetaattribute> dataMetaAttributes= new ArrayList<Dsmetaattribute>();
 
-    public TableModelDataSets(ArrayList<Dataset> datasets) {
+    public TableModelDataSets(List<Dataset> datasets, List<Dsmetaattribute> dataMetaAttributes) {
         this.datasets= datasets;
+        this.dataMetaAttributes=dataMetaAttributes;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class TableModelDataSets extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return Dataset.vratiZaglavlje().length+MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames().length;
+        return Dataset.vratiZaglavlje().length+dataMetaAttributes.size();
     }
 
     @Override
@@ -36,7 +38,7 @@ public class TableModelDataSets extends AbstractTableModel{
         if(column<Dataset.vratiZaglavlje().length){
             return Dataset.vratiZaglavlje()[column];
         }else{
-            return MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames()[column-Dataset.vratiZaglavlje().length];
+            return dataMetaAttributes.get(column-Dataset.vratiZaglavlje().length).getDsmetaattributeName();
         }
     }
 
@@ -49,9 +51,11 @@ public class TableModelDataSets extends AbstractTableModel{
         if(columnIndex<Dataset.vratiZaglavlje().length){
             return objs[columnIndex];
         }else{
-            String string=MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames()[columnIndex-Dataset.vratiZaglavlje().length];
-            Double get = ds.getMetaAttributes().get(string);
-            return get;
+            Dsmetaattribute dSMetaAttribute= dataMetaAttributes.get(columnIndex-Dataset.vratiZaglavlje().length);
+            //String string=MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames()[columnIndex-Dataset.vratiZaglavlje().length];
+            //Double get = ds.getMetaAttributes().get(string);
+            
+            return ds.getDataSetMetaAttributeValue(dSMetaAttribute);
         }
     }
    
