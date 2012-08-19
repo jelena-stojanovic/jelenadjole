@@ -14,14 +14,15 @@ package logic;
  * Fakultet organizacionih nauka - Beograd
  *
  */
-import java.net.*;
 import java.io.*;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 import logic.SO.*;
 import model.OpstiDomenskiObjekat;
 
-class KontrolerAL // Kontroler aplikacione logike
+
+public class KontrolerAL // Kontroler aplikacione logike
 {
 
     static ServerSocket ss;
@@ -39,7 +40,6 @@ class KontrolerAL // Kontroler aplikacione logike
         }
     }
 }
-
 class Klijent extends Thread {
 
     public Klijent(Socket soketS1, int brojKlijenta1) {
