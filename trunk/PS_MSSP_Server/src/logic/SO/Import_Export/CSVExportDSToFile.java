@@ -13,9 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.attribute.Attribute;
-import model.attribute.DateAttribute;
-import model.attribute.NominalAttribute;
+import model.attribute.*;
 import model.dataFormat.CSVFormat;
 import model.dataset.Dataset;
 
@@ -57,13 +55,12 @@ public class CSVExportDSToFile {
 
                 /***first value in row ***/
                 double d1=ds[0];
-                
-                if (attributes.get(0).isNominal()) {
-                        NominalAttribute noma = (NominalAttribute) attributes.get(0);
+                if (attributes.get(0).getNominalattribute()!=null) {
+                        Nominalattribute noma =  attributes.get(0).getNominalattribute();
                         String value = noma.getNominalValueFromIndex(d1);
                         out.print(value);
-                    }else if(attributes.get(0).isDate()){
-                        DateAttribute da= (DateAttribute)attributes.get(0);
+                    }else if(attributes.get(0).getDateattribute()!=null){
+                        Dateattribute da= attributes.get(0).getDateattribute();
                         Date date = da.getDateFromDouble(d1);
                         String format= csvFormat.getDatePattern();
                         String dateInFormat= new SimpleDateFormat(format).format(date);
@@ -77,15 +74,15 @@ public class CSVExportDSToFile {
                 for (int j = 1; j < ds.length; j++) {
                     double d = ds[j];
                     
-                    if (attributes.get(j).isNominal()) {
-                        NominalAttribute noma = (NominalAttribute) attributes.get(j);
+                    if (attributes.get(j).getNominalattribute()!=null) {
+                        Nominalattribute noma = attributes.get(j).getNominalattribute();
                         String value = noma.getNominalValueFromIndex(d);
                         out.print(',' +value);
-                    }else if(attributes.get(j).isDate()){
-                        DateAttribute da= (DateAttribute)attributes.get(j);
+                    }else if(attributes.get(j).getDateattribute()!=null){
+                        Dateattribute da= attributes.get(j).getDateattribute();
                         Date date = da.getDateFromDouble(d);
-                        //String format= da.getDatePatern();
-                        String format= "MM/dd/yyyy";
+                        String format= da.getDatePattern();
+                       
                         String dateInFormat= new SimpleDateFormat(format).format(date);
                         out.print(',' + dateInFormat);
                     }else {
