@@ -6,84 +6,140 @@ package model.attribute;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import model.OpstiDomenskiObjekat;
+import model.statistics.Maximum;
+import model.statistics.Minimum;
 
 /**
  *
  * @author Jelena
  */
 @Entity
-@Table(name = "attribute")
+@Table(name = "dateattribute")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Attribute.findAll", query = "SELECT a FROM Attribute a"),
-    @NamedQuery(name = "Attribute.findByIndexOfAttribute", query = "SELECT a FROM Attribute a WHERE a.attributePK.indexOfAttribute = :indexOfAttribute"),
-    @NamedQuery(name = "Attribute.findByDataSetID", query = "SELECT a FROM Attribute a WHERE a.attributePK.dataSetID = :dataSetID"),
-    @NamedQuery(name = "Attribute.findByName", query = "SELECT a FROM Attribute a WHERE a.name = :name"),
-    @NamedQuery(name = "Attribute.findByDescription", query = "SELECT a FROM Attribute a WHERE a.description = :description"),
-    @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
-    @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
-public class DateAttribute extends Attribute  implements Serializable {
-
-//    private HashMap<String, Double> statistics;
-//    private String datePatern="MM/dd/yyyy";
-    public DateAttribute() {
-    }
+    @NamedQuery(name = "Dateattribute.findAll", query = "SELECT d FROM Dateattribute d"),
+    @NamedQuery(name = "Dateattribute.findByDataSetID", query = "SELECT d FROM Dateattribute d WHERE d.dateattributePK.dataSetID = :dataSetID"),
+    @NamedQuery(name = "Dateattribute.findByIndexOfAttribute", query = "SELECT d FROM Dateattribute d WHERE d.dateattributePK.indexOfAttribute = :indexOfAttribute"),
+    @NamedQuery(name = "Dateattribute.findByDatePattern", query = "SELECT d FROM Dateattribute d WHERE d.datePattern = :datePattern")})
+public class Dateattribute  implements Serializable, OpstiDomenskiObjekat {
+    private static final long serialVersionUID = 1L;
+    @EmbeddedId
+    protected DateattributePK dateattributePK;
+    @Basic(optional = false)
+    @Column(name = "datePattern")
+    private String datePattern;
+    @JoinColumns({
+    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false),    
+    @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)    
+    })
+    @OneToOne(optional = false)
+    private Attribute attribute;
     
 
+    public Dateattribute() {
+    }
+
+    public Dateattribute(DateattributePK dateattributePK) {
+        this.dateattributePK = dateattributePK;
+    }
+
+    public Dateattribute(DateattributePK dateattributePK, String datePattern) {
+        this.dateattributePK = dateattributePK;
+        this.datePattern = datePattern;
+    }
+
+    public Dateattribute(int dataSetID, int indexOfAttribute) {
+        this.dateattributePK = new DateattributePK(dataSetID, indexOfAttribute);
+    }
+
+    public DateattributePK getDateattributePK() {
+        return dateattributePK;
+    }
+
+    public void setDateattributePK(DateattributePK dateattributePK) {
+        this.dateattributePK = dateattributePK;
+    }
+
+    public String getDatePattern() {
+        return datePattern;
+    }
+
+    public void setDatePattern(String datePattern) {
+        this.datePattern = datePattern;
+    }
+
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(Attribute attribute) {
+        this.attribute = attribute;
+    }
+
+
     @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (dateattributePK != null ? dateattributePK.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Dateattribute)) {
+            return false;
+        }
+        Dateattribute other = (Dateattribute) object;
+        if ((this.dateattributePK == null && other.dateattributePK != null) || (this.dateattributePK != null && !this.dateattributePK.equals(other.dateattributePK))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.attribute.Dateattribute[ dateattributePK=" + dateattributePK + " ]";
+    }
+    
+    
+    
+    
+        
     public boolean isNominal() {
        return false;
     }
 
-    @Override
+    
     public boolean isNumerical() {
         return false;
     }
 
-    @Override
+    
     public boolean isOrdinal() {
         return false;
     }
 
-    @Override
+    
     public boolean isInterval() {
         return false;
     }
 
-    @Override
+   
     public boolean isDate() {
         return true;
     }
 
     
-//    public Object getPossibleValues() {
-//        double minValue= getStatistics().get(Minimum.class.getName());
-//            double maxValue= getStatistics().get(Maximum.class.getName());
-//            return "["+getDateFromDouble(minValue)+" - " +getDateFromDouble(maxValue)  +"]";
-//    }
+    public Object getPossibleValues() {
+        double minValue=attribute.getStatisticValue(Minimum.class.getSimpleName());
+        double maxValue=attribute.getStatisticValue(Maximum.class.getSimpleName());
+            return "["+getDateFromDouble(minValue)+" - " +getDateFromDouble(maxValue)  +"]";
+    }
 
-
-
-//    /**
-//     * @return the datePatern
-//     */
-//    public String getDatePatern() {
-//        return datePatern;
-//    }
-//
-//    /**
-//     * @param datePatern the datePatern to set
-//     */
-//    public void setDatePatern(String datePatern) {
-//        this.datePatern = datePatern;
-//    }
-//    
     
     public Date getDateFromDouble(double d){
         Long time= Math.round(d);
@@ -91,25 +147,6 @@ public class DateAttribute extends Attribute  implements Serializable {
         return date;
     }
 
-//    @Override
-//    public void setPossibleValues(Object object) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-
-//    /**
-//     * @return the statistics
-//     */
-//    public HashMap<String, Double> getStatistics() {
-//        return statistics;
-//    }
-//
-//    /**
-//     * @param statistics the statistics to set
-//     */
-//    public void setStatistics(HashMap<String, Double> statistics) {
-//        this.statistics = statistics;
-//    }
-//    
     
     @Override
     public String vratiImeKlase() {
@@ -123,15 +160,15 @@ public class DateAttribute extends Attribute  implements Serializable {
 
     @Override
     public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
-        DateAttribute da= (DateAttribute) odo;
-        da.setAttributePK(attributePK);
-        da.setAttributeRole(this.getAttributeRole());
-        da.setAttributestatisticList(getAttributestatisticList());
+        Dateattribute da= (Dateattribute) odo;
+        da.setDateattributePK(dateattributePK);
+        da.setAttribute(attribute);
+        da.setDatePattern(datePattern);
     }
 
     @Override
     public Object vratiID() {
-        return attributePK;
+        return dateattributePK;
     }
 
     @Override
@@ -154,5 +191,6 @@ public class DateAttribute extends Attribute  implements Serializable {
         return "date attribute";
     }
 
-
+    
+    
 }

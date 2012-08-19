@@ -20,7 +20,7 @@ public class PercentOfNumericalAttribute implements DSMetaAttribute, Serializabl
     public double calculate(Dataset dataSet) {
         List<Attribute> attributes= dataSet.getAttributeList();
         for (Attribute attribute : attributes) {
-            if(attribute.isNumerical()){
+            if(attribute.getNumericalattribute()!=null){
                 percentOfNumericalAttributes++;
             }
         }

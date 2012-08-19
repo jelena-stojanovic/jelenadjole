@@ -29,10 +29,16 @@ import model.dataset.Dataset;
     @NamedQuery(name = "Attribute.findByDescription", query = "SELECT a FROM Attribute a WHERE a.description = :description"),
     @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
     @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
-public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
+public class Attribute implements Serializable, OpstiDomenskiObjekat {
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
+    private Numericalattribute numericalattribute;
     
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
+    private Nominalattribute nominalattribute;
     
-   
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
+    private Dateattribute dateattribute;
+    
     /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
     private List<Attributestatistic> attributestatisticList1;
    */
@@ -58,9 +64,9 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
     @ManyToOne(optional = false)
     private Dataset dataset;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
-    private List<Possibleattributevalue> possibleattributevalueList;
-    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
+//    private List<Possibleattributevalue> possibleattributevalueList;
+//    
    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
     private List<Attributestatistic> attributestatisticList;
@@ -160,6 +166,16 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
         this.attributestatisticList = attributestatisticList;
     }
     
+    public double getStatisticValue(String statisticName){
+        for (int i = 0; i < attributestatisticList.size(); i++) {
+            Attributestatistic get = attributestatisticList.get(i);
+            if(get.getStatistic().getStatisticName().equals(statisticName)){
+                return get.getStatisticValue();
+            }
+        }
+        return Double.NaN;
+    }
+    
     
      public double getDataSetMetaAttributeValue(Statistic statistic){
         for (Attributestatistic attstat : attributestatisticList) {
@@ -184,20 +200,104 @@ public abstract class Attribute implements Serializable, OpstiDomenskiObjekat {
 //    }
 //    
 
-    @XmlTransient
-    public List<Possibleattributevalue> getPossibleattributevalueList() {
-        return possibleattributevalueList;
+//    @XmlTransient
+//    public List<Possibleattributevalue> getPossibleattributevalueList() {
+//        return possibleattributevalueList;
+//    }
+//
+//    public void setPossibleattributevalueList(List<Possibleattributevalue> possibleattributevalueList) {
+//        this.possibleattributevalueList = possibleattributevalueList;
+//    }
+
+//    public abstract boolean isNominal();
+//    public abstract boolean isNumerical();
+//    public abstract boolean isOrdinal();
+//    public abstract boolean isInterval();
+//    public abstract boolean isDate();
+
+    /**
+     * @return the numericalattribute
+     */
+    public Numericalattribute getNumericalattribute() {
+        return numericalattribute;
     }
 
-    public void setPossibleattributevalueList(List<Possibleattributevalue> possibleattributevalueList) {
-        this.possibleattributevalueList = possibleattributevalueList;
+    /**
+     * @param numericalattribute the numericalattribute to set
+     */
+    public void setNumericalattribute(Numericalattribute numericalattribute) {
+        this.numericalattribute = numericalattribute;
     }
 
-    public abstract boolean isNominal();
-    public abstract boolean isNumerical();
-    public abstract boolean isOrdinal();
-    public abstract boolean isInterval();
-    public abstract boolean isDate();
+    /**
+     * @return the nominalattribute
+     */
+    public Nominalattribute getNominalattribute() {
+        return nominalattribute;
+    }
+
+    /**
+     * @param nominalattribute the nominalattribute to set
+     */
+    public void setNominalattribute(Nominalattribute nominalattribute) {
+        this.nominalattribute = nominalattribute;
+    }
+
+    /**
+     * @return the dateattribute
+     */
+    public Dateattribute getDateattribute() {
+        return dateattribute;
+    }
+
+    /**
+     * @param dateattribute the dateattribute to set
+     */
+    public void setDateattribute(Dateattribute dateattribute) {
+        this.dateattribute = dateattribute;
+    }
+
+    @Override
+    public String vratiImeKlase() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivTabele() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Object vratiID() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void postaviAtributPretrazivanja(String atribut) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiAtributPretrazivanja() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivNovogObjekta() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String vratiNazivObjekta() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
     
     
 }

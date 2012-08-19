@@ -5,6 +5,7 @@
 //package model.attribute;
 //
 //import java.io.Serializable;
+//import java.util.Date;
 //import javax.persistence.Entity;
 //import javax.persistence.NamedQueries;
 //import javax.persistence.NamedQuery;
@@ -16,15 +17,17 @@
 // *
 // * @author Jelena
 // */
-//public class IntervalAttribute extends Attribute implements Serializable {
+//public class DateAttributeOLD extends Attribute  implements Serializable {
 //
-//    public IntervalAttribute() {
+////    private HashMap<String, Double> statistics;
+//    private String datePatern="MM/dd/yyyy";
+//    public DateAttributeOLD() {
 //    }
-//
 //    
+//
 //    @Override
 //    public boolean isNominal() {
-//        return false;
+//       return false;
 //    }
 //
 //    @Override
@@ -39,28 +42,51 @@
 //
 //    @Override
 //    public boolean isInterval() {
-//       return true;
+//        return false;
 //    }
 //
 //    @Override
 //    public boolean isDate() {
-//        return false;
+//        return true;
 //    }
+//
 //    
-////    @Override
 ////    public Object getPossibleValues() {
-////        throw new UnsupportedOperationException("Not supported yet.");
+////        double minValue= getStatistics().get(Minimum.class.getName());
+////            double maxValue= getStatistics().get(Maximum.class.getName());
+////            return "["+getDateFromDouble(minValue)+" - " +getDateFromDouble(maxValue)  +"]";
 ////    }
+//
+//    
+//    public Date getDateFromDouble(double d){
+//        Long time= Math.round(d);
+//        Date date= new Date(time);
+//        return date;
+//    }
 //
 ////    @Override
 ////    public void setPossibleValues(Object object) {
 ////        throw new UnsupportedOperationException("Not supported yet.");
 ////    }
 //
-//
-//     @Override
+////    /**
+////     * @return the statistics
+////     */
+////    public HashMap<String, Double> getStatistics() {
+////        return statistics;
+////    }
+////
+////    /**
+////     * @param statistics the statistics to set
+////     */
+////    public void setStatistics(HashMap<String, Double> statistics) {
+////        this.statistics = statistics;
+////    }
+////    
+//    
+//    @Override
 //    public String vratiImeKlase() {
-//        return "IntervalAttribute";
+//        return "DateAttribute";
 //    }
 //
 //    @Override
@@ -70,10 +96,10 @@
 //
 //    @Override
 //    public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
-//        IntervalAttribute ia= (IntervalAttribute) odo;
-//        ia.setAttributePK(attributePK);
-//        ia.setAttributeRole(this.getAttributeRole());
-//        
+//        DateAttributeOLD da= (DateAttributeOLD) odo;
+//        da.setAttributePK(attributePK);
+//        da.setAttributeRole(this.getAttributeRole());
+//        da.setAttributestatisticList(getAttributestatisticList());
 //    }
 //
 //    @Override
@@ -93,21 +119,27 @@
 //
 //    @Override
 //    public String vratiNazivNovogObjekta() {
-//        return "new interval attribute";
+//        return "new date attribute";
 //    }
 //
 //    @Override
 //    public String vratiNazivObjekta() {
-//        return "interval attribute";
+//        return "date attribute";
 //    }
 //
-//    public IntervalAttribute(int indexOfAttribute, int dataSetID) {
-//        super(indexOfAttribute, dataSetID);
+//    /**
+//     * @return the datePatern
+//     */
+//    public String getDatePatern() {
+//        return datePatern;
 //    }
 //
-//    public IntervalAttribute(AttributePK attributePK) {
-//        super(attributePK);
+//    /**
+//     * @param datePatern the datePatern to set
+//     */
+//    public void setDatePatern(String datePatern) {
+//        this.datePatern = datePatern;
 //    }
 //
-//    
+//
 //}

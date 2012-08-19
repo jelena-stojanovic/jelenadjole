@@ -5,117 +5,162 @@
 package model.attribute;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import model.Attributestatistic;
 import model.OpstiDomenskiObjekat;
-import model.statistics.Maximum;
-import model.statistics.Minimum;
-import model.statistics.NumericalStatistic;
-
 
 /**
  *
  * @author Jelena
  */
 @Entity
-@Table(name = "attribute")
+@Table(name = "numericalattribute")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Attribute.findAll", query = "SELECT a FROM Attribute a"),
-    @NamedQuery(name = "Attribute.findByIndexOfAttribute", query = "SELECT a FROM Attribute a WHERE a.attributePK.indexOfAttribute = :indexOfAttribute"),
-    @NamedQuery(name = "Attribute.findByDataSetID", query = "SELECT a FROM Attribute a WHERE a.attributePK.dataSetID = :dataSetID"),
-    @NamedQuery(name = "Attribute.findByName", query = "SELECT a FROM Attribute a WHERE a.name = :name"),
-    @NamedQuery(name = "Attribute.findByDescription", query = "SELECT a FROM Attribute a WHERE a.description = :description"),
-    @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
-    @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
-public class NumericalAttribute extends Attribute implements Serializable {
-
-    public NumericalAttribute() {
-        
-        
+    @NamedQuery(name = "Numericalattribute.findAll", query = "SELECT n FROM Numericalattribute n"),
+    @NamedQuery(name = "Numericalattribute.findByDataSetID", query = "SELECT n FROM Numericalattribute n WHERE n.numericalattributePK.dataSetID = :dataSetID"),
+    @NamedQuery(name = "Numericalattribute.findByIndexOfAttribute", query = "SELECT n FROM Numericalattribute n WHERE n.numericalattributePK.indexOfAttribute = :indexOfAttribute"),
+    @NamedQuery(name = "Numericalattribute.findByMinValue", query = "SELECT n FROM Numericalattribute n WHERE n.minValue = :minValue"),
+    @NamedQuery(name = "Numericalattribute.findByMaxValue", query = "SELECT n FROM Numericalattribute n WHERE n.maxValue = :maxValue")})
+public class Numericalattribute implements Serializable, OpstiDomenskiObjekat {
+    private static final long serialVersionUID = 1L;
+    @EmbeddedId
+    protected NumericalattributePK numericalattributePK;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "minValue")
+    private Double minValue;
+    @Column(name = "maxValue")
+    private Double maxValue;
+    
+    @JoinColumns({
+    @JoinColumn(name = "dataSetID", referencedColumnName = "dataSetID", insertable = false, updatable = false),    
+    @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)    
+    })
+    @OneToOne(optional = false)
+    private Attribute attribute;
+    
+    public Numericalattribute() {
     }
 
-    public NumericalAttribute(int indexOfAttribute, int dataSetID) {
-        super(indexOfAttribute, dataSetID);
+    public Numericalattribute(NumericalattributePK numericalattributePK) {
+        this.numericalattributePK = numericalattributePK;
     }
 
-  //  private HashMap<String, Double> statistics;
-
-    public NumericalAttribute(AttributePK attributePK) {
-        super(attributePK);
+    public Numericalattribute(int dataSetID, int indexOfAttribute) {
+        this.numericalattributePK = new NumericalattributePK(dataSetID, indexOfAttribute);
     }
+
+    public NumericalattributePK getNumericalattributePK() {
+        return numericalattributePK;
+    }
+
+    public void setNumericalattributePK(NumericalattributePK numericalattributePK) {
+        this.numericalattributePK = numericalattributePK;
+    }
+
+    public Double getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(Double minValue) {
+        this.minValue = minValue;
+    }
+
+    public Double getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(Double maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(Attribute attribute) {
+        this.attribute = attribute;
+    }
+
+   
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (numericalattributePK != null ? numericalattributePK.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Numericalattribute)) {
+            return false;
+        }
+        Numericalattribute other = (Numericalattribute) object;
+        if ((this.numericalattributePK == null && other.numericalattributePK != null) || (this.numericalattributePK != null && !this.numericalattributePK.equals(other.numericalattributePK))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.attribute.Numericalattribute[ numericalattributePK=" + numericalattributePK + " ]";
+    }
+    
 
     
-    @Override
+    
+    
+    
+    
     public boolean isNominal() {
          return false;
     }
 
-    @Override
+    
     public boolean isNumerical() {
          return true;
     }
 
-    @Override
+    
     public boolean isOrdinal() {
          return false;
     }
 
     public Object getPossibleValues() {
-        double minValue=0;
-        double maxValue=0;
-            
-        for (int i = 0; i < getAttributestatisticList().size(); i++) {
-            Attributestatistic as = getAttributestatisticList().get(i);
-            if(as.getStatistic().getStatisticName().equals("Minimum"))
-                minValue=as.getStatisticValue();
-            if(as.getStatistic().getStatisticName().equals("Maximum"))
-                maxValue=as.getStatisticValue();
-        }
+//        double minValue=0;
+//        double maxValue=0;
+//            
+//        for (int i = 0; i < getAttributestatisticList().size(); i++) {
+//            Attributestatistic as = getAttributestatisticList().get(i);
+//            if(as.getStatistic().getStatisticName().equals("Minimum"))
+//                minValue=as.getStatisticValue();
+//            if(as.getStatistic().getStatisticName().equals("Maximum"))
+//                maxValue=as.getStatisticValue();
+//        }
             
             return "["+minValue+" - " +maxValue +"]";
         
     }
 
-    @Override
+    
     public boolean isInterval() {
         return false;
     }
 
-    @Override
+    
     public boolean isDate() {
         return false;
     }
 
   
-//    public HashMap<String, Double> getStatistics() {
-//        return statistics;
-//    }
-//
-//    /**
-//     * @param statistics the statistics to set
-//     */
-//    public void setStatistics(HashMap<String, Double> statistics) {
-//        this.statistics = statistics;
-//    }
 
-//    @Override
-//    public void setPossibleValues(Object object) {
-//        
-//    }
-@Override
+    @Override
     public String vratiImeKlase() {
         return "NumericalAttribute";
     }
+
 
     @Override
     public String vratiNazivTabele() {
@@ -124,15 +169,16 @@ public class NumericalAttribute extends Attribute implements Serializable {
 
     @Override
     public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
-        NumericalAttribute na= (NumericalAttribute) odo;
-        na.setAttributePK(attributePK);
-        na.setAttributeRole(this.getAttributeRole());
+        Numericalattribute na= (Numericalattribute) odo;
+        na.setNumericalattributePK(numericalattributePK);
+        na.setMaxValue(maxValue);
+        na.setMinValue(minValue);
         
     }
 
     @Override
     public Object vratiID() {
-        return attributePK;
+        return numericalattributePK;
     }
 
     @Override
@@ -155,6 +201,8 @@ public class NumericalAttribute extends Attribute implements Serializable {
         return "numerical attribute";
     }
 
-  
-    
+
+
+
+
 }

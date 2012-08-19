@@ -13,11 +13,9 @@
     <class>model.Attributestatistic</class>
     <class>model.dataset.Dataset</class>
     <class>model.attribute.Possibleattributevalue</class>
-    <class>model.attribute.DateAttribute</class>
-    <class>model.attribute.IntervalAttribute</class>
-    <class>model.attribute.NominalAttribute</class>
-    <class>model.attribute.NumericalAttribute</class>
-    <class>model.attribute.OrdinalAttribute</class>
+    <class>model.attribute.Nominalattribute</class>
+    <class>model.attribute.Dateattribute</class>
+    <class>model.attribute.Numericalattribute</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dss"/>
       <property name="javax.persistence.jdbc.password" value=""/>

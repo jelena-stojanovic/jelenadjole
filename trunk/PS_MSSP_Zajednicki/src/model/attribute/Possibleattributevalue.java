@@ -23,12 +23,6 @@ import model.OpstiDomenskiObjekat;
     @NamedQuery(name = "Possibleattributevalue.findByIndexOfValue", query = "SELECT p FROM Possibleattributevalue p WHERE p.possibleattributevaluePK.indexOfValue = :indexOfValue"),
     @NamedQuery(name = "Possibleattributevalue.findByPossibleValue", query = "SELECT p FROM Possibleattributevalue p WHERE p.possibleValue = :possibleValue")})
 public class Possibleattributevalue implements Serializable, OpstiDomenskiObjekat {
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected PossibleattributevaluePK possibleattributevaluePK;
-    @Basic(optional = false)
-    @Column(name = "possibleValue")
-    private String possibleValue;
     
     
     @JoinColumns({
@@ -36,9 +30,15 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
     @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)    
     })
     @ManyToOne(optional = false)
-    private Attribute attribute;
-   
-
+    private Nominalattribute nominalattribute;
+    
+    private static final long serialVersionUID = 1L;
+    @EmbeddedId
+    protected PossibleattributevaluePK possibleattributevaluePK;
+    @Basic(optional = false)
+    @Column(name = "possibleValue")
+    private String possibleValue;
+    
     public Possibleattributevalue() {
     }
 
@@ -70,15 +70,6 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
     public void setPossibleValue(String possibleValue) {
         this.possibleValue = possibleValue;
     }
-
-    public Attribute getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(Attribute attribute) {
-        this.attribute = attribute;
-    }
-
     
     @Override
     public int hashCode() {
@@ -118,7 +109,7 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
     @Override
     public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
         Possibleattributevalue pav= (Possibleattributevalue)odo;
-        pav.setAttribute(attribute);
+        pav.setNominalattribute(nominalattribute);
         pav.setPossibleValue(possibleValue);
         pav.setPossibleattributevaluePK(possibleattributevaluePK);
     }
@@ -146,6 +137,14 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
     @Override
     public String vratiNazivObjekta() {
         return "possibleattributevalue";
+    }
+
+    public Nominalattribute getNominalattribute() {
+        return nominalattribute;
+    }
+
+    public void setNominalattribute(Nominalattribute nominalattribute) {
+        this.nominalattribute = nominalattribute;
     }
     
 }
