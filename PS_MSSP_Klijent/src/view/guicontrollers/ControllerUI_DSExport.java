@@ -30,7 +30,7 @@ import view.panels.TableModelDataSets;
  */
 public class ControllerUI_DSExport {
 
-    ControllerAL_DSExport controllerAL_DSExport = ControllerAL_DSExport.getInstance();
+    //ControllerAL_DSExport controllerAL_DSExport = ControllerAL_DSExport.getInstance();
     private PanelExportDS panelExportDS;
     CSVFormat cSVFormat = new CSVFormat();
     boolean saveCSV = false;
@@ -218,9 +218,9 @@ public class ControllerUI_DSExport {
         JTable table = panelExportDS.getTblDataSetPreprocessing();
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         if (dataset != null) {
-            String[] columIdentifiers = new String[dataset.getAttributes().size()];
-            for (int i = 0; i < dataset.getAttributes().size(); i++) {
-                columIdentifiers[i] = dataset.getAttributes().get(i).getName();
+            String[] columIdentifiers = new String[dataset.getAttributeList().size()];
+            for (int i = 0; i < dataset.getAttributeList().size(); i++) {
+                columIdentifiers[i] = dataset.getAttributeList().get(i).getName();
             }
             String[][] datasetMatrix = new String[dataset.getDataTable().getDoubleMatrix().length][dataset.getDataTable().getDoubleMatrix()[0].length];
             for (int i = 0; i < dataset.getDataTable().getDoubleMatrix().length; i++) {

@@ -134,6 +134,21 @@ public abstract class OpstiKontrolerKI {
         return signal;
     }
 
+    public String SOVratiSve() {
+        odo = oef.kreirajObjekat();
+        KonvertujGrafickiObjekatUDomenskiObjekat();
+        /**
+         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
+         */
+        signal = pozivSO("Obradi");
+        /**
+         * *******************************************************************************
+         */
+        KonvertujDomenskiObjekatUGrafickiObjekat();
+        return signal;
+    }
+
+    
     String pozivSO(String nazivSO) {
         try {
             out.writeObject(nazivSO);
@@ -150,6 +165,7 @@ public abstract class OpstiKontrolerKI {
         }
         return signal;
     }
+    
 
     abstract public void KonvertujGrafickiObjekatUDomenskiObjekat();
 
