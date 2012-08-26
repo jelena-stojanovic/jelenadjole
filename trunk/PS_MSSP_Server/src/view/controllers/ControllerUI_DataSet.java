@@ -4,6 +4,7 @@
  */
 package view.controllers;
 
+import tools.KonverterTipova;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.EtchedBorder;
 import model.OpstiDomenskiObjekat;
 import model.Reference;
+import model.ReferencePK;
 import model.dataset.Dataset;
 import model.dataset.Source;
 import view.forms.OpstaEkranskaForma;
@@ -62,6 +64,13 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
             frmDataSet.getTfDateDS().setBackground(Color.red);
         }
         dataSet.setSource(source);
+        for (int i = 0; i < references.size(); i++) {
+            Reference reference1 = references.get(i);
+            reference1.setDataset(dataSet);
+            ReferencePK refpk= new ReferencePK(i, dataSet.getDataSetID());
+            reference1.setReferencePK(refpk);
+            
+        }
         dataSet.setReferenceList(references);
     }
 
@@ -101,5 +110,11 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
             frmDataSet.getTfDate().setBorder(new EtchedBorder(Color.red, Color.black));
         }
 
+    }
+
+    public void updateDS() {
+        
+        String SOObradi = SOObradi();
+        JOptionPane.showMessageDialog(frmDataSet, SOObradi);
     }
 }

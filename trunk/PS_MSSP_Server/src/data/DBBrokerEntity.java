@@ -59,12 +59,13 @@ public class DBBrokerEntity {
     }
 
     public boolean vratiODOpoUslovu(OpstiDomenskiObjekat odo) {
-        String namedQuery = odo.vratiImeKlase() + ".findBy" + odo.vratiAtributPretrazivanja();
+        //String namedQuery = odo.vratiImeKlase() + ".findBy" + odo.vratiAtributPretrazivanja();
         
-
+            
         try {
-            OpstiDomenskiObjekat trazeni = (OpstiDomenskiObjekat) em.createNamedQuery(namedQuery).getSingleResult();
-            trazeni.prekopirajVrednostiAtributa(odo);
+          //  OpstiDomenskiObjekat trazeni = (OpstiDomenskiObjekat) em.createNamedQuery(namedQuery).getSingleResult();
+            OpstiDomenskiObjekat resultODO = em.find(odo.getClass(), odo.vratiID());
+            resultODO.prekopirajVrednostiAtributa(odo);
         } catch (Exception e) {
             porukaMetode = porukaMetode + "\n Greska u upitu. Neuspesno vraćanje " + odo.getClass().getSimpleName() + " iz baze.";
             Logger.getLogger(DBBrokerEntity.class.getName()).log(Level.SEVERE, null, e);

@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.table.TableModel;
@@ -72,6 +73,7 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
         jScrollPane5 = new javax.swing.JScrollPane();
         listReferences = new javax.swing.JList();
         jLabel16 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DataSet");
@@ -173,6 +175,15 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
         jLabel16.setText("References:");
         getContentPane().add(jLabel16);
         jLabel16.setBounds(394, 263, 210, 14);
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnUpdate);
+        btnUpdate.setBounds(563, 460, 90, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddReferenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReferenceActionPerformed
@@ -192,8 +203,13 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
 
     }//GEN-LAST:event_tfDateDSFocusLost
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        controllerDataSet.updateDS();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddReference;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -321,6 +337,10 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
 
     public void setControllerDataSet(ControllerUI_DataSet controllerDataSet) {
         this.controllerDataSet = controllerDataSet;
+    }
+
+    public JButton getBtnUpdate() {
+        return btnUpdate;
     }
     
     

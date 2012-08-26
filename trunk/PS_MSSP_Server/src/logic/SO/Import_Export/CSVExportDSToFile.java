@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logic.SO.Pretrazi;
 import model.attribute.*;
 import model.dataFormat.CSVFormat;
 import model.dataset.Dataset;
@@ -111,8 +112,8 @@ public class CSVExportDSToFile {
     }
 
     public String exportClient(Dataset dataset, CSVFormat csvFormat) throws Exception {
-
-
+        String PretraziS = Pretrazi.Pretrazi(dataset);
+        System.out.println(PretraziS);    
         boolean writeAttributeName = csvFormat.isUseFirstRowAsAttributeNames();
         char columnSeparator = csvFormat.getColumnSeparator();
 
@@ -137,12 +138,12 @@ public class CSVExportDSToFile {
 
             //no of rows =i
             for (int i = 0; i < doubleMatrix.length; i++) {
-                double[] ds = doubleMatrix[i];
+                double[] daa = doubleMatrix[i];
 
                 /**
                  * *first value in row **
                  */
-                double d1 = ds[0];
+                double d1 = daa[0];
                 if (attributes.get(0).isNominal()) {
 
                     string += attributes.get(0).getNominalValueFromIndex(d1);
@@ -160,8 +161,8 @@ public class CSVExportDSToFile {
                  * *end of first value in row **
                  */
                 //no of columns =j
-                for (int j = 1; j < ds.length; j++) {
-                    double d = ds[j];
+                for (int j = 1; j < daa.length; j++) {
+                    double d = daa[j];
 
                     if (attributes.get(j).isNominal()) {
 

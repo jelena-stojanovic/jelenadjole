@@ -93,11 +93,11 @@ class Klijent extends Thread {
                     String similarity = (String) in.readObject();
 
                     double d = Double.NaN;
-                    
+
                     if (similarity.equals("CalculateCosineSimilarity")) {
-                        d= CalculateCosineSimilarity.calculate(ds1,ds2);
+                        d = CalculateCosineSimilarity.calculate(ds1, ds2);
                     } else if (similarity.equals("CalculateEuclidianSimilarity")) {
-                        d= CalculateEuclidianSimilarity.calculate(ds1,ds2);
+                        d = CalculateEuclidianSimilarity.calculate(ds1, ds2);
                     }
 
                     out.writeObject(d);
@@ -107,8 +107,29 @@ class Klijent extends Thread {
                 } else if (NazivSO.equals("Export") == true) {
                     Dataset ds = (Dataset) rac;
                     DataFormat df = (DataFormat) in.readObject();
-                    String exportClient = new CSVExportDSToFile().exportClient(ds, (CSVFormat) df);
-                    out.writeObject(exportClient);
+
+                    String filePath = ds.getFilePath();
+                    File file = new File((filePath + ".csv"));
+                    if (!file.exists()) {
+                        CSVFormat csv = (CSVFormat) df;
+                        csv.setCsvFile(new File((filePath + ".csv")));
+                        new CSVExportDSToFile().export(ds, csv);
+                    }
+                   
+
+                    // sendfile
+
+                    byte[] mybytearray = new byte[(int) file.length()];
+                    FileInputStream fis = new FileInputStream(file);
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    bis.read(mybytearray, 0, mybytearray.length);
+
+                    out.write(mybytearray, 0, mybytearray.length);
+                    out.flush();
+
+                   
+
+                  //  out.writeObject(exportClient);
                     out.writeObject(signal);
 
                 } else {
