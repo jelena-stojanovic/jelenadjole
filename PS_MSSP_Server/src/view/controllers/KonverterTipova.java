@@ -72,6 +72,7 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
     }
 
     static void Konvertuj(java.util.Date kon_u, JTextField kon_i) {
+        if(kon_u!=null)
         kon_i.setText(kon_u.toString());
     }
 
@@ -113,6 +114,8 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         try {
             DefaultTableModel DTM = (DefaultTableModel) Tabela.getModel();
             DTM.setRowCount(nizObjekata.length);
+            if(nizObjekata!=null&&nizObjekata[0]!=null)
+            DTM.setColumnCount(nizObjekata[0].getClass().getDeclaredFields().length);
             for (int i = 0; i < nizObjekata.length; i++) {
                 for (int j = 0; j < Tabela.getColumnCount(); j++) {
                     Tabela.setValueAt(Polje.Vrati(j, nizObjekata[i]), i, j);

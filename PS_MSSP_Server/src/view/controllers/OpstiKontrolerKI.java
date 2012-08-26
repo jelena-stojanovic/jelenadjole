@@ -20,6 +20,8 @@ import java.awt.event.*;
 import javax.swing.table.*;
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logic.SO.KreirajNovi;
 import logic.SO.Obradi;
 import logic.SO.Pretrazi;
@@ -86,6 +88,7 @@ public abstract class OpstiKontrolerKI {
         return signal;
     }
 
+
     public String SOKreirajNovi() {
         odo = oef.kreirajObjekat();
         /**
@@ -95,7 +98,7 @@ public abstract class OpstiKontrolerKI {
         /**
          * *******************************************************************************
          */
-        KonvertujDomenskiObjekatUGrafickiObjekat();
+        //KonvertujDomenskiObjekatUGrafickiObjekat();
         return signal;
     }
 
@@ -128,7 +131,7 @@ public abstract class OpstiKontrolerKI {
     }
 
     public String SOObradi() {
-        odo = oef.kreirajObjekat();
+       // odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         /**
          * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
@@ -137,7 +140,6 @@ public abstract class OpstiKontrolerKI {
         /**
          * *******************************************************************************
          */
-        KonvertujDomenskiObjekatUGrafickiObjekat();
         return signal;
     }
 

@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import model.attribute.Attribute;
-import model.attribute.Nominalattribute;
 import model.attribute.Possibleattributevalue;
 import model.attribute.PossibleattributevaluePK;
 
@@ -27,15 +26,15 @@ public class MappingValues {
 //        return indexMap;
 //    }
 //    
-    public static List<Possibleattributevalue> mapNominalToNumerical(Nominalattribute a, List<String> nominalValues, List<Possibleattributevalue> pvalues) {
+    public static List<Possibleattributevalue> mapNominalToNumerical(Attribute a, List<String> nominalValues, List<Possibleattributevalue> pvalues) {
         for (int i = 0; i < nominalValues.size(); i++) {
             Possibleattributevalue pv= new Possibleattributevalue();
             
-            PossibleattributevaluePK pk=new PossibleattributevaluePK(a.getNominalattributePK().getIndexOfAttribute(), a.getNominalattributePK().getDataSetID(), Double.valueOf(i));
+            PossibleattributevaluePK pk=new PossibleattributevaluePK(a.getAttributePK().getIndexOfAttribute(), a.getAttributePK().getDataSetID(), Double.valueOf(i));
             String string = nominalValues.get(i);
             
             pv.setPossibleattributevaluePK(pk);
-            pv.setNominalattribute(a);
+            pv.setAttribute(a);
             pv.setPossibleValue(string);
             
             pvalues.add(pv);

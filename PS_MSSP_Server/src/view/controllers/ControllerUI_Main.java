@@ -37,4 +37,10 @@ public class ControllerUI_Main {
     public void startApplication(){
         mainForm.setVisible(true);
     }
+
+    public FrmMain getMainForm() {
+        return mainForm;
+    }
+    
+    
 }

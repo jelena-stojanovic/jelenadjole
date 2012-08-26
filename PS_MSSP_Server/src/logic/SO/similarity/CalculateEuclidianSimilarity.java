@@ -4,10 +4,7 @@
  */
 package logic.SO.similarity;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import logic.SO.Import_Export.CalculateMetaAttributeForDataSet;
 import model.dataset.Dataset;
 import model.dataset.Datasetmetaattribute;
 

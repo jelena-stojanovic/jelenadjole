@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import logic.ControllerAL_DSExport;
 import model.dataFormat.CSVFormat;
 import model.dataFormat.DataFormat;
+import model.dataset.DataTable;
 import model.dataset.Dataset;
 import view.panels.importDSpanel.PanelAllDataSets;
 import view.panels.importDSpanel.PanelExportDS;
@@ -81,11 +82,13 @@ public class ControllerUI_DSExport {
 
     public void lastStep() {
         directoryPath = panelExportDS.getFileChooserDS().getCurrentDirectory().getPath().trim();
+        
         System.out.println(directoryPath);
         fileName = panelExportDS.getTxtFieldFileName().getText().trim();
         if (fileName == null || fileName.equals("")) {
-            fileName = dataset.getTitle() + ".csv";
+            fileName = dataset.getTitle();
         }
+        fileName=fileName + ".csv";
         String filepath = directoryPath + "\\" + fileName;
 
         File dsFile = new File(filepath);
@@ -224,10 +227,11 @@ public class ControllerUI_DSExport {
             for (int i = 0; i < dataset.getAttributeList().size(); i++) {
                 columIdentifiers[i] = dataset.getAttributeList().get(i).getName();
             }
-            String[][] datasetMatrix = new String[dataset.getDataTable().getDoubleMatrix().length][dataset.getDataTable().getDoubleMatrix()[0].length];
-            for (int i = 0; i < dataset.getDataTable().getDoubleMatrix().length; i++) {
-                for (int j = 0; j < dataset.getDataTable().getDoubleMatrix()[i].length; j++) {
-                    datasetMatrix[i][j] = String.valueOf(dataset.getDataTable().getDoubleMatrix()[i][j]);
+            DataTable dt= dataset.getDataTable();
+            String[][] datasetMatrix = new String[dt.getDoubleMatrix().length][dt.getDoubleMatrix()[0].length];
+            for (int i = 0; i < dt.getDoubleMatrix().length; i++) {
+                for (int j = 0; j < dt.getDoubleMatrix()[i].length; j++) {
+                    datasetMatrix[i][j] = String.valueOf(dt.getDoubleMatrix()[i][j]);
                 }
             }
             dtm.setDataVector(datasetMatrix, columIdentifiers);

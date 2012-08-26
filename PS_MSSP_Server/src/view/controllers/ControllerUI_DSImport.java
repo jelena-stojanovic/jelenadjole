@@ -251,6 +251,7 @@ public class ControllerUI_DSImport {
             if (title == null|| title.equals("")) {
                 title = file.getName().substring(0, file.getName().length() - 4);
             }
+            
             ds.setTitle(title);
 
             String dsDescr=null;
@@ -272,12 +273,12 @@ public class ControllerUI_DSImport {
             
             String donor=null;
             donor= KonverterTipova.Konvertuj(panelImportDS.getTfDonor(),donor );
-            source.setCreator(donor);
+            source.setDonor(donor);
             
             Date date = null;
             date= KonverterTipova.Konvertuj(panelImportDS.getTfDateDS(), date);
             source.setSourceDate(date);
-            
+            controllerAL_DSImport.creatNewODO(source);
             ds.setSource(source);
             /***end SOURCE***/
             

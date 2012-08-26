@@ -25,10 +25,10 @@ public class AttributeFactory {
         List<Attribute> attributes = new ArrayList<Attribute>();
         for (int i = 0; i < tmdt.getColumnCount(); i++) {
         
-                String simpleClassName = tmdt.getAttributeType(i) + "attribute";
-                String className = "model.attribute." + simpleClassName;
-                Constructor c = Class.forName(className).getConstructor();
-                
+//                String simpleClassName = tmdt.getAttributeType(i) + "attribute";
+//                String className = "model.attribute." + simpleClassName;
+//                Constructor c = Class.forName(className).getConstructor();
+//                
                 
                 Attribute attribute= new Attribute();
                 AttributePK apk= new AttributePK(i, ds.getDataSetID());
@@ -36,30 +36,41 @@ public class AttributeFactory {
                 attribute.setAttributeRole(tmdt.getAttributeRole(i));
                 attribute.setName(tmdt.getAttributeName(i));
                 attribute.setDataset(ds);
+                attribute.setDateAttributeType(tmdt.getAttributeTypeObj(i));
                 
                 
-                if(simpleClassName.equals(Nominalattribute.class.getName())){
-                    Nominalattribute noma = (Nominalattribute)c.newInstance();
-                    noma.setAttribute(attribute);
-                    NominalattributePK nomapk= new NominalattributePK(attribute.getAttributePK().getIndexOfAttribute(), attribute.getAttributePK().getDataSetID());
-                    noma.setNominalattributePK(nomapk);
-                    
-                    attribute.setNominalattribute(noma);
-                }else if(simpleClassName.equals(Numericalattribute.class.getName())){
-                    Numericalattribute numa = (Numericalattribute)c.newInstance();
-                    numa.setAttribute(attribute);
-                    NumericalattributePK numapk= new NumericalattributePK(attribute.getAttributePK().getIndexOfAttribute(), attribute.getAttributePK().getDataSetID());
-                    numa.setNumericalattributePK(numapk);
-                    
-                    attribute.setNumericalattribute(numa);
-                }else if(simpleClassName.equals(Dateattribute.class.getName())){
-                    Dateattribute da = (Dateattribute)c.newInstance();
-                    DateattributePK dpk= new DateattributePK(attribute.getAttributePK().getIndexOfAttribute(), attribute.getAttributePK().getDataSetID());
-                    da.setDateattributePK(dpk);
-                    da.setAttribute(attribute);
-                    
-                    attribute.setDateattribute(da);
-                }
+//                System.out.println(simpleClassName);
+//                if(simpleClassName.equals(Nominalattribute.class.getSimpleName())){
+//                    Nominalattribute noma = (Nominalattribute)c.newInstance();
+//                    
+//                    noma.setAttribute(attribute);
+//                    NominalattributePK nomapk= new NominalattributePK();
+//                    nomapk.setDataSetID(attribute.getAttributePK().getDataSetID());
+//                    nomapk.setIndexOfAttribute(attribute.getAttributePK().getIndexOfAttribute());
+//                    noma.setNominalattributePK(nomapk);
+//                    
+//                    attribute.setNominalattribute(noma);
+//                    System.out.println("Kreiran novi nominal attribute u attribute factory"+noma.getAttribute().getName());
+//                }else if(simpleClassName.equals(Numericalattribute.class.getSimpleName())){
+//                    Numericalattribute numa = (Numericalattribute)c.newInstance();
+//                    numa.setAttribute(attribute);
+//                    
+//                    NumericalattributePK numapk= new NumericalattributePK();
+//                    numapk.setDataSetID(attribute.getAttributePK().getDataSetID());
+//                    numapk.setIndexOfAttribute(attribute.getAttributePK().getIndexOfAttribute());
+//                    
+//                    numa.setNumericalattributePK(numapk);
+//                    
+//                    attribute.setNumericalattribute(numa);
+//                    System.out.println("Kreiran novi numerical attribute u attribute factory"+numa.getAttribute().getName());
+//                }else if(simpleClassName.equals(Dateattribute.class.getSimpleName())){
+//                    Dateattribute da = (Dateattribute)c.newInstance();
+//                    DateattributePK dpk= new DateattributePK(attribute.getAttributePK().getIndexOfAttribute(), attribute.getAttributePK().getDataSetID());
+//                    da.setDateattributePK(dpk);
+//                    da.setAttribute(attribute);
+//                    
+//                    attribute.setDateattribute(da);
+//                }
                 attributes.add(attribute);
             
 

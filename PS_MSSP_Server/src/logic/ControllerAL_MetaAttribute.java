@@ -6,10 +6,9 @@ package logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import logic.SO.Import_Export.CalculateMetaAttributeForDataSet;
+import logic.SO.Obradi;
 import logic.SO.VratiSve;
 import logic.SO.serialization.Serialize;
 import model.OpstiDomenskiObjekat;
@@ -37,36 +36,29 @@ public class ControllerAL_MetaAttribute {
     }
     
     public void calculateMetaattributes(Dataset ds){
-        ArrayList<Dsmetaattribute> allDsmetaattributes = getAllDsmetaattributes();
+        List<Dsmetaattribute> allDsmetaattributes = getAllDsmetaattributes();
         List<Datasetmetaattribute> calculate = new CalculateMetaAttributeForDataSet().calculate(ds, allDsmetaattributes);
         ds.setDatasetmetaattributeList(calculate);
-        /*HashMap<String, Double> metaAttributes = new HashMap<String, Double>();
-        metaAttributes = (new CalculateMetaAttributeForDataSet()).calculate(ds, metaAttributes);
-        ds.setMetaAttributes(metaAttributes);
-        for (Map.Entry<String, Double> entry : metaAttributes.entrySet()) {
-        String string = entry.getKey();
-        Double double1 = entry.getValue();
-        System.out.println(string + "=" + double1);
-        }*/
+     
     }
     
     public void recalculateMetaAttributes() throws IOException{
         
         for (Dataset dataSet : ControllerAL_Main.getInstance().getAllDataSets()) {
-            ArrayList<Dsmetaattribute> al= getUnalculatedMetaAttribute(dataSet);
+            List<Dsmetaattribute> al= getUnalculatedMetaAttribute(dataSet);
             List<Datasetmetaattribute> calculate = new CalculateMetaAttributeForDataSet().calculate(dataSet, al);
             
             for (Datasetmetaattribute datasetmetaattribute : calculate) {
                 dataSet.addDatasetmetaattribute(datasetmetaattribute);
             }
-            
+            Obradi.Obradi(dataSet);
             Serialize.serialize(dataSet);
         }
     }
     
-    public ArrayList<Dsmetaattribute> getUnalculatedMetaAttribute(Dataset dss){
-        ArrayList<Dsmetaattribute> uncalculated=new ArrayList<Dsmetaattribute>();
-        ArrayList<Dsmetaattribute> alldsma=getAllDsmetaattributes();
+    public List<Dsmetaattribute> getUnalculatedMetaAttribute(Dataset dss){
+        List<Dsmetaattribute> uncalculated=new ArrayList<Dsmetaattribute>();
+        List<Dsmetaattribute> alldsma=getAllDsmetaattributes();
         List<Datasetmetaattribute> datasetmetaattributeList = dss.getDatasetmetaattributeList();
             
         for (int i = 0; i < alldsma.size(); i++) {
@@ -89,12 +81,13 @@ public class ControllerAL_MetaAttribute {
         return uncalculated;
     }
     
-    public ArrayList<Dsmetaattribute> getAllDsmetaattributes(){
-        ArrayList<Dsmetaattribute> alldsma=new ArrayList<Dsmetaattribute>();
-        ArrayList<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
+    public List<Dsmetaattribute> getAllDsmetaattributes(){
+        List<Dsmetaattribute> alldsma=new ArrayList<Dsmetaattribute>();
+        List<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
         Dsmetaattribute dma= new Dsmetaattribute();
         allODO.add(dma);
-        VratiSve.VratiSve(allODO);
+        String signal="";
+        allODO=VratiSve.VratiSve(allODO,signal);
         for (int i = 0; i < allODO.size(); i++) {
             OpstiDomenskiObjekat opstiDomenskiObjekat = allODO.get(i);
             Dsmetaattribute dsma= (Dsmetaattribute)opstiDomenskiObjekat;
@@ -103,15 +96,19 @@ public class ControllerAL_MetaAttribute {
         return alldsma;
     }
     
-    public ArrayList<Statistic> getAllStatistics(){
-        ArrayList<Statistic> alldsma=new ArrayList<Statistic>();
-        ArrayList<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
+    public List<Statistic> getAllStatistics(){
+        List<Statistic> alldsma=new ArrayList<Statistic>();
+        List<OpstiDomenskiObjekat> allODO= new ArrayList<OpstiDomenskiObjekat>();
         Statistic st= new Statistic();
         allODO.add(st);
-        VratiSve.VratiSve(allODO);
+        String signal= "";
+        allODO=VratiSve.VratiSve(allODO,signal);
+//        System.out.println("Sastistike iz baze");
         for (int i = 0; i < allODO.size(); i++) {
             OpstiDomenskiObjekat opstiDomenskiObjekat = allODO.get(i);
+//            System.out.println("ODO statsitika iz baze"+opstiDomenskiObjekat.vratiNazivTabele());
             Statistic dsma= (Statistic)opstiDomenskiObjekat;
+//            System.out.println("Statistika"+dsma.getStatisticName()+dsma.getStatisticClass());
             alldsma.add(dsma);
         }
         return alldsma;

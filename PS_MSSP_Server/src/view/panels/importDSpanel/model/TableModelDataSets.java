@@ -10,7 +10,6 @@ import javax.swing.table.AbstractTableModel;
 import logic.ControllerAL_MetaAttribute;
 import model.dataset.Dataset;
 import model.dataset.Dsmetaattribute;
-import model.dataset.MetaAttributesAndStatisticsColection;
 
 /**
  *
@@ -18,7 +17,7 @@ import model.dataset.MetaAttributesAndStatisticsColection;
  */
 public class TableModelDataSets extends AbstractTableModel{
     List<Dataset> datasets= new ArrayList<Dataset>();
-    ArrayList<Dsmetaattribute> dataMetaAttributes= ControllerAL_MetaAttribute.getInstance().getAllDsmetaattributes();
+    List<Dsmetaattribute> dataMetaAttributes= ControllerAL_MetaAttribute.getInstance().getAllDsmetaattributes();
 
     public TableModelDataSets(List<Dataset> datasets) {
         this.datasets= datasets;

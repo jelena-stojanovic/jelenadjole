@@ -19,8 +19,14 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 import logic.SO.*;
+import logic.SO.Import_Export.CSVExportDSToFile;
+import logic.SO.similarity.CalculateCosineSimilarity;
+import logic.SO.similarity.CalculateEuclidianSimilarity;
 import model.OpstiDomenskiObjekat;
-
+import model.dataFormat.CSVFormat;
+import model.dataFormat.DataFormat;
+import model.dataset.Dataset;
+import to.DataSetTO;
 
 public class KontrolerAL // Kontroler aplikacione logike
 {
@@ -40,6 +46,7 @@ public class KontrolerAL // Kontroler aplikacione logike
         }
     }
 }
+
 class Klijent extends Thread {
 
     public Klijent(Socket soketS1, int brojKlijenta1) {
@@ -62,12 +69,48 @@ class Klijent extends Thread {
                 OpstiDomenskiObjekat rac = (OpstiDomenskiObjekat) in.readObject();
 
 
-                if (NazivSO.equals("Vrati sve") == true) {
+                if (NazivSO.equals("VratiSve") == true) {
                     List<OpstiDomenskiObjekat> odoList = new ArrayList<OpstiDomenskiObjekat>();
                     odoList.add(rac);
-                    signal = VratiSve.VratiSve(odoList);
-                    out.writeObject(odoList);
+                    odoList = VratiSve.VratiSve(odoList, signal);
+                    List<OpstiDomenskiObjekat> odoListDS = new ArrayList<OpstiDomenskiObjekat>();
+                    if (rac instanceof Dataset) {
+
+                        for (int i = 0; i < odoList.size(); i++) {
+                            OpstiDomenskiObjekat opstiDomenskiObjekat = odoList.get(i);
+                            DataSetTO dto = new DataSetTO((Dataset) opstiDomenskiObjekat);
+                            odoListDS.add(dto);
+
+                        }
+                        out.writeObject(odoListDS);
+                    } else {
+                        out.writeObject(odoList);
+                    }
                     out.writeObject(signal);
+                } else if (NazivSO.equals("CalculateSimilarity")) {
+                    Dataset ds1 = (Dataset) rac;
+                    Dataset ds2 = (Dataset) in.readObject();
+                    String similarity = (String) in.readObject();
+
+                    double d = Double.NaN;
+                    
+                    if (similarity.equals("CalculateCosineSimilarity")) {
+                        d= CalculateCosineSimilarity.calculate(ds1,ds2);
+                    } else if (similarity.equals("CalculateEuclidianSimilarity")) {
+                        d= CalculateEuclidianSimilarity.calculate(ds1,ds2);
+                    }
+
+                    out.writeObject(d);
+                    out.writeObject(signal);
+
+
+                } else if (NazivSO.equals("Export") == true) {
+                    Dataset ds = (Dataset) rac;
+                    DataFormat df = (DataFormat) in.readObject();
+                    String exportClient = new CSVExportDSToFile().exportClient(ds, (CSVFormat) df);
+                    out.writeObject(exportClient);
+                    out.writeObject(signal);
+
                 } else {
 
                     if (NazivSO.equals("kreirajNovi") == true) {
@@ -98,6 +141,7 @@ class Klijent extends Thread {
 
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
     private Socket soketS;

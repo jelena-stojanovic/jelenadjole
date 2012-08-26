@@ -7,6 +7,9 @@ package view.forms;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import model.Administrator;
 import model.OpstiDomenskiObjekat;
@@ -16,7 +19,7 @@ import view.controllers.ControllerUI_Administrator;
  *
  * @author Djordje
  */
-public class FrmAdministrator extends OpstaEkranskaForma {
+public class FrmAdministrator extends JFrame implements OpstaEkranskaForma {
 
     ControllerUI_Administrator ctrlAdmin;
 
@@ -24,7 +27,7 @@ public class FrmAdministrator extends OpstaEkranskaForma {
      * Creates new form FrmAdministrator
      */
     public FrmAdministrator() {
-        initializeController();
+
         initComponents();
     }
 
@@ -47,9 +50,10 @@ public class FrmAdministrator extends OpstaEkranskaForma {
         firstName = new javax.swing.JTextField();
         lastName = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnRegisterAdmin = new javax.swing.JButton();
+        btnUpdateAdmin = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Username: ");
 
@@ -61,10 +65,17 @@ public class FrmAdministrator extends OpstaEkranskaForma {
 
         jLabel5.setText("e-mail: ");
 
-        jButton1.setText("Register new administrator");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterAdmin.setText("Register new administrator");
+        btnRegisterAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegisterAdminActionPerformed(evt);
+            }
+        });
+
+        btnUpdateAdmin.setText("Update administrator");
+        btnUpdateAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateAdminActionPerformed(evt);
             }
         });
 
@@ -74,10 +85,9 @@ public class FrmAdministrator extends OpstaEkranskaForma {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
@@ -90,7 +100,11 @@ public class FrmAdministrator extends OpstaEkranskaForma {
                                 .addComponent(username)
                                 .addComponent(firstName)
                                 .addComponent(lastName)
-                                .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))))
+                                .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnUpdateAdmin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegisterAdmin)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,28 +131,46 @@ public class FrmAdministrator extends OpstaEkranskaForma {
                     .addComponent(jLabel5)
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegisterAdmin)
+                    .addComponent(btnUpdateAdmin))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        ctrlAdmin.KonvertujGrafickiObjekatUDomenskiObjekat();
-        System.out.println("uradijo sam");
+    private void btnRegisterAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterAdminActionPerformed
+
+        String SOZapamti = ctrlAdmin.SOZapamti();
+        JOptionPane.showMessageDialog(this, SOZapamti);
+        if (ctrlAdmin.getPanelAllAdmins() != null) {
+            ctrlAdmin.setTableModel();
+        }
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegisterAdminActionPerformed
+
+    private void btnUpdateAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAdminActionPerformed
+        String SOObradi = ctrlAdmin.SOObradi();
+        JOptionPane.showMessageDialog(this, SOObradi);
+        if (ctrlAdmin.getPanelAllAdmins() != null) {
+            ctrlAdmin.setTableModel();
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnUpdateAdminActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -158,17 +190,21 @@ public class FrmAdministrator extends OpstaEkranskaForma {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new FrmAdministrator().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegisterAdmin;
+    private javax.swing.JButton btnUpdateAdmin;
     private javax.swing.JTextField email;
     private javax.swing.JTextField firstName;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -200,11 +236,9 @@ public class FrmAdministrator extends OpstaEkranskaForma {
     }
 
     private void initializeController() {
-        try {
+      
             ctrlAdmin = new ControllerUI_Administrator(this);
-        } catch (IOException ex) {
-            Logger.getLogger(FrmAdministrator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
     }
 
     /**
@@ -276,5 +310,16 @@ public class FrmAdministrator extends OpstaEkranskaForma {
     public void setUsername(javax.swing.JTextField username) {
         this.username = username;
     }
-    
+
+    public JButton getBtnRegisterAdmin() {
+        return btnRegisterAdmin;
+    }
+
+    public JButton getBtnUpdateAdmin() {
+        return btnUpdateAdmin;
+    }
+
+    public void setCtrlAdmin(ControllerUI_Administrator ctrlAdmin) {
+        this.ctrlAdmin = ctrlAdmin;
+    }
 }

@@ -5,12 +5,11 @@
 package view.panels.datasets;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.table.TableModel;
 import model.OpstiDomenskiObjekat;
 import view.controllers.ControllerUI_DataSet;
@@ -20,20 +19,22 @@ import view.forms.OpstaEkranskaForma;
  *
  * @author Jelena
  */
-public class FrmDataSet extends OpstaEkranskaForma {
+public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaForma {
+
+    
+    
+    
 
     ControllerUI_DataSet controllerDataSet; 
     
     /**
-     * Creates new form PanelDataSet
+     * CreaJFrametes new form PanelDataSet
      */
-    public FrmDataSet() {
+    public FrmDataSet(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        try {
-            controllerDataSet = new ControllerUI_DataSet(this);
-        } catch (IOException ex) {
-            Logger.getLogger(FrmDataSet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+       
     }
 
     /**
@@ -45,153 +46,115 @@ public class FrmDataSet extends OpstaEkranskaForma {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtFieldDataSetTitle = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtFieldDataSetTitle = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDescription = new javax.swing.JTextArea();
-        pnlDataSetSource = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         tfCreator = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         tfDonor = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         tfDateDS = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         tfAuthors = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         tfTitle = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         tfDate = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         tfLocation = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tfOtherInformation = new javax.swing.JTextArea();
+        btnAddReference = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         listReferences = new javax.swing.JList();
         jLabel16 = new javax.swing.JLabel();
-        btnAddReference = new javax.swing.JButton();
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Set:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("DataSet");
+        setBackground(new java.awt.Color(204, 204, 255));
+        setBounds(new java.awt.Rectangle(100, 100, 700, 510));
+        setFont(new java.awt.Font("Agency FB", 2, 10)); // NOI18N
+        getContentPane().setLayout(null);
 
         jLabel2.setText("DataSet Title: ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 14, 100, 14);
 
         jLabel3.setText("DataSet Description: ");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 37, 102, 14);
+        getContentPane().add(txtFieldDataSetTitle);
+        txtFieldDataSetTitle.setBounds(115, 11, 540, 20);
 
         txtAreaDescription.setColumns(20);
         txtAreaDescription.setRows(5);
         jScrollPane1.setViewportView(txtAreaDescription);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
-                    .addComponent(txtFieldDataSetTitle))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFieldDataSetTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3))))
-        );
-
-        pnlDataSetSource.setBorder(javax.swing.BorderFactory.createTitledBorder("o   Data set source:"));
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(116, 37, 539, 97);
 
         jLabel11.setText("Creator:");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(10, 143, 100, 14);
+        getContentPane().add(tfCreator);
+        tfCreator.setBounds(115, 140, 540, 20);
 
         jLabel12.setText("Donor:");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(10, 174, 100, 14);
+        getContentPane().add(tfDonor);
+        tfDonor.setBounds(115, 171, 540, 20);
 
         jLabel13.setText("Date (please insert date in format MM/dd/yyyy):");
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(10, 197, 346, 14);
 
         tfDateDS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfDateDSFocusLost(evt);
             }
         });
-
-        javax.swing.GroupLayout pnlDataSetSourceLayout = new javax.swing.GroupLayout(pnlDataSetSource);
-        pnlDataSetSource.setLayout(pnlDataSetSourceLayout);
-        pnlDataSetSourceLayout.setHorizontalGroup(
-            pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDataSetSourceLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDataSetSourceLayout.createSequentialGroup()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfDateDS, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
-                    .addGroup(pnlDataSetSourceLayout.createSequentialGroup()
-                        .addGroup(pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfDonor)
-                            .addComponent(tfCreator))))
-                .addContainerGap())
-        );
-        pnlDataSetSourceLayout.setVerticalGroup(
-            pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDataSetSourceLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDataSetSourceLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(tfDonor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(tfCreator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDataSetSourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(tfDateDS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("o   Reference"));
+        getContentPane().add(tfDateDS);
+        tfDateDS.setBounds(374, 197, 281, 20);
 
         jLabel4.setText("Author(s):");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 263, 90, 14);
+        getContentPane().add(tfAuthors);
+        tfAuthors.setBounds(106, 260, 270, 20);
 
         jLabel9.setText("Title:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(10, 289, 90, 14);
+        getContentPane().add(tfTitle);
+        tfTitle.setBounds(106, 286, 270, 20);
 
         jLabel10.setText("Date:");
-
-        jLabel14.setText("Other information:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(10, 315, 90, 14);
+        getContentPane().add(tfDate);
+        tfDate.setBounds(106, 312, 270, 20);
 
         jLabel15.setText("Location:");
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(10, 342, 90, 14);
+        getContentPane().add(tfLocation);
+        tfLocation.setBounds(106, 339, 270, 20);
+
+        jLabel14.setText("Other information:");
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(10, 365, 89, 14);
 
         tfOtherInformation.setColumns(20);
         tfOtherInformation.setRows(5);
         jScrollPane4.setViewportView(tfOtherInformation);
 
-        jScrollPane5.setViewportView(listReferences);
-
-        jLabel16.setText("References:");
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(103, 365, 273, 48);
 
         btnAddReference.setText("Add Reference");
         btnAddReference.addActionListener(new java.awt.event.ActionListener() {
@@ -199,94 +162,17 @@ public class FrmDataSet extends OpstaEkranskaForma {
                 btnAddReferenceActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAddReference);
+        btnAddReference.setBounds(271, 429, 105, 23);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel14)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfAuthors)
-                                .addComponent(tfTitle)
-                                .addComponent(tfDate)
-                                .addComponent(tfLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
-                    .addComponent(btnAddReference))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(tfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddReference)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jScrollPane5.setViewportView(listReferences);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlDataSetSource, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnlDataSetSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane5);
+        jScrollPane5.setBounds(394, 286, 261, 166);
+
+        jLabel16.setText("References:");
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(394, 263, 210, 14);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddReferenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReferenceActionPerformed
@@ -319,13 +205,10 @@ public class FrmDataSet extends OpstaEkranskaForma {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JList listReferences;
-    private javax.swing.JPanel pnlDataSetSource;
     private javax.swing.JTextField tfAuthors;
     private javax.swing.JTextField tfCreator;
     private javax.swing.JTextField tfDate;
@@ -379,12 +262,6 @@ public class FrmDataSet extends OpstaEkranskaForma {
         return listReferences;
     }
 
-    /**
-     * @return the pnlDataSetSource
-     */
-    public javax.swing.JPanel getPnlDataSetSource() {
-        return pnlDataSetSource;
-    }
 
     /**
      * @return the tfAuthors
@@ -440,6 +317,10 @@ public class FrmDataSet extends OpstaEkranskaForma {
      */
     public javax.swing.JTextField getTfTitle() {
         return tfTitle;
+    }
+
+    public void setControllerDataSet(ControllerUI_DataSet controllerDataSet) {
+        this.controllerDataSet = controllerDataSet;
     }
     
     

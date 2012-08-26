@@ -20,17 +20,17 @@ public class ConvertValuesToMatrixDataTable {
 
         int index = a.getAttributePK().getIndexOfAttribute();
 
-        if (a.getNominalattribute()!=null) {
+        if (a.isNominal()) {
 
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
-                Nominalattribute na = a.getNominalattribute();
-                Double d = na.getIndexOfNominalValue(string);
+                
+                Double d = a.getIndexOfNominalValue(string);
               
                 dataTable.add(i, index, d);
 
             }
-        } else if (a.getNumericalattribute()!=null) {
+        } else if (a.isNumerical()) {
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
                 Double d = Double.parseDouble(string);
@@ -39,11 +39,11 @@ public class ConvertValuesToMatrixDataTable {
             }
 
         //} else if (a.isOrdinal()) {
-        } else if (a.getDateattribute()!=null) {
+        } else if (a.isDate()) {
             for (int i = 0; i < strings.length; i++) {
                 String string = strings[i];
-                Dateattribute da = a.getDateattribute();
-                Date date = new SimpleDateFormat(da.getDatePattern()).parse(string);
+                
+                Date date = new SimpleDateFormat("MM/dd/yyyy").parse(string);
                 
                 Double d = Double.valueOf(date.getTime());
                 dataTable.add(i, index, d);

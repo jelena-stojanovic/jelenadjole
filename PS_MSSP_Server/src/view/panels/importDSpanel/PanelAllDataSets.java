@@ -4,10 +4,14 @@
  */
 package view.panels.importDSpanel;
 
+import java.awt.event.ActionEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import logic.ControllerAL_Main;
+import model.dataset.Dataset;
+import view.controllers.ControllerUI_DataSet;
+import view.controllers.ControllerUI_Main;
 import view.panels.datasets.FrmDataSet;
 import view.panels.importDSpanel.model.TableModelDataSets;
 
@@ -24,6 +28,7 @@ public class PanelAllDataSets extends javax.swing.JPanel {
         initComponents();
         TableModelDataSets tmds = new TableModelDataSets(ControllerAL_Main.getInstance().getAllDataSets());
         tblDatasets.setModel(tmds);
+        tblDatasets.setComponentPopupMenu(postaviPopupmenu());
     }
 
     /**
@@ -64,33 +69,33 @@ public class PanelAllDataSets extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDatasetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatasetsMouseClicked
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            JPopupMenu popupMeny = new JPopupMenu();
-            JMenuItem miViewDataset = new JMenuItem("View dataset");
-            tblDatasets.getSelectedRow();
-
-            miViewDataset.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    FrmDataSet dsForm = new FrmDataSet();
-                    dsForm.setVisible(true);
-                    dsForm.setFocusable(true);
-                }
-            });
-
-            popupMeny.add(miViewDataset);
-            popupMeny.show(evt.getComponent(), evt.getX(), evt.getY());
-            popupMeny.setVisible(true);
-            popupMeny.setFocusable(true);
-        }
+//        if (SwingUtilities.isRightMouseButton(evt)) {
+//            JPopupMenu popupMeny = new JPopupMenu();
+//            JMenuItem miViewDataset = new JMenuItem("View dataset");
+//            tblDatasets.getSelectedRow();
+//
+//            miViewDataset.addActionListener(new java.awt.event.ActionListener() {
+//                @Override
+//                public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                    FrmDataSet dsForm = new FrmDataSet();
+//                    dsForm.setVisible(true);
+//                    dsForm.setFocusable(true);
+//                }
+//            });
+//
+//            popupMeny.add(miViewDataset);
+//            popupMeny.show(evt.getComponent(), evt.getX(), evt.getY());
+//            popupMeny.setVisible(true);
+//            popupMeny.setFocusable(true);
+//        }
     }//GEN-LAST:event_tblDatasetsMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
@@ -103,4 +108,61 @@ public class PanelAllDataSets extends javax.swing.JPanel {
     public javax.swing.JTable getTblDatasets() {
         return tblDatasets;
     }
+    
+        private JPopupMenu postaviPopupmenu() {
+        JPopupMenu jpm = new JPopupMenu("Dataset");
+        JMenuItem jmiDetalji = new JMenuItem();
+        jmiDetalji.setText("View details about dataset");
+        jmiDetalji.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDetaljiActionPerformed(evt);
+            }
+
+            private void jmiDetaljiActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not yet implemented");
+            }
+        });
+        jpm.add(jmiDetalji);
+        
+        
+        JMenuItem jmiIzmeni = new JMenuItem();
+        jmiIzmeni.setText("Edit dataset");
+        jmiIzmeni.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiIzmeniActionPerformed(evt);
+            }
+
+            private void jmiIzmeniActionPerformed(ActionEvent evt) {
+                int red = tblDatasets.getSelectedRow();
+                Dataset ds =((TableModelDataSets)tblDatasets.getModel()).getDataSet(red);
+                FrmDataSet fds= new FrmDataSet(ControllerUI_Main.getInstance().getMainForm(), true);
+                ControllerUI_DataSet cads=new ControllerUI_DataSet(fds);
+                fds.setControllerDataSet(cads);
+                cads.setOdo(ds);
+                cads.setOef(fds);
+                cads.KonvertujDomenskiObjekatUGrafickiObjekat();
+                fds.setVisible(true);
+            }
+        });
+        jpm.add(jmiIzmeni);
+        
+        JMenuItem jmiSacuvaj = new JMenuItem();
+        jmiSacuvaj.setText("Save administratora");
+        jmiSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSacuvajActionPerformed(evt);
+            }
+
+            private void jmiSacuvajActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not yet implemented");
+            }
+        });
+        jpm.add(jmiSacuvaj);
+        
+        return jpm;
+}
 }
