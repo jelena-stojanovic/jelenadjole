@@ -4,11 +4,15 @@
  */
 package view.panels;
 
+import javax.swing.table.TableModel;
+import model.OpstiDomenskiObjekat;
+import view.forms.OpstaEkranskaForma;
+
 /**
  *
  * @author Jelena
  */
-public class PanelAllDataSets extends javax.swing.JPanel {
+public class PanelAllDataSets extends javax.swing.JPanel implements OpstaEkranskaForma{
 
     /**
      * Creates new form PanelAllDataSets
@@ -51,9 +55,9 @@ public class PanelAllDataSets extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -69,5 +73,34 @@ public class PanelAllDataSets extends javax.swing.JPanel {
         return tblDatasets;
     }
 
+    @Override
+    public TableModel vratiModel() {
+       return tblDatasets.getModel();
+    }
+
+    @Override
+    public Object[] vratiPocetneVrednosti() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int vratiSelektovaniRed() {
+        return tblDatasets.getSelectedRow();
+    }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return odo;
+    }
+
+    OpstiDomenskiObjekat odo;
+
+    public OpstiDomenskiObjekat getOdo() {
+        return odo;
+    }
+
+    public void setOdo(OpstiDomenskiObjekat odo) {
+        this.odo = odo;
+    }
     
 }

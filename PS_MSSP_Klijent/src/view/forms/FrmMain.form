@@ -31,11 +31,31 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Similarity"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miSimilarity">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calculate similarity"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSimilarityActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mMetaAttribute">
           <Properties>
             <Property name="text" type="java.lang.String" value=" MetaAttribute"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miMetaAttributes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Test Meta attribute"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miMetaAttributesActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

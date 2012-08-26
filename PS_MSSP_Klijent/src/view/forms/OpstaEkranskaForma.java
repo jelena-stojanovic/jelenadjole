@@ -22,7 +22,7 @@ import model.OpstiDomenskiObjekat;
 
 
 
- public abstract class OpstaEkranskaForma extends JFrame
+ public interface  OpstaEkranskaForma 
 {
   public abstract TableModel vratiModel();
   public abstract Object[] vratiPocetneVrednosti();
