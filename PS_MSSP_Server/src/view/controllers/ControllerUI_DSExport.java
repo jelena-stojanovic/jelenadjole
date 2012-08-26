@@ -4,6 +4,7 @@
  */
 package view.controllers;
 
+import tools.KonverterTipova;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -81,9 +82,8 @@ public class ControllerUI_DSExport {
     }
 
     public void lastStep() {
-        directoryPath = panelExportDS.getFileChooserDS().getCurrentDirectory().getPath().trim();
-        
-        System.out.println(directoryPath);
+        directoryPath = panelExportDS.getFileChooserDS().getSelectedFile().getPath();
+        System.out.println("directoryPath "+directoryPath);
         fileName = panelExportDS.getTxtFieldFileName().getText().trim();
         if (fileName == null || fileName.equals("")) {
             fileName = dataset.getTitle();

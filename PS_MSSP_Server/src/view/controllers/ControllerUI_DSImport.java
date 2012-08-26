@@ -4,6 +4,7 @@
  */
 package view.controllers;
 
+import tools.KonverterTipova;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;

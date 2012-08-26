@@ -4,6 +4,7 @@
  */
 package view.controllers;
 
+import tools.KonverterTipova;
 import javax.swing.JOptionPane;
 import logic.ControllerAL_Main;
 import model.Administrator;
@@ -46,11 +47,15 @@ public class ControllerUI_Login extends OpstiKontrolerKI{
         KonvertujGrafickiObjekatUDomenskiObjekat();
         odo = ControllerAL_Main.getInstance().login(odo);
         if(odo!=null){
-            JOptionPane.showMessageDialog((FrmStart)oef,"Welcome,"+((Administrator)odo).getFirstName()+" "+((Administrator)odo).getLastName() +"! :)");
-            
+            JOptionPane.showMessageDialog((FrmStart)oef,"Welcome, "+((Administrator)odo).getFirstName()+" "+((Administrator)odo).getLastName() +"! :)");
+            ControllerUI_Main.getInstance().startApplication();
+            ((FrmStart)oef).dispose();
+       
         }
         else{
-            JOptionPane.showMessageDialog((FrmStart)oef,"Wrong username or password!");
+            JOptionPane.showMessageDialog((FrmStart)oef,"Wrong username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+           //((FrmStart)oef).getTfUserName().setText("");
+           ((FrmStart)oef).getPfPassword().setText("");
         }
     }
 }

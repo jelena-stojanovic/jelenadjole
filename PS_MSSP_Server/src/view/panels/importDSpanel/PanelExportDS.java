@@ -88,8 +88,10 @@ public class PanelExportDS extends javax.swing.JPanel {
         checkBCSV.setText("CSV");
 
         checkBAML.setText("AML");
+        checkBAML.setEnabled(false);
 
         chechBText.setText("Text");
+        chechBText.setEnabled(false);
 
         btnNextFormat.setText("Next -->");
         btnNextFormat.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +138,7 @@ public class PanelExportDS extends javax.swing.JPanel {
                 .addComponent(checkBAML)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chechBText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 453, Short.MAX_VALUE)
                 .addGroup(pnlSelectFormatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNextFormat)
                     .addComponent(btnPreviousFormat))
@@ -382,7 +384,7 @@ public class PanelExportDS extends javax.swing.JPanel {
                 .addGroup(pnlSelectFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtFieldFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(fileChooserDS, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

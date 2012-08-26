@@ -123,7 +123,7 @@
                       <Component id="checkBAML" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="chechBText" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="445" max="32767" attributes="0"/>
+                      <EmptySpace pref="453" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnNextFormat" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPreviousFormat" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -147,11 +147,13 @@
             <Component class="javax.swing.JCheckBox" name="checkBAML">
               <Properties>
                 <Property name="text" type="java.lang.String" value="AML"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chechBText">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Text"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnNextFormat">
@@ -511,7 +513,7 @@
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFieldFileName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Component id="fileChooserDS" min="-2" pref="482" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

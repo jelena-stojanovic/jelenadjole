@@ -121,7 +121,16 @@ public class PanelAllDataSets extends javax.swing.JPanel {
             }
 
             private void jmiDetaljiActionPerformed(ActionEvent evt) {
-                throw new UnsupportedOperationException("Not yet implemented");
+                int red = tblDatasets.getSelectedRow();
+                Dataset ds =((TableModelDataSets)tblDatasets.getModel()).getDataSet(red);
+                FrmDataSet fds= new FrmDataSet(ControllerUI_Main.getInstance().getMainForm(), true);
+                ControllerUI_DataSet cads=new ControllerUI_DataSet(fds);
+                fds.setControllerDataSet(cads);
+                cads.setOdo(ds);
+                cads.setOef(fds);
+                cads.KonvertujDomenskiObjekatUGrafickiObjekat();
+                fds.getBtnUpdate().setVisible(false);
+                fds.setVisible(true);
             }
         });
         jpm.add(jmiDetalji);
@@ -144,24 +153,11 @@ public class PanelAllDataSets extends javax.swing.JPanel {
                 cads.setOdo(ds);
                 cads.setOef(fds);
                 cads.KonvertujDomenskiObjekatUGrafickiObjekat();
+                fds.getBtnUpdate().setVisible(true);
                 fds.setVisible(true);
             }
         });
         jpm.add(jmiIzmeni);
-        
-        JMenuItem jmiSacuvaj = new JMenuItem();
-        jmiSacuvaj.setText("Save administratora");
-        jmiSacuvaj.addActionListener(new java.awt.event.ActionListener() {
-
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiSacuvajActionPerformed(evt);
-            }
-
-            private void jmiSacuvajActionPerformed(ActionEvent evt) {
-                throw new UnsupportedOperationException("Not yet implemented");
-            }
-        });
-        jpm.add(jmiSacuvaj);
         
         return jpm;
 }
