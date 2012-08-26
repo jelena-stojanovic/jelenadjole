@@ -4,10 +4,12 @@
  */
 package model.dataFormat;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jelena
  */
-public class DataFormat {
+public class DataFormat  implements Serializable{
     
 }

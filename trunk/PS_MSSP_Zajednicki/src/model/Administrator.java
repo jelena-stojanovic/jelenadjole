@@ -151,6 +151,8 @@ public class Administrator implements Serializable, OpstiDomenskiObjekat{
         admin.setUsername(username);
         admin.setPassword(password);
         admin.setEmail(email);
+        admin.setAdminID(adminID);
+        
     }
 
     @Override

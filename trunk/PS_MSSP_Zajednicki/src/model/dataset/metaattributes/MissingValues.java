@@ -5,7 +5,6 @@
 package model.dataset.metaattributes;
 
 import java.io.Serializable;
-import java.util.List;
 import model.attribute.Attribute;
 import model.dataset.Dataset;
 
@@ -13,18 +12,22 @@ import model.dataset.Dataset;
  *
  * @author Jelena
  */
-public class DSNoOfNominalAttributes  implements DSMetaAttribute, Serializable{
+public class MissingValues implements DSMetaAttribute, Serializable{
 
-    int noOfNominalAttributes=0;
+    public MissingValues() {
+    }
+
+    
+    
     @Override
     public double calculate(Dataset dataSet) {
-        List<Attribute> attributes= dataSet.getAttributeList();
-        for (Attribute attribute : attributes) {
-            if(attribute.isNominal()){
-                noOfNominalAttributes++;
+        int missingvalues=0;
+        for (Attribute object : dataSet.getAttributeList()) {
+            if(object.getMissingValues()!=null){
+                missingvalues+=object.getMissingValues();
             }
         }
-        return noOfNominalAttributes;
+        return missingvalues;
     }
 
     @Override
@@ -33,13 +36,13 @@ public class DSNoOfNominalAttributes  implements DSMetaAttribute, Serializable{
     }
 
     @Override
-    public double getValue() {
-        return noOfNominalAttributes;
+    public String getName() {
+        return "MissingValues";
     }
 
     @Override
-    public String getName() {
-        return "DSNoOfNominalAttributes";
+    public double getValue() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

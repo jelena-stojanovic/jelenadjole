@@ -20,7 +20,7 @@ public class NoOfNumericalAttributes implements DSMetaAttribute, Serializable{
     public double calculate(Dataset dataSet) {
        List<Attribute> attributes= dataSet.getAttributeList();
         for (Attribute attribute : attributes) {
-            if(attribute.getNumericalattribute()!=null){
+            if(attribute.isNumerical()){
                 noOfNumericalAttribute++;
             }
         }

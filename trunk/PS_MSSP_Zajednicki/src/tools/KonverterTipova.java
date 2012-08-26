@@ -132,6 +132,12 @@ public class KonverterTipova {   // Konvertovanje tipova grafickih elemenata u p
         }
         return null;
     }
+ 
+    public static Date Konvertuj(double d){
+        Long time= Math.round(d);
+        Date date= new Date(time);
+        return date;
+    }
     
     public static java.sql.Date Konvertuj(java.util.Date date) {
             return new java.sql.Date(date.getTime());

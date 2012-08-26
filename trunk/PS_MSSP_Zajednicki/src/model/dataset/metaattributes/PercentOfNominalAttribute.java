@@ -20,7 +20,7 @@ public class PercentOfNominalAttribute implements DSMetaAttribute, Serializable{
     public double calculate(Dataset dataSet) {
         List<Attribute> attributes= dataSet.getAttributeList();
         for (Attribute attribute : attributes) {
-            if(attribute.getNominalattribute()!=null){
+            if(attribute.isNominal()){
                 percentOfNominalAttributes++;
             }
         }
