@@ -4,6 +4,7 @@
  */
 package view.guicontrollers;
 
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -26,6 +27,10 @@ public class ControllerUI_Main {
     
     public static ControllerUI_Main getInstance() {
         return ControllerUI_MainHolder.INSTANCE;
+    }
+
+    public Frame getMainForm() {
+        return mainForm;
     }
     
     private static class ControllerUI_MainHolder {

@@ -4,9 +4,19 @@
  */
 package view.panels;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.table.TableModel;
 import model.OpstiDomenskiObjekat;
+import model.dataset.Dataset;
 import view.forms.OpstaEkranskaForma;
+import view.guicontrollers.ControllerUI_DataSet;
+import view.guicontrollers.ControllerUI_Main;
+import view.panels.tablemodels.TableModelDataSets;
 
 /**
  *
@@ -19,7 +29,7 @@ public class PanelAllDataSets extends javax.swing.JPanel implements OpstaEkransk
      */
     public PanelAllDataSets() {
         initComponents();
-        
+        tblDatasets.setComponentPopupMenu(postaviPopupmenu());     
     }
 
     /**
@@ -102,5 +112,66 @@ public class PanelAllDataSets extends javax.swing.JPanel implements OpstaEkransk
     public void setOdo(OpstiDomenskiObjekat odo) {
         this.odo = odo;
     }
+
     
+    private JPopupMenu postaviPopupmenu() {
+        JPopupMenu jpm = new JPopupMenu("Dataset");
+        JMenuItem jmiDetalji = new JMenuItem();
+        jmiDetalji.setText("View details about dataset");
+        jmiDetalji.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDetaljiActionPerformed(evt);
+            }
+
+            private void jmiDetaljiActionPerformed(ActionEvent evt) {
+                try {
+                    int red = tblDatasets.getSelectedRow();
+                    Dataset ds =((TableModelDataSets)tblDatasets.getModel()).getDataSet(red);
+                    FrmDataSet fds= new FrmDataSet(ControllerUI_Main.getInstance().getMainForm(), true);
+                    ControllerUI_DataSet cads=new ControllerUI_DataSet(fds);
+                    fds.setControllerDataSet(cads);
+                    cads.setOdo(ds);
+                    cads.setOef(fds);
+                    cads.KonvertujDomenskiObjekatUGrafickiObjekat();
+//                    fds.getBtnUpdate().setVisible(false);
+                    fds.setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(PanelAllDataSets.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        jpm.add(jmiDetalji);
+        
+        
+//        JMenuItem jmiIzmeni = new JMenuItem();
+//        jmiIzmeni.setText("Edit dataset");
+//        jmiIzmeni.addActionListener(new java.awt.event.ActionListener() {
+//
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jmiIzmeniActionPerformed(evt);
+//            }
+//
+//            private void jmiIzmeniActionPerformed(ActionEvent evt) {
+//                try {
+//                    int red = tblDatasets.getSelectedRow();
+//                    Dataset ds =((TableModelDataSets)tblDatasets.getModel()).getDataSet(red);
+//                    FrmDataSet fds= new FrmDataSet(ControllerUI_Main.getInstance().getMainForm(), true);
+//                    ControllerUI_DataSet cads=new ControllerUI_DataSet(fds);
+//                    fds.setControllerDataSet(cads);
+//                    cads.setOdo(ds);
+//                    cads.setOef(fds);
+//                    cads.KonvertujDomenskiObjekatUGrafickiObjekat();
+//                    fds.getBtnUpdate().setVisible(true);
+//                    fds.setVisible(true);
+//                } catch (IOException ex) {
+//                    Logger.getLogger(PanelAllDataSets.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//        jpm.add(jmiIzmeni);
+//        
+        return jpm;
+}
 }

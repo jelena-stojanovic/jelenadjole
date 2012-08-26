@@ -7,19 +7,13 @@ package view.guicontrollers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import model.dataFormat.CSVFormat;
 import model.dataFormat.DataFormat;
 import model.dataset.Dataset;
-import tools.KonverterTipova;
 
 import view.panels.PanelExportDS;
 import view.panels.PanelWelcome;
@@ -50,7 +44,7 @@ public class ControllerUI_DSExport extends OpstiKontrolerKI{
     private File file = null;
     private Dataset dataset = null;
     private char columnSeparation = ',';
-    private boolean writeAttributeNames = false;
+    private boolean writeAttributeNames = true;
     private boolean useQuotesForNominal = true;
     private String datePattern = "MM/dd/yyyy";
     
@@ -74,13 +68,7 @@ public class ControllerUI_DSExport extends OpstiKontrolerKI{
     
 
     public void saveFildValues() {
-        columnSeparation = getSelectedColumnSeparator();
-        writeAttributeNames = KonverterTipova.Konvertuj(getPanelExportDS().getCheckBUseFirstRow(), writeAttributeNames);
-        useQuotesForNominal = KonverterTipova.Konvertuj(getPanelExportDS().getCheckBUseQuotes(), useQuotesForNominal);
-        datePattern = KonverterTipova.Konvertuj( getPanelExportDS().getTxtFieldDateFormat(), datePattern);
 
-
-        cSVFormat.setColumnSeparator(columnSeparation);
         cSVFormat.setUseFirstRowAsAttributeNames(writeAttributeNames);
         cSVFormat.setUseQuotesForNominal(useQuotesForNominal);
         cSVFormat.setDatePattern(datePattern);
@@ -91,11 +79,10 @@ public class ControllerUI_DSExport extends OpstiKontrolerKI{
         
         checkSaveTypes();
         setSelectedDataSet();
-        setValuesToGUI();
     }
 
     public void lastStep() {
-        directoryPath = panelExportDS.getFileChooserDS().getCurrentDirectory().getPath().trim();
+        directoryPath = panelExportDS.getFileChooserDS().getSelectedFile().getPath();
         fileName = panelExportDS.getTxtFieldFileName().getText().trim();
         if (fileName == null || fileName.equals("")) {
             fileName = dataset.getTitle() + ".csv";
@@ -114,66 +101,19 @@ public class ControllerUI_DSExport extends OpstiKontrolerKI{
             Logger.getLogger(ControllerUI_DSExport.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println(ex);
         }
-        JOptionPane.showMessageDialog(panelExportDS, "Data set has been exported successfull!", "Export data set", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(panelExportDS, "Data set has been exported successfull! \n On path: "+filepath, "Export data set", JOptionPane.INFORMATION_MESSAGE);
         ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
     }
 
-    public void setValuesToGUI() {
-        getSelectedRBColumnSeparator().setSelected(true);
-
-        KonverterTipova.Konvertuj(writeAttributeNames, getPanelExportDS().getCheckBUseFirstRow());
-
-        KonverterTipova.Konvertuj(useQuotesForNominal, getPanelExportDS().getCheckBUseQuotes());
-
-//        if (file != null) {
-//            fillTblDataSetPreprocessing();
-//            fillTblDataTypes();
-//        }
-        fillTblDataPreview();
-    }
 
     public void disableAllExcept(int numberOfPane) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             panelExportDS.getTpnlExportDS().setEnabledAt(i, false);
         }
         panelExportDS.getTpnlExportDS().setEnabledAt(numberOfPane, true);
         panelExportDS.getTpnlExportDS().setSelectedIndex(numberOfPane);
     }
 
-    public JRadioButton getSelectedRBColumnSeparator() {
-        char character = columnSeparation;
-        if (character == ',') {
-            return getPanelExportDS().getRbComma();
-        } else if (character == ';') {
-            return getPanelExportDS().getRbSemicolon();
-        } else if (character == ' ') {
-            return getPanelExportDS().getRbSpace();
-        } else if (character == '\t') {
-            return getPanelExportDS().getRbTab();
-        }
-        return getPanelExportDS().getRbComma();
-    }
-
-    private char getSelectedColumnSeparator() {
-        char character = 0;
-        ButtonGroup gbr = getPanelExportDS().getRbgColumnSeparator();
-        for (Enumeration e = gbr.getElements(); e.hasMoreElements();) {
-            JRadioButton b = (JRadioButton) e.nextElement();
-            if (b.getModel() == gbr.getSelection()) {
-                String selectedAvatar = b.getText();
-                if (selectedAvatar != null && selectedAvatar.equalsIgnoreCase(getPanelExportDS().getRbComma().getText())) {
-                    character = ',';
-                } else if (selectedAvatar != null && selectedAvatar.equalsIgnoreCase(getPanelExportDS().getRbSemicolon().getText())) {
-                    character = ';';
-                } else if (selectedAvatar != null && selectedAvatar.equalsIgnoreCase(getPanelExportDS().getRbSpace().getText())) {
-                    character = ' ';
-                } else if (selectedAvatar != null && selectedAvatar.equalsIgnoreCase(getPanelExportDS().getRbTab().getText())) {
-                    character = '\t';
-                }
-            }
-        }
-        return character;
-    }
 
     /**
      * @return the panelExportDS
@@ -229,24 +169,6 @@ public class ControllerUI_DSExport extends OpstiKontrolerKI{
                 SOExport(dataFormat);
                 
             }
-        }
-    }
-
-    public void fillTblDataPreview() {
-        JTable table = panelExportDS.getTblDataSetPreprocessing();
-        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-        if (dataset != null) {
-            String[] columIdentifiers = new String[dataset.getAttributeList().size()];
-            for (int i = 0; i < dataset.getAttributeList().size(); i++) {
-                columIdentifiers[i] = dataset.getAttributeList().get(i).getName();
-            }
-            String[][] datasetMatrix = new String[dataset.getDataTable().getDoubleMatrix().length][dataset.getDataTable().getDoubleMatrix()[0].length];
-            for (int i = 0; i < dataset.getDataTable().getDoubleMatrix().length; i++) {
-                for (int j = 0; j < dataset.getDataTable().getDoubleMatrix()[i].length; j++) {
-                    datasetMatrix[i][j] = String.valueOf(dataset.getDataTable().getDoubleMatrix()[i][j]);
-                }
-            }
-            dtm.setDataVector(datasetMatrix, columIdentifiers);
         }
     }
 

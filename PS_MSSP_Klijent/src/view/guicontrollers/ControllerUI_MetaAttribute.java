@@ -7,9 +7,11 @@ package view.guicontrollers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import model.OpstiDomenskiObjekat;
 import model.dataset.Dsmetaattribute;
 import view.forms.OpstaEkranskaForma;
+import view.panels.PanelMetaAttribute;
 
 /**
  *
@@ -18,7 +20,6 @@ import view.forms.OpstaEkranskaForma;
 public class ControllerUI_MetaAttribute extends OpstiKontrolerKI {
 
     public ControllerUI_MetaAttribute() throws IOException {
-        
     }
 
     public void setOdo(OpstiDomenskiObjekat odo) {
@@ -29,18 +30,14 @@ public class ControllerUI_MetaAttribute extends OpstiKontrolerKI {
         this.oef = oef;
     }
 
-   
-  
-  
     private List<Dsmetaattribute> getAllDataMetaAttributes() {
 
         Dsmetaattribute ds = new Dsmetaattribute();
-        odo=ds;
+        odo = ds;
         List<OpstiDomenskiObjekat> lodo = SOVratiSve();
         List<Dsmetaattribute> dslist = new ArrayList<Dsmetaattribute>();
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : lodo) {
             dslist.add((Dsmetaattribute) opstiDomenskiObjekat);
-            
         }
         return dslist;
     }
@@ -51,24 +48,23 @@ public class ControllerUI_MetaAttribute extends OpstiKontrolerKI {
 
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
-     
-        
     }
 
     @Override
     public void KonvertujDomenskiObjekatUGrafickiObjekat() {
         List<Dsmetaattribute> allDataMetaAttributes = getAllDataMetaAttributes();
+        DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < allDataMetaAttributes.size(); i++) {
             Dsmetaattribute dsmetaattribute = allDataMetaAttributes.get(i);
-            System.out.println(dsmetaattribute);
-            
+            dlm.addElement(dsmetaattribute);
         }
+        ((PanelMetaAttribute) oef).getListDsmetaattributes().setModel(dlm);
+
     }
     /*
      * private static class ControllerUI_AllDataSetsHolder {
      *
      * private static final ControllerUI_AllDataSets INSTANCE = new
-     * ControllerUI_AllDataSets();
-    }
+     * ControllerUI_AllDataSets(); }
      */
 }
