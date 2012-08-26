@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import model.OpstiDomenskiObjekat;
 import model.Reference;
 import model.attribute.Attribute;
+import model.attribute.Possibleattributevalue;
 import model.dataset.*;
 
 /**
@@ -60,6 +61,16 @@ public class DataSetTO implements OpstiDomenskiObjekat, Serializable {
         this.metads = ds.getMetads();
         ds.getAttributeList().size();
         this.attributeList = ds.getAttributeList();
+        for (int i = 0; i < ds.getAttributeList().size(); i++) {
+            Attribute attribute = ds.getAttributeList().get(i);
+           
+            attribute.getPossibleattributevalueList().size();;
+            this.attributeList.get(i).setPossibleattributevalueList(attribute.getPossibleattributevalueList());
+            
+            attribute.getAttributestatisticList().size();
+            this.attributeList.get(i).setAttributestatisticList(attribute.getAttributestatisticList());
+        }
+        
         ds.getDatasetmetaattributeList().size();
         this.datasetmetaattributeList = ds.getDatasetmetaattributeList();
         ds.getReferenceList().size();

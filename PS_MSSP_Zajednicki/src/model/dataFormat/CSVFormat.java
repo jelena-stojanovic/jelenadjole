@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class CSVFormat extends DataFormat implements Serializable{
 
     private File csvFile;
-    private boolean useFirstRowAsAttributeNames = false;
+    private boolean useFirstRowAsAttributeNames = true;
     private boolean trimLines = false;
     private boolean skipComments = true;
     private char commentCharacter = '#';

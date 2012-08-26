@@ -120,7 +120,7 @@ public class Dsmetaattribute implements Serializable , OpstiDomenskiObjekat{
 
     @Override
     public String toString() {
-        return "entity.Dsmetaattribute[ dsmetaattributeID=" + dsmetaattributeID + " ]";
+        return  dsmetaattributeID + ". "+ dsmetaattributeName+ ": "+ dsmetaattributeDescription;
     }
 
     public String getDsmetaattributeClass() {
