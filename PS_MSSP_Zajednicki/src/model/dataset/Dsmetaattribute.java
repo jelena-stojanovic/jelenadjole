@@ -176,5 +176,12 @@ public class Dsmetaattribute implements Serializable , OpstiDomenskiObjekat{
     public String vratiNazivObjekta() {
         return "dataset metaattribute";
     }
+
     
+    
+    public void instantiateLAZYrelationship(){
+       
+        getDatasetmetaattributeList().size();
+       
+    }
 }

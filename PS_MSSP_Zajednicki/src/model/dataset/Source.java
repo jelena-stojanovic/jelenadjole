@@ -38,12 +38,15 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
     @Basic(optional = false)
     @Column(name = "sourceID")
     private Integer sourceID;
+    
     @Column(name = "creator")
     private String creator;
+    
     @Column(name = "donor")
     private String donor;
-    @OneToMany(mappedBy = "source")
-    private List<Dataset> datasetList;
+    
+    @OneToOne(mappedBy = "source")
+    private Dataset dataset;
     
     public Source() {
     }
@@ -77,12 +80,12 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
     }
 
     @XmlTransient
-    public List<Dataset> getDatasetList() {
-        return datasetList;
+    public Dataset getDataset() {
+        return dataset;
     }
 
-    public void setDatasetList(List<Dataset> datasetList) {
-        this.datasetList = datasetList;
+    public void setDataset(Dataset datasetList) {
+        this.dataset = datasetList;
     }
 
     @Override
@@ -239,6 +242,8 @@ public class Source implements OpstiDomenskiObjekat, Serializable {
         source.setCreator(creator);
         source.setDonor(donor);
         source.setSourceDate(sourceDate);
+        source.setDataset(dataset);
+        source.setSourceID(sourceID);
         
     }
 @Override

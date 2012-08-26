@@ -134,8 +134,11 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
 
     @Override
     public String toString() {
-        return "entity.Reference[ referencePK=" + referencePK + " ]";
+        return   author + "; " + title + "; " + referenceDate + "; " + location + ". " + otherInformation;
     }
+
+    
+    
     
     public Reference(String author, String title, Date date, String location, String otherInformation) {
         this.author = author;
@@ -281,6 +284,10 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
         ref.setReferenceDate(referenceDate);
         ref.setLocation(location);
         ref.setOtherInformation(otherInformation);
+        ref.setAuthor(author);
+        ref.setDataset(dataset);
+        ref.setReferencePK(referencePK);
+        
 
     }
 
@@ -294,4 +301,6 @@ public class Reference implements OpstiDomenskiObjekat  , Serializable {
 
     }
 
+    
+    
 }

@@ -126,11 +126,12 @@ public class Metads implements Serializable, OpstiDomenskiObjekat {
         mds.setDatasetList(datasetList);
         mds.setMetadsID(metadsID);
         mds.setDsmetaattributeList(dsmetaattributeList);
+        
     }
 
     @Override
     public Object vratiID() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return metadsID;
     }
 
     @Override
@@ -140,7 +141,7 @@ public class Metads implements Serializable, OpstiDomenskiObjekat {
 
     @Override
     public String vratiAtributPretrazivanja() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "MetadsID";
     }
 
     @Override
@@ -153,4 +154,10 @@ public class Metads implements Serializable, OpstiDomenskiObjekat {
         return "metads";
     }
     
+    
+    public void addDataset(Dataset ds){
+        if(datasetList!=null){
+            datasetList.add(ds);
+        }
+    }
 }

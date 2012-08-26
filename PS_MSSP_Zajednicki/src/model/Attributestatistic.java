@@ -143,6 +143,8 @@ public class Attributestatistic implements Serializable, OpstiDomenskiObjekat {
         a.setAttribute(attribute);
         a.setStatistic(statistic);
         a.setStatisticValue(statisticValue);
+        a.setAttributestatisticPK(attributestatisticPK);
+        
     }
 
     @Override

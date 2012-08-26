@@ -22,7 +22,7 @@ public class Testic {
     public static void main(String[] args) {
         
         
-        String[] availableMetaAttributeImplementationClassNames = MetaAttributesAndStatisticsColection.getInstance().getAvailableStatisticsImplementationClassNames();
+        String[] availableMetaAttributeImplementationClassNames = MetaAttributesAndStatisticsColection.getInstance().getAvailableMetaAttributeImplementationClassNames();
        for (String statclass : availableMetaAttributeImplementationClassNames) {
             System.out.println(statclass);
         }

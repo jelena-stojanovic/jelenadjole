@@ -28,16 +28,25 @@ import model.dataset.Dataset;
     @NamedQuery(name = "Attribute.findByName", query = "SELECT a FROM Attribute a WHERE a.name = :name"),
     @NamedQuery(name = "Attribute.findByDescription", query = "SELECT a FROM Attribute a WHERE a.description = :description"),
     @NamedQuery(name = "Attribute.findByMissingValues", query = "SELECT a FROM Attribute a WHERE a.missingValues = :missingValues"),
+    @NamedQuery(name = "Attribute.findByAttributeType", query = "SELECT a FROM Attribute a WHERE a.dateAttributeType = :dateAttributeType"),
     @NamedQuery(name = "Attribute.findByAttributeRole", query = "SELECT a FROM Attribute a WHERE a.attributeRole = :attributeRole")})
 public class Attribute implements Serializable, OpstiDomenskiObjekat {
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
-    private Numericalattribute numericalattribute;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
-    private Nominalattribute nominalattribute;
+    @JoinColumn(name = "dateAttributeType", referencedColumnName = "attribtteTypeID")
+    @ManyToOne
+    private Attributetype dateAttributeType;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
-    private Dateattribute dateattribute;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute")
+    private List<Possibleattributevalue> possibleattributevalueList;
+    
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
+//    private Numericalattribute numericalattribute;
+//    
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
+//    private Nominalattribute nominalattribute;
+//    
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "attribute")
+//    private Dateattribute dateattribute;
     
     /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "attribute1")
     private List<Attributestatistic> attributestatisticList1;
@@ -209,72 +218,104 @@ public class Attribute implements Serializable, OpstiDomenskiObjekat {
 //        this.possibleattributevalueList = possibleattributevalueList;
 //    }
 
-//    public abstract boolean isNominal();
-//    public abstract boolean isNumerical();
-//    public abstract boolean isOrdinal();
-//    public abstract boolean isInterval();
-//    public abstract boolean isDate();
-
-    /**
-     * @return the numericalattribute
-     */
-    public Numericalattribute getNumericalattribute() {
-        return numericalattribute;
+    public  boolean isNominal(){
+        if(dateAttributeType.getAttributeTypeName().equals("nominal"))
+            return true;
+        return false;
+    }
+    public  boolean isNumerical(){
+        if(dateAttributeType.getAttributeTypeName().equals("numerical"))
+            return true;
+        return false;
+    }
+    public  boolean isOrdinal(){
+        if(dateAttributeType.getAttributeTypeName().equals("nominal"))
+            return true;
+        return false;
+    }
+    public  boolean isInterval(){
+        if(dateAttributeType.getAttributeTypeName().equals("interval"))
+            return true;
+        return false;
+    }
+    public  boolean isDate(){
+        if(dateAttributeType.getAttributeTypeName().equals("date"))
+            return true;
+        return false;
     }
 
-    /**
-     * @param numericalattribute the numericalattribute to set
-     */
-    public void setNumericalattribute(Numericalattribute numericalattribute) {
-        this.numericalattribute = numericalattribute;
-    }
-
-    /**
-     * @return the nominalattribute
-     */
-    public Nominalattribute getNominalattribute() {
-        return nominalattribute;
-    }
-
-    /**
-     * @param nominalattribute the nominalattribute to set
-     */
-    public void setNominalattribute(Nominalattribute nominalattribute) {
-        this.nominalattribute = nominalattribute;
-    }
-
-    /**
-     * @return the dateattribute
-     */
-    public Dateattribute getDateattribute() {
-        return dateattribute;
-    }
-
-    /**
-     * @param dateattribute the dateattribute to set
-     */
-    public void setDateattribute(Dateattribute dateattribute) {
-        this.dateattribute = dateattribute;
-    }
+//    /**
+//     * @return the numericalattribute
+//     */
+//    public Numericalattribute getNumericalattribute() {
+//        return numericalattribute;
+//    }
+//
+//    /**
+//     * @param numericalattribute the numericalattribute to set
+//     */
+//    public void setNumericalattribute(Numericalattribute numericalattribute) {
+//        this.numericalattribute = numericalattribute;
+//    }
+//
+//    /**
+//     * @return the nominalattribute
+//     */
+//    public Nominalattribute getNominalattribute() {
+//        return nominalattribute;
+//    }
+//
+//    /**
+//     * @param nominalattribute the nominalattribute to set
+//     */
+//    public void setNominalattribute(Nominalattribute nominalattribute) {
+//        this.nominalattribute = nominalattribute;
+//    }
+//
+//    /**
+//     * @return the dateattribute
+//     */
+//    public Dateattribute getDateattribute() {
+//        return dateattribute;
+//    }
+//
+//    /**
+//     * @param dateattribute the dateattribute to set
+//     */
+//    public void setDateattribute(Dateattribute dateattribute) {
+//        this.dateattribute = dateattribute;
+//    }
 
     @Override
     public String vratiImeKlase() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Attribute";
     }
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "attribute";
     }
 
     @Override
     public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Attribute atr= (Attribute)odo;
+        atr.setAttributePK(attributePK);
+        atr.setAttributeRole(attributeRole);
+        atr.setAttributestatisticList(attributestatisticList);
+        atr.setDataset(dataset);
+        
+        atr.setDescription(description);
+        atr.setMissingValues(missingValues);
+        atr.setName(name);
+        atr.setPossibleattributevalueList(possibleattributevalueList);
+        atr.setDateAttributeType(dateAttributeType);
+        
+        
     }
 
     @Override
     public Object vratiID() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return attributePK;
     }
 
     @Override
@@ -284,20 +325,61 @@ public class Attribute implements Serializable, OpstiDomenskiObjekat {
 
     @Override
     public String vratiAtributPretrazivanja() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "IndexOfAttribute";
     }
 
     @Override
     public String vratiNazivNovogObjekta() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return " new attribute";
     }
 
     @Override
     public String vratiNazivObjekta() {
-        throw new UnsupportedOperationException("Not supported yet.");
+       return "attribute";
+    }
+
+    public Attributetype getDateAttributeType() {
+        return dateAttributeType;
+    }
+
+    public void setDateAttributeType(Attributetype dateAttributeType) {
+        this.dateAttributeType = dateAttributeType;
+    }
+
+    @XmlTransient
+    public List<Possibleattributevalue> getPossibleattributevalueList() {
+        return possibleattributevalueList;
+    }
+
+    public void setPossibleattributevalueList(List<Possibleattributevalue> possibleattributevalueList) {
+        this.possibleattributevalueList = possibleattributevalueList;
     }
 
     
     
+    
+    public  double getIndexOfNominalValue(String nominalValue) {
+        
+        for (int i = 0; i < possibleattributevalueList.size(); i++) {
+            Possibleattributevalue possibleattributevalue = possibleattributevalueList.get(i);
+            if(possibleattributevalue.getPossibleattributevaluePK().getIndexOfAttribute()==attributePK.getIndexOfAttribute()&&possibleattributevalue.getPossibleattributevaluePK().getDatasetID()==attributePK.getDataSetID()&&possibleattributevalue.getPossibleValue().equals(nominalValue)){
+                return possibleattributevalue.getPossibleattributevaluePK().getIndexOfValue();
+            }
+        }
+        return Double.NaN;
+    }
+  public String getNominalValueFromIndex(double index) throws Exception {
+        if(Double.isNaN(index))
+            throw new Exception("Index does not have a valid value.");
+        
+        
+        for (int i = 0; i < possibleattributevalueList.size(); i++) {
+            Possibleattributevalue possibleattributevalue = possibleattributevalueList.get(i);
+            if(possibleattributevalue.getPossibleattributevaluePK().getIndexOfAttribute()==attributePK.getIndexOfAttribute()&&possibleattributevalue.getPossibleattributevaluePK().getDatasetID()==attributePK.getDataSetID()&&possibleattributevalue.getPossibleattributevaluePK().getIndexOfValue()==index){
+                return possibleattributevalue.getPossibleValue();
+            }
+        }
+        return null;
+    }
     
 }

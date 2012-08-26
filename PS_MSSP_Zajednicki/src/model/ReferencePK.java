@@ -70,9 +70,15 @@ public class ReferencePK implements Serializable {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "entity.ReferencePK[ referenceID=" + referenceID + ", dataSetID=" + dataSetID + " ]";
+//    }
+    
+    
     @Override
     public String toString() {
-        return "entity.ReferencePK[ referenceID=" + referenceID + ", dataSetID=" + dataSetID + " ]";
+        return ""+ referenceID;
     }
-    
+
 }

@@ -135,4 +135,21 @@ public class DataTable implements Serializable{
     public void setDataSet(Dataset dataSet) {
         this.dataSet = dataSet;
     }
+
+    @Override
+    public String toString() {
+       String s="";
+        for (int i = 0; i < row; i++) { //broj redova
+
+            for (int j = 0; j < column; j++) { //broj kolona
+                s+=(getValue(i, j) + ", ");
+                
+            }
+         s+="\n";
+        }
+        return s;
+    }
+    
+    
+    
 }

@@ -30,7 +30,7 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
     @JoinColumn(name = "indexOfAttribute", referencedColumnName = "indexOfAttribute", insertable = false, updatable = false)    
     })
     @ManyToOne(optional = false)
-    private Nominalattribute nominalattribute;
+    private Attribute attribute;
     
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -109,7 +109,7 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
     @Override
     public void prekopirajVrednostiAtributa(OpstiDomenskiObjekat odo) {
         Possibleattributevalue pav= (Possibleattributevalue)odo;
-        pav.setNominalattribute(nominalattribute);
+        pav.setAttribute(attribute);
         pav.setPossibleValue(possibleValue);
         pav.setPossibleattributevaluePK(possibleattributevaluePK);
     }
@@ -139,12 +139,21 @@ public class Possibleattributevalue implements Serializable, OpstiDomenskiObjeka
         return "possibleattributevalue";
     }
 
-    public Nominalattribute getNominalattribute() {
-        return nominalattribute;
+//    public Attribute getNominalattribute() {
+//        return attribute;
+//    }
+//
+//    public void setNominalattribute(Attribute attribute) {
+//        this.attribute = attribute;
+//    }
+
+    public Attribute getAttribute() {
+        return attribute;
     }
 
-    public void setNominalattribute(Nominalattribute nominalattribute) {
-        this.nominalattribute = nominalattribute;
+    public void setAttribute(Attribute attribute) {
+        this.attribute = attribute;
     }
-    
+
+   
 }

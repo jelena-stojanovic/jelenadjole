@@ -2,73 +2,55 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dataset;
+package to;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import model.OpstiDomenskiObjekat;
 import model.Reference;
 import model.attribute.Attribute;
-import to.DataSetTO;
+import model.dataset.*;
 
 /**
  *
  * @author Jelena
  */
-@Entity
-@Table(name = "dataset")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Dataset.findAll", query = "SELECT d FROM Dataset d"),
-    @NamedQuery(name = "Dataset.findByDataSetID", query = "SELECT d FROM Dataset d WHERE d.dataSetID = :dataSetID"),
-    @NamedQuery(name = "Dataset.findByTitle", query = "SELECT d FROM Dataset d WHERE d.title = :title"),
-    @NamedQuery(name = "Dataset.findByDsDescription", query = "SELECT d FROM Dataset d WHERE d.dsDescription = :dsDescription"),
-    @NamedQuery(name = "Dataset.findByFilePath", query = "SELECT d FROM Dataset d WHERE d.filePath = :filePath")})
-public class Dataset implements OpstiDomenskiObjekat, Serializable {
+public class DataSetTO implements OpstiDomenskiObjekat, Serializable {
 
-    @JoinColumn(name = "metadsID", referencedColumnName = "metadsID")
-    @ManyToOne
     private Metads metadsID;
     private static final long serialVersionUID = 1L;
-    @Id
-    @SequenceGenerator(name = "seq", sequenceName = "seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
-    @Basic(optional = false)
-    @Column(name = "dataSetID")
     private Integer dataSetID;
-    @Column(name = "title")
     private String title;
-    @Column(name = "dsDescription")
     private String dsDescription;
-    @Column(name = "filePath")
     private String filePath;
-    @JoinColumn(name = "source", referencedColumnName = "sourceID")
-    @OneToOne
     private Source source;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dataset")
     private List<Attribute> attributeList = new ArrayList<Attribute>();
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "dataset")
     private Metads metads;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dataset")
     private List<Datasetmetaattribute> datasetmetaattributeList = new ArrayList<Datasetmetaattribute>();
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dataset")
     private List<Reference> referenceList = new ArrayList<Reference>();
 
     //private DataTable dataTable;
-    public Dataset() {
+    public DataSetTO() {
     }
 
-    public Dataset(Integer dataSetID) {
+    public DataSetTO(Metads metadsID, Integer dataSetID, String title, String dsDescription, String filePath, Source source, Metads metads) {
+        this.metadsID = metadsID;
+        this.dataSetID = dataSetID;
+        this.title = title;
+        this.dsDescription = dsDescription;
+        this.filePath = filePath;
+        this.source = source;
+        this.metads = metads;
+    }
+
+    public DataSetTO(Integer dataSetID) {
         this.dataSetID = dataSetID;
     }
 
-    public Dataset(DataSetTO ds) {
+    public DataSetTO(Dataset ds) {
         this.metadsID = ds.getMetads();
         this.dataSetID = ds.getDataSetID();
         this.title = ds.getTitle();
@@ -76,9 +58,13 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         this.filePath = ds.getFilePath();
         this.source = ds.getSource();
         this.metads = ds.getMetads();
+        ds.getAttributeList().size();
         this.attributeList = ds.getAttributeList();
+        ds.getDatasetmetaattributeList().size();
         this.datasetmetaattributeList = ds.getDatasetmetaattributeList();
+        ds.getReferenceList().size();
         this.referenceList = ds.getReferenceList();
+
     }
 
     public Integer getDataSetID() {
@@ -121,7 +107,6 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         this.source = source;
     }
 
-    @XmlTransient
     public List<Attribute> getAttributeList() {
         return attributeList;
     }
@@ -138,7 +123,6 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         this.metads = metads;
     }
 
-    @XmlTransient
     public List<Datasetmetaattribute> getDatasetmetaattributeList() {
         return datasetmetaattributeList;
     }
@@ -161,7 +145,6 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         datasetmetaattributeList.add(datasetmetaattribute);
     }
 
-    @XmlTransient
     public List<Reference> getReferenceList() {
         return referenceList;
     }
@@ -180,10 +163,10 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Dataset)) {
+        if (!(object instanceof DataSetTO)) {
             return false;
         }
-        Dataset other = (Dataset) object;
+        DataSetTO other = (DataSetTO) object;
         if ((this.dataSetID == null && other.dataSetID != null) || (this.dataSetID != null && !this.dataSetID.equals(other.dataSetID))) {
             return false;
         }
@@ -195,113 +178,11 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         return "entity.Dataset[ dataSetID=" + dataSetID + " ]";
     }
 
-//    
-//    /**
-//     * @return the dataTable
-//     */
-//    public DataTable getDataTable() {
-//        return dataTable;
-//    }
-//
-//    /**
-//     * @param dataTable the dataTable to set
-//     */
-//    public void setDataTable(DataTable dataTable) {
-//        this.dataTable = dataTable;
-//    }
-//
-//    @Override
-//    public String vratiVrednostiAtributa() {
-//       return  dataSetID + ", '" + title + "', '" +  dsDescription + "' ";
-//    }
-//
-//    @Override
-//    public String postaviVrednostiAtributa() {
-//        return "dataSetID = "+ dataSetID + ", title ='" + title +
-//           "', dsDescription ='" + dsDescription + "'";
-//    }
     @Override
     public String vratiImeKlase() {
         return "Dataset";
     }
 
-//    @Override
-//    public String vratiUslovZaNadjiSlog() {
-//        return "dataSetID = "+ dataSetID ;
-//    }
-//
-//    @Override
-//    public String vratiUslovZaNadjiSlogove() {
-//        return "";
-//    }
-//
-//    @Override
-//    public boolean Napuni(ResultSet RSslog) {
-//        try{
-//        dataSetID= KonverterTipova.Konvertuj(RSslog, dataSetID, "dataSetID");
-//        dsDescription=KonverterTipova.Konvertuj(RSslog, dsDescription,"dsDescription");
-//        title= KonverterTipova.Konvertuj(RSslog, title, "title");
-//        }catch(Exception e){
-//            System.out.println(e);
-//            return false;
-//        }
-//          return true;     
-//    }
-//
-//    @Override
-//    public int povecajBroj(ResultSet rs) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public OpstiDomenskiObjekat vratiVezaniObjekat(int brojVezanogObjekta) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void Napuni(ResultSet RSslog, int brojSloga, int brojVezanogObjekta) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void kreirajVezaniObjekat(int brojStavkiVezanogObjekta, int brojVezanogObjekta) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public int vratiBrojVezanihObjekata() {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void postaviPocetniBroj() {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public OpstiDomenskiObjekat vratiSlogVezanogObjekta(int brojVezanogObjekta, int brojSloga) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public int vratiBrojSlogovaVezanogObjekta(int brojVezanogObjekta) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public boolean vrednosnaOgranicenja() {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void Obradi() {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void Storniraj() {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
     @Override
     public String vratiNazivNovogObjekta() {
         return "new dataset";
@@ -363,7 +244,6 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         ds.setReferenceList(this.referenceList);
         ds.setDataSetID(this.dataSetID);
 
-//        ds.setDataTable(dataTable);
     }
 
     @Override
@@ -371,23 +251,15 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
         return dataSetID;
     }
 
-    // private String atributPretrazivanja;
     @Override
     public void postaviAtributPretrazivanja(String atribut) {
-        //  atributPretrazivanja=atribut;
     }
 
     @Override
     public String vratiAtributPretrazivanja() {
         return "dataSetID";
-        //return atributPretrazivanja;
     }
 
-//    /***RAZLIKA***/
-//    private DataTable dataTable;
-    /**
-     * @return the dataTable
-     */
     public DataTable getDataTable() {
         DataTable dataTable = null;
         try {
@@ -448,24 +320,23 @@ public class Dataset implements OpstiDomenskiObjekat, Serializable {
 
         oos.defaultWriteObject();
     }
-
-    public void instantiateLAZYrelationship() {
-        if (this.metads != null && this.metadsID != null) {
-            if (getAttributeList() != null) {
-                getAttributeList().size();
-            }
-            if (getDatasetmetaattributeList() != null) {
-                getDatasetmetaattributeList().size();
-            }
-            if (getMetads() != null) {
-                getMetads().getDsmetaattributeList().size();
-            }
-            if (getReferenceList() != null) {
-                getReferenceList().size();
-            }
-        }
-    }
-
-    public void createAllLazyEntityFields() {
-    }
+//    public void instantiateLAZYrelationship() {
+//        if (this.metads != null && this.metadsID != null) {
+//            if (getAttributeList() != null) {
+//                getAttributeList().size();
+//            }
+//            if (getDatasetmetaattributeList() != null) {
+//                getDatasetmetaattributeList().size();
+//            }
+//            if (getMetads() != null) {
+//                getMetads().getDsmetaattributeList().size();
+//            }
+//            if (getReferenceList() != null) {
+//                getReferenceList().size();
+//            }
+//        }
+//    }
+//
+//    public void createAllLazyEntityFields() {
+//    }
 }

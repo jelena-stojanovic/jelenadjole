@@ -5,12 +5,13 @@
 package model.dataFormat;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  *
  * @author Jelena
  */
-public class CSVFormat extends DataFormat{
+public class CSVFormat extends DataFormat implements Serializable{
 
     private File csvFile;
     private boolean useFirstRowAsAttributeNames = false;
