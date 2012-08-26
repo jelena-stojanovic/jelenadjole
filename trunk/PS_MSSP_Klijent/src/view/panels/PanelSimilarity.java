@@ -4,17 +4,25 @@
  */
 package view.panels;
 
+import javax.swing.table.TableModel;
+import model.OpstiDomenskiObjekat;
+import view.forms.OpstaEkranskaForma;
+import view.guicontrollers.ControllerUI_Similarity;
+
 /**
  *
- * @author Jelena
+ * @author Djordje
  */
-public class PanelSimilarity extends javax.swing.JPanel {
+public class PanelSimilarity extends javax.swing.JPanel implements OpstaEkranskaForma {
+
+    private ControllerUI_Similarity controller;
 
     /**
      * Creates new form PanelSimilarity
      */
     public PanelSimilarity() {
         initComponents();
+
     }
 
     /**
@@ -26,17 +34,151 @@ public class PanelSimilarity extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        cbSimilarity = new javax.swing.JComboBox();
+        btnCalculateSimilarity = new javax.swing.JButton();
+        lblSimilarityResult = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAllDatasets = new javax.swing.JTable();
+
+        jLabel1.setText("Select similarity measurement  : ");
+
+        cbSimilarity.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSimilarityItemStateChanged(evt);
+            }
+        });
+
+        btnCalculateSimilarity.setText("Calculate similarity");
+        btnCalculateSimilarity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculateSimilarityActionPerformed(evt);
+            }
+        });
+
+        tblAllDatasets.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblAllDatasets.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(tblAllDatasets);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(btnCalculateSimilarity))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSimilarityResult, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cbSimilarity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(cbSimilarity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCalculateSimilarity)
+                    .addComponent(lblSimilarityResult, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCalculateSimilarityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateSimilarityActionPerformed
+        controller.calculateSimilarity();
+        
+    }//GEN-LAST:event_btnCalculateSimilarityActionPerformed
+
+    private void cbSimilarityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSimilarityItemStateChanged
+        controller.setSimilarity();
+    }//GEN-LAST:event_cbSimilarityItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalculateSimilarity;
+    private javax.swing.JComboBox cbSimilarity;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSimilarityResult;
+    private javax.swing.JTable tblAllDatasets;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the cbSimilarity
+     */
+    public javax.swing.JComboBox getCbSimilarity() {
+        return cbSimilarity;
+    }
+
+    /**
+     * @return the lblSimilarityResult
+     */
+    public javax.swing.JLabel getLblSimilarityResult() {
+        return lblSimilarityResult;
+    }
+
+    /**
+     * @return the controller
+     */
+    public ControllerUI_Similarity getController() {
+        return controller;
+    }
+
+    /**
+     * @param controller the controller to set
+     */
+    public void setController(ControllerUI_Similarity controller) {
+        this.controller = controller;
+    }
+
+    /**
+     * @return the tblAllDatasets
+     */
+    public javax.swing.JTable getTblAllDatasets() {
+        return tblAllDatasets;
+    }
+
+    @Override
+    public TableModel vratiModel() {
+        return tblAllDatasets.getModel();
+    }
+
+    @Override
+    public Object[] vratiPocetneVrednosti() {
+        return null;
+    }
+
+    @Override
+    public int vratiSelektovaniRed() {
+        return tblAllDatasets.getSelectedRows()[0];
+    }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return odo;
+    }
+    OpstiDomenskiObjekat odo;
+
+    public void setOdo(OpstiDomenskiObjekat odo) {
+        this.odo = odo;
+    }
 }

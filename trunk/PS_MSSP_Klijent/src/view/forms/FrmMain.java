@@ -12,12 +12,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import view.guicontrollers.ControllerUI_AllDataSets;
-import view.guicontrollers.ControllerUI_DSExport;
-import view.guicontrollers.ControllerUI_Main;
+import view.guicontrollers.*;
 
 import view.panels.PanelAllDataSets;
 import view.panels.PanelExportDS;
+import view.panels.PanelMetaAttribute;
+import view.panels.PanelSimilarity;
 
 
 /**
@@ -48,7 +48,9 @@ public class FrmMain extends javax.swing.JFrame {
         miShowDataSets = new javax.swing.JMenuItem();
         miExportDS = new javax.swing.JMenuItem();
         mSimilarity = new javax.swing.JMenu();
+        miSimilarity = new javax.swing.JMenuItem();
         mMetaAttribute = new javax.swing.JMenu();
+        miMetaAttributes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,9 +78,27 @@ public class FrmMain extends javax.swing.JFrame {
         jMenuBar1.add(mDataSet);
 
         mSimilarity.setText("Similarity");
+
+        miSimilarity.setText("Calculate similarity");
+        miSimilarity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSimilarityActionPerformed(evt);
+            }
+        });
+        mSimilarity.add(miSimilarity);
+
         jMenuBar1.add(mSimilarity);
 
         mMetaAttribute.setText(" MetaAttribute");
+
+        miMetaAttributes.setText("Test Meta attribute");
+        miMetaAttributes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMetaAttributesActionPerformed(evt);
+            }
+        });
+        mMetaAttribute.add(miMetaAttributes);
+
         jMenuBar1.add(mMetaAttribute);
 
         setJMenuBar(jMenuBar1);
@@ -98,12 +118,43 @@ public class FrmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_miShowDataSetsActionPerformed
 
     private void miExportDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExportDSActionPerformed
-        PanelExportDS panelExport = new PanelExportDS();
-        ControllerUI_DSExport dsExport = new ControllerUI_DSExport();
-        panelExport.setControllerExport(dsExport);
-        dsExport.setPanelExportDS(panelExport);
-        ControllerUI_Main.getInstance().setActivePanel(panelExport);
+        try {
+            PanelExportDS panelExport = new PanelExportDS();
+            ControllerUI_DSExport dsExport = new ControllerUI_DSExport(panelExport);
+            panelExport.setControllerExport(dsExport);
+            //dsExport.setPanelExportDS(panelExport);
+            ControllerUI_Main.getInstance().setActivePanel(panelExport);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_miExportDSActionPerformed
+
+    private void miMetaAttributesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMetaAttributesActionPerformed
+        try {
+            PanelMetaAttribute pma= new PanelMetaAttribute();
+            ControllerUI_MetaAttribute cuima= new ControllerUI_MetaAttribute();
+            cuima.setOef(pma);
+            ControllerUI_Main.getInstance().setActivePanel(pma);
+            cuima.KonvertujDomenskiObjekatUGrafickiObjekat();
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_miMetaAttributesActionPerformed
+
+    private void miSimilarityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSimilarityActionPerformed
+        try {
+            PanelSimilarity pansim = new PanelSimilarity();
+            ControllerUI_Similarity contr = new ControllerUI_Similarity();
+            pansim.setController(contr);
+            contr.setOef(pansim);
+            contr.setPanelSimilarity(pansim);
+            contr.KonvertujDomenskiObjekatUGrafickiObjekat();
+            ControllerUI_Main.getInstance().setActivePanel(pansim);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_miSimilarityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +203,9 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenu mMetaAttribute;
     private javax.swing.JMenu mSimilarity;
     private javax.swing.JMenuItem miExportDS;
+    private javax.swing.JMenuItem miMetaAttributes;
     private javax.swing.JMenuItem miShowDataSets;
+    private javax.swing.JMenuItem miSimilarity;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
 

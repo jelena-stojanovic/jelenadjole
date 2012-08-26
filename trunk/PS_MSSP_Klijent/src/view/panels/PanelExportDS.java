@@ -5,13 +5,18 @@
 package view.panels;
 
 import java.awt.Container;
+import javax.swing.table.TableModel;
+import model.OpstiDomenskiObjekat;
+import model.dataset.Dataset;
+import view.forms.OpstaEkranskaForma;
 import view.guicontrollers.ControllerUI_DSExport;
+import view.panels.tablemodels.TableModelDataSets;
 
 /**
  *
  * @author Jelena
  */
-public class PanelExportDS extends javax.swing.JPanel {
+public class PanelExportDS extends javax.swing.JPanel implements OpstaEkranskaForma{
 
     private ControllerUI_DSExport controllerExport;
 
@@ -690,6 +695,27 @@ public class PanelExportDS extends javax.swing.JPanel {
     
     public PanelAllDataSets getPanelAllDataSets() {
         return panelAllDataSets;
+    }
+
+    @Override
+    public TableModel vratiModel() {
+       return getPanelAllDataSets().getTblDatasets().getModel();
+    }
+
+    @Override
+    public Object[] vratiPocetneVrednosti() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int vratiSelektovaniRed() {
+        return getPanelAllDataSets().getTblDatasets().getSelectedRow();
+    }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        Dataset ds=((TableModelDataSets)vratiModel()).getDataSet(vratiSelektovaniRed());
+        return ds;
     }
     
     

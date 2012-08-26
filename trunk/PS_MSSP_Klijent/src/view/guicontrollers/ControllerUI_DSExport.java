@@ -5,6 +5,7 @@
 package view.guicontrollers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -22,13 +23,13 @@ import tools.KonverterTipova;
 
 import view.panels.PanelExportDS;
 import view.panels.PanelWelcome;
-import view.panels.TableModelDataSets;
+import view.panels.tablemodels.TableModelDataSets;
 
 /**
  *
  * @author Djordje
  */
-public class ControllerUI_DSExport {
+public class ControllerUI_DSExport extends OpstiKontrolerKI{
 
     //ControllerAL_DSExport controllerAL_DSExport = ControllerAL_DSExport.getInstance();
     private PanelExportDS panelExportDS;
@@ -39,6 +40,7 @@ public class ControllerUI_DSExport {
     String fileName = null;
     String directoryPath = null;
     List<DataFormat> dataFormatList = new ArrayList<DataFormat>();
+    ControllerUI_AllDataSets controllerUI_AllDataSets;
     /*
      * --local--
      */
@@ -51,12 +53,25 @@ public class ControllerUI_DSExport {
     private boolean writeAttributeNames = false;
     private boolean useQuotesForNominal = true;
     private String datePattern = "MM/dd/yyyy";
+    
     /*
      * ----end of csv format fields -----
      */
 
-    public ControllerUI_DSExport() {
+//    public ControllerUI_DSExport() {
+//    }
+
+    public ControllerUI_DSExport() throws IOException {
+        super();
     }
+
+    public ControllerUI_DSExport(PanelExportDS panelExportDS) throws IOException {
+        super();
+        this.panelExportDS = panelExportDS;
+        oef=panelExportDS;
+        controllerUI_AllDataSets= new ControllerUI_AllDataSets(panelExportDS.getPanelAllDataSets());
+    }
+    
 
     public void saveFildValues() {
         columnSeparation = getSelectedColumnSeparator();
@@ -95,9 +110,11 @@ public class ControllerUI_DSExport {
         try {
             saveDataSet();
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(panelExportDS, ex.getMessage(), "Data set export error!", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControllerUI_DSExport.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println(ex);
         }
+        JOptionPane.showMessageDialog(panelExportDS, "Data set has been exported successfull!", "Export data set", JOptionPane.INFORMATION_MESSAGE);
         ControllerUI_Main.getInstance().setActivePanel(new PanelWelcome());
     }
 
@@ -209,7 +226,8 @@ public class ControllerUI_DSExport {
     public void saveDataSet() throws Exception {
         if (dataset != null) {
             for (DataFormat dataFormat : dataFormatList) {
-                controllerAL_DSExport.exportDS(dataFormat, dataset);
+                SOExport(dataFormat);
+                
             }
         }
     }
@@ -230,5 +248,15 @@ public class ControllerUI_DSExport {
             }
             dtm.setDataVector(datasetMatrix, columIdentifiers);
         }
+    }
+
+    @Override
+    public void KonvertujGrafickiObjekatUDomenskiObjekat() {
+        
+    }
+
+    @Override
+    public void KonvertujDomenskiObjekatUGrafickiObjekat() {
+        
     }
 }

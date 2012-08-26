@@ -18,7 +18,12 @@ import java.awt.event.*;
 import javax.swing.table.*;
 import java.net.*;
 import java.io.*;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.OpstiDomenskiObjekat;
+import model.dataFormat.CSVFormat;
+import model.dataFormat.DataFormat;
 import view.forms.OpstaEkranskaForma;
 
 public abstract class OpstiKontrolerKI {
@@ -29,6 +34,7 @@ public abstract class OpstiKontrolerKI {
     String signal;
     OpstiDomenskiObjekat odo;
     OpstaEkranskaForma oef;
+    
 
     OpstiKontrolerKI() throws IOException {
         soketK = new Socket("127.0.0.1", 8189);
@@ -134,20 +140,60 @@ public abstract class OpstiKontrolerKI {
         return signal;
     }
 
-    public String SOVratiSve() {
+    
+    public List<OpstiDomenskiObjekat> SOVratiSve() {
         odo = oef.kreirajObjekat();
-        KonvertujGrafickiObjekatUDomenskiObjekat();
-        /**
-         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
-         */
-        signal = pozivSO("Obradi");
-        /**
-         * *******************************************************************************
-         */
-        KonvertujDomenskiObjekatUGrafickiObjekat();
-        return signal;
+        List<OpstiDomenskiObjekat> odoList=null;
+        try {
+            out.writeObject("VratiSve");
+            out.writeObject(odo);
+        } catch (IOException ex) {
+            Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println( "Neuspesno slanje objekata ka serveru.");
+        }
+        try {
+            odoList= (List<OpstiDomenskiObjekat>) in.readObject();
+            signal = (String) in.readObject();
+            System.out.println(signal);
+        } catch (IOException ex) {
+            System.out.println( "Neuspesno citanje objekata sa servera.");
+            Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println( "Neuspesno citanje objekata sa servera.");
+            Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return odoList;
+       
     }
 
+    public void SOExport(DataFormat df) {
+        odo = oef.kreirajObjekat();
+        
+        try {
+            out.writeObject("Export");
+            out.writeObject(odo);
+            out.writeObject(df);
+        } catch (IOException ex) {
+            Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println( "Neuspesno slanje objekata ka serveru.");
+        }
+        try {
+            String string= (String)in.readObject();
+            signal = (String) in.readObject();
+            System.out.println(signal);
+            String filePath= ((CSVFormat)df).getCsvFile().getPath();
+            PrintWriter pwriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(filePath)));
+            pwriter.write(string);
+        } catch (IOException ex) {
+            System.err.println( "Neuspesno citanje objekata sa servera.");
+            Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.err.println( "Neuspesno citanje objekata sa servera.");
+            Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
     
     String pozivSO(String nazivSO) {
         try {
