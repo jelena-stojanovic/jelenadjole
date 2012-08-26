@@ -47,6 +47,10 @@ public abstract class OpstaSO {
         if (transakcija) {
             os.commitTransakcije();
         }
+        if(!os.zatvoriBazu()){
+            return os.vratiPorukuMetode();
+        }
+        
         return os.vratiPorukuMetode();
     }
 
@@ -100,8 +104,22 @@ public abstract class OpstaSO {
         return dbbe.rollbackTransaction();
     }
 
+    boolean zatvoriBazu(){
+        if (BazaOtvorena == true) {
+            signal=dbbe.closeTransaction();
+            if (!signal) {
+                return false;
+            }
+            BazaOtvorena=false;
+        }
+       
+        return true;
+    }
+    
     String vratiPorukuMetode() {
         System.out.println(dbbe.vratiPorukuMetode());
         return dbbe.vratiPorukuMetode();
     }
+    
+    
 }

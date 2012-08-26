@@ -10,15 +10,9 @@ import java.util.logging.Logger;
 import javax.swing.JPanel;
 import logic.ControllerAL_Main;
 import logic.SO.serialization.Serialize;
-import view.controllers.ControllerUI_AllDataSets;
-import view.controllers.ControllerUI_DSExport;
-import view.controllers.ControllerUI_DSImport;
-import view.controllers.ControllerUI_Main;
-import view.controllers.ControllerUI_Similarity;
-import view.panels.importDSpanel.PaneAnylNewMetaAttribute;
-import view.panels.importDSpanel.PanelAllDataSets;
-import view.panels.importDSpanel.PanelExportDS;
-import view.panels.importDSpanel.PanelImportDS;
+import model.Administrator;
+import view.controllers.*;
+import view.panels.importDSpanel.*;
 import view.panels.similarity.PanelSimilarity;
 
 /**
@@ -70,6 +64,11 @@ public class FrmMain extends javax.swing.JFrame {
         mAdministrator.setText("Administrator");
 
         miShowAdministators.setText("Show all administrators");
+        miShowAdministators.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miShowAdministatorsActionPerformed(evt);
+            }
+        });
         mAdministrator.add(miShowAdministators);
 
         miNewAdministrator.setText("Add new Administrators");
@@ -172,9 +171,16 @@ public class FrmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
     
     private void miNewAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNewAdministratorActionPerformed
-        FrmAdministrator frmAdmin = new FrmAdministrator();
-        frmAdmin.setVisible(true);
-        frmAdmin.setFocusable(true);
+
+        FrmAdministrator frmAdministrator= new FrmAdministrator();
+        ControllerUI_Administrator controllerUI_Administrator= new ControllerUI_Administrator(frmAdministrator);
+                frmAdministrator.setCtrlAdmin(controllerUI_Administrator);
+                controllerUI_Administrator.setOdo(new Administrator());
+                controllerUI_Administrator.setOef(frmAdministrator);
+                frmAdministrator.getBtnRegisterAdmin().setVisible(true);
+                frmAdministrator.getBtnUpdateAdmin().setVisible(false);
+                frmAdministrator.setVisible(true);
+        
     }//GEN-LAST:event_miNewAdministratorActionPerformed
     
     private void miAnyNewMattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnyNewMattActionPerformed
@@ -190,6 +196,14 @@ public class FrmMain extends javax.swing.JFrame {
         contr.setPanelSimilarity(pansim);
         ControllerUI_Main.getInstance().setActivePanel(pansim);
     }//GEN-LAST:event_miCheckSimilarityActionPerformed
+
+    private void miShowAdministatorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowAdministatorsActionPerformed
+        PanelAllAdmins paad= new PanelAllAdmins();
+        ControllerUI_Administrator cuia= new ControllerUI_Administrator();
+        cuia.setPanelAllAdmins(paad);
+        paad.setControllerUI_Administrator(cuia);
+        ControllerUI_Main.getInstance().setActivePanel(paad);
+    }//GEN-LAST:event_miShowAdministatorsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,4 +274,6 @@ public class FrmMain extends javax.swing.JFrame {
         repaint();
         pack();
     }
+    
+    
 }

@@ -5,10 +5,8 @@
 package logic.SO.Import_Export;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import model.attribute.Attribute;
-import model.attribute.Nominalattribute;
 import model.attribute.Possibleattributevalue;
 
 /**
@@ -19,16 +17,17 @@ public class AttributePossibleValues {
     
     public static  List<Possibleattributevalue> getAttributePossibleValues(Attribute a, String[] allValues){
          List<Possibleattributevalue> possibleValuesList= new ArrayList<Possibleattributevalue>();
-        if(a.getNominalattribute()!=null){
-            Nominalattribute na=  a.getNominalattribute();
+        if(a.isNominal()){
+            
             List<String> possibleNominalValues= new ArrayList<String>();
             possibleNominalValues=MappingValues.extractPossibleNominaValuse(allValues, possibleNominalValues);
             //HashMap<String, Double> classToIndexMap = na.getClassToIndexMap();
             possibleValuesList= new ArrayList<Possibleattributevalue>();
-            possibleValuesList=MappingValues.mapNominalToNumerical(na,possibleNominalValues, possibleValuesList);
-            na.setPossibleattributevalueList(possibleValuesList);
-        }else if (a.getNumericalattribute()!=null){
-                       
+            possibleValuesList=MappingValues.mapNominalToNumerical(a,possibleNominalValues, possibleValuesList);
+            a.setPossibleattributevalueList(possibleValuesList);
+        }else if (a.isNumerical()){
+            
+        }
             
 //        }else if (a.isOrdinal()){
 //            
@@ -44,8 +43,8 @@ public class AttributePossibleValues {
 //            
 //        }else if (a.isInterval()){
 //            
-        }
-        
+//        }
+//        
         
         return possibleValuesList;
     }

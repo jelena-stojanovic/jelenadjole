@@ -39,10 +39,10 @@ public class Zapamti extends OpstaSO
 	      return false;
 	    }
 */
-	  if (!dbbe.obrisiODO(odo))
-	    { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");
-	   	  return false;
-	    }
+//	  if (!dbbe.obrisiODO(odo))
+//	    { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");
+//	   	  return false;
+//	    }
 
       if (!dbbe.sacuvajODO(odo))
        { dbbe.dodajPorukuMetode("Sistem ne moze da zapamti " + odo.vratiNazivObjekta() + ".");

@@ -14,6 +14,7 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import logic.ControllerAL_DSImport;
+import model.attribute.Attributetype;
 import model.attribute.Ontology;
 
 /**
@@ -125,6 +126,10 @@ public class TableModelDataTypes extends AbstractTableModel {
         return metaAttributes.get(2)[index];
 
     }
+    public Attributetype getAttributeTypeObj(int index) {
+        return Ontology.getAttributeTypeObject(metaAttributes.get(2)[index]);
+    }
+    
     public String getAttributeName(int index) {
         return metaAttributes.get(0)[index];
 

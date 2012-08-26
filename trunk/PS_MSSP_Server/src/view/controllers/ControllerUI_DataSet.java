@@ -5,7 +5,6 @@
 package view.controllers;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,9 +12,11 @@ import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EtchedBorder;
+import model.OpstiDomenskiObjekat;
 import model.Reference;
 import model.dataset.Dataset;
 import model.dataset.Source;
+import view.forms.OpstaEkranskaForma;
 import view.panels.datasets.FrmDataSet;
 
 /**
@@ -27,11 +28,25 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
     FrmDataSet frmDataSet;
     ArrayList<Reference> references = new ArrayList<Reference>();
 
-    public ControllerUI_DataSet(FrmDataSet pnlDataSet) throws IOException {
+    public ControllerUI_DataSet(FrmDataSet pnlDataSet){
         oef = pnlDataSet;
-        frmDataSet = (FrmDataSet) oef;
+        this.frmDataSet = pnlDataSet;
+        
     }
 
+    public void setOdo(OpstiDomenskiObjekat odo) {
+        this.odo = odo;
+    }
+
+    public void setOef(OpstaEkranskaForma oef) {
+        this.oef = oef;
+    }
+
+    public void setFrmDataSet(FrmDataSet frmDataSet) {
+        this.frmDataSet = frmDataSet;
+    }
+
+    
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         Dataset dataSet = (Dataset) odo;
@@ -46,16 +61,6 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
         } catch (ParseException ex) {
             frmDataSet.getTfDateDS().setBackground(Color.red);
         }
-//        reference.setAuthor(KonverterTipova.Konvertuj(frmDataSet.getTfAuthors(), reference.getAuthor()));
-//        reference.setLocation(KonverterTipova.Konvertuj(frmDataSet.getTfLocation(), reference.getLocation()));
-//        reference.setTitle(KonverterTipova.Konvertuj(frmDataSet.getTfTitle(), reference.getTitle()));
-//        try {
-//            reference.setDate(KonverterTipova.Konvertuj(frmDataSet.getTfDate(), reference.getDate()));
-//        } catch (ParseException ex) {
-//            JOptionPane.showMessageDialog(frmDataSet, "Unesite datum u \"MM/dd/yyyy\"  formatu.");
-//            frmDataSet.getTfDate().setBorder(new EtchedBorder(Color.red, Color.black));
-//        }
-//        reference.setOtherInformation(KonverterTipova.Konvertuj(frmDataSet.getTfOtherInformation(), reference.getOtherInformation()));
         dataSet.setSource(source);
         dataSet.setReferenceList(references);
     }

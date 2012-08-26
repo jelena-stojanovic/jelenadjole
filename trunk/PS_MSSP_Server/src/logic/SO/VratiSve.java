@@ -14,39 +14,43 @@ import model.OpstiDomenskiObjekat;
  */
 public class VratiSve extends OpstaSO {
 
-    public static String VratiSve(List<OpstiDomenskiObjekat> odoList) {
+    public static List<OpstiDomenskiObjekat> VratiSve(List<OpstiDomenskiObjekat> odoList, String signal) {
         VratiSve vs = new VratiSve();
         OpstaSO.transakcija = false;
-        return opsteIzvrsenjeSO(odoList, vs);
+        return opsteIzvrsenjeSO(odoList, signal,vs);
     }
 
-    synchronized static String opsteIzvrsenjeSO(List<OpstiDomenskiObjekat> odoList, VratiSve vs) {
+    synchronized static List<OpstiDomenskiObjekat> opsteIzvrsenjeSO(List<OpstiDomenskiObjekat> odoList, String signal, VratiSve vs) {
         if (!vs.otvoriBazu()) {
-            return vs.vratiPorukuMetode();
+            signal=vs.vratiPorukuMetode();
+            return null;
         }
 
-        if (vs.izvrsenjeSO(odoList) && transakcija) {
-            signal = vs.rollbackTransakcije();
-            return vs.vratiPorukuMetode();
+        if (vs.izvrsenjeSO(odoList)==null && transakcija) {
+            vs.rollbackTransakcije();
+            signal=vs.vratiPorukuMetode();
+            return null;
         }
 
         if (transakcija) {
             vs.commitTransakcije();
         }
-        return vs.vratiPorukuMetode();
+        signal=vs.vratiPorukuMetode();
+        return vs.izvrsenjeSO(odoList);
     }
 
     
    
-    boolean  izvrsenjeSO(List<OpstiDomenskiObjekat> odoList) {
-        signal = dbbe.vratiSveODO(odoList);
+    List<OpstiDomenskiObjekat>  izvrsenjeSO(List<OpstiDomenskiObjekat> odoList) {
         
-        if (!signal) {
-            dbbe.dodajPorukuMetode("*Sistem ne moze da nadje " + odoList.get(0).vratiNazivObjekta() + " po zadatoj vrednosti.");
-            return false;
+        odoList = dbbe.vratiSveODO(odoList);
+        
+        if (odoList==null) {
+            dbbe.dodajPorukuMetode("*Sistem ne moze da nadje nijedan " + odoList.get(0).vratiNazivObjekta() + " .");
+            return odoList;
         }
-        dbbe.dodajPorukuMetode("Sistem je nasao " + odoList.get(0).vratiNazivObjekta() + " po zadatoj vrednosti.");
-        return true;
+        dbbe.dodajPorukuMetode("Sistem je nasao sve" + odoList.get(0).vratiNazivObjekta() + "e.");
+        return odoList;
     }
 
     @Override

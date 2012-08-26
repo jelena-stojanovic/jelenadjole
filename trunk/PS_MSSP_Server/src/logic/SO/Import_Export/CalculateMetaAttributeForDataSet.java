@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dataset.Dataset;
 import model.dataset.Datasetmetaattribute;
+import model.dataset.DatasetmetaattributePK;
 import model.dataset.Dsmetaattribute;
 import model.dataset.metaattributes.DSMetaAttribute;
 
@@ -38,6 +39,10 @@ public class CalculateMetaAttributeForDataSet {
             availableMetaAttributeImplementationClassNames[i]=dsmetaattribute.getDsmetaattributeClass();
             
             Datasetmetaattribute d= new Datasetmetaattribute();
+            DatasetmetaattributePK  dpk= new DatasetmetaattributePK();
+            dpk.setDataSetID(ds.getDataSetID());
+            dpk.setDsmetaattributeID(dsmetaattribute.getDsmetaattributeID());
+            d.setDatasetmetaattributePK(dpk);
             d.setDataset(ds);
             d.setDsmetaattribute(dsmetaattribute);
             

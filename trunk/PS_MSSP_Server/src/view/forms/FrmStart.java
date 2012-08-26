@@ -4,13 +4,20 @@
  */
 package view.forms;
 
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.table.TableModel;
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+import model.Administrator;
+import model.OpstiDomenskiObjekat;
+import view.controllers.ControllerUI_Login;
 import view.controllers.ControllerUI_Main;
 
 /**
  *
  * @author Jelena
  */
-public class FrmStart extends javax.swing.JFrame {
+public class FrmStart extends javax.swing.JFrame implements OpstaEkranskaForma{
 
     /**
      * Creates new form FrmStart
@@ -34,7 +41,7 @@ public class FrmStart extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tfUserName = new javax.swing.JTextField();
-        tfUserName1 = new javax.swing.JTextField();
+        pfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,14 +68,12 @@ public class FrmStart extends javax.swing.JFrame {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLoginLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
-                    .addGroup(panelLoginLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(48, 48, 48)
-                        .addComponent(tfUserName1)))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(pfPassword))
                 .addContainerGap())
         );
         panelLoginLayout.setVerticalGroup(
@@ -80,9 +85,9 @@ public class FrmStart extends javax.swing.JFrame {
                     .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUserName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,6 +120,10 @@ public class FrmStart extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartServerActionPerformed
+        ControllerUI_Login controllerUI_Login= new ControllerUI_Login();
+        controllerUI_Login.setOef(this);
+        controllerUI_Login.KonvertujGrafickiObjekatUDomenskiObjekat();
+        controllerUI_Login.login();
         ControllerUI_Main.getInstance().startApplication();
         this.dispose();
     }//GEN-LAST:event_btnStartServerActionPerformed
@@ -166,7 +175,38 @@ public class FrmStart extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel panelLogin;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfUserName;
-    private javax.swing.JTextField tfUserName1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public TableModel vratiModel() {
+        return null;
+    }
+
+    @Override
+    public Object[] vratiPocetneVrednosti() {
+        return null;
+    }
+
+    @Override
+    public int vratiSelektovaniRed() {
+        return -1;
+    }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new Administrator();
+    }
+
+    public JTextField getTfUserName() {
+        return tfUserName;
+    }
+
+    public JPasswordField getPfPassword() {
+        return pfPassword;
+    }
+
+    
+    
 }

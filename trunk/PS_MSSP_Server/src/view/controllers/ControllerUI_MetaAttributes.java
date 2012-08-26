@@ -6,6 +6,7 @@ package view.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import logic.ControllerAL_Main;
 import logic.ControllerAL_MetaAttribute;
 import model.dataset.Dsmetaattribute;
@@ -29,8 +30,8 @@ public class ControllerUI_MetaAttributes {
         private static final ControllerUI_MetaAttributes INSTANCE = new ControllerUI_MetaAttributes();
     }
     
-    public ArrayList<Dsmetaattribute> getUnCalculatedMetaAttribute(){
-        ArrayList<Dsmetaattribute> uncalculated= ControllerAL_MetaAttribute.getInstance().getUnalculatedMetaAttribute(ControllerAL_Main.getInstance().getAllDataSets().get(0));
+    public List<Dsmetaattribute> getUnCalculatedMetaAttribute(){
+        List<Dsmetaattribute> uncalculated= ControllerAL_MetaAttribute.getInstance().getUnalculatedMetaAttribute(ControllerAL_Main.getInstance().getAllDataSets().get(0));
         
         for (int i = 0; i < uncalculated.size(); i++) {
             Dsmetaattribute Dsmetaattribute = uncalculated.get(i);

@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import model.attribute.Attributetype;
 import model.attribute.Ontology;
 
 /**
@@ -55,8 +56,8 @@ public class TableDataTypes extends JTable {
             }
             case 2: {
                 JComboBox jcb = new JComboBox();
-                for (String string : Ontology.getAttributeTypes()) {
-                    jcb.addItem(string);
+                for (String s : Ontology.getAttributeTypesS()) {
+                    jcb.addItem(s);
                 }
                 return new DefaultCellEditor(jcb);
             }

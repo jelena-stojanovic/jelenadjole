@@ -13,7 +13,7 @@ import view.panels.similarity.PanelSimilarity;
 
 /**
  *
- * @author Djordje
+ * @author Jelena
  */
 public class ControllerUI_Similarity {
 
@@ -24,7 +24,7 @@ public class ControllerUI_Similarity {
     public ControllerUI_Similarity() {
     }
 
-    public void setSelectedDataSets() {
+    private void setSelectedDataSets() {
         if (getPanelSimilarity().getTblAllDatasets() != null) {
             int[] indexes = getPanelSimilarity().getTblAllDatasets().getSelectedRows();
 
@@ -38,9 +38,10 @@ public class ControllerUI_Similarity {
     }
 
     public double calculateSimilarity() {
-        if (panelSimilarity.getCbSimilarity().getSelectedItem() instanceof CalculateCosineSimilarity) {
+        setSelectedDataSets();
+        if (panelSimilarity.getCbSimilarity().getSelectedItem().equals(CalculateCosineSimilarity.class.getSimpleName())) {
             return CalculateCosineSimilarity.calculate(dataset1, dataset2);
-        } else if (panelSimilarity.getCbSimilarity().getSelectedItem() instanceof CalculateEuclidianSimilarity) {
+        } else if (panelSimilarity.getCbSimilarity().getSelectedItem().equals( CalculateEuclidianSimilarity.class.getSimpleName())) {
             return CalculateEuclidianSimilarity.calculate(dataset1, dataset2);
         }
 

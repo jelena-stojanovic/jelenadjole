@@ -4,11 +4,8 @@
  */
 package view.panels.importDSpanel;
 
-import java.awt.TrayIcon;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.dataset.Dsmetaattribute;
@@ -125,13 +122,17 @@ public class PaneAnylNewMetaAttribute extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillList(){
-        ArrayList<Dsmetaattribute> calculatedMetaAttribute = ControllerUI_MetaAttributes.getInstance().getUnCalculatedMetaAttribute();
+        List<Dsmetaattribute> calculatedMetaAttribute = ControllerUI_MetaAttributes.getInstance().getUnCalculatedMetaAttribute();
+        if(!calculatedMetaAttribute.isEmpty()){
         DefaultListModel dlm = new DefaultListModel();
             for (Dsmetaattribute dsma : calculatedMetaAttribute) {
                 dlm.addElement(dsma);
             }
             jList1.setModel(dlm);
             System.out.println("Seted list");
+        }else{
+            JOptionPane.showMessageDialog(this, "There are no uncalculated metaattributes.");
+        }
     }
 
 }

@@ -40,16 +40,22 @@ public class Obradi extends OpstaSO {
 
         odo.Obradi();
 */
-        if (!dbbe.obrisiODO(odo)) {
+//        if (!dbbe.obrisiODO(odo)) {
+//            dbbe.dodajPorukuMetode("Sistem ne moze da obradi " + odo.vratiNazivObjekta() + ".");
+//            return false;
+//        }
+//
+//        if (!dbbe.sacuvajODO(odo)) {
+//            dbbe.dodajPorukuMetode("Sistem ne moze da obradi " + odo.vratiNazivObjekta() + ".");
+//            return false;
+//        }
+
+        
+        if (!dbbe.izmeniODO(odo)) {
             dbbe.dodajPorukuMetode("Sistem ne moze da obradi " + odo.vratiNazivObjekta() + ".");
             return false;
         }
-
-        if (!dbbe.sacuvajODO(odo)) {
-            dbbe.dodajPorukuMetode("Sistem ne moze da obradi " + odo.vratiNazivObjekta() + ".");
-            return false;
-        }
-
+        
         dbbe.dodajPorukuMetode("Sistem je obradio " + odo.vratiNazivObjekta() + ".");
         return true;
     }
