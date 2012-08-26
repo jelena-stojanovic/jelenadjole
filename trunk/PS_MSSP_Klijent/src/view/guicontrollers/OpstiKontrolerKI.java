@@ -34,7 +34,6 @@ public abstract class OpstiKontrolerKI {
     String signal;
     OpstiDomenskiObjekat odo;
     OpstaEkranskaForma oef;
-    
 
     OpstiKontrolerKI() throws IOException {
         soketK = new Socket("127.0.0.1", 8189);
@@ -74,7 +73,8 @@ public abstract class OpstiKontrolerKI {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         /**
-         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
+         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU
+         * ********
          */
         signal = pozivSO("Pretrazi");
         /**
@@ -88,7 +88,8 @@ public abstract class OpstiKontrolerKI {
     public String SOKreirajNovi() {
         odo = oef.kreirajObjekat();
         /**
-         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
+         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU
+         * ********
          */
         signal = pozivSO("kreirajNovi");
         /**
@@ -102,7 +103,8 @@ public abstract class OpstiKontrolerKI {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         /**
-         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
+         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU
+         * ********
          */
         signal = pozivSO("Zapamti");
         /**
@@ -116,7 +118,8 @@ public abstract class OpstiKontrolerKI {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         /**
-         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
+         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU
+         * ********
          */
         signal = pozivSO("Storniraj");
         /**
@@ -130,7 +133,8 @@ public abstract class OpstiKontrolerKI {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         /**
-         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU ********
+         * ****** POZIVA SE KONTROLER APL. LOGIKE DA IZVRSI SISTEMSKU OPERACIJU
+         * ********
          */
         signal = pozivSO("Obradi");
         /**
@@ -140,61 +144,87 @@ public abstract class OpstiKontrolerKI {
         return signal;
     }
 
-    
     public List<OpstiDomenskiObjekat> SOVratiSve() {
         odo = oef.kreirajObjekat();
-        List<OpstiDomenskiObjekat> odoList=null;
+        List<OpstiDomenskiObjekat> odoList = null;
         try {
             out.writeObject("VratiSve");
             out.writeObject(odo);
         } catch (IOException ex) {
             Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println( "Neuspesno slanje objekata ka serveru.");
+            System.out.println("Neuspesno slanje objekata ka serveru.");
         }
         try {
-            odoList= (List<OpstiDomenskiObjekat>) in.readObject();
+            odoList = (List<OpstiDomenskiObjekat>) in.readObject();
             signal = (String) in.readObject();
             System.out.println(signal);
         } catch (IOException ex) {
-            System.out.println( "Neuspesno citanje objekata sa servera.");
+            System.out.println("Neuspesno citanje objekata sa servera.");
             Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            System.out.println( "Neuspesno citanje objekata sa servera.");
+            System.out.println("Neuspesno citanje objekata sa servera.");
             Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       return odoList;
-       
+
+        return odoList;
+
     }
 
     public void SOExport(DataFormat df) {
         odo = oef.kreirajObjekat();
-        
+
         try {
             out.writeObject("Export");
             out.writeObject(odo);
             out.writeObject(df);
         } catch (IOException ex) {
             Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println( "Neuspesno slanje objekata ka serveru.");
+            System.err.println("Neuspesno slanje objekata ka serveru.");
         }
         try {
-            String string= (String)in.readObject();
+            int filesize = 6022386; // filesize temporary hardcoded
+
+            int bytesRead;
+            int current = 0;
+            
+            // receive file
+            byte[] mybytearray = new byte[filesize];
+
+            FileOutputStream fos = new FileOutputStream(((CSVFormat) df).getCsvFile());
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            bytesRead = in.read(mybytearray, 0, mybytearray.length);
+            current = bytesRead;
+
+            
+            do {
+                bytesRead =
+                        in.read(mybytearray, current, (mybytearray.length - current));
+                if (bytesRead >= 0) {
+                    current += bytesRead;
+                }
+            } while (bytesRead > -1);
+
+            bos.write(mybytearray, 0, current);
+            bos.flush();
+            
+            
+            bos.close();
+
             signal = (String) in.readObject();
-            System.out.println(signal);
-            String filePath= ((CSVFormat)df).getCsvFile().getPath();
-            PrintWriter pwriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(filePath)));
-            pwriter.write(string);
+
+
+            //-----------------
+
         } catch (IOException ex) {
-            System.err.println( "Neuspesno citanje objekata sa servera.");
+            System.err.println("Neuspesno citanje objekata sa servera.");
             Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            System.err.println( "Neuspesno citanje objekata sa servera.");
+            System.err.println("Neuspesno citanje objekata sa servera.");
             Logger.getLogger(OpstiKontrolerKI.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
-    
+
     String pozivSO(String nazivSO) {
         try {
             out.writeObject(nazivSO);
@@ -211,7 +241,6 @@ public abstract class OpstiKontrolerKI {
         }
         return signal;
     }
-    
 
     abstract public void KonvertujGrafickiObjekatUDomenskiObjekat();
 
