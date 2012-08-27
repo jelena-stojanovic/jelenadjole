@@ -103,12 +103,12 @@ public class ControllerAL_MetaAttribute {
         allODO.add(st);
         String signal= "";
         allODO=VratiSve.VratiSve(allODO,signal);
-//        System.out.println("Sastistike iz baze");
+
         for (int i = 0; i < allODO.size(); i++) {
             OpstiDomenskiObjekat opstiDomenskiObjekat = allODO.get(i);
-//            System.out.println("ODO statsitika iz baze"+opstiDomenskiObjekat.vratiNazivTabele());
+
             Statistic dsma= (Statistic)opstiDomenskiObjekat;
-//            System.out.println("Statistika"+dsma.getStatisticName()+dsma.getStatisticClass());
+
             alldsma.add(dsma);
         }
         return alldsma;

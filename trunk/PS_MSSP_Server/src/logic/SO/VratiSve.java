@@ -25,8 +25,8 @@ public class VratiSve extends OpstaSO {
             signal=vs.vratiPorukuMetode();
             return null;
         }
-
-        if (vs.izvrsenjeSO(odoList)==null && transakcija) {
+        List<OpstiDomenskiObjekat> list=vs.izvrsenjeSO(odoList);
+        if (list==null && transakcija) {
             vs.rollbackTransakcije();
             signal=vs.vratiPorukuMetode();
             return null;
@@ -36,7 +36,7 @@ public class VratiSve extends OpstaSO {
             vs.commitTransakcije();
         }
         signal=vs.vratiPorukuMetode();
-        return vs.izvrsenjeSO(odoList);
+        return list;
     }
 
     

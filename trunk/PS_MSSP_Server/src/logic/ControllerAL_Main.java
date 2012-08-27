@@ -33,7 +33,7 @@ public class ControllerAL_Main {
     }
 
     public List<Dataset> getAllDataSets() {
-        System.out.println("Vrati sve datasetove");
+
         List<Dataset> alldsma = new ArrayList<Dataset>();
         List<OpstiDomenskiObjekat> allODO = new ArrayList<OpstiDomenskiObjekat>();
         Dataset dma = new Dataset();
@@ -41,14 +41,12 @@ public class ControllerAL_Main {
         String signal = "";
         allODO = VratiSve.VratiSve(allODO, signal);
         if (allODO != null) {
-            System.out.println("Lista ds-ova nije prazna");
-            System.out.println(signal);
             for (int i = 0; i < allODO.size(); i++) {
 
                 OpstiDomenskiObjekat opstiDomenskiObjekat = allODO.get(i);
                 Dataset dsma = (Dataset) opstiDomenskiObjekat;
                 dsma.instantiateLAZYrelationship();
-                System.out.println("ds" + i + dsma);
+
                 alldsma.add(dsma);
             }
         }
@@ -61,9 +59,7 @@ public class ControllerAL_Main {
         allODO.add(dma);
         String signal = "";
         allODO = VratiSve.VratiSve(allODO, signal);
-        System.out.println("Poruka:" + signal + " osim ukoliko nema poruke");
         dma = (Metads) allODO.get(0);
-        System.out.println("Naziv metads:" + dma.getDataset().getTitle() + "podaci o mds:");
         return dma;
     }
     
@@ -96,12 +92,9 @@ public class ControllerAL_Main {
             
             for (OpstiDomenskiObjekat opstiDomenskiObjekat : Pretrazi) {
                 Administrator administ= (Administrator)opstiDomenskiObjekat;
-                System.out.println(administ+ administ.getFirstName()+administ.getLastName());
+
                  return administ;
             }
-            
-           
-            
         }
         
         return null;

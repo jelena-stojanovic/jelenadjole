@@ -173,7 +173,7 @@ public class ControllerAL_DSImport {
          */
 
         Metads mds= ControllerAL_Main.getInstance().getMetads();
-        System.out.println("title: "+mds.getDataset().getTitle()+" "+mds);
+
         mds.addDataset(ds);
         ds.setMetads(mds);
         ds.setMetadsID(mds);
