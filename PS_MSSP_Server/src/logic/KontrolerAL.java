@@ -161,7 +161,7 @@ class Klijent extends Thread {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println(e);
             e.printStackTrace();
         }
     }
