@@ -15,7 +15,6 @@ import model.OpstiDomenskiObjekat;
 import model.dataset.Dataset;
 import model.dataset.Source;
 
-
 /**
  *
  * @author Jelena
@@ -60,10 +59,10 @@ public class DBBrokerEntity {
 
     public boolean vratiODOpoUslovu(OpstiDomenskiObjekat odo) {
         //String namedQuery = odo.vratiImeKlase() + ".findBy" + odo.vratiAtributPretrazivanja();
-        
-            
+
+
         try {
-          //  OpstiDomenskiObjekat trazeni = (OpstiDomenskiObjekat) em.createNamedQuery(namedQuery).getSingleResult();
+            //  OpstiDomenskiObjekat trazeni = (OpstiDomenskiObjekat) em.createNamedQuery(namedQuery).getSingleResult();
             OpstiDomenskiObjekat resultODO = em.find(odo.getClass(), odo.vratiID());
             resultODO.prekopirajVrednostiAtributa(odo);
         } catch (Exception e) {
@@ -76,34 +75,35 @@ public class DBBrokerEntity {
 
 
     }
+
     public List<OpstiDomenskiObjekat> vratiODOpoUslovu(OpstiDomenskiObjekat odo, HashMap<String, Object> mapFieldValue) {
-       String query="SELECT objd FROM "+odo.vratiImeKlase()+" objd where ";
-            //Query createQuery = em.createQuery("SELECT objd FROM "+odo.vratiImeKlase()+" objd where ");
+        String query = "SELECT objd FROM " + odo.vratiImeKlase() + " objd where ";
+        //Query createQuery = em.createQuery("SELECT objd FROM "+odo.vratiImeKlase()+" objd where ");
 
         for (Map.Entry<String, Object> entry : mapFieldValue.entrySet()) {
-            query+="objd.";
+            query += "objd.";
             String string = entry.getKey();
             Object object = entry.getValue();
-            query+=string+"='"+object + "' AND ";
-            
-            
-          //  createQuery = createQuery.setParameter(string, object);
+            query += string + "='" + object + "' AND ";
+
+
+            //  createQuery = createQuery.setParameter(string, object);
         }
-        String newq=query.substring(0, query.length()-4);
-        newq+=";";
+        String newq = query.substring(0, query.length() - 4);
+        newq += ";";
         System.out.println(newq);
         try {
-        //List<OpstiDomenskiObjekat> lista = createQuery.getResultList();
+            //List<OpstiDomenskiObjekat> lista = createQuery.getResultList();
             List<OpstiDomenskiObjekat> lista = em.createQuery(newq).getResultList();
-            
-            
-        return lista;
-        }catch (Exception e) {
+
+
+            return lista;
+        } catch (Exception e) {
             porukaMetode = porukaMetode + "\n Greska u upitu. Neuspesno vraćanje " + odo.getClass().getSimpleName() + "po uslovu iz baze.";
             Logger.getLogger(DBBrokerEntity.class.getName()).log(Level.SEVERE, null, e);
             return null;
         }
-        
+
 
 
 
@@ -134,7 +134,12 @@ public class DBBrokerEntity {
 
     public boolean sacuvajODO(OpstiDomenskiObjekat odo) {
         try {
-            em.persist(odo);
+            OpstiDomenskiObjekat resultodo = em.find(odo.getClass(), odo.vratiID());
+            if (resultodo == null) {
+                em.persist(odo);
+            } else {
+                em.merge(odo);
+            }
             return true;
         } catch (Exception e) {
             porukaMetode = porukaMetode + "\n Objekat " + odo.getClass().getSimpleName() + " nije sačuvan.";
@@ -166,8 +171,8 @@ public class DBBrokerEntity {
             return false;
         } else {
             d.prekopirajVrednostiAtributa(resultODO);
-            
-         em.merge(d);
+
+            em.merge(d);
 //            em.persist(resultODO);
 //            em.flush();
 //           // em.refresh(resultODO);
