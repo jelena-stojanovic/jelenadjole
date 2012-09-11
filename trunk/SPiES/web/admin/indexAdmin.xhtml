@@ -14,10 +14,8 @@ and open the template in the editor.
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
-                <style media="screen" type="text/css">
-                    @import "../resources/css/style.css";  
-                </style>
+                <title>Welcome admin</title>
+               
             </f:facet>
         </h:head>
 
@@ -25,8 +23,8 @@ and open the template in the editor.
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit  styleClass="header" position="north" size="100" resizable="true" closable="true" collapsible="true" >
-                    <h:outputLabel value="Data set similarity" styleClass="headertext"/>
+                <p:layoutUnit  styleClass="header" position="north" size="120" resizable="true" closable="true" collapsible="true" >
+                   <p:graphicImage width="1265" height="100" url="../img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
@@ -34,27 +32,12 @@ and open the template in the editor.
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
-                    <p:menu>
-                        <p:submenu label="Dataset">
-                            <p:menuitem value="Import dataset" url="../dataset/importds.xhtml" />
-                            <p:menuitem value="Export dataset" url="../dataset/exportds.xhtml" />
-                            <p:menuitem value="View all datasets" url="../allDatasets.xhtml" />
-                        </p:submenu>
-                        <p:submenu label="Similarity">
-                            <p:menuitem value="Calculate similarity" url="../similarity/similarity.xhtml"/>
-                        </p:submenu>
-                        <p:submenu label="Administartor">
-                            <p:menuitem value="Logout" url="#{login.logout()}" />
-                            <p:menuitem value="Register new administrator" url="newAdministrator.xhtml" />
-                            <p:menuitem value="View all administrators" url="allAdmins.xhtml" />
-                        </p:submenu>
-                    </p:menu>
+                    <ui:include src="../component/MenuAdmin.xhtml"></ui:include>                   
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    
-
-                    <h:link outcome="../img/newjsf.xhtml" value="slicica" />
+                   <h:outputLabel value="Welcome, to the admin page of my website! :)"/> 
+                    <!--><p:graphicImage  width="1000" height="400" url="../img/X08image.gif" title="background"></p:graphicImage><-->
                 </p:layoutUnit>
 
             </p:layout>

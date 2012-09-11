@@ -12,6 +12,7 @@ root {
 
 .header{
     background-color: #000000;
+    background-image: url("img/header_dataset.jpg");
     /*background-image: url("../img/header_dataset.jpg");*/
 }
 
