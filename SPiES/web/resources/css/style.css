@@ -1,0 +1,20 @@
+/* 
+    Document   : newcss
+    Created on : Sep 10, 2012, 6:04:01 PM
+    Author     : Jelena
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.header{
+    background-color: #000000;
+    /*background-image: url("../img/header_dataset.jpg");*/
+}
+
+.headertext{
+    text-align: center;
+}
