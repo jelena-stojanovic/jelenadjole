@@ -18,4 +18,8 @@ public interface SessionBeanDatasetLocal {
     List<Dataset> getAllDatasets();
 
     Dataset getDataset(Dataset ds);
+    
+    void createDataset(Dataset ds);
+    void saveDataset(Dataset ds);
+    void updateDataset(Dataset ds);
 }
