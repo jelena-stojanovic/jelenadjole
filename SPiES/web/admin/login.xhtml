@@ -17,30 +17,29 @@
         <h:form>  
 
             <p:panel header="Login">  
-                <h:panelGrid columns="2" cellpadding="3">  
+                <h:panelGrid columns="2" cellpadding="5">  
 
                     <h:outputText value="Username"/>
-                    <h:inputText value="#{login.admin.username}" id="username" validatorMessage="Enter your username" ></h:inputText>
-                    <h:message for="username" id="txtUsername"   ></h:message>
+                    <h:inputText value="#{admin.logadmin.username}"/>
                     
-                    <h:outputText value="Password"/>
-                    <h:inputText value="#{login.admin.password}" id="password" validatorMessage="Enter your password" ></h:inputText>
-                    <h:message for="password" id="txtPassword" ></h:message>
+                    <h:outputText value="Passsword " />  
+                    <p:password id="password" value="#{admin.logadmin.password}"/>
+                    
                     <p:commandButton value="Reset" type="reset" />  
-                    <p:commandButton value="Login" update="display" oncomplete="#{login.login()}" />  
+                    <p:commandButton value="Login" update="display" oncomplete="#{admin.login()}" />  
 
                 </h:panelGrid>  
             </p:panel>  
 
             <p:dialog widgetVar="dialog" modal="true">  
                 <h:panelGrid id="display" columns="2" cellpadding="5">  
-                    <h:outputText value="Welcome, #{login.admin.firstName} #{login.admin.lastName} :)!" />  
-                    <p:commandButton value="Thank you" action="indexAdmin.xhtml" />  
+                    <h:outputText value="Welcome, #{admin.logadmin.username} #{admin.logadmin.lastName} :)!" />  
+                    <p:commandButton value="Thank you!" action="indexAdmin.xhtml" />  
                 </h:panelGrid>  
             </p:dialog>  
 
             
-            <p:dialog widgetVar="dialogError" modal="true">  
+            <p:dialog widgetVar="dialogError" modal="false">  
                 <h:panelGrid id="error">  
                     <h:outputText value="Unsuccessfull login! Check username or password!" />  
                 </h:panelGrid>  

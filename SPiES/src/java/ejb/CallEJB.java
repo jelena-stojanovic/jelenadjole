@@ -32,11 +32,13 @@ public class CallEJB {
 
 
             SessionBeanDatasetLocal SBdataset = (SessionBeanDatasetLocal) ctx.lookup("java:global/SPiESEE/EJBSPiES/SessionBeanDataset");
+            //SessionBeanDatasetLocal SBdataset = (SessionBeanDatasetLocal) ctx.lookup("java:comp/env/SessionBeanDataset");
             mapa.put("SBdataset", SBdataset);
             SeassionBeanAdministratorLocal SBadmin = (SeassionBeanAdministratorLocal) ctx.lookup("java:global/SPiESEE/EJBSPiES/SeassionBeanAdministrator");
+            //SeassionBeanAdministratorLocal SBadmin = (SeassionBeanAdministratorLocal) ctx.lookup("java:comp/env/SeassionBeanAdministrator");
             mapa.put("SBadmin", SBadmin);
         } catch (Exception e) {
-            System.out.println("GRESKA: " + e.getMessage());
+            System.err.println("GRESKA: " + e.getMessage());
             e.printStackTrace();
         }
 
