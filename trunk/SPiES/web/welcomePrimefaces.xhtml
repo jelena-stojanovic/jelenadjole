@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+                <title>Welcome</title>
 
             </f:facet>
 
@@ -31,11 +31,11 @@
                 <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
                     <p:menu>
                         <p:submenu label="Dataset">
-                            <p:menuitem value="Export dataset" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="View all datasets" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Export dataset" url="dataset/exportds.xhtml" />
+                            <p:menuitem value="View all datasets" url="dataset/allDatasets.xhtml" />
                         </p:submenu>
                         <p:submenu label="Similarity">
-                            <p:menuitem value="Calculate similarity" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                            <p:menuitem value="Calculate similarity" url="similarity/similarity.xhtml"/>
                         </p:submenu>
                         <p:submenu label="Administartor">
                             <p:menuitem value="Login" url="admin/login.xhtml" />
@@ -44,7 +44,7 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                    Dataset similarity :)
 
                     <h:link outcome="img/newjsf.xhtml" value="slicica" />
                 </p:layoutUnit>

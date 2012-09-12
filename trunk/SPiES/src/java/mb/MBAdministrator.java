@@ -6,6 +6,7 @@ package mb;
 
 import ejb.CallEJB;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,12 +19,15 @@ import model.Administrator;
  *
  * @author Jelena
  */
-@ManagedBean(name = "admin")
+@ManagedBean(name = "mbadmin")
 @SessionScoped
 public class MBAdministrator implements Serializable{
 
     Administrator logadmin;
+    Administrator updateadmin;
     Administrator newAdmin;
+    List<Administrator> allAdmins= new ArrayList<Administrator>();
+   
 
     /**
      * Creates a new instance of MBAdministrator
@@ -35,6 +39,17 @@ public class MBAdministrator implements Serializable{
 
     public Administrator getLogadmin() {
         return logadmin;
+    }
+
+    public void setAllAdmins(List<Administrator> allAdmins) {
+        this.allAdmins = allAdmins;
+    }
+
+    public List<Administrator> getAllAdmins() {
+        allAdmins.add(new Administrator(1, "admin1", "admin1", "admin1", "admin1", "admin1"));
+        allAdmins.add(new Administrator(1, "admin2", "admin2", "admin2", "admin2", "admin2"));
+        allAdmins.add(new Administrator(1, "admin3", "admin3", "admin3", "admin3", "admin3"));
+        return allAdmins;
     }
 
     public void setLogadmin(Administrator logadmin) {
@@ -49,6 +64,15 @@ public class MBAdministrator implements Serializable{
         this.newAdmin = newAdmin;
     }
 
+    public Administrator getUpdateadmin() {
+        return updateadmin;
+    }
+
+    public void setUpdateadmin(Administrator updateadmin) {
+        this.updateadmin = updateadmin;
+    }
+    
+
     
    
     public String login() {
@@ -58,7 +82,7 @@ public class MBAdministrator implements Serializable{
 //        for (Administrator a : sviAdministratori) {
 //            if (a.getUsername().equals(logadmin.getUsername()) && a.getPassword().equals(logadmin.getPassword())) {
 //                    logadmin = a;
-//                    //return "indexAdmin.xhtml";
+                    //return "indexAdmin.xhtml";
                     return "dialog.show()";
 //            }
 //        }
@@ -71,4 +95,14 @@ public class MBAdministrator implements Serializable{
         return "../index.xhtml";
 
     }
+    
+    public List<Administrator> getAdmins() {
+        List<Administrator> sviAdministratori = CallEJB.getInstance().getSBadmin().getAllAdmins();
+        return sviAdministratori;
+    }
+    
+    public void saveNewAdmin(){
+        CallEJB.getInstance().getSBadmin().saveAdmin(newAdmin);
+    }
+    
 }

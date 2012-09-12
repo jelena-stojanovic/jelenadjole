@@ -37,7 +37,31 @@ and open the template in the editor.
                 <p:layoutUnit position="center">
                     
 
-                    <h:link outcome="../img/newjsf.xhtml" value="slicica" />
+                    <h:form>  
+                        <p:dataTable var="admindt" value="#{admin.allAdmins}" selectionMode="single" selection="#{admin.updateadmin}" rowKey="#{admindt.adminID}">  
+                            <p:column headerText="AdminID">  
+                                <h:outputText value="#{admindt.adminID}" />  
+                            </p:column>  
+
+                            <p:column headerText="Username">  
+                                <h:outputText value="#{admindt.username}" />  
+                            </p:column>  
+
+                            <p:column headerText="First name">  
+                                <h:outputText value="#{admindt.firstName}" />  
+                            </p:column>  
+                            
+                            <p:column headerText="Last name">  
+                                <h:outputText value="#{admindt.lastName}" />  
+                            </p:column>  
+
+                             <p:column headerText="E-mail">  
+                                 <h:outputText value="#{admindt.email}" />  
+                            </p:column>  
+
+                        </p:dataTable>  
+                    </h:form>  
+
                 </p:layoutUnit>
 
             </p:layout>
