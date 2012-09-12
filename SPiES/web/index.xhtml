@@ -2,17 +2,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-         <style media="screen" type="text/css">
-          @import "resources/css/style.css";  
-         </style>
-    </h:head>
-    <h:body>
-      <br/>
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <p:editor/>
-    </h:body>
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Dataset similarity</title>
+
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit  position="north" size="115" resizable="true" closable="true" collapsible="true">
+                    <p:graphicImage width="1265" height="100" url="img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <h:link style="text-align: center" target="faces/welcomePrimefaces.xhtml" value="Data set similarity"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                    <p:menu>
+                        <p:submenu label="Dataset">
+                            <p:menuitem value="Export dataset" url="faces/dataset/exportds.xhtml" />
+                            <p:menuitem value="View all datasets" url="faces/dataset/allDatasets.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Similarity">
+                            <p:menuitem value="Calculate similarity" url="faces/similarity/similarity.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Administartor">
+                            <p:menuitem value="Login" url="faces/admin/login.xhtml" />
+                        </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:outputLabel value="Welcome to my website! Dataset similarity :)"/>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
 </html>
 

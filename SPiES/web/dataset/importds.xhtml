@@ -4,11 +4,49 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Import dataset</title>
+
+            </f:facet>
+
+
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit  position="north" size="120" resizable="true" closable="true" collapsible="true">
+                    <p:graphicImage width="1265" height="100" url="../img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <h:link style="text-align: center" target="../welcomePrimefaces.xhtml" value="Data set similarity"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                     <ui:include src="../component/MenuUser.xhtml"></ui:include>                   
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <h:outputLabel value="Import dataset"/>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
 </html>
+
+

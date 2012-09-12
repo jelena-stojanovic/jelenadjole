@@ -4,11 +4,81 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Similarity</title>
+
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit  styleClass="header" position="north" size="120" resizable="true" closable="true" collapsible="true" >
+                    <p:graphicImage width="1265" height="100" url="../img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <h:outputLabel value="footer"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                    <ui:include src="../component/MenuUser.xhtml"></ui:include>                   
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:outputLabel value="Welcome, to the similarity page of my website! :)"/> 
+
+                    <h:form>  
+                        <p:dataTable var="datasetdt" value="#{mbdataset.allDatasets}" selectionMode="multiple" selection="#{mbsimilarity.dss}" rowKey="#{datasetdt.dataSetID}"
+                                     scrollRows="10" scrollable="true" resizableColumns="true" scrollHeight="200" >  
+                            <p:column headerText="Data set ID">  
+                                <h:outputText value="#{datasetdt.dataSetID}" />  
+                            </p:column>  
+
+                            <p:column headerText="Title" >  
+                                <h:outputText value="#{datasetdt.title}" />  
+                            </p:column>  
+
+                            <p:column headerText="Description">  
+                                <h:outputText value="#{datasetdt.dsDescription}" />  
+                            </p:column>  
+                        </p:dataTable>  
+
+                        <h:panelGrid id="calcsimilarity" columns="2" cellpadding="5">  
+
+                            <h:outputLabel value="Choose similarity measure:" />
+                            
+                            <p:selectOneMenu value="#{mbsimilarity.similaritymeasure}">  
+                                <f:selectItem itemLabel="CalculateCosineSimilarity" itemValue="CalculateCosineSimilarity" />  
+                                <f:selectItem itemLabel="CalculateEuclidianSimilarity" itemValue="CalculateCosineSimilarity" />  
+                            </p:selectOneMenu>  
+                            
+                            <p:commandButton value="Calculate similarity" update="calcsimilarityvalue"/>  
+                            <h:outputText id="calcsimilarityvalue" value="#{mbsimilarity.calculateSimilarityMeasure()}"/>
+                            <br/>
+                            
+                        </h:panelGrid>
+
+
+                    </h:form>  
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
 </html>
+
+

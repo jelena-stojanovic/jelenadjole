@@ -9,6 +9,8 @@ import java.util.Properties;
 import javax.naming.InitialContext;
 import logic.SeassionBeanAdministratorLocal;
 import logic.SessionBeanDatasetLocal;
+import logic.SessionBeanSimilarity;
+import logic.SessionBeanSimilarityLocal;
 
 /**
  *
@@ -37,6 +39,8 @@ public class CallEJB {
             SeassionBeanAdministratorLocal SBadmin = (SeassionBeanAdministratorLocal) ctx.lookup("java:global/SPiESEE/EJBSPiES/SeassionBeanAdministrator");
             //SeassionBeanAdministratorLocal SBadmin = (SeassionBeanAdministratorLocal) ctx.lookup("java:comp/env/SeassionBeanAdministrator");
             mapa.put("SBadmin", SBadmin);
+            SessionBeanSimilarityLocal SBSimilarity = (SessionBeanSimilarityLocal) ctx.lookup("java:global/SPiESEE/EJBSPiES/SessionBeanSimilarity");
+            mapa.put("SBSimilarity", SBSimilarity);
         } catch (Exception e) {
             System.err.println("GRESKA: " + e.getMessage());
             e.printStackTrace();
@@ -59,5 +63,8 @@ public class CallEJB {
 
     public SessionBeanDatasetLocal getSBdataset() {
         return (SessionBeanDatasetLocal) mapa.get("SBdataset");
+    }
+    public SessionBeanSimilarityLocal getSBSimilarity() {
+        return (SessionBeanSimilarityLocal) mapa.get("SBSimilarity");
     }
 }

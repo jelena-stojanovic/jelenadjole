@@ -13,7 +13,7 @@ import model.dataset.Dataset;
 
 /**
  *
- * @author Djordje
+ * @author Jelena
  */
 @Named(value = "mbdataset")
 @Dependent
@@ -21,7 +21,8 @@ public class MBDataset {
 
     Dataset dataset;
     List<Dataset> allDatasets;
-    
+
+    Dataset[] selecteddatasets;
     /**
      * Creates a new instance of MBDataset
      */
@@ -35,6 +36,18 @@ public class MBDataset {
 
     public void setDataset(Dataset dataset) {
         this.dataset = dataset;
+    }
+
+    public Dataset[] getSelecteddatasets() {
+        return selecteddatasets;
+    }
+
+    public void setSelecteddatasets(Dataset[] selecteddatasets) {
+        this.selecteddatasets = selecteddatasets;
+    }
+
+    public void setAllDatasets(List<Dataset> allDatasets) {
+        this.allDatasets = allDatasets;
     }
     
     public List<Dataset> getAllDatasets() {

@@ -40,19 +40,19 @@ and open the template in the editor.
                         <p:panel header="Register new admin">  
                             <h:panelGrid columns="2" cellpadding="6">  
                                 <h:outputText value="Username:" />  
-                                <h:inputText value="#{admin.newAdmin.username}" />
+                                <h:inputText value="#{mbadmin.newAdmin.username}" />
                                 
                                 <h:outputText value="Passsword:" />  
-                                <p:password value="#{admin.newAdmin.password}" />
+                                <p:password value="#{mbadmin.newAdmin.password}" />
 
                                 <h:outputText value="First name: " />  
-                                <h:inputText value="#{admin.newAdmin.firstName}" />
+                                <h:inputText value="#{mbadmin.newAdmin.firstName}" />
                                 
                                 <h:outputText value="Last name: " />  
-                                <h:inputText value="#{admin.newAdmin.lastName}" />
+                                <h:inputText value="#{mbadmin.newAdmin.lastName}" />
 
                                 <h:outputText value="email: " />  
-                                <h:inputText value="#{admin.newAdmin.email}" />
+                                <h:inputText value="#{mbadmin.newAdmin.email}" />
                               
                                 <p:commandButton value="Reset" type="reset" />  
                                 <p:commandButton value="Submit" update="displayNA" oncomplete="dialogNewAdmin.show()"/>  
@@ -64,20 +64,20 @@ and open the template in the editor.
                             <h:panelGrid id="displayNA" columns="2" cellpadding="6">  
 
                                 <h:outputText value="Username:" />  
-                                <h:outputText value="#{admin.newAdmin.username}"/>
+                                <h:outputText value="#{mbadmin.newAdmin.username}"/>
                                 
 
                                 <h:outputText value="Passsword:" />  
-                                <h:outputText value="#{admin.newAdmin.password}" />
+                                <h:outputText value="#{mbadmin.newAdmin.password}" />
 
                                 <h:outputText value="First name: " />  
-                                <h:outputText value="#{radmin.newAdmin.firstName}" />
+                                <h:outputText value="#{mbadmin.newAdmin.firstName}" />
                                 
                                 <h:outputText value="Last name: " />  
-                                <h:outputText value="#{admin.newAdmin.lastName}" />
+                                <h:outputText value="#{mbadmin.newAdmin.lastName}" />
 
                                 <h:outputText value="email: " />  
-                                <h:outputText value="#{admin.newAdmin.email}"/>  
+                                <h:outputText value="#{mbadmin.newAdmin.email}"/>  
 
                                 <p:commandButton value="OK" action="indexAdmin.xhtml" />  
                                 

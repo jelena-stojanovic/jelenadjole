@@ -2,53 +2,57 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-
-
-    <h:head>
-        <title>Login</title>
-
-    </h:head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Login</title>
+               
+            </f:facet>
+        </h:head>
+    
 
     <h:body>
-        <h:outputLabel value="Jelena"/>
+
         <h:form>  
 
             <p:panel header="Login">  
-                <h:panelGrid columns="2" cellpadding="5">  
+                <h:outputLabel value="Please enter your username and password."/>
+                <h:panelGrid columns="2" cellpadding="4">  
 
                     <h:outputText value="Username"/>
-                    <h:inputText value="#{admin.logadmin.username}"/>
-                    
-                    <h:outputText value="Passsword " />  
-                    <p:password id="password" value="#{admin.logadmin.password}"/>
-                    
-                    <p:commandButton value="Reset" type="reset" />  
-                    <p:commandButton value="Login" update="display" oncomplete="#{admin.login()}" />  
+                    <h:inputText value="#{mbadmin.logadmin.username}"/>
 
+                    <h:outputText value="Passsword " />  
+                    <p:password value="#{mbadmin.logadmin.password}"/>
+
+                    <p:commandButton value="Reset" type="reset" oncomplete="#{mbadmin.logout()}"/>  
+                    <p:commandButton value="Login"  action="indexAdmin.xhtml"  />  
+<!--> update="display" oncomplete="#{mbadmin.login()}"<-->
                 </h:panelGrid>  
             </p:panel>  
 
             <p:dialog widgetVar="dialog" modal="true">  
-                <h:panelGrid id="display" columns="2" cellpadding="5">  
-                    <h:outputText value="Welcome, #{admin.logadmin.username} #{admin.logadmin.lastName} :)!" />  
+                <h:panelGrid id="display" columns="2" cellpadding="2">  
+
+                    <h:outputText value="Welcome, #{mbadmin.logadmin.username} :)!" />
                     <p:commandButton value="Thank you!" action="indexAdmin.xhtml" />  
                 </h:panelGrid>  
             </p:dialog>  
 
-            
-            <p:dialog widgetVar="dialogError" modal="false">  
+
+            <p:dialog widgetVar="dialogError" modal="true">  
                 <h:panelGrid id="error">  
                     <h:outputText value="Unsuccessfull login! Check username or password!" />  
                 </h:panelGrid>  
             </p:dialog>  
-            
+
         </h:form>  
 
 
     </h:body>
-
+</f:view>
 </html>
 
