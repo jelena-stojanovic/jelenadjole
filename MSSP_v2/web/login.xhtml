@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view contentType="text/html">
+
+       
+        <h:head>
+            <title>Login</title>          
+        </h:head>
+         
+        <h:body>
+            <h:form>  
+
+                <p:panel header="Login">  
+                    <h:outputLabel value="Please enter your username and password."/>
+                    <h:panelGrid columns="2" cellpadding="4">  
+
+                        <h:outputText value="Username"/>
+                        <h:inputText value="#{mbadmin.logadmin.username}"/>
+
+                        <h:outputText value="Passsword " />  
+                        <p:password value="#{mbadmin.logadmin.password}"/>
+
+                        <p:commandButton value="Reset" type="reset"/>  
+                        <p:commandButton value="Login"  ajax="false" action="#{mbadmin.login()}"  />  
+
+                    </h:panelGrid>  
+                </p:panel>  
+
+                <p:messages id="messages" showDetail="true" autoUpdate="true"  />  
+            </h:form>  
+
+        </h:body>
+    </f:view>
+</html>

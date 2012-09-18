@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Welcome admin</title>
+    </h:head>
+    <h:body>
+       
+                   <p:layout fullPage="true">
+
+                <p:layoutUnit  styleClass="header" position="north" size="120" resizable="true" closable="true" collapsible="true" >
+                   <p:graphicImage width="1265" height="100" url="./img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <h:link style="text-align: center" target="./index.xhtml" value="Data set similarity"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                   <h:outputLabel value="Welcome, to the admin page of my website! :)"/> 
+                   <p:messages id="messages" showDetail="true" autoUpdate="true"  />  
+                   
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                    <ui:include src="./component/menuAdmin.xhtml"></ui:include>                   
+                </p:layoutUnit>
+
+               
+            </p:layout>
+
+        </h:body>
+ 
+        
+</html>

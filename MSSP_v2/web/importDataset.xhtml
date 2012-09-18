@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Import datasets</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit  position="north" size="120" resizable="true" closable="true" collapsible="true">
+                <p:graphicImage width="1265" height="100" url="./img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                <h:link style="text-align: center" target="./index.xhtml" value="Data set similarity"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                <ui:include src="./component/menuAdmin.xhtml"></ui:include>                   
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+
+                <h:form enctype="multipart/form-data">  
+                    <h:outputText value="Upload csv file:"/><br/>
+                    <p:fileUpload fileUploadListener="#{mbdataset.handleFileUpload}"  
+                                  mode="advanced"   
+                                  update="messages"  
+                                  allowTypes="/(\.|\/)(csv|jpe?g|png)$/"/>  
+
+                    <p:growl id="messages" showDetail="true"/>  
+
+                </h:form>  
+
+
+                <h:form id="formParse">  
+                    <p:growl id="msgs" showDetail="true"/>  
+                    <p:panel header="Parse file" style="margin-bottom:10px;">  
+                        <h:outputText value="Now the name of attributes are 'att1', 'att2'...  Should we use the first row as attributes' names?"/><br/>
+                        <p:selectBooleanCheckbox value="#{mbdataset.importcsv.useFirstRowAsAttributeNames}">  
+                            <p:ajax update="atts" listener="#{mbdataset.updatedsTable}"/>  
+
+                        </p:selectBooleanCheckbox> <br/>
+
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+                            <h:outputText value="Column separator " />  
+                            <p:selectOneRadio id="options" value="#{mbdataset.importcsv.columnSeparator}">  
+                                <f:selectItem itemLabel="Comma ','" itemValue=',' />  
+                                <f:selectItem itemLabel="Semicolon ';'" itemValue=';' />  
+                                <f:selectItem itemLabel="Space ' '" itemValue=' ' />  
+                                <f:selectItem itemLabel="Tab '  '" itemValue='\t' />  
+                                <p:ajax update="atts" listener="#{mbdataset.updatedsTable}"/>  
+
+                            </p:selectOneRadio>  
+                        </h:panelGrid>  
+
+                        <p:dataTable id="atts" var="attdt" value="#{mbdataset.stringArrayList}" scrollable="true" scrollWidth="1000" scrollHeight="150">                      
+                            <p:columns value="#{mbdataset.columns}" var="column" columnIndexVar="colIndex">  
+                                <f:facet name="header">  #{column.header}  </f:facet>  
+                                #{attdt[colIndex]}  
+                            </p:columns>  
+
+                        </p:dataTable>  
+                    </p:panel>  
+
+                </h:form>  
+
+                <h:form id="dsinfo">  
+                    <p:panel header="Data set information" style="margin-bottom:10px;">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="6">  
+
+                            <h:outputText value="Dataset title" />  
+                            <h:inputText value="#{mbdataset.newdataset.title}" style="font-weight:bold"/>  
+                            <h:outputText value="Description:" />  
+                            <h:inputText value="#{mbdataset.newdataset.dsDescription}" style="font-weight:bold"/>  
+                            <h:outputText value="Source creator:" />  
+                            <h:inputText value="#{mbdataset.newdataset.source.creator}" style="font-weight:bold"/>  
+                            <h:outputText value="Source donor" />  
+                            <h:inputText value="#{mbdataset.newdataset.source.donor}" style="font-weight:bold"/>  
+                            <h:outputText value="Source date:" />  
+                             <p:inputMask value="#{mbdataset.newdataset.source.sourceDate}" style="font-weight:bold" mask="99/99/9999">  
+                                <f:convertDateTime pattern="MM/dd/yyyy"/>
+                            </p:inputMask>
+                        </h:panelGrid>  
+
+                        <p:commandButton value="Save dataset info"  icon="ui-icon-pencil"  
+                                         ajax="false" action="#{mbdataset.savedsInfo()}"/>  
+                    </p:panel>
+                </h:form>  
+
+
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Dataset similariy</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit  position="north" size="115" resizable="true" closable="true" collapsible="true">
+                <p:graphicImage width="1265" height="100" url="./img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                <h:link style="text-align: center" target="./index.xhtml" value="Data set similarity"/>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                <h:form id="frmMenuBar">
+                    <p:menu>
+                        <p:submenu label="Dataset">
+                            <p:menuitem value="Export dataset" ajax="false" action="./exportDataset.xhtml" />
+                            <p:menuitem value="View all datasets" ajax="false" action="./allDatasets.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Similarity">
+                            <p:menuitem value="Calculate similarity" ajax="false" action="./similarity.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Administartor">
+                            <p:menuitem value="Login" ajax="false" action="./login.xhtml" />
+
+                        </p:submenu>
+                    </p:menu>
+
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h:outputLabel value="Welcome to my website! Dataset similarity :)"/>
+                <p:messages id="messages" showDetail="true" autoUpdate="true"  />  
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+</html>
+

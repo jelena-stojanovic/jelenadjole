@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Menu admin</title>
+    </h:head>
+    <h:body>
+           <h:form id="frmMenuBar">
+                    <p:menu>
+                        <p:submenu label="Dataset">
+                            <p:menuitem value="Import dataset" ajax="false" action="./importDataset.xhtml" />
+                            <p:menuitem value="Export dataset" ajax="false" action="./exportDataset.xhtml" />
+                            <p:menuitem value="View all datasets" ajax="false" action="./allDatasets.xhtml" />
+                            <p:menuitem value="Update dataset" ajax="false" action="./updateDataset.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Similarity">
+                            <p:menuitem value="Calculate similarity" ajax="false" action="./similarity.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Administartor">
+                            <p:menuitem value="Logout" ajax="false" action="#{mbadmin.logout()}" />
+                            <p:menuitem value="Register new administrator" ajax="false" action="./newAdmin.xhtml" />
+                            <p:menuitem value="View all administrators" ajax="false" action="./allAdmins.xhtml" />
+                            <p:menuitem value="Update administrator" ajax="false" action="./updateAdmin.xhtml" />
+                        </p:submenu>
+                    </p:menu>
+                        </h:form>
+            
+    </h:body>
+</html>
