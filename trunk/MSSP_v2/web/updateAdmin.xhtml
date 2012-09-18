@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Update admin</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit  styleClass="header" position="north" size="120" resizable="true" closable="true" collapsible="true" >
+                <p:graphicImage width="1265" height="100" url="./img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                <h:link style="text-align: center" target="./index.xhtml" value="Data set similarity"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                <ui:include src="./component/menuAdmin.xhtml"></ui:include>                   
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h:form>  
+
+                    <p:panel header="Update administrator">  
+                        <h:panelGrid columns="2" cellpadding="7">  
+                            <h:outputText value="Admin ID" />  
+                            <h:outputText value="#{mbadmin.updateadmin.adminID}" />
+                            <h:outputText value="Username:" />  
+                            <h:inputText value="#{mbadmin.updateadmin.username}" />
+
+                            <h:outputText value="Passsword:" />  
+                            <h:inputText value="#{mbadmin.updateadmin.password}" />
+
+                            <h:outputText value="First name: " />  
+                            <h:inputText value="#{mbadmin.updateadmin.firstName}" />
+
+                            <h:outputText value="Last name: " />  
+                            <h:inputText value="#{mbadmin.updateadmin.lastName}" />
+
+                            <h:outputText value="email: " />  
+                            <h:inputText value="#{mbadmin.updateadmin.email}" />
+
+                            <p:commandButton value="Reset" type="reset" />  
+                            <p:commandButton value="Update admin"  ajax="false" action="#{mbadmin.updateAdmin()}"/>  
+
+                        </h:panelGrid>  
+                        <p:messages id="messages" showDetail="true" autoUpdate="true"  />  
+                    </p:panel>  
+
+                    <p:dialog widgetVar="dialogNewAdmin" modal="true">  
+                        <h:panelGrid id="displayNA" columns="2" cellpadding="6">  
+
+                            <h:outputText value="Username:" />  
+                            <h:outputText value="#{mbadmin.updateadmin.username}"/>
+
+
+                            <h:outputText value="Passsword:" />  
+                            <h:outputText value="#{mbadmin.updateadmin.password}" />
+
+                            <h:outputText value="First name: " />  
+                            <h:outputText value="#{mbadmin.updateadmin.firstName}" />
+
+                            <h:outputText value="Last name: " />  
+                            <h:outputText value="#{mbadmin.updateadmin.lastName}" />
+
+                            <h:outputText value="email: " />  
+                            <h:outputText value="#{mbadmin.updateadmin.email}"/>  
+
+                            <p:commandButton value="OK" ajax="false" action="indexAdmin.xhtml" />  
+
+                        </h:panelGrid>  
+                    </p:dialog>  
+
+                </h:form>  
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+</html>

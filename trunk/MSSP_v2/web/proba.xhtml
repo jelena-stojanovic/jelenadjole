@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>All dss</title>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">
+
+            <p:layoutUnit  styleClass="header" position="north" size="120" resizable="true" closable="true" collapsible="true" >
+                <p:graphicImage width="1265" height="100" url="./img/header_dataset.jpg" title="DATA SET SIMILARITY"></p:graphicImage>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                <h:link style="text-align: center" target="./index.xhtml" value="Data set similarity"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200"  header="Menu" collapsible="true" resizable="true">
+                <ui:include src="./component/menuAdmin.xhtml"></ui:include>                   
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+
+
+                <h:form>  
+
+                    <p:contextMenu for="datasets">  
+                        <p:menuitem value="View" update="display" icon="ui-icon-search" oncomplete="adminDialog.show()"/>  
+                        <p:menuitem value="Update" update="datasets" icon="ui-icon-search" ajax="false" action="#{proba.update()}"/>  
+                    </p:contextMenu>  
+
+                    <p:dataTable id="datasets" var="dsdt" value="#{proba.allADatasets}" 
+                                 selectionMode="single" selection="#{proba.updatedataset}" rowKey="#{dsdt.dataSetID}">  
+                        <p:column headerText="DSID">  
+                            <h:outputText value="#{dsdt.dataSetID}" />  
+                        </p:column>  
+
+                        <p:column headerText="Title">  
+                            <h:outputText value="#{dsdt.title}" />  
+                        </p:column>  
+
+                        <p:column headerText="desc">  
+                            <h:outputText value="#{dsdt.dsDescription}" />  
+                        </p:column>  
+
+
+                    </p:dataTable>  
+
+
+
+                    <p:dialog header="Dataset Detail" widgetVar="adminDialog" resizable="false"  
+                              width="400" showEffect="clip" hideEffect="fold" id="dialog">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="3">  
+                            <h:outputText value="AdminID:" />  
+                            <h:outputText value="#{proba.updatedataset.dataSetID}"  style="font-weight:bold"/>  
+                            
+                            <h:outputText value="Username:" />  
+                            <h:outputText value="#{proba.updatedataset.title}" style="font-weight:bold"/>  
+                            <h:outputText value="Password:" />  
+                            <h:outputText value="#{proba.updatedataset.dsDescription}" style="font-weight:bold"/>  
+                           
+                        </h:panelGrid>  
+                    </p:dialog>  
+
+
+
+                </h:form>  
+
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+</html>
