@@ -4,9 +4,12 @@
  */
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
+import model.dataFormat.CSVFormat;
 import model.dataset.Dataset;
+import to.DataSetTO;
 
 /**
  *
@@ -15,11 +18,16 @@ import model.dataset.Dataset;
 @Local
 public interface SessionBeanDatasetLocal {
  
-    List<Dataset> getAllDatasets();
+    List<DataSetTO> getAllDatasetsTO();
 
-    Dataset getDataset(Dataset ds);
+    List<Dataset> getAllDatasets();
     
-    void createDataset(Dataset ds);
+    Dataset getDataset(Dataset ds);
+    public void saveDataset(Dataset ds,ArrayList<String[]>metaAttributes , ArrayList<String[]> stringArrayList);
+    int createDataset(Dataset ds);
     void saveDataset(Dataset ds);
     void updateDataset(Dataset ds);
+    String exportDS(Dataset ds, CSVFormat csv);
+    ArrayList<String[]> readCSV(String filePath, char columnSeparator);
+    String[][] convert(List<String[]> dsValues, String[][] stringMatrix);
 }

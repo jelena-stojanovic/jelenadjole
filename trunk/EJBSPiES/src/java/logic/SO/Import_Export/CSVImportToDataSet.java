@@ -31,9 +31,6 @@ public class CSVImportToDataSet {
             String[] lineInDataset = new String[size];
 
             for (int i = 0; i < size; i++) {
-//                if (trimLines == true) {
-//                    lineInDataset[i] = st.nextToken().trim();
-//                }
                 lineInDataset[i] = st.nextToken();
             }
             datasetList.add(lineInDataset);

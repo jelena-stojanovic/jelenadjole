@@ -7,7 +7,6 @@ package logic;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import logic.SO.KreirajNovi;
 import logic.SO.Obradi;
@@ -23,9 +22,7 @@ import model.OpstiDomenskiObjekat;
  * @author Jelena
  */
 @Stateless
-//@EJB(name="SeassionBeanAdministrator",beanInterface=SeassionBeanAdministratorLocal.class,beanName="SeassionBeanAdministrator")
 public class SeassionBeanAdministrator implements SeassionBeanAdministratorLocal {
-
     @Override
     public Administrator getAdmin(Administrator admin) {
         System.out.println(Pretrazi.Pretrazi(admin));
@@ -33,22 +30,21 @@ public class SeassionBeanAdministrator implements SeassionBeanAdministratorLocal
     }
 
     @Override
-    public void createAdmin(Administrator admin) {
-        System.out.println(KreirajNovi.kreirajNovi(admin));
+    public String createAdmin(Administrator admin) {
+        return KreirajNovi.kreirajNovi(admin);
     }
 
     @Override
-    public void saveAdmin(Administrator admin) {
-        System.out.println(Zapamti.Zapamti(admin));
+    public String saveAdmin(Administrator admin) {
+        return Zapamti.Zapamti(admin);
     }
 
     @Override
-    public void updateAdmin(Administrator admin) {
-        System.out.println(Obradi.Obradi(admin));
+    public String updateAdmin(Administrator admin) {
+        return Obradi.Obradi(admin);
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
     @Override
     public List<Administrator> getAllAdmins() {
 

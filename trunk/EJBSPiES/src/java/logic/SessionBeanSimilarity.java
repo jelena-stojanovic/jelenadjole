@@ -20,9 +20,9 @@ public class SessionBeanSimilarity implements SessionBeanSimilarityLocal {
     public double calculateSimilarity(Dataset ds1, Dataset ds2, String similarityMeasure) {
                     double d = Double.NaN;
 
-                    if (similarityMeasure.equals("CalculateCosineSimilarity")) {
+                    if (similarityMeasure.equals("1")) {
                         d = CalculateCosineSimilarity.calculate(ds1, ds2);
-                    } else if (similarityMeasure.equals("CalculateEuclidianSimilarity")) {
+                    } else if (similarityMeasure.equals("2")) {
                         d = CalculateEuclidianSimilarity.calculate(ds1, ds2);
                     }
 
