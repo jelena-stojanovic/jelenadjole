@@ -30,7 +30,7 @@ public class PanelWelcome extends javax.swing.JPanel {
 
         lblImg.setFont(new java.awt.Font("Cambria", 3, 18)); // NOI18N
         lblImg.setForeground(new java.awt.Color(51, 255, 255));
-        lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/X08image.gif"))); // NOI18N
+        lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/background.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

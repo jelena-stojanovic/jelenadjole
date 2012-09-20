@@ -24,7 +24,7 @@ import view.panels.FrmDataSet;
 
 /**
  *
- * @author Djordje
+ * @author Jelena
  */
 public class ControllerUI_DataSet extends OpstiKontrolerKI {
 
