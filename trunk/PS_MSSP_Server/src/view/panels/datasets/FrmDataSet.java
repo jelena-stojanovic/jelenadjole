@@ -84,36 +84,36 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
 
         jLabel2.setText("DataSet Title: ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 14, 100, 14);
+        jLabel2.setBounds(0, 20, 100, 14);
 
         jLabel3.setText("DataSet Description: ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 37, 102, 14);
+        jLabel3.setBounds(0, 50, 102, 14);
         getContentPane().add(txtFieldDataSetTitle);
-        txtFieldDataSetTitle.setBounds(115, 11, 540, 20);
+        txtFieldDataSetTitle.setBounds(120, 10, 540, 30);
 
         txtAreaDescription.setColumns(20);
         txtAreaDescription.setRows(5);
         jScrollPane1.setViewportView(txtAreaDescription);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(116, 37, 539, 97);
+        jScrollPane1.setBounds(120, 50, 539, 80);
 
         jLabel11.setText("Creator:");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 143, 100, 14);
+        jLabel11.setBounds(0, 150, 100, 14);
         getContentPane().add(tfCreator);
-        tfCreator.setBounds(115, 140, 540, 20);
+        tfCreator.setBounds(120, 140, 540, 30);
 
         jLabel12.setText("Donor:");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(10, 174, 100, 14);
+        jLabel12.setBounds(0, 180, 100, 14);
         getContentPane().add(tfDonor);
-        tfDonor.setBounds(115, 171, 540, 20);
+        tfDonor.setBounds(120, 180, 540, 30);
 
         jLabel13.setText("Date (please insert date in format MM/dd/yyyy):");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(10, 197, 346, 14);
+        jLabel13.setBounds(0, 220, 346, 14);
 
         tfDateDS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -121,42 +121,42 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
             }
         });
         getContentPane().add(tfDateDS);
-        tfDateDS.setBounds(374, 197, 281, 20);
+        tfDateDS.setBounds(370, 220, 281, 30);
 
         jLabel4.setText("Author(s):");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 263, 90, 14);
+        jLabel4.setBounds(0, 260, 90, 14);
         getContentPane().add(tfAuthors);
-        tfAuthors.setBounds(106, 260, 270, 20);
+        tfAuthors.setBounds(100, 250, 270, 30);
 
         jLabel9.setText("Title:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 289, 90, 14);
+        jLabel9.setBounds(0, 290, 90, 14);
         getContentPane().add(tfTitle);
-        tfTitle.setBounds(106, 286, 270, 20);
+        tfTitle.setBounds(100, 290, 270, 30);
 
         jLabel10.setText("Date:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(10, 315, 90, 14);
+        jLabel10.setBounds(0, 324, 90, 20);
         getContentPane().add(tfDate);
-        tfDate.setBounds(106, 312, 270, 20);
+        tfDate.setBounds(100, 330, 270, 20);
 
         jLabel15.setText("Location:");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(10, 342, 90, 14);
+        jLabel15.setBounds(0, 360, 90, 20);
         getContentPane().add(tfLocation);
-        tfLocation.setBounds(106, 339, 270, 20);
+        tfLocation.setBounds(100, 360, 270, 30);
 
         jLabel14.setText("Other information:");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(10, 365, 89, 14);
+        jLabel14.setBounds(0, 400, 89, 14);
 
         tfOtherInformation.setColumns(20);
         tfOtherInformation.setRows(5);
         jScrollPane4.setViewportView(tfOtherInformation);
 
         getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(103, 365, 273, 48);
+        jScrollPane4.setBounds(100, 400, 273, 48);
 
         btnAddReference.setText("Add Reference");
         btnAddReference.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
             }
         });
         getContentPane().add(btnAddReference);
-        btnAddReference.setBounds(271, 429, 105, 23);
+        btnAddReference.setBounds(270, 460, 105, 23);
 
         jScrollPane5.setViewportView(listReferences);
 
@@ -174,7 +174,7 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
 
         jLabel16.setText("References:");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(394, 263, 210, 14);
+        jLabel16.setBounds(400, 260, 210, 14);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {

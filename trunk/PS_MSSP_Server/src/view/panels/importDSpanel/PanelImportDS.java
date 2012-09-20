@@ -134,7 +134,7 @@ public class PanelImportDS extends javax.swing.JPanel {
 
         pnlParseLine.setBorder(javax.swing.BorderFactory.createTitledBorder("Attribute name"));
 
-        jLabel2.setText("<html><p>Now the name of attributes are \"att1\", \"att2\"... </br>\nShould we use the first row as attributes' names?</p></html>");
+        jLabel2.setText("<html><p>Now the name of attributes are \"att1\", \"att2\"... </br> Should we use the first row as attributes' names?</p></html>");
 
         checkBUseFirstRow.setText("Use first row as attribute name.");
         checkBUseFirstRow.addItemListener(new java.awt.event.ItemListener() {
@@ -287,7 +287,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                     .addComponent(pnlColumnSeparation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlParseLine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlParseFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNextParse)
@@ -527,7 +527,7 @@ public class PanelImportDS extends javax.swing.JPanel {
                 .addGroup(pnlDSInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrevioucFirstRow)
                     .addComponent(btnNextFirstRow))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         tpnlImportDS.addTab("Step 3: Data set information", pnlDSInformation);

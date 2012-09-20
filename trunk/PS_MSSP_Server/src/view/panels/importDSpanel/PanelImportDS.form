@@ -194,7 +194,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;p&gt;Now the name of attributes are &quot;att1&quot;, &quot;att2&quot;... &lt;/br&gt;&#xa;Should we use the first row as attributes&apos; names?&lt;/p&gt;&lt;/html&gt;"/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;p&gt;Now the name of attributes are &quot;att1&quot;, &quot;att2&quot;... &lt;/br&gt; Should we use the first row as attributes&apos; names?&lt;/p&gt;&lt;/html&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="checkBUseFirstRow">

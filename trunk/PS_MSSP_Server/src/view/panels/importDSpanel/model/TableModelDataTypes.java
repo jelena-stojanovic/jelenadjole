@@ -5,15 +5,9 @@
 package view.panels.importDSpanel.model;
 
 import import_csv.GuessValueTypesClass;
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.event.CellEditorListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellEditor;
-import logic.ControllerAL_DSImport;
 import model.attribute.Attributetype;
 import model.attribute.Ontology;
 
