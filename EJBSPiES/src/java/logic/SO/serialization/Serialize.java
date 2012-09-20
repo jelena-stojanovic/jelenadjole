@@ -33,8 +33,6 @@ public class Serialize {
     }
 
     public static void serialize(Dataset dataset) throws IOException {
-
-        //addDSToMDS(dataset, filePath);
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dataset.getFilePath()));
         oos.writeObject(dataset);
         oos.close();

@@ -17,9 +17,9 @@ public interface SeassionBeanAdministratorLocal {
     List<Administrator> getAllAdmins();
     Administrator getAdmin(Administrator admin);
     
-    void createAdmin(Administrator admin);
-    void saveAdmin(Administrator admin);
-    void updateAdmin(Administrator admin);
+    String createAdmin(Administrator admin);
+    String saveAdmin(Administrator admin);
+    String updateAdmin(Administrator admin);
     
     Administrator login(Administrator admin);
 }

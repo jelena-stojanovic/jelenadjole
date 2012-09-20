@@ -134,12 +134,18 @@ public class DBBrokerEntity {
 
     public boolean sacuvajODO(OpstiDomenskiObjekat odo) {
         try {
-            OpstiDomenskiObjekat resultodo = em.find(odo.getClass(), odo.vratiID());
-            if (resultodo == null) {
-                em.persist(odo);
+
+            if (odo.vratiID() != null) {
+                OpstiDomenskiObjekat resultodo = em.find(odo.getClass(), odo.vratiID());
+                if (resultodo == null) {
+                    em.persist(odo);
+                } else {
+                    em.merge(odo);
+                }
             } else {
-                em.merge(odo);
+                em.persist(odo);
             }
+
             return true;
         } catch (Exception e) {
             porukaMetode = porukaMetode + "\n Objekat " + odo.getClass().getSimpleName() + " nije sačuvan.";
@@ -173,9 +179,7 @@ public class DBBrokerEntity {
             d.prekopirajVrednostiAtributa(resultODO);
 
             em.merge(d);
-//            em.persist(resultODO);
-//            em.flush();
-//           // em.refresh(resultODO);
+
             return true;
         }
     }
