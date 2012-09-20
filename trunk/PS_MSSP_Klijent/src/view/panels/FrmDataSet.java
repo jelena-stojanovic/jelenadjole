@@ -73,32 +73,32 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
 
         jLabel3.setText("DataSet Description: ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 37, 102, 14);
+        jLabel3.setBounds(10, 60, 102, 14);
         getContentPane().add(txtFieldDataSetTitle);
-        txtFieldDataSetTitle.setBounds(115, 11, 540, 20);
+        txtFieldDataSetTitle.setBounds(115, 11, 540, 30);
 
         txtAreaDescription.setColumns(20);
         txtAreaDescription.setRows(5);
         jScrollPane1.setViewportView(txtAreaDescription);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(116, 37, 539, 97);
+        jScrollPane1.setBounds(120, 60, 539, 80);
 
         jLabel11.setText("Creator:");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 143, 100, 14);
+        jLabel11.setBounds(10, 154, 100, 20);
         getContentPane().add(tfCreator);
-        tfCreator.setBounds(115, 140, 540, 20);
+        tfCreator.setBounds(120, 150, 540, 30);
 
         jLabel12.setText("Donor:");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(10, 174, 100, 14);
+        jLabel12.setBounds(10, 200, 100, 14);
         getContentPane().add(tfDonor);
-        tfDonor.setBounds(115, 171, 540, 20);
+        tfDonor.setBounds(120, 190, 540, 30);
 
         jLabel13.setText("Date (please insert date in format MM/dd/yyyy):");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(10, 197, 346, 14);
+        jLabel13.setBounds(10, 230, 346, 14);
 
         tfDateDS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -106,7 +106,7 @@ public class FrmDataSet extends javax.swing.JDialog  implements OpstaEkranskaFor
             }
         });
         getContentPane().add(tfDateDS);
-        tfDateDS.setBounds(374, 197, 281, 20);
+        tfDateDS.setBounds(380, 230, 281, 30);
 
         jScrollPane5.setViewportView(listReferences);
 
