@@ -23,17 +23,17 @@ import view.panels.datasets.FrmDataSet;
 
 /**
  *
- * @author Djordje
+ * @author Jelena
  */
 public class ControllerUI_DataSet extends OpstiKontrolerKI {
 
     FrmDataSet frmDataSet;
     ArrayList<Reference> references = new ArrayList<Reference>();
 
-    public ControllerUI_DataSet(FrmDataSet pnlDataSet){
+    public ControllerUI_DataSet(FrmDataSet pnlDataSet) {
         oef = pnlDataSet;
         this.frmDataSet = pnlDataSet;
-        
+
     }
 
     public void setOdo(OpstiDomenskiObjekat odo) {
@@ -48,7 +48,6 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
         this.frmDataSet = frmDataSet;
     }
 
-    
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         Dataset dataSet = (Dataset) odo;
@@ -67,22 +66,24 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
         for (int i = 0; i < references.size(); i++) {
             Reference reference1 = references.get(i);
             reference1.setDataset(dataSet);
-            ReferencePK refpk= new ReferencePK(i, dataSet.getDataSetID());
+            ReferencePK refpk = new ReferencePK(i, dataSet.getDataSetID());
             reference1.setReferencePK(refpk);
-            
+
         }
         dataSet.setReferenceList(references);
     }
 
     @Override
     public void KonvertujDomenskiObjekatUGrafickiObjekat() {
-       Dataset dataSet = (Dataset) odo;
-       KonverterTipova.Konvertuj(dataSet.getTitle(), frmDataSet.getTxtFieldDataSetTitle());
-       KonverterTipova.Konvertuj(dataSet.getDsDescription(), frmDataSet.getTxtAreaDescription());
-       KonverterTipova.Konvertuj(dataSet.getSource().getCreator(), frmDataSet.getTfCreator());
-       KonverterTipova.Konvertuj(dataSet.getSource().getDonor(), frmDataSet.getTfDonor());
-       KonverterTipova.Konvertuj(dataSet.getSource().getSourceDate(), frmDataSet.getTfDateDS());
-       KonverterTipova.Konvertuj(dataSet.getReferenceList(), frmDataSet.getListReferences());
+        Dataset dataSet = (Dataset) odo;
+        KonverterTipova.Konvertuj(dataSet.getTitle(), frmDataSet.getTxtFieldDataSetTitle());
+        KonverterTipova.Konvertuj(dataSet.getDsDescription(), frmDataSet.getTxtAreaDescription());
+        if (dataSet.getSource() != null) {
+            KonverterTipova.Konvertuj(dataSet.getSource().getCreator(), frmDataSet.getTfCreator());
+            KonverterTipova.Konvertuj(dataSet.getSource().getDonor(), frmDataSet.getTfDonor());
+            KonverterTipova.Konvertuj(dataSet.getSource().getSourceDate(), frmDataSet.getTfDateDS());
+        }
+        KonverterTipova.Konvertuj(dataSet.getReferenceList(), frmDataSet.getListReferences());
     }
 
     public void addReference() {
@@ -113,7 +114,7 @@ public class ControllerUI_DataSet extends OpstiKontrolerKI {
     }
 
     public void updateDS() {
-        
+
         String SOObradi = SOObradi();
         JOptionPane.showMessageDialog(frmDataSet, SOObradi);
     }

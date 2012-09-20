@@ -4,15 +4,9 @@
  */
 package ps_merenjeslicnostiskupovapodataka_server;
 
-import java.io.*;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.KontrolerAL;
-import logic.SO.Import_Export.ConvertHorizontalStringArrayListToVertikalStringArrayList;
-import logic.SO.Import_Export.ConvertListOfHorizontalStringArrayToMatrixOfString;
 import view.forms.FrmStart;
 
 /**

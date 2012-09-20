@@ -87,8 +87,7 @@ public class ControllerAL_DSImport {
             try {
                 Attribute attribute = attributes.get(i);
                 String[] allValues = verticalArrayListString.get(attribute.getAttributePK().getIndexOfAttribute());
-
-                
+            
                 attribute.setMissingValues(Integer.valueOf(MissingValues.countMissingValues(allValues)));
 
                 creatNewODO(attribute);
