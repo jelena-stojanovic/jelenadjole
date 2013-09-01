@@ -5,7 +5,11 @@
  */
 package topsortapp;
 
-import java.util.ArrayList;
+import algorithms.TopSortAlgorithm;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,30 +20,20 @@ public class TopSortApp {
     /**
      * @param args the command line arguments
      */
+       
     public static void main(String[] args) {
+        try {
+            TopSortAlgorithm tsa= new TopSortAlgorithm();
+            tsa.readInputArray("src/data/Assign1input3");
+
         
-        
-        // TODO code application logic here
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TopSortApp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TopSortApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
-    public int[] readArray(String fileName){
-        
-        //read n--- first row
-        
-        //initialize pred array
-        //initialize succ array
-        
-        ArrayList al=new ArrayList<>();
-        
-        
-        //read m pairs, do 00
-        
-        
-        
-        // put it in a list
-        
-        return new int[5];
-    }
     
 }
