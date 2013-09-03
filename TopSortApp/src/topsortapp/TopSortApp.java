@@ -24,7 +24,9 @@ public class TopSortApp {
     public static void main(String[] args) {
         try {
             TopSortAlgorithm tsa= new TopSortAlgorithm();
-            tsa.readInputArray("src/data/Assign1input3");
+            tsa.readInputArray("src/data/Assign1input1");
+            tsa.bagInitialization();
+            tsa.topsorts();
 
         
         } catch (FileNotFoundException ex) {
