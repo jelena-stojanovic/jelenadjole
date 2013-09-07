@@ -1,0 +1,11 @@
+Topsort 1 : 1 10 2 3 4 5 6 7 8 9 
+Topsort 2 : 1 2 10 3 4 5 6 7 8 9 
+Topsort 3 : 1 2 3 10 4 5 6 7 8 9 
+Topsort 4 : 1 2 3 4 10 5 6 7 8 9 
+Topsort 5 : 1 2 3 4 5 10 6 7 8 9 
+Topsort 6 : 1 2 3 4 5 6 10 7 8 9 
+Topsort 7 : 1 2 3 4 5 6 7 10 8 9 
+Topsort 8 : 1 2 3 4 5 6 7 8 10 9 
+Topsort 9 : 1 2 3 4 5 6 7 8 9 10 
+Topsort 10 : 10 1 2 3 4 5 6 7 8 9 
+Number of possible sorts is: 10.

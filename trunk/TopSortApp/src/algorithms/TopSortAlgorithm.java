@@ -145,70 +145,37 @@ public class TopSortAlgorithm {
     }
 
     public boolean bagIsEmpty() {
-
         return ((startPOsition > endPossition) || (startPOsition == -1 && endPossition == -1));
-
-//        if ((startPOsition == -1 && endPossition == -1)) {
-//            return true;
-//        }
-//        if (currentStartPosition <= startPOsition && endPossition < currentStartPosition) {
-//            return false;
-//        } else {
-//            return startPOsition > endPossition;
-//        }
     }
 
-    private boolean thereIsAnObjectNotTakenOutYet() {
-        if (currentStartPosition <= startPOsition && endPossition < currentStartPosition) {
-            return false;
-        } else {
-            return startPOsition <= endPossition;
-        }
-
-        //check
-//        if (currentStartPosition <= startPOsition) {
-//            if (currentStartPosition <= endPossition) {
-//                return startPOsition <= endPossition;
-//            } else {
-//                return false;
-//            }
-//        } else {//current>start
-//            return startPOsition <= endPossition;
-//        }
-    }
     int currentStartPosition = 0;
-    int currentEndPosition = 0;
 
     boolean negative = false;
 
     public void topsorts() {
-
         System.out.println("START NEW TOPSORT");
         //   if (bag is not empty){
         if (!bagIsEmpty()) {
-
 //      while (there is an object not taken out yet){
             //while (startPOsition <= endPossition) {
-            for (int iter = startPOsition; iter < endPossition + 1; iter++) {
+            for (int iter = startPOsition; iter <= endPossition; iter++) {
                 //while (thereIsAnObjectNotTakenOutYet()) {
+                int currentEndPosition;
                 System.out.println("STARTNA POZICIJA JE " + startPOsition);
-                System.out.println("TRENUTNA STARTNA POZICIJA JE:" + iter + currentStartPosition);
+                System.out.println("TRENUTNA STARTNA POZICIJA JE:" + iter);
                 //Take it out of the Bag,
                 //******************zamena starog
                 //int element = bag[startPOsition++];   //******************zamena starog
                 int element = bag[iter];
+                System.out.println("ELEMENT JE SADA " + (element + 1));
+
                 bag[iter] = bag[startPOsition];
+                System.out.println("A bag od iter je posle " + (bag[iter] + 1));
                 startPOsition++;
                 currentEndPosition = endPossition;
-                outputRanking[++numRanked] = element + 1;
-
-//                if ((startPOsition == n - 1) && currentStartPosition != 0) {            //******************zamena starog
-//                    startPOsition = 0;                    //******************zamena starog
-//                } else {                                //******************zamena starog
-//                    startPOsition++;                  //******************zamena starog
-//                }
+                System.out.println("TRENUTNA KRAJNJA POZICIJA JE " + currentEndPosition);
+                outputRanking[++numRanked] = element + 1;//+1 because arrays starts from 0
 //                //put it in the output array,               
-//                outputRanking[++numRanked] = element + 1;//+1 because arrays starts from 0
                 System.out.println("num ranked " + numRanked);
                 //traverse its succ list, 
                 System.out.println("element is:" + (element + 1));
@@ -224,20 +191,11 @@ public class TopSortAlgorithm {
                     //and if it goes to zero, put it in the Bag
                     if (predArray[ithsucc] == 0) {
                         System.out.println("dodajem ga u bag");
-
-////                        if (endPossition == (n - 1) && currentStartPosition != 0) { //******************zamena starog
-////                            endPossition = 0;         //******************zamena starog
-////                        } else {                    //******************zamena starog
-////                            endPossition++;       //******************zamena starog
-////                        }                           //******************zamena starog
-////                        bag[endPossition] = ithsucc;//******************zamena starog
                         bag[++endPossition] = ithsucc;//******************zamena starog
                     } else if (predArray[ithsucc] < 0) {
-                        System.out.println("NEGATIVAN JE");
                         negative = true;
                     }
                 }
-
                 System.out.println("pocetna pozicija:" + startPOsition);
                 System.out.println("krajnja pozicija" + endPossition);
                 System.out.println("Items in bag:");
@@ -248,29 +206,25 @@ public class TopSortAlgorithm {
                 if (!negative) {
                     topsorts();
                 }
+                System.out.println("REVERSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 //         Reverse the above
 //         and if it goes to zero, put it in the Bag
-                System.out.println("Element after call of ts" + element);
-//         "remove" it from the output array,
-                numRanked--;
+                System.out.println("PRE-Element after call of topsort is: " + (element + 1));
+                System.out.println("PRE- reversa startna pozicija je " + startPOsition);
+                System.out.println("PRE- reversa end pozicija je : " + endPossition);
+                System.out.println("PRE-A trenutna je: " + currentEndPosition);
+                System.out.println("PRE-Trenutna startna pozicija je , takozvni iter:" + iter);
+                //         "remove" it from the output array,
                 //         Take it back in the Bag,
-                System.out.println("posle reversa startna pozicija je " + startPOsition);
-                //******************zamena starog
-//                if (startPOsition == 0 && currentStartPosition != 0) {            //******************zamena starog
-//                    startPOsition = n - 1;                    //******************zamena starog
-//                } else {                                //******************zamena starog
-//                    startPOsition--;                  //******************zamena starog
-//                }
-//
-//                bag[startPOsition] = element;             //******************zamena starog
-
                 startPOsition--;
                 numRanked--;
+                System.out.println("OUTPUT POZICIJA JE SADA " + numRanked);
                 endPossition = currentEndPosition;
                 bag[iter] = element;         //******************zamena starog
-                System.out.println("Element je u vrecici na " + startPOsition + " poziciji");
-                System.out.println("A krajnja pozicija je " + endPossition);
-
+                System.out.println("Bag of itera " + iter + " je sada" + (element + 1));
+                System.out.println("POSLE-Element je u vrecici na " + startPOsition + " poziciji--- new start");
+                System.out.println("POSLE-A krajnja pozicija je " + endPossition + " stvarni");
+                System.out.println("POSLE-Trenutni end je: " + currentEndPosition);
                 ArrayList listSucc = succArray[element];
                 if (listSucc != null && !listSucc.isEmpty()) {
                     //traverse its succ list, 
@@ -280,32 +234,25 @@ public class TopSortAlgorithm {
                         predArray[ithsuccessor]++;
                     }
                 }
-
-//                if (currentStartPosition < n) {
-//                    currentStartPosition++;
-//                }
             }
         } else {
-            if (counter <= 50) {
-                outputOutput(outputRanking);
+            //Output the output array
+            if (numRanked == (n - 1)) {
+                counter++;
+                if (counter <= 50) {
+                    outputOutput(outputRanking);
+                }
+            } else {
+                System.err.println("It is not partial order.");
             }
-//      Output the output array
-//            System.out.println("*********************OUTPUT***********");
-//            for (int i = 0; i < outputRanking.length; i++) {
-//                int j = outputRanking[i];
-//                System.out.println((i + 1) + "th rank:" + j);
-//            }
         }
-        printNumberOfPossibleTopsorts();
-    }
 
+    }
     int counter = 0;
 
     public void outputOutput(int[] output) {
         try {
             PrintWriter out = null;
-            System.out.println("ŠTAMPA" + counter++);
-
             out = new PrintWriter(new BufferedWriter(new FileWriter((filePath + "output"), true)));
             out.print("Topsort " + counter + " : ");
             for (int i = 0; i < output.length; i++) {
@@ -322,12 +269,12 @@ public class TopSortAlgorithm {
         }
     }
 
-    private void printNumberOfPossibleTopsorts() {
+    public void printNumberOfPossibleTopsorts() {
         try {
             PrintWriter out = null;
 
             out = new PrintWriter(new BufferedWriter(new FileWriter((filePath + "output"), true)));
-            out.print("Broj mogucih sortova je " + counter + " .");
+            out.print("Number of possible sorts is: " + counter + ".");
             out.println();
             out.close();
 

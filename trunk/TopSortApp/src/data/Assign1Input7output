@@ -1,0 +1,4 @@
+Topsort 1 : 1 3 2 
+Topsort 2 : 1 2 3 
+Topsort 3 : 3 1 2 
+Broj mogucih sortova je 3 .
