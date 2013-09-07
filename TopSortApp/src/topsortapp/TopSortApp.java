@@ -22,17 +22,20 @@ public class TopSortApp {
      */
        
     public static void main(String[] args) {
+       TopSortAlgorithm tsa= new TopSortAlgorithm();
         try {
-            TopSortAlgorithm tsa= new TopSortAlgorithm();
-            tsa.readInputArray("src/data/Assign1input1");
+            
+            tsa.readInputArray("src/data/Assign1input5");
             tsa.bagInitialization();
             tsa.topsorts();
-
+            //tsa.printNumberOfPossibleTopsorts();
         
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TopSortApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(TopSortApp.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            tsa.printNumberOfPossibleTopsorts();
         }
     }
     

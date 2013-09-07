@@ -1,0 +1,27 @@
+Topsort 1 : 1 4 5 3 2 6 
+Topsort 2 : 1 4 5 3 6 2 
+Topsort 3 : 1 4 5 2 3 6 
+Topsort 4 : 1 5 4 2 3 6 
+Topsort 5 : 1 5 4 3 2 6 
+Topsort 6 : 1 5 4 3 6 2 
+Topsort 7 : 1 5 2 4 3 6 
+Topsort 8 : 4 1 5 3 2 6 
+Topsort 9 : 4 1 5 3 6 2 
+Topsort 10 : 4 1 5 2 3 6 
+Topsort 11 : 4 5 1 3 2 6 
+Topsort 12 : 4 5 1 3 6 2 
+Topsort 13 : 4 5 1 2 3 6 
+Topsort 14 : 4 5 3 1 6 2 
+Topsort 15 : 4 5 3 1 2 6 
+Topsort 16 : 4 5 3 6 1 2 
+Topsort 17 : 5 4 1 3 2 6 
+Topsort 18 : 5 4 1 3 6 2 
+Topsort 19 : 5 4 1 2 3 6 
+Topsort 20 : 5 4 3 1 6 2 
+Topsort 21 : 5 4 3 1 2 6 
+Topsort 22 : 5 4 3 6 1 2 
+Topsort 23 : 5 1 4 2 3 6 
+Topsort 24 : 5 1 4 3 2 6 
+Topsort 25 : 5 1 4 3 6 2 
+Topsort 26 : 5 1 2 4 3 6 
+Number of possible sorts is: 26.
