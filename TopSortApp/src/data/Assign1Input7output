@@ -1,4 +1,15 @@
-Topsort 1 : 1 3 2 
-Topsort 2 : 1 2 3 
-Topsort 3 : 3 1 2 
-Broj mogucih sortova je 3 .
+Topsort 1 : 1 2 1 2 
+Topsort 2 : 1 2 2 1 
+Topsort 3 : 1 1 2 2 
+Topsort 4 : 2 1 2 1 
+Topsort 5 : 2 1 1 2 
+Topsort 6 : 2 2 1 1 
+Number of possible sorts is: 6.
+
+Topsort 1 : 1 3 2 4 
+Topsort 2 : 1 3 4 2 
+Topsort 3 : 1 2 3 4 
+Topsort 4 : 3 1 4 2 
+Topsort 5 : 3 1 2 4 
+Topsort 6 : 3 4 1 2 
+Number of possible sorts is: 6.
