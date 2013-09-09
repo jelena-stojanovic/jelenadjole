@@ -1,3 +1,9 @@
-3
+4
 1 2
+3 4
 0 0
+
+Example you mentioned on the class (Multiset permutation problem):
+problem: 1122, 
+and can be converted to the problem 1234 as showed above, so the output of this file will be printed in both form.
+Number of possible solutions should be 4!/(2!2!)=6.
