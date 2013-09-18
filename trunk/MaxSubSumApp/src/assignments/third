@@ -1,0 +1,37 @@
+Text of assignment:
+3.Find a loop invariant that works for this modified mss4 and show it is “useful”. 
+Do not prove it is a loop invariant.
+
+//while (i <= p2) 
+
+Solution:
+For loop invariant to be useful conditions are:
+- ((not C) and L) must imply correct result 
+(~Result is correct when program stops and 
+~the program stops)
+
+Requirement: maxsum contains the maximum subsequence sum for all subsequences 
+starting and ending before n+1 and these positions are known.
+
+(not C): i is n+1
+C condition can be written as i<= p2 
+which means i<=n-1 because arrays start from 0, but also can be written as i<n.
+When we increase number by 1 (because of arrays) we get that i<n+1.
+That means, that i cannot be n+1, and therefore (not C): i=n+1.
+
+L: (i>=1 and (maxsum contains the maximum subsequence sum for all subsequences 
+starting and ending before i and these positions are known))
+--> L is true for i=n+1 and so implies that maxsum contains the maximum 
+subsequence sum for all subsequences starting and ending before n+1 and these 
+positions are known.
+
+For (not C) and L:
+- (i!=n+1) and (maxsum contains the maximum subsequence sum for all subsequences 
+starting and ending before i and these positions are known)
+
+Since this condition imply correct result (program will stop at point n+1, and
+for n+1 maxsum will contain the maximum subsequence sum for all subsequences 
+starting and ending before n+1 with known start and end positions), 
+we can say that loop invariant is useful. :)
+
+
