@@ -1,0 +1,81 @@
+Text of assignment:
+1. Recall that the claim that the calls to determine L and R give the correct 
+result,in the proof of correctness for mss3, requires that k1 and k2 are  < n-1
+for n>2, where k1=m-p1+1, k2=p2-(m+1)+1, m=floor((p1+p2)/2), and n=p2-p1+1. 
+Prove that k1<= n-1 and k2<= n-1 for n>=2.
+
+Solution:
+
+Since we have:
+(1) k1=m-p1+1
+(2) k2=p2-(m+1)+1
+(3) m=floor((p1+p2)/2)
+(4) n=p2-p1+1
+
+We can put (3) in (1), so we can get next expression: 
+(5) k1= floor((p1+p2)/2) -p1+1=  floor ((p1+p2)/2 -2p1/2+1)= floor ((p2-p1)/2+1)
+
+Since p1>=1 and p2<=n we can note that p2-p1 should be less or equal to n-1, 
+so we can put this fact into previous (5) expression:
+(6) k1<=floor ((p2-p1)/2+1)= floor((n-1)/2+2/2)= floor ((n+1)/2)
+
+The same can be done for the right side-> put (3) in (2):
+(7) k2= p2- (floor((p1+p2)/2)+1) +1 = p2-floor((p1+p2)/2)
+
+Again, since p1>=1 and p2<=n => p2+p1 can be less or equal to n+1 and if we use 
+this values for p1 an p2 we get:
+(8) k2<= n-floor((n+1)/2) = floor (2n/2  - (n+1)/2)= floor((n-1)/2)
+
+From (6) and (8) we get upper limit for k1 and k2:
+(9) k1ul= floor((n+1)/2) and 
+(10) k2ul= floor((n-1)/2)
+
+So now we should prove that k1ul<n-1 and k2ul<n-1 for all n>2.
+We have two cases: 
+a) when n is even and 
+b) when n is odd.
+
+Regarding a) case, we can write n as 2k:
+(11) n=2t, t>=1
+so we have that 
+(12) k1ul= floor((n+1)/2)= floor((2t+1)/2)= floor(t+1/2)=t 
+=> k1ul=t
+
+so if we now put this result (12) into (11) we can get:
+(13) n=2k1ul for k1ul>=1 , 
+and if we add (-1) to both side of this expression we get 
+(14) n-1 = 2k1ul-1
+for condition (if we add k1ul to both side):
+(15) 2k1ul>=k1ul+1  and if we add (-1) to both side
+(16) 2k1ul-1>=k1ul
+
+so, if we combine last 3 expressions we get that:
+(17) k1ul=<2k1ul-1=n-1 => k1ul=<n-1
+
+since k1<=k1ul, we get that k1<=n-1 :)
+
+Regarding k2, since k2ul<k1ul, because floor((n-1)/2)<floor((n+1)/2) 
+(from (9) and (10)), we can conclude that k2<=n-1 also. :)
+
+When it comes to the b) case, we can write odd integer as
+(18) n=2t+1 for t>=1 (because of condition that n>=2)
+so we can write k1ul as:
+(19) k1ul= floor((n+1)/2)= floor((2t+1+1)/2)= floor(t+1)=t+1
+=> k1ul=t+1
+
+From (18) we can get that :
+(20) n-1=2t for t>=1  or 2t>=t+1 (if we add t to both side of inequality)
+
+From (19) and (20) we get:
+(21) k1ul=t+1<=2t=n-1   --> k1ul<=n-1
+and since k1<=k1ul, we get that k1<=n-1 :)
+
+And equal as in previous case:
+since k2ul<k1ul, because floor((n-1)/2)<floor((n+1)/2) 
+(from (9) and (10)), we can conclude that k2<=n-1 also. :)
+
+
+
+
+
+
