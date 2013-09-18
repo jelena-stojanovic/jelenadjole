@@ -208,7 +208,7 @@ public class TopSortAlgorithm {
                 bag[currentStartPosition] = element; //on currentStartPosition in order to make permutations in next for loop iteration
                 startPOsition--; 
                 endPossition = currentEndPosition; //set end position to the value of current end posion before recursive call
-                
+                                                   //in order to move out of the bag elements in constant time
                 //traverse its succ list, 
                 SuccArray listSucc = succArray[element];
                 SuccArray.SuccArrayElement currentlistsucc = listSucc.getFirst();
